@@ -1,0 +1,21 @@
+export const paths = {
+    home: '/',
+    login: '/login',
+    register: '/register',
+    forgot: '/forgot',
+    verify: '/verify',
+    candidate: '/candidates-dashboard/dashboard',
+    employer: '/employers-dashboard/dashboard',
+    candidate_profile: '/candidates-dashboard/my-profile',
+    publicemployer: '/employer',
+    publiccandidate: '/candidate',
+    employer_profile: '/employers-dashboard/company-profile',
+    employer_all_applicants: '/employers-dashboard/all-applicants',
+    manage_jobs: '/employers-dashboard/manage-jobs',
+    edit_job: '/employers-dashboard/edit-job',
+    job_list: '/job-list-v1',
+    job: '/job',
+    blog: '/blog-list-v1',
+    about: '/about',
+    contact: '/contact'
+}
