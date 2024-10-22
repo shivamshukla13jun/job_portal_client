@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import candidatesData from "../../../../../data/candidates";
 import { paths } from "@/services/paths";
+import { API_CANDIDATE_PATH } from "@/lib/config";
 
 
 const Applicants = ({ data }) => {
@@ -15,7 +16,7 @@ const Applicants = ({ data }) => {
             <div className="content">
               <figure className="image">
                 <img
-                  src={candidatesData[0].avatar}
+                  src={API_CANDIDATE_PATH+candidateId?.profile?.filename}
                   alt="candidates"
                 />
               </figure>
