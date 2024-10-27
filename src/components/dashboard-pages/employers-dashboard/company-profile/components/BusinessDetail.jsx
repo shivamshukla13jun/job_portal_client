@@ -119,27 +119,14 @@ const BusinessDetail = ({ watch, register, setValue, error }) => {
                     <label>Products And Services <span className='required-form'>*</span></label>
 
                     <div className="form-group col-lg-12 col-md-12"> 
-                <CKEditor
-                    editor={ClassicEditor}
-                    data={watch("product_services")}
-                    config={{
-                        toolbar: {
-                            items: [
-                                'heading', '|',
-                                'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
-                                'indent', 'outdent', '|',
-                                'blockQuote', '|',
-                                'undo', 'redo'
-                            ]
-                        },
-                        placeholder: "Spent several years working on sheep on Wall Street...",
-                    }}
-                    onChange={(event, editor) => {
-                        const data = editor.getData();
-                        setValue("product_services", data);
-                    }}
-                    className={`${error?.product_services ? 'error error-border' : ''}`}
-                />
+                    <textarea
+                        className={`${error?.product_services ? 'error error-border' : ''}`}
+                        {...register("product_services")}
+                        style={{ height: '120px', minHeight: '120px', padding: '15px 20px' }}
+                        placeholder='Write Here...'
+                        rows={4} // Adjust the number of visible rows
+                    />
+
                 {error?.product_services && <p className="error">{error.product_services.message}</p>}
             </div>
                  </div>

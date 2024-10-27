@@ -2,3 +2,50 @@
 @import "slick-carousel/slick/slick-theme.scss";
 @import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "public/scss/main.scss";
+
+
+/* CSS3 spinner */
+
+@keyframes rotate{
+	from{
+		transform:rotate(0deg) translate(-9px) rotate(0deg);
+	}
+	to{
+		transform:rotate(360deg) translate(-9px) rotate(-360deg);
+	}
+}
+.spinner{
+	position:relative;
+	top:10px;
+	left:10px;
+	display:inline-block;
+	width:6px;
+	height:6px;
+	background-color:#000;
+	border-radius:3px;
+	animation:rotate infinite linear;
+	animation-duration:.5s;
+	animation-delay:.1s;
+}
+.spinner ~ .spinner{margin-left:-10px;}
+.spinner:nth-child(2){
+	opacity:.80;
+	animation-delay:.2s;
+}
+.spinner:nth-child(3){
+	opacity:.60;
+	animation-delay:.3s;
+}
+.spinner:nth-child(4){
+	opacity:.35;
+	animation-delay:.4s;
+}
+.spinner:nth-child(5){
+	opacity:.10;
+	animation-delay:.5s;
+}
+.ls-pagination .prev.disabled,
+.ls-pagination .next.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

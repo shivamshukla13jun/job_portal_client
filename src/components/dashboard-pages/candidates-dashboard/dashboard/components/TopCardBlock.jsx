@@ -1,9 +1,10 @@
-const TopCardBlock = () => {
+const TopCardBlock = ({data}) => {
   const cardContent = [
     {
       id: 1,
       icon: "flaticon-briefcase",
-      countNumber: "22",
+      countNumber: data?.Applicationdata?.Application 
+      ,
       metaName: "Applied Jobs",
       uiClass: "ui-blue",
     },
@@ -24,7 +25,7 @@ const TopCardBlock = () => {
     {
       id: 4,
       icon: "la-bookmark-o",
-      countNumber: "32",
+      countNumber:  data?.Applicationdata?.Shortlist,
       metaName: "Shortlist",
       uiClass: "ui-green",
     },

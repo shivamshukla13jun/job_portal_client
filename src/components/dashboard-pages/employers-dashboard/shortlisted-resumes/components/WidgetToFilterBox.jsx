@@ -1,18 +1,20 @@
-const WidgetToFilterBox = ({ search, setSearch }) => {
+import { datePostApplication } from "@/utils/datePost";
+
+const WidgetToFilterBox = ({ search, handleSerch }) => {
   return (
     <div className="chosen-outer">
       {/* <!--search box--> */}
       <div className="search-box-one">
-        <form method="post" action="blog.html">
+        <form method="post">
           <div className="form-group">
             <span className="icon flaticon-search-1"></span>
             <input
               type="search"
-              name="search-field"
+              name="search"
               placeholder="Search"
               required
-              defaultValue={search}
-              onChange={e => setSearch(e.target.value)}
+              defaultValue={search.search}
+              onChange={(e)=>handleSerch("search",e.target.value)}
             />
           </div>
         </form>
@@ -20,12 +22,12 @@ const WidgetToFilterBox = ({ search, setSearch }) => {
       {/* End searchBox one */}
 
       {/* <!--Tabs Box--> */}
-      <select className="chosen-single form-select chosen-container">
-        <option>Newest</option>
-        <option>Last 12 Months</option>
-        <option>Last 16 Months</option>
-        <option>Last 24 Months</option>
-        <option>Last 5 year</option>
+      <select name="createdAt" value={search?.createdAt}  onChange={(e)=>handleSerch("createdAt",e.target.value)} className="chosen-single form-select chosen-container">
+        {
+          datePostApplication.map((item,i)=>(
+            <option  key={i} value={item.value}>{item.name}</option>
+          ))
+        }
       </select>
     </div>
   );

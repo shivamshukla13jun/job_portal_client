@@ -11,14 +11,16 @@ import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { toast } from "react-toastify";
 import { del } from "@/services/api";
 import { logout } from "@/store/reducers/user";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { paths } from "@/services/paths";
+import { selectWishlist } from "@/store/reducers/Whishlist";
 
 const DashboardCandidatesHeader = () => {
   const userInfo = useUserInfo()
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const [navbar, setNavbar] = useState(false);
+  const SavedJobs = useSelector(selectWishlist);
 
   const changeBackground = () => {
     if (window.scrollY >= 0) {
@@ -83,10 +85,10 @@ const DashboardCandidatesHeader = () => {
           {/* End .nav-outer */}
 
           <div className="outer-box">
-            <button className="menu-btn">
-              <span className="count">1</span>
-              <span className="icon la la-heart-o"></span>
-            </button>
+              <button className="menu-btn">
+                <span className="count">{SavedJobs?.length}</span>
+                <span className="icon la la-heart-o"></span>
+              </button>
             {/* wishlisted menu */}
 
             <button className="menu-btn">

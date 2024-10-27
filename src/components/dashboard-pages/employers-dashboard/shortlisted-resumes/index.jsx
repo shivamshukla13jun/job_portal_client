@@ -8,21 +8,31 @@ import WidgetToFilterBox from "./components/WidgetToFilterBox";
 import WidgetContentBox from "./components/WidgetContentBox";
 import MenuToggler from "../../MenuToggler";
 import { useQuery } from "@tanstack/react-query";
-import { getById } from "@/services/api";
+import { get, getById } from "@/services/api";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import useDebounce from "@/utils/hooks/useDebounce";
 
 const index = () => {
   const userInfo = useUserInfo();
-  const [search, setSearch] = useState('')
-
-  const debouncedSearch = useDebounce(search, 500);
+  const [search, setSearch] = useState({
+    page: 1,
+    limit: 10,
+    createdAt: '',
+    search:""
+});
+const handleSerch=(name,value)=>{
+  setSearch((prev)=>({
+    ...prev,
+    [name]:value
+  }))
+}
+  const debouncedSearch = useDebounce(search.search, 500);
 
   const { data, isLoading } = useQuery({
-    queryKey: [`shortlistedCandidate${userInfo._id}`, debouncedSearch],
+    queryKey: [`application/tracking`, debouncedSearch,search.createdAt],
     queryFn: async () => {
-      let res = (await getById(`/job/shortlistedCandidate`, userInfo._id + `?name=${debouncedSearch}`)).data;
+      let res = (await get(`application/tracking?createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}&name=${debouncedSearch}&status=shortlisted`)).data;
       return res;
     },
     enabled: !!userInfo._id
@@ -61,7 +71,7 @@ const index = () => {
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
                   <h4>Shorlist Resumes</h4>
-                  <WidgetToFilterBox search={search} setSearch={setSearch} />
+                  <WidgetToFilterBox search={search} handleSerch={handleSerch} />
                 </div>
                 {/* End widget top filter box */}
                 <WidgetContentBox data={data} />

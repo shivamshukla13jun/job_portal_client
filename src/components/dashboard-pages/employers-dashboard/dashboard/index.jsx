@@ -9,8 +9,26 @@ import Notification from "./components/Notification";
 import Applicants from "./components/Applicants";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
+import useUserInfo from "@/utils/hooks/useUserInfo";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { get } from "@/services/api";
 
 const Index = () => {
+  const userInfo = useUserInfo();
+  const [statrtdate, setStartdate] = useState("")
+
+
+  const { data, isLoading } = useQuery({
+    queryKey: [`dashboard/employer`, statrtdate],
+    queryFn: async () => {
+      let res = (await get(`dashboard/employer`)).data.data
+      return res;
+    },
+    enabled: !!userInfo._id
+  });
+
+  if (isLoading) return <div>Loading...</div>
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
@@ -38,7 +56,7 @@ const Index = () => {
           {/* Collapsible sidebar button */}
 
           <div className="row">
-            <TopCardBlock />
+            <TopCardBlock data={data} />
           </div>
           {/* End .row top card block */}
 
@@ -46,7 +64,7 @@ const Index = () => {
             <div className="col-xl-7 col-lg-12">
               {/* <!-- Graph widget --> */}
               <div className="graph-widget ls-widget">
-                <ProfileChart />
+                <ProfileChart   data={data}/>
               </div>
               {/* End profile chart */}
             </div>

@@ -20,9 +20,9 @@ const index = () => {
   const { data: jobNames, isLoading } = useQuery({
     queryKey: ['jobNames'],
     queryFn: async () => {
-      let res = (await get("job/employer/name")).data.data;
+      let res = (await get("application/jobs/employer/name")).data.data;
       if (!searchParams.get("id")) {
-        setJob(res[0]._id);
+        setJob(res[0]["job"]._id);
       }
       return res;
     }
@@ -33,14 +33,14 @@ const index = () => {
   const { data: currentJob, isLoading: jobLoader } = useQuery({
     queryKey: [`job${job}`, job],
     queryFn: async () => {
-      let res = (await getById('job', job)).data.data;
+      let res = (await getById(`application/job`,job)).data;
       return res;
     },
     enabled: !!job
   });
 
   const acceptMutation = useMutation({
-    mutationFn: (payload) => put('/job/shortlist', job, { candidateId: payload }),
+    mutationFn: ({_id,status}) => put('/application/status', _id, { status: status }),
     onSuccess: (res) => {
       if (res.data.success) {
         toast.success(res.data.message);
@@ -52,21 +52,11 @@ const index = () => {
     }
   });
 
-  const declineMutation = useMutation({
-    mutationFn: (payload) => put('/job/decline', job, { candidateId: payload }),
-    onSuccess: (res) => {
-      if (res.data.success) {
-        toast.success(res.data.message);
-        queryClient.invalidateQueries([`job${job}`]);
-      }
-    },
-    onError: (err) => {
-      toast.error(err.response.data.error)
-    }
-  });
+ 
 
   if (isLoading || jobLoader) return <div>Loading...</div>
-
+let title=Array.isArray(jobNames) && jobNames.length>0 ?jobNames?.find((item=>item?.job._id===job))?.title:""
+console.log("title??",title)
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
@@ -104,7 +94,7 @@ const index = () => {
                   </div>
                   {/* End top widget filter bar */}
 
-                  <WidgetContentBox data={currentJob} acceptMutation={acceptMutation} declineMutation={declineMutation} />
+                  <WidgetContentBox  data={currentJob} acceptMutation={acceptMutation} title={title} />
                   {/* End widget-content */}
                 </div>
               </div>

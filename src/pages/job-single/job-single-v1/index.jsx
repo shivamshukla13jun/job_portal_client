@@ -52,14 +52,15 @@ const JobSingleDynamicV1 = () => {
   });
 
   const mutation = useMutation({
-    mutationFn: (data) => put('job/apply', userInfo?._id, { jobId: id }),
+    mutationFn: (data) => put('application/apply', id),
     onSuccess: async (res) => {
       if (res.data.success) {
+
         toast.success(res.data.message);
-        sessionStorage.setItem("session", res.data.token)
-        let user = (await getById(`/user`, res.data.data._id)).data.data;
-        let enData = encrypt(user);
-        sessionStorage.setItem("userInfo", enData);
+        // sessionStorage.setItem("session", res.data.token)
+        // let user = (await getById(`/user`, res.data.data._id)).data.data;
+        // let enData = encrypt(user);
+        // sessionStorage.setItem("userInfo", enData);
 
         window.location.reload()
       }
@@ -70,6 +71,10 @@ const JobSingleDynamicV1 = () => {
   });
 
   const handleJobApplySubmit = (data) => {
+    if (!userInfo._id) {
+      toast.info('Please login as Candidate to Apply Job.');
+      return;
+    }
     mutation.mutate(data)
   };
 
@@ -100,7 +105,7 @@ const JobSingleDynamicV1 = () => {
                   <span className="company-logo">
                     <img src={API_EMPLOYER_PATH + data?.employerId?.logo?.filename} alt="logo" />
                   </span>
-                  <h4>{capitalizeFirstLetter(data?.title)}</h4>
+                  <h4>{data?.title ?capitalizeFirstLetter(data?.title):""}</h4>
 
                   <ul className="job-info">
                     <li>
@@ -139,11 +144,11 @@ const JobSingleDynamicV1 = () => {
 
                 <div className="btn-box">
                   <button
-                    disabled={userInfo?.jobs?.some(job => job.jobId === id)} // Check if jobId exists in jobs array
-                    className={`theme-btn btn-style-one ${userInfo?.jobs?.some(job => job.jobId === id) ? 'disabled' : ''}`}
+                    disabled={data?.isApplied} // Check if jobId exists in jobs array
+                    className={`theme-btn btn-style-one ${data?.isApplied ? 'disabled' : ''}`}
                     onClick={handleJobApplySubmit}
                   >
-                    {userInfo?.jobs?.some(job => job.jobId === id) ? 'Applied' : `Apply For Job`}
+                    {data?.isApplied ? 'Applied' : `Apply For Job`}
                   </button>
                   <button className="bookmark-btn">
                     <i className="flaticon-bookmark"></i>
@@ -177,12 +182,12 @@ const JobSingleDynamicV1 = () => {
                   <div className="title-box">
                     <h3>Related Jobs</h3>
                     <div className="text">
-                      2020 jobs live - 293 added today.
+                      {/* 2020 jobs live - 293 added today. */}
                     </div>
                   </div>
                   {/* End title box */}
 
-                  <RelatedJobs data={jobsData} />
+                  <RelatedJobs data={jobsData ||[]} />
                 </div>
                 {/* <!-- Related Jobs --> */}
               </div>
@@ -221,7 +226,7 @@ const JobSingleDynamicV1 = () => {
                           <img src={data?.logo} alt="resource" />
                         </div>
                         <h5 className="company-name">{data?.company?.name}</h5>
-                        <Link to={`${paths.publicemployer}/${data?.employerId?._id}`} className="profile-link">
+                        <Link to={`${paths.publicemployer}/${data?.employerId?._id}`} state={{company:data?.company}} className="profile-link">
                           View company profile
                         </Link>
                       </div>

@@ -12,7 +12,7 @@ const useUserInfo = () => {
         };
 
         return () => {
-            setUserInfo({});
+            setUserInfo({  });
         };
     }, [user]);
 

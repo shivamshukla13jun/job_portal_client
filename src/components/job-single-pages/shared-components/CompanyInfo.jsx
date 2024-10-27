@@ -3,9 +3,9 @@ import Social from "../social/Social";
 const CompanyInfo = ({ data }) => {
   return (
     <ul className="company-info">
-      <li>
+      {/* <li>
         Primary industry: <div dangerouslySetInnerHTML={{__html:data?.employerId?.product_services}}></div>
-      </li>
+      </li> */}
       <li>
         Company size: <span>{data?.company?.size_of_org}</span>
       </li>

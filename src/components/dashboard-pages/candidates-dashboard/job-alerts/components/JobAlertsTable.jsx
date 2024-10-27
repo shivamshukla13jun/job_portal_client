@@ -11,11 +11,11 @@ const JobAlertsTable = () => {
         <div className="chosen-outer">
           {/* <!--Tabs Box--> */}
           <select className="chosen-single form-select">
-            <option>Last 6 Months</option>
-            <option>Last 12 Months</option>
-            <option>Last 16 Months</option>
-            <option>Last 24 Months</option>
-            <option>Last 5 year</option>
+     {
+            d.map((item)=>(
+              <option value={item.value}>{item.name}</option>
+            ))
+          }
           </select>
         </div>
       </div>

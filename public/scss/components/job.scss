@@ -492,7 +492,11 @@ Job Section
   -o-transition: all 300ms ease;
   transition: all 300ms ease;
 }
-
+/* Disabled state - when the button is disabled */
+.job-block .bookmark-btn.disable {
+  background: #e0e0e0; /* Grey background for disabled state */
+  opacity: 0.6; /* Make it semi-transparent */
+}
 .job-block .bookmark-btn:hover {
   background: #ecedf2;
 }
