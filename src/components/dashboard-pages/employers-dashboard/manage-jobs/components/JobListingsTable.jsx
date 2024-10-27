@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import jobs from "../../../../../data/job-featured.js";
 import { paths } from "@/services/paths.js";
 import { API_EMPLOYER_PATH } from "@/lib/config.js";
+import { datePost } from "@/utils/datePost.js";
 
 
 const JobListingsTable = ({ data, handleJobDelete }) => {
@@ -16,11 +17,11 @@ const JobListingsTable = ({ data, handleJobDelete }) => {
         <div className="chosen-outer">
           {/* <!--Tabs Box--> */}
           <select className="chosen-single form-select">
-            <option>Last 6 Months</option>
-            <option>Last 12 Months</option>
-            <option>Last 16 Months</option>
-            <option>Last 24 Months</option>
-            <option>Last 5 year</option>
+     {
+            datePost.map((item)=>(
+              <option value={item.value}>{item.name}</option>
+            ))
+          }
           </select>
         </div>
       </div>
@@ -75,7 +76,7 @@ const JobListingsTable = ({ data, handleJobDelete }) => {
                     </div>
                   </td>
                   <td className="applied">
-                    <Link to={paths.employer_all_applicants + '?id=' + item._id}>{item?.candidate_applied?.length || 0} Applied</Link>
+                    <Link to={paths.employer_all_applicants + '?id=' + item._id}>{item?.applications?.length || 0} Applied</Link>
                   </td>
                   <td>
                     {new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(item.createdAt))} <br />
@@ -85,17 +86,17 @@ const JobListingsTable = ({ data, handleJobDelete }) => {
                     <div className="option-box">
                       <ul className="option-list">
                         <li>
-                          <button data-text="View Aplication" onClick={() => navigate(`${paths.job}/${item._id}`)}>
+                          <button data-text="View" onClick={() => navigate(`${paths.job}/${item._id}`)}>
                             <span className="la la-eye"></span>
                           </button>
                         </li>
                         <li>
-                          <button data-text="Reject Aplication" onClick={() => navigate(`${paths.edit_job}/${item._id}`)}>
+                          <button data-text="Edit" onClick={() => navigate(`${paths.edit_job}/${item._id}`)}>
                             <span className="la la-pencil"></span>
                           </button>
                         </li>
                         <li>
-                          <button data-text="Delete Aplication" onClick={() => handleJobDelete(item._id)}>
+                          <button data-text="Delete " onClick={() => handleJobDelete(item._id)}>
                             <span className="la la-trash"></span>
                           </button>
                         </li>

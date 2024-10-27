@@ -7,10 +7,13 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { API_CANDIDATE_PATH, API_EMPLOYER_PATH } from "@/lib/config";
 import employerMenu from "@/data/employerMenuData";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import { useSelector } from "react-redux";
+import { selectWishlist } from "@/store/reducers/Whishlist";
 
 const DefaulHeader2 = () => {
   const userInfo = useUserInfo();
   const { pathname } = useLocation();
+  const SavedJobs = useSelector(selectWishlist);
 
   const [navbar, setNavbar] = useState(false);
 
@@ -88,7 +91,7 @@ const DefaulHeader2 = () => {
           {userInfo?.userType?.name && (
             <div className="outer-box">
               <button className="menu-btn">
-                <span className="count">1</span>
+                <span className="count">{SavedJobs?.length}</span>
                 <span className="icon la la-heart-o"></span>
               </button>
               {/* wishlisted menu */}

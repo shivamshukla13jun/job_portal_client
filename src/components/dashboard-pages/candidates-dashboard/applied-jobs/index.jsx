@@ -8,19 +8,34 @@ import JobListingsTable from "./components/JobListingsTable";
 import MenuToggler from "../../MenuToggler";
 import { useQuery } from "@tanstack/react-query";
 import { get } from "@/services/api";
+import { useState } from "react";
+import usePaginationhook from "@/utils/hooks/usePagination";
 
 const index = () => {
 
+  const [search, setSearch] = useState({
+    page: 1,
+    limit: 10,
+    createdAt: '',
+    sort: 'new'
+});
+const handleSerch=(name,value)=>{
+  setSearch((prev)=>({
+    ...prev,
+    [name]:value
+  }))
+}
   const { data, isLoading } = useQuery({
-    queryKey: ['appliedJobs'],
+    queryKey: ['appliedJobs',search.createdAt],
     queryFn: async () => {
-      let res = (await get('/user/job/applied')).data.data;
+      let res = (await get(`/application/applied?createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}`)).data.data;
       return res;
     }
   });
-
+  console.log("data???",data)
+  // const pagination=usePaginationhook()
   if (isLoading) return <div>Loading...</div>
-
+  
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
@@ -51,7 +66,7 @@ const index = () => {
             <div className="col-lg-12">
               {/* <!-- Ls widget --> */}
               <div className="ls-widget">
-                <JobListingsTable data={data} />
+                <JobListingsTable data={data} search={search} setSearch={ setSearch} handleSerch={handleSerch}/>
               </div>
             </div>
           </div>

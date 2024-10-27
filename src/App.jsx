@@ -67,6 +67,7 @@ import { decrypt } from "./lib/encrypt";
 import { paths } from "./services/paths";
 import ForgotPasswordPage from "./pages/others/forgot";
 import ResetPassword from "./pages/others/resetpassword";
+import SavedJobsPage from "./pages/candidates-dashboard/saved-jobs";
 
 function App() {
 
@@ -146,6 +147,7 @@ function App() {
                 <Route path="candidates-dashboard" element={userInfo === 'candidate' ? <Outlet /> : <Navigate to={paths.home} />}  >
                   <Route path="dashboard" element={<DashboardPage />} />
                   <Route path="applied-jobs" element={<AppliedJobsPage />} />
+                  <Route path="saved-jobs" element={<SavedJobsPage />} />
                   <Route path="change-password" element={<ChangePasswordPage />} />
                   <Route path="cv-manager" element={<CVMannagerPage />} />
                   <Route path="job-alerts" element={<JobAlertPage />} />

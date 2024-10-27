@@ -4,7 +4,7 @@ import FooterDefault from "@/components/footer/common-footer";
 import DefaulHeader from "@/components/header/DefaulHeader";
 import MobileMenu from "@/components/header/MobileMenu";
 import JobDetailsDescriptions from "@/components/employer-single-pages/shared-components/JobDetailsDescriptions";
-import RelatedJobs from "@/components/employer-single-pages/related-jobs/RelatedJobs";
+import RelatedJobs from "@/components/job-single-pages/related-jobs/RelatedJobs";
 import MapJobFinder from "@/components/job-listing-pages/components/MapJobFinder";
 import Social from "@/components/employer-single-pages/social/Social";
 import PrivateMessageBox from "@/components/employer-single-pages/shared-components/PrivateMessageBox";
@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 import { getById } from "@/services/api";
 import { API_EMPLOYER_PATH } from "@/lib/config";
+import { useLocation } from "react-router-dom";
 
 const metadata = {
   title:
@@ -22,6 +23,8 @@ const metadata = {
 
 const EmployersSingleV1 = () => {
   let params = useParams();
+  let {state} = useLocation();
+  console.log(state)
   const id = params.id;
 
   const { data, isLoading } = useQuery({
@@ -31,7 +34,13 @@ const EmployersSingleV1 = () => {
       return res;
     }
   });
-console.log("data",data)
+  const { data: jobsData, isLoading: jobsLoader } = useQuery({
+    queryKey: ['jobs'],
+    queryFn: async () => {
+      let res = (await get('job?limit=4&sort=new')).data.data;
+      return res;
+    }
+  });
   return (
     <>
       <MetaComponent meta={metadata} />
@@ -58,12 +67,12 @@ console.log("data",data)
                   <span className="company-logo">
                     <img src={API_EMPLOYER_PATH + data?.employerDetails?.logo?.filename} alt="logo" />
                   </span>
-                  <h4>{ data?.employerDetails?.name}</h4>
+                  <h4>{state?.company?.name || data?.employerDetails?.name}</h4>
 
                   <ul className="job-info">
                     <li>
                       <span className="icon flaticon-map-locator"></span>
-                      {data?.employerDetails?.address?.city} ,{data?.employerDetails?.address?.state}
+                      {data?.employerDetails?.address?.city + ", "+data?.employerDetails?.address?.state}
                     </li>
                     {/* compnay info */}
                     {/* <li>
@@ -99,9 +108,9 @@ console.log("data",data)
                   >
                     Private Message
                   </button>
-                  <button className="bookmark-btn">
+                  {/* <button className="bookmark-btn">
                     <i className="flaticon-bookmark"></i>
-                  </button>
+                  </button> */}
                 </div>
                 {/* End btn-box */}
 
@@ -116,7 +125,7 @@ console.log("data",data)
                     <div className="apply-modal-content modal-content">
                       <div className="text-center">
                         <h3 className="title">
-                          Send message to {data?.name}
+                          Send message to {data?.employerDetails?.name}
                         </h3>
                         <button
                           type="button"
@@ -153,14 +162,14 @@ console.log("data",data)
                 {/* <!-- Related Jobs --> */}
                 <div className="related-jobs">
                   <div className="title-box">
-                    <h3>3 Others jobs available</h3>
+                    <h3> {jobsData?.length || 0} Others jobs available</h3>
                     <div className="text">
-                      2020 jobs live - 293 added today.
+                      {/* 2020 jobs live - 293 added today. */}
                     </div>
                   </div>
                   {/* End .title-box */}
 
-                  <RelatedJobs />
+                  <RelatedJobs data={jobsData || []} />
                   {/* End RelatedJobs */}
                 </div>
                 {/* <!-- Related Jobs --> */}
@@ -173,23 +182,23 @@ console.log("data",data)
                     <div className="widget-content">
                       {/*  compnay-info */}
                       <ul className="company-info mt-0">
-                        <li>
+                        {/* <li>
                           Primary industry: <span>Software</span>
+                        </li> */}
+                        <li>
+                          Company size: <span>{state?.company?.size_of_org || data?.employerDetails?.company?.size_of_org }</span>
                         </li>
                         <li>
-                          Company size: <span>501-1,000</span>
+                          Founded in: <span>{new Date(data?.employerDetails?.year_established).getFullYear()}</span>
                         </li>
                         <li>
-                          Founded in: <span>2011</span>
+                          Phone: <span>{data?.employerDetails?.phone}</span>
                         </li>
                         <li>
-                          Phone: <span>{data?.phone}</span>
+                          Email: <span>{data?.employerDetails?.email}</span>
                         </li>
                         <li>
-                          Email: <span>{data?.email}</span>
-                        </li>
-                        <li>
-                          Location: <span>{data?.location}</span>
+                          Location: <span> {data?.employerDetails?.address?.city + ", "+data?.employerDetails?.address?.state}</span>
                         </li>
                         <li>
                           Social media:

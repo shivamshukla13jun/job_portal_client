@@ -11,8 +11,10 @@ const request = axios.create({
 });
 
 request.interceptors.request.use((config) => {
-    let token=new URLSearchParams(window.location.search).get("token")
-    config.headers.Authorization = `Bearer ${sessionStorage.getItem("session") || token}`;
+    if(sessionStorage.getItem("session")){
+
+        config.headers.Authorization = `Bearer ${sessionStorage.getItem("session") ||""}`;
+    }
     return config;
 }, (error) => {
     return Promise.reject(error);

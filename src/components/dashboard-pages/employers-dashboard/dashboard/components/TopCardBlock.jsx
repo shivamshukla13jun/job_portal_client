@@ -1,35 +1,36 @@
-const TopCardBlock = () => {
+const TopCardBlock = ({data}) => {
+
   const cardContent = [
     {
       id: 1,
       icon: "flaticon-briefcase",
-      countNumber: "22",
+      countNumber: data?.jobs?.total,
       metaName: "Posted Jobs",
       uiClass: "ui-blue",
     },
     {
       id: 2,
       icon: "la-file-invoice",
-      countNumber: "9382",
+      countNumber:  data?.Applicationdata?.Application,
       metaName: "Application",
       uiClass: "ui-red",
     },
     {
       id: 3,
       icon: "la-comment-o",
-      countNumber: "74",
+      countNumber: "0",
       metaName: "Messages",
       uiClass: "ui-yellow",
     },
     {
       id: 4,
       icon: "la-bookmark-o",
-      countNumber: "32",
+      countNumber:  data?.Applicationdata?.Shortlist,
       metaName: "Shortlist",
       uiClass: "ui-green",
     },
   ];
-
+console.log("data?????",data)
   return (
     <>
       {cardContent.map((item) => (

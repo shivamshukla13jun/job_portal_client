@@ -7,11 +7,13 @@ import employerFilterSlice from "@/features/filter/employerFilterSlice";
 import candidateSlice from "@/features/candidate/candidateSlice";
 import candidateFilterSlice from "@/features/filter/candidateFilterSlice";
 import shopSlice from "@/features/shop/shopSlice";
-
 import userSlice from "@/store/reducers/user"
+import { wishlistReducer } from "./reducers/Whishlist";
+
 
 export const store = configureStore({
     reducer: {
+        wishlist:wishlistReducer,
         job: jobSlice,
         toggle: toggleSlice,
         filter: filterSlice,

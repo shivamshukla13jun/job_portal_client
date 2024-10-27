@@ -2,24 +2,26 @@ import { Link, useNavigate } from "react-router-dom";
 import { API_EMPLOYER_PATH } from "@/lib/config.js";
 import { paths } from "@/services/paths.js";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter.js";
+import { datePost } from "@/utils/datePost";
 
 const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
   const navigate = useNavigate();
- 
+  const now = new Date();
+
   return (
     <div className="tabs-box">
       <div className="widget-title">
-        <h4>My Shortlisted Jobs</h4>
+        <h4>My Saved Jobs</h4>
 
-        {/* <div className="chosen-outer">
-          <select onChange={(e)=>handleSerch("createdAt",e.target.value)}  className="chosen-single form-select">
+        <div className="chosen-outer">
+          {/* <select onChange={(e)=>handleSerch("createdAt",e.target.value)}  className="chosen-single form-select">
           {
             datePost.map((item)=>(
               <option value={item.value}>{item.name}</option>
             ))
           }
-          </select>
-        </div> */}
+          </select> */}
+        </div>
       </div>
       {/* End filter top bar */}
 
@@ -31,7 +33,6 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
               <thead>
                 <tr>
                   <th>Job Title</th>
-                  <th>Date Applied</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -39,6 +40,10 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
 
               <tbody>
                 {data?.length > 0 && data.map((item) => {
+                  const { _id,company,title } = item;
+                  if (!_id || !title || !company) {
+                    return null;
+                  }
                   return (
                     <tr key={item?._id}>
                       <td>
@@ -48,34 +53,33 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
                             <div className="content">
                               <span className="company-logo">
                                 <img
-                                  src={API_EMPLOYER_PATH + item?.job?.employerId?.logo?.filename}
+                                  src={API_EMPLOYER_PATH + item?.employerId?.logo?.filename}
                                   alt="logo"
                                 />
                               </span>
                               <h4>
-                                <Link to={`${paths.job}/${item?.job?._id}`}>{capitalizeFirstLetter(item?.job?.title)}</Link>
+                                <Link to={`${paths.job}/${item?._id}`}>{capitalizeFirstLetter(item?.title)}</Link>
                               </h4>
                               <ul className="job-info">
                                 <li>
                                   <span className="icon flaticon-briefcase"></span>
-                                  {item?.job?.company?.name}
+                                  {item?.company?.name}
                                 </li>
                                 <li>
                                   <span className="icon flaticon-map-locator"></span>
-                                  {item?.job?.location}
+                                  {item?.location}
                                 </li>
                               </ul>
                             </div>
                           </div>
                         </div>
                       </td>
-                      <td>{new Date(item?.createdAt).toDateString()}</td>
                       <td className="status">Active</td>
                       <td>
                         <div className="option-box">
                           <ul className="option-list">
                             <li>
-                              <button data-text="View Aplication" onClick={() => navigate(`${paths.job}/${item?.job?._id}`)}>
+                              <button data-text="View Aplication" onClick={() => navigate(`${paths.job}/${item?._id}`)}>
                                 <span className="la la-eye"></span>
                               </button>
                             </li>

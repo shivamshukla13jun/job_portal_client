@@ -1,12 +1,32 @@
 import { API_EMPLOYER_PATH } from "@/lib/config";
 import { paths } from "@/services/paths";
+import { addToWishlist, fetchWishlist, selectWishlist, selectWishlistLoading } from "@/store/reducers/Whishlist";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import useUserInfo from "@/utils/hooks/useUserInfo";
+import { useWhishlist } from "@/utils/hooks/useWhishlist";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const FilterJobsBox = ({ jobs, search, queryParams, setSearch }) => {
+  const userInfo=useUserInfo()
 const navigate=useNavigate()
+const dispatch = useDispatch();
+const SavedJobs = useSelector(selectWishlist);
+const isLoading = useSelector(selectWishlistLoading);
+
+
+const handleWishist = async (id, operation) => {
+  if (!userInfo._id) {
+    toast.info('Please login as Candidate to Save Job.');
+    return;
+  }
+  if (id && operation) {
+    dispatch(addToWishlist({ id, operation }));
+  }
+};
   const handleSearch = () => {
     if (jobs?.count <= ((search.page + 1) * search.limit)) {
       toast.error(`No more jobs available`)
@@ -15,7 +35,6 @@ const navigate=useNavigate()
 
     setSearch((prev) => ({ ...prev, page: ++prev.page }))
   }
-
   return (
     <>
       <div className="ls-switcher">
@@ -120,10 +139,12 @@ const navigate=useNavigate()
                     </li>
                   ))}
                 </ul>
-
-                <button className="bookmark-btn">
+                {
+                  !isLoading &&    <button className={`bookmark-btn ${SavedJobs.includes(item?._id)?"disable":"" }`}  type="button" onClick={()=>handleWishist(item?._id,SavedJobs.includes(item?._id)?"remove":"add")}>
                   <span className="flaticon-bookmark"></span>
                 </button>
+                }
+             
               </div>
             </div>
           </div>

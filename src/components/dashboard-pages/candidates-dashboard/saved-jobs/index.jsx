@@ -1,10 +1,10 @@
 import MobileMenu from "../../../header/MobileMenu";
+import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import LoginPopup from "../../../common/form/login/LoginPopup";
 import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
-import JobFavouriteTable from "./components/JobFavouriteTable";
-import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
+import JobListingsTable from "./components/JobListingsTable";
 import MenuToggler from "../../MenuToggler";
 import { useQuery } from "@tanstack/react-query";
 import { get } from "@/services/api";
@@ -25,14 +25,13 @@ const handleSerch=(name,value)=>{
   }))
 }
   const { data, isLoading } = useQuery({
-    queryKey: ['appliedJobs',search.createdAt],
+    queryKey: ['whishlist/all',search.createdAt],
     queryFn: async () => {
-      let res = (await get(`/application/applied?status=shortlisted&createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}`)).data.data;
+      let res = (await get(`/whishlist/all?createdAt=${search.createdAt}`)).data.data;
       return res;
     }
   });
-  console.log("data???",data)
-
+console.log({data})
   if (isLoading) return <div>Loading...</div>
 
   return (
@@ -55,7 +54,7 @@ const handleSerch=(name,value)=>{
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Shortlisted jobs!" />
+          <BreadCrumb title="Saved jobs!" />
           {/* breadCrumb */}
 
           <MenuToggler />
@@ -65,7 +64,7 @@ const handleSerch=(name,value)=>{
             <div className="col-lg-12">
               {/* <!-- Ls widget --> */}
               <div className="ls-widget">
-                <JobFavouriteTable data={data} />
+                <JobListingsTable data={data} search={search} setSearch={ setSearch} handleSerch={handleSerch}/>
               </div>
             </div>
           </div>

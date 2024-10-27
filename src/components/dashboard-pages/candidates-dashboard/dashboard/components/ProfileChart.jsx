@@ -13,6 +13,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
+import { datePost } from "@/utils/datePost";
 
 ChartJS.register(
   CategoryScale,
@@ -75,11 +76,11 @@ const ProfileChart = () => {
         <div className="chosen-outer">
           {/* <!--Tabs Box--> */}
           <select className="chosen-single form-select">
-            <option>Last 6 Months</option>
-            <option>Last 12 Months</option>
-            <option>Last 16 Months</option>
-            <option>Last 24 Months</option>
-            <option>Last 5 year</option>
+     {
+           datePost && datePost.map((item)=>(
+              <option value={item.value}>{item.name}</option>
+            ))
+          }
           </select>
         </div>
       </div>

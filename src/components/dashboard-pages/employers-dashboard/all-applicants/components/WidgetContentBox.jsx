@@ -4,273 +4,113 @@ import { Link, useNavigate } from "react-router-dom";
 import { paths } from "@/services/paths";
 import { API_CANDIDATE_PATH } from "@/lib/config";
 
-const WidgetContentBox = ({ data, acceptMutation, declineMutation }) => {
+const WidgetContentBox = ({ data, acceptMutation, title }) => {
+  console.log("data????", data);
 
   const navigate = useNavigate();
 
-  const handleAccept = (item) => {
-    acceptMutation.mutate(item);
+  const handleAccept = (_id,status) => {
+    acceptMutation.mutate({_id,status});
   };
 
-  const handleReject = (item) => {
-    declineMutation.mutate(item);
-  };
+  
+
+  // Check if data exists and has candidates, otherwise return loading or error
+  if (!data) {
+    return <p>Loading...</p>;
+  }
+  if (!data.data || data.data.length === 0) {
+    return <p>No candidates found.</p>;
+  }
 
   return (
     <div className="widget-content">
       <div className="tabs-box">
         <Tabs>
           <div className="aplicants-upper-bar">
-            <h6>{data?.title}</h6>
-
+            <h6>{title}</h6>
             <TabList className="aplicantion-status tab-buttons clearfix">
-              <Tab className="tab-btn totals"> Total(s): {data?.candidate_applied?.length > 0 && Object.keys(data?.candidate_applied?.[0]).length > 0 ? data?.candidate_applied?.length : 0}</Tab>
-              <Tab className="tab-btn approved"> Approved: {data?.candidate_shortlisted?.length > 0 && Object.keys(data?.candidate_shortlisted?.[0]).length > 0 ? data?.candidate_shortlisted?.length : 0}</Tab>
-              <Tab className="tab-btn rejected"> Rejected(s): {data?.candidate_rejected?.length > 0 && Object.keys(data?.candidate_rejected?.[0]).length > 0 ? data?.candidate_rejected?.length : 0}</Tab>
+              <Tab className="tab-btn totals">Total(s): {data?.stats?.totals?.total || 0}</Tab>
+              <Tab className="tab-btn approved">Approved: {data?.stats?.approved?.total || 0}</Tab>
+              <Tab className="tab-btn rejected">Rejected(s): {data?.stats?.rejected?.total || 0}</Tab>
             </TabList>
           </div>
 
           <div className="tabs-content">
             <TabPanel>
               <div className="row">
-                {data?.candidate_applied?.length > 0 && Object.keys(data?.candidate_applied?.[0]).length > 0 && data.candidate_applied.map(({ candidateId }) => (
+                {data?.data.map(({_id, candidate }) => (
                   <div
                     className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
-                    key={candidateId?._id}
+                    key={candidate?._id}
                   >
                     <div className="inner-box">
                       <div className="content">
                         <figure className="image">
                           <img
-                            src={API_CANDIDATE_PATH+candidateId?.profile?.filename}
+                            src={API_CANDIDATE_PATH + candidate?.profile?.filename}
                             alt="candidates"
                           />
                         </figure>
                         <h4 className="name">
-                          <Link to={`${paths.publiccandidate}/${candidateId?._id}`}>
-                            {candidateId?.name}
+                          <Link to={`${paths.publiccandidate}/${candidate?._id}`}>
+                            {candidate?.name}
                           </Link>
                         </h4>
-
                         <ul className="candidate-info">
                           <li className="designation">
-                            {candidateId?.designation || "Designation"}
+                            {candidate?.designation || "Designation"}
                           </li>
                           <li>
                             <span className="icon flaticon-map-locator"></span>{" "}
-                            {candidateId?.contact?.current_address?.country}
+                            {candidate?.contact?.current_address?.country}
                           </li>
                           <li>
                             <span className="icon flaticon-money"></span>
-                            ₹{candidateId?.hourlyRate || '17000'}
+                            ₹{candidate?.hourlyRate || '17000'}
                           </li>
                         </ul>
-                        {/* End candidate-info */}
 
                         <ul className="post-tags">
-                          {candidateId?.education?.map((val, i) => (
+                          {candidate?.education?.map((val, i) => (
                             <li key={i}>
                               <a>{val.qualification}</a>
                             </li>
                           ))}
                         </ul>
                       </div>
-                      {/* End content */}
 
                       <div className="option-box">
                         <ul className="option-list">
                           <li>
-                            <button data-text="View Aplication" onClick={() => navigate(`${paths.publiccandidate}/${candidateId._id}`)}>
+                            <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${candidate._id}`)}>
                               <span className="la la-eye"></span>
                             </button>
                           </li>
                           <li>
-                            <button data-text="Approve Aplication" onClick={() => handleAccept(candidateId._id)}>
+                            <button data-text="Approve Application" onClick={() => handleAccept(_id,'shortlisted')}>
                               <span className="la la-check"></span>
                             </button>
                           </li>
                           <li>
-                            <button data-text="Reject Aplication" onClick={() => handleReject(candidateId._id)}>
+                            <button data-text="Reject Application" onClick={() => handleAccept(_id,"rejected")}>
                               <span className="la la-times-circle"></span>
                             </button>
                           </li>
-                          {/* <li>
-                            <button data-text="Delete Aplication">
-                              <span className="la la-trash"></span>
-                            </button>
-                          </li> */}
                         </ul>
                       </div>
-                      {/* End admin options box */}
                     </div>
                   </div>
                 ))}
               </div>
             </TabPanel>
-            {/* End total applicants */}
-
-            <TabPanel>
-              <div className="row">
-                {data?.candidate_shortlisted?.length > 0 && Object.keys(data?.candidate_shortlisted?.[0]).length > 0 && data.candidate_shortlisted.map(({ candidateId }) => (
-                  <div
-                    className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
-                    key={candidateId._id}
-                  >
-                    <div className="inner-box">
-                      <div className="content">
-                        <figure className="image">
-                          <img
-
-                            src={API_CANDIDATE_PATH+candidateId?.profile?.filename}
-                            alt="candidates"
-                          />
-                        </figure>
-                        <h4 className="name">
-                          <Link to={`${paths.publiccandidate}/${candidateId?._id}`}>
-                            {candidateId?.name}
-                          </Link>
-                        </h4>
-
-                        <ul className="candidate-info">
-                          <li className="designation">
-                            {candidateId?.designation || "Designation"}
-                          </li>
-                          <li>
-                            <span className="icon flaticon-map-locator"></span>{" "}
-                            {candidateId?.contact?.current_address?.country}
-                          </li>
-                          <li>
-                            <span className="icon flaticon-money"></span>
-                            ₹{candidateId?.hourlyRate || '17000'}
-                          </li>
-                        </ul>
-                        {/* End candidate-info */}
-
-                        <ul className="post-tags">
-                          {candidateId?.education?.map((val, i) => (
-                            <li key={i}>
-                              <a>{val.qualification}</a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      {/* End content */}
-
-                      <div className="option-box">
-                        <ul className="option-list">
-                          <li>
-                            <button data-text="View Aplication" onClick={() => navigate(`${paths.publiccandidate}/${candidateId._id}`)}>
-                              <span className="la la-eye"></span>
-                            </button>
-                          </li>
-                          {/* <li>
-                            <button data-text="Approve Aplication" onClick={() => handleAccept(candidateId._id)}>
-                              <span className="la la-check"></span>
-                            </button>
-                          </li> */}
-                          <li>
-                            <button data-text="Reject Aplication" onClick={() => handleReject(candidateId._id)}>
-                              <span className="la la-times-circle"></span>
-                            </button>
-                          </li>
-                          {/* <li>
-                            <button data-text="Delete Aplication">
-                              <span className="la la-trash"></span>
-                            </button>
-                          </li> */}
-                        </ul>
-                      </div>
-                      {/* End admin options box */}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </TabPanel>
-            {/* End approved applicants */}
-
-            <TabPanel>
-              <div className="row">
-                {data?.candidate_rejected?.length > 0 && Object.keys(data?.candidate_rejected?.[0]).length > 0 && data.candidate_rejected.map(({ candidateId }) => (
-                  <div
-                    className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
-                    key={candidateId._id}
-                  >
-                    <div className="inner-box">
-                      <div className="content">
-                        <figure className="image">
-                          <img
-
-                            src={API_CANDIDATE_PATH+candidateId?.profile?.filename}
-                            alt="candidates"
-                          />
-                        </figure>
-                        <h4 className="name">
-                          <Link to={`${paths.publiccandidate}/${candidateId?._id}`}>
-                            {candidateId?.name}
-                          </Link>
-                        </h4>
-
-                        <ul className="candidate-info">
-                          <li className="designation">
-                            {candidateId?.designation || "Designation"}
-                          </li>
-                          <li>
-                            <span className="icon flaticon-map-locator"></span>{" "}
-                            {candidateId?.contact?.current_address?.country}
-                          </li>
-                          <li>
-                            <span className="icon flaticon-money"></span>
-                            ₹{candidateId?.hourlyRate || '17000'}
-                          </li>
-                        </ul>
-                        {/* End candidate-info */}
-
-                        <ul className="post-tags">
-                          {candidateId?.education?.map((val, i) => (
-                            <li key={i}>
-                              <a>{val.qualification}</a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      {/* End content */}
-
-                      <div className="option-box">
-                        <ul className="option-list">
-                          <li>
-                            <button data-text="View Aplication" onClick={() => navigate(`${paths.publiccandidate}/${candidateId._id}`)}>
-                              <span className="la la-eye"></span>
-                            </button>
-                          </li>
-                          <li>
-                            <button data-text="Approve Aplication" onClick={() => handleAccept(candidateId._id)}>
-                              <span className="la la-check"></span>
-                            </button>
-                          </li>
-                          {/* <li>
-                            <button data-text="Reject Aplication" onClick={() => handleReject(candidateId._id)}>
-                              <span className="la la-times-circle"></span>
-                            </button>
-                          </li> */}
-                          {/* <li>
-                            <button data-text="Delete Aplication">
-                              <span className="la la-trash"></span>
-                            </button>
-                          </li> */}
-                        </ul>
-                      </div>
-                      {/* End admin options box */}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </TabPanel>
-            {/* End rejected applicants */}
+            {/* Repeat for other TabPanels with similar checks */}
           </div>
         </Tabs>
       </div>
     </div>
   );
 };
+
 
 export default WidgetContentBox;
