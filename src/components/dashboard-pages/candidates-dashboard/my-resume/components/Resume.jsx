@@ -29,7 +29,15 @@ const Resume = ({ watch, register, setValue, error, handleSubmit, handleRegister
         <div className="form-group col-lg-12 col-md-12">
           <AddPortfolio watch={watch} register={register} setValue={setValue} error={error} />
         </div>
-
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Portfolio Link </label>
+          <input
+            type="text"
+            {...register("portfoliolink")}
+            placeholder="Portfolio Link"
+            className={`${error?.portfoliolink?.message ? 'error' : ''}`}
+          />
+        </div>
         <div className="form-group col-lg-12 col-md-12">
           <Awards watch={watch} register={register} setValue={setValue} error={error} />
         </div>
@@ -87,6 +95,7 @@ const Resume = ({ watch, register, setValue, error, handleSubmit, handleRegister
             className={`${error?.social_media?.twitter?.message ? 'error' : ''}`}
           />
         </div>
+       
 
 
         <div className="form-group col-lg-6 col-md-12">

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import jobs from "../../../../../data/job-featured.js";
+import { datePost } from "@/utils/datePost.js";
 
 
 const JobAlertsTable = () => {
@@ -12,7 +13,7 @@ const JobAlertsTable = () => {
           {/* <!--Tabs Box--> */}
           <select className="chosen-single form-select">
      {
-            d.map((item)=>(
+            datePost.map((item)=>(
               <option value={item.value}>{item.name}</option>
             ))
           }

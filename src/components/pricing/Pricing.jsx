@@ -1,45 +1,21 @@
+import { get } from "@/services/api";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
 const Pricing = () => {
-  const pricingCotent = [
-    {
-      id: 1,
-      packageType: "Basic",
-      price: "199",
-      tag: "",
-      features: [
-        "30 job posting",
-        "3 featured job",
-        "Job displayed for 15 days",
-        "Premium Support 24/7",
-      ],
-    },
-    {
-      id: 2,
-      packageType: "Standard",
-      price: "499",
-      tag: "tagged",
-      features: [
-        "40 job posting",
-        "5 featured job",
-        "Job displayed for 20 days",
-        "Premium Support 24/7",
-      ],
-    },
-    {
-      id: 3,
-      packageType: "Extended",
-      price: "799",
-      tag: "",
-      features: [
-        "50 job posting",
-        "10 featured job",
-        "Job displayed for 60 days",
-        "Premium Support 24/7",
-      ],
-    },
-  ];
-
+const {data=[],isLoading}=useQuery({
+  queryKey:["plans"],
+  queryFn: async () => {
+    try {
+      let res = (await get('/plan')).data.data;
+      return res;
+    } catch (error) {
+      console.log(error)
+     return
+    }
+  },
+})
+console.log("dt????/",data)
   return (
     <div className="pricing-tabs tabs-box wow fadeInUp">
       {/* <!--Tabs Container--> */}

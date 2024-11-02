@@ -19,7 +19,7 @@ const JobCategorie1 = () => {
                 <h4>
                   <Link to={paths.job_list + "?categories=" + item.value}>{item.label}</Link>
                 </h4>
-                <p>({item.jobNumber || 0} open positions)</p>
+                {/* <p>({item.jobNumber || 0} open positions)</p> */}
               </div>
             </div>
           </div>

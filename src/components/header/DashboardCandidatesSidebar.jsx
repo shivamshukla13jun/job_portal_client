@@ -30,24 +30,33 @@ const DashboardCandidatesSidebar = () => {
   // menu togggle handler
   const menuToggleHandler = async (item) => {
     dispatch(menuToggle());
-    if (item.name === 'Logout') {
-      dispatch(logout());
-      sessionStorage.removeItem("session");
-      sessionStorage.removeItem("userInfo");
-    }
-    if (item.name === 'Delete Profile') {
-      try {
-        const res = await del('/user', userInfo._id);
-        if (res.data.success) {
-          toast.success(res.data.message);
+      if (item.name === 'Logout') {
+        let dialogoue=confirm("Are You Sure")
+        if(dialogoue){
+
+          dispatch(logout());
           sessionStorage.removeItem("session");
           sessionStorage.removeItem("userInfo");
-          window.location.href = paths.login;
         }
-      } catch (err) {
-        toast.error(err.response.data.error)
       }
-    }
+      if (item.name === 'Delete Profile') {
+        try {
+          let dialogoue=confirm("Are You Sure")
+          if(dialogoue){
+            const res = await del('/user', userInfo._id);
+            if (res.data.success) {
+              toast.success(res.data.message);
+              sessionStorage.removeItem("session");
+              sessionStorage.removeItem("userInfo");
+              window.location.href = paths.login;
+            }
+          }
+        } catch (err) {
+          toast.error(err.response.data.error)
+        }
+      }
+    
+  
   };
 
   useEffect(() => {
@@ -94,9 +103,14 @@ const DashboardCandidatesSidebar = () => {
               key={item.id}
               onClick={() => menuToggleHandler(item)}
             >
-              <Link to={item.routePath}>
+              {item.name==="Logout" || item.name==="Delete Profile"?
+             <Link >
+             <i className={`la ${item.icon}`}></i> {item.name}
+           </Link>
+              :<Link to={item.routePath}>
                 <i className={`la ${item.icon}`}></i> {item.name}
-              </Link>
+              </Link> }
+              
             </li>
           ))}
         </ul>

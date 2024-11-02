@@ -90,8 +90,8 @@ const DefaulHeader2 = () => {
 
           {userInfo?.userType?.name && (
             <div className="outer-box">
-              <button className="menu-btn">
-                <span className="count">{SavedJobs?.length}</span>
+               <button className="menu-btn">
+                <Link to={"/candidates-dashboard/saved-jobs"} className="count">{SavedJobs?.length}</Link>
                 <span className="icon la la-heart-o"></span>
               </button>
               {/* wishlisted menu */}

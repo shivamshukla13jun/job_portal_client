@@ -28,6 +28,7 @@ import { getById, post, put, putMultiForm } from "@/services/api";
 import { decrypt, encrypt } from "@/lib/encrypt";
 import { userInfo } from "@/store/reducers/user";
 import useUserInfo from "@/utils/hooks/useUserInfo";
+import CoverLetter from "./components/CoverLetter";
 
 const index = () => {
   const userInfo = useUserInfo();
@@ -122,6 +123,7 @@ const index = () => {
         },
         score_card: {},
       },
+      coverletter:"",
       hear_about_us: ''
     }
   });
@@ -149,7 +151,7 @@ const index = () => {
 
     const name = `${data.myProfile.candidate_name.title} ${data.myProfile.candidate_name.first} ${data.myProfile.candidate_name.middle} ${data.myProfile.candidate_name.last}`;
     const formattedData = {
-      name,
+      name,coverletter:data.coverletter,
       gender: data.myProfile.gender,
       email: data.contact.email,
       dob: data.myProfile.dob,
@@ -216,6 +218,7 @@ const index = () => {
           ...data.english_language,
           recent_test: new Date(data.english_language.recent_test),
         },
+        coverletter:data.coverletter || "",
         hear_about_us: data.hear_about_us.join(","),
       });
     }
@@ -357,6 +360,18 @@ const index = () => {
               </div>
               {/* <!-- English Language Certifications --> */}
 
+              <div className="ls-widget">
+                <div className="tabs-box">
+                  <div className="widget-title">
+                    <h4>Cover Letter</h4>
+                  </div>
+                  {/* End widget-title */}
+                  <div className="widget-content">
+                 <CoverLetter watch={watch} register={register} setValue={setValue} error={errors}/>
+                  </div>
+                </div>
+              </div>
+              {/* <!-- Conclusion --> */}
               <div className="ls-widget">
                 <div className="tabs-box">
                   <div className="widget-title">

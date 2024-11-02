@@ -3,6 +3,7 @@ export const paths = {
     login: '/login',
     register: '/register',
     forgot: '/forgot',
+    pricing:"/pricing",
     verify: '/verify',
     candidate: '/candidates-dashboard/dashboard',
     employer: '/employers-dashboard/dashboard',
