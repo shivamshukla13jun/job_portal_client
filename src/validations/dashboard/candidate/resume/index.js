@@ -19,7 +19,9 @@ export const resumeSchema = Yup.object().shape({
             end_date: Yup.date().required('End date is required'),
             description: Yup.string().required('Description is required'),
         }).required('Work experience entry is required')
-    ).required('Work experience is required'),
+    ).notRequired()
+    // .required('Work experience is required')
+    ,
     portfolio: Yup.mixed().required('Portfolio upload is required').test('is-file-or-object', 'Portfolio upload must be a file', value => value instanceof File || typeof value === 'object'),
     portfoliolink: Yup.string().url().label("portfolio link"),
     awards: Yup.array().of(
@@ -29,7 +31,9 @@ export const resumeSchema = Yup.object().shape({
             end_date: Yup.date().required('End date is required'),
             description: Yup.string().required('Description is required'),
         }).required('Award entry is required')
-    ).required('Awards are required'),
+    ).notRequired()
+    // .required('Awards are required')
+    ,
     skills: Yup.array().of(
         Yup.object().shape({
             label: Yup.string().required('Skill label is required'),

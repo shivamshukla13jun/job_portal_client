@@ -10,8 +10,9 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const FilterJobsBox = ({ jobs, search, queryParams, setSearch }) => {
-  const userInfo=useUserInfo()
+const FilterJobsBox = ({ jobs, search, queryParams, setSearch,data }) => {
+  console.log("data????????????//",data)
+const userInfo=useUserInfo()
 const navigate=useNavigate()
 const dispatch = useDispatch();
 const SavedJobs = useSelector(selectWishlist);
@@ -77,10 +78,11 @@ const handleWishist = async (id, operation) => {
                     categories: '',
                     job_type: '',
                     date_posted: '',
+                    clear:true,
                     experience_from: 0,
-                    experience_to: 1,
                     salary_from: 0,
-                    salary_to: 10_000,
+                    salary_to:data?.maxsalary?.candidate_requirement?.salary_to || 30000,
+                     experience_to:data?.maxeperience?.candidate_requirement?.experience || 10,
                     tags: [],
                     sort: 'new'
                   })

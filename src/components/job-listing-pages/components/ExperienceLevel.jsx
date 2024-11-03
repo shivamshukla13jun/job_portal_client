@@ -1,6 +1,6 @@
 import InputRange from "react-input-range";
 
-const ExperienceLevel = ({ search, setSearch }) => {
+const ExperienceLevel = ({ search, setSearch,data }) => {
 
     const handleOnChange = (value) => {
         setSearch((prev) => ({

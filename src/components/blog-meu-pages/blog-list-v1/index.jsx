@@ -7,8 +7,44 @@ import BlogPagination from "../blog-sidebar/BlogPagination";
 import BlogSidebar from "../blog-sidebar";
 import Breadcrumb from "../../common/Breadcrumb";
 import DefaulHeader2 from "@/components/header/DefaulHeader2";
+import blogContent from "../../../data/blogs";
+import { useState } from "react";
+import { useEffect } from "react";
+const ITEMS_PER_PAGE = 5;
 
 const index = () => {
+   // Define states for search, category, and pagination
+   const [searchQuery, setSearchQuery] = useState("");
+   const [category, setCategory] = useState("all");
+   const [currentPage, setCurrentPage] = useState(1);
+   const [filteredData, setFilteredData] = useState([]);
+ 
+   // Filter blog data based on search query and category
+   useEffect(() => {
+    const filtered = blogContent.filter((blog) => {
+      const title = blog.title && typeof blog.title === 'string' ? blog.title.toLowerCase() : "";
+      const content = blog.content && typeof blog.content === 'string' ? blog.content.toLowerCase() : "";
+  
+      const matchesSearch =
+        title.includes(searchQuery.toLowerCase()) ||
+        content.includes(searchQuery.toLowerCase());
+      const matchesCategory =
+        category === "all" || blog.category === category;
+  
+      return matchesSearch && matchesCategory;
+    });
+  
+    setFilteredData(filtered);
+  }, [searchQuery, category]);
+  
+   // Calculate pagination
+   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+   const currentPageData = filteredData.slice(
+     startIndex,
+     startIndex + ITEMS_PER_PAGE
+   );
+   const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  const  onSearch=(value) => setSearchQuery(value)
   return (
     <>
       {/* <!-- Header Span --> */}
@@ -32,19 +68,22 @@ const index = () => {
             <div className="content-side col-lg-8 col-md-12 col-sm-12">
               <div className="blog-grid">
                 <div className="row">
-                  <Blog6 />
+                <Blog6 blogContent={currentPageData} />
                 </div>
                 {/* End .row */}
 
-                <BlogPagination />
-                {/* End blog pagination */}
+                <BlogPagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={(page) => setCurrentPage(page)}
+                />                {/* End blog pagination */}
               </div>
               {/* End blog-grid */}
             </div>
             {/* <!--End Content Side--> */}
 
             <div className="sidebar-side col-lg-4 col-md-12 col-sm-12">
-              <BlogSidebar />
+              <BlogSidebar onSearch={onSearch} />
             </div>
             {/* <!--End Sidebar Side--> */}
           </div>

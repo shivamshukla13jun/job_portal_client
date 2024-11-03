@@ -2,18 +2,8 @@ import { get } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
 import InputRange from "react-input-range";
 
-const SalaryRangeSlider = ({ search, setSearch }) => {
-    const { data, isLoading } = useQuery({
-        queryKey: [`utilities/maxsalary`],
-        queryFn: async () => {
-          let res = (await get('utilities/maxsalary')).data.data;
-          setSearch((prev)=>({
-            ...prev,
-            salary_to:res?.maxsalary?.candidate_requirement?.salary_to || 30000
-          }))
-          return res;
-        }
-      });
+const SalaryRangeSlider = ({ search, setSearch,data }) => {
+    
     const handleOnChange = (value) => {
         setSearch((prev) => ({
             ...prev,
@@ -22,7 +12,6 @@ const SalaryRangeSlider = ({ search, setSearch }) => {
             ,page:1
         }))
     }
-if(!isLoading){
 
     return (
         <div className="range-slider-one salary-range">
@@ -46,7 +35,6 @@ if(!isLoading){
             </div>
         </div>
     );
-}
 };
 
 export default SalaryRangeSlider;

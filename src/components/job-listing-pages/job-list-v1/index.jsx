@@ -12,7 +12,6 @@ import FilterSidebar from "./FilterSidebar";
 
 import { get } from "@/services/api";
 import useDebounce from "@/utils/hooks/useDebounce";
-import { categories } from "@/data/category";
 
 const index = () => {
 
@@ -26,15 +25,16 @@ const index = () => {
     const [search, setSearch] = useState({
         page: 1,
         limit: 10,
+        clear:false,
         keyword: queryParams.get('keyword') || '',
         location: queryParams.get('location') || '',
         categories: queryParams.get('categories') || '',
         job_type: '',
         date_posted: '',
         experience_from: 0,
-        experience_to: 1,
+        experience_to: 10,
         salary_from: 0,
-        salary_to: 0,
+        salary_to: 10000,
         tags: [],
         sort: 'new'
     });
@@ -52,7 +52,7 @@ const index = () => {
             try {
                 let res = await get(`job?page=${search.page}&keyword=${search.keyword}&jobtype=${search.job_type}&location=${search.location}&categories=${search.categories}&sort=${search.sort}&candidate_requirement.salary_to=${search.salary_to}&candidate_requirement.salary_from=${search.salary_from}&createdAt=${search.date_posted}&experience_from=${search.experience_from}&experience_to=${search.experience_to}`);
                 setJob(prev => ({
-                    data: search.page === 1 ?
+                    data: search.page === 1 || search.clear ?
                         res.data.data :
                         [...prev.data, ...res.data.data],
                     count: res.data.count
@@ -64,7 +64,19 @@ const index = () => {
             }
         },
     });
-
+    const { data:SalaryandExp, isLoading:SalaryandExpIsloding } = useQuery({
+        queryKey: [`utilities/maxsalary`],
+        queryFn: async () => {
+          let res = (await get('utilities/maxsalaryandexp')).data.data;
+          setSearch((prev)=>({
+            ...prev,
+            salary_to:res?.maxsalary?.candidate_requirement?.salary_to || 30000,
+            experience_to:res?.maxeperience?.candidate_requirement?.experience || 10,
+            clear:false
+          }))
+          return res;
+        }
+      });
     if (isLoading) return <>Loading.....</>
 
     return (
@@ -100,13 +112,13 @@ const index = () => {
                         {/* End filter column for tablet and mobile devices */}
 
                         <div className="filters-column hidden-1023 col-lg-4 col-md-12 col-sm-12">
-                            <FilterSidebar search={search} setSearch={setSearch} />
+                            <FilterSidebar search={search} setSearch={setSearch} data={SalaryandExp} />
                         </div>
                         {/* <!-- End Filters Column for destop and laptop --> */}
 
                         <div className="content-column col-lg-8 col-md-12 col-sm-12">
                             <div className="ls-outer">
-                                <FilterJobsBox jobs={jobs} search={search} queryParams={queryParams} setSearch={setSearch} />
+                                <FilterJobsBox jobs={jobs} search={search} queryParams={queryParams} setSearch={setSearch} data={SalaryandExp} />
                                 {/* <!-- ls Switcher --> */}
                             </div>
                         </div>

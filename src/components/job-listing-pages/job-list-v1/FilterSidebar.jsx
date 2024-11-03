@@ -10,7 +10,7 @@ import SearchBox from "../components/SearchBox";
 import Tag from "../components/Tag";
 import { get } from "@/services/api";
 
-const FilterSidebar = ({ search, setSearch }) => {
+const FilterSidebar = ({ search, setSearch,data }) => {
 
   return (
     <div className="inner-column">
@@ -64,14 +64,14 @@ const FilterSidebar = ({ search, setSearch }) => {
 
         <div className="checkbox-outer">
           <h4>Experience Level</h4>
-          <ExperienceLevel search={search} setSearch={setSearch} />
+          <ExperienceLevel search={search} setSearch={setSearch} data={data} />
         </div>
         {/* <!-- Checkboxes Ouer --> */}
 
         <div className="filter-block">
           <h4>Salary <span style={{ fontSize: "13px" }}>(Monthly)</span></h4>
 
-          <SalaryRangeSlider search={search} setSearch={setSearch} />
+          <SalaryRangeSlider search={search} setSearch={setSearch} data={data} />
         </div>
         {/* <!-- Filter Block --> */}
 
