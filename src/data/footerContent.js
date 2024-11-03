@@ -3,10 +3,10 @@ const footerContent = [
     id: 1,
     title: "For Candidates",
     menuList: [
-      { name: "Browse Jobs", route: "/job-list-v11" },
+      { name: "Browse Jobs", route: "/job-list-v1" },
       { name: "Browse Categories", route: "/job-list-v3" },
       { name: "Candidate Dashboard", route: "/candidates-dashboard/dashboard" },
-      { name: "Job Alerts", route: "/candidates-dashboard/job-alerts" },
+      // { name: "Job Alerts", route: "/candidates-dashboard/job-alerts" },
       {
         name: "My Bookmarks",
         route: "/candidates-dashboard/short-listed-jobs",

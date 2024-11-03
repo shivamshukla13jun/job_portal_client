@@ -3,7 +3,6 @@ import Select from "react-select";
 
 const Language = ({ watch, register, setValue, error }) => {
 
-    console.log(watch("languages"))
 
     return (
         <Select

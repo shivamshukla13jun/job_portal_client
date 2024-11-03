@@ -1,4 +1,30 @@
+import { get, getById } from "@/services/api";
+import { paths } from "@/services/paths";
+import { dateFormatter } from "@/utils/dateformater";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+
 const PackageDataTable = () => {
+  const {data,isLoading,isError,error}=useQuery({
+    queryKey:["plans"],
+    queryFn: async () => {
+        let res = (await get('payment/subscription')).data.data;
+        return res;
+    }
+
+  })
+  
+  
+  if (isLoading) return <div>Loading...</div>
+  if (isError) {
+    return(
+    <div className="error">
+      {error?.response?.data?.error || error.message}
+      <Link to={paths.pricing}>Buy Packages</Link>
+      </div>
+    )
+  }
+
   return (
     <table className="default-table manage-job-table">
       <thead>
@@ -7,7 +33,7 @@ const PackageDataTable = () => {
           <th>Transaction id</th>
           <th>Package</th>
           <th>Expiry</th>
-          <th>Total Jobs/CVs</th>
+          <th>Total Jobs Limit</th>
           <th>Used</th>
           <th>Remaining</th>
           <th>Status</th>
@@ -17,87 +43,22 @@ const PackageDataTable = () => {
       <tbody>
         <tr>
           <td>1</td>
-          <td className="trans-id">#593677663</td>
+          <td className="trans-id">{data?.orderId}</td>
           <td className="package">
-            <a href="#">Super CV Pack</a>
+            <a href="#">{data?.plan_id?.name}</a>
           </td>
-          <td className="expiry">Jan 11, 2021</td>
-          <td className="total-jobs">50</td>
-          <td className="used">8</td>
-          <td className="remaining">42</td>
-          <td className="status">Active</td>
-        </tr>
-        {/* End tr */}
+          <td className="expiry">
+          {data?.expiresAt ? dateFormatter.format(new Date(data.expiresAt)) : ""}
 
-        <tr>
-          <td>2</td>
-          <td className="trans-id">#593677663</td>
-          <td className="package">
-            <a href="#">Gold Jobs package</a>
           </td>
-          <td className="expiry">Jan 11, 2021</td>
-          <td className="total-jobs">50</td>
-          <td className="used">8</td>
-          <td className="remaining">42</td>
-          <td className="status">Active</td>
+          <td className="total-jobs">{data?.plan_id?.jobPostLimit}</td>
+          <td className="used">{data?.jobPostsUsed}</td>
+          <td className="remaining">{
+           data?.jobPostLimit
+            }</td>
+          <td className="status">{data?.isActive?"Active":'In Active'}</td>
         </tr>
-        {/* End tr */}
-
-        <tr>
-          <td>3</td>
-          <td className="trans-id">#593677663</td>
-          <td className="package">
-            <a href="#">Silver Jobs package</a>
-          </td>
-          <td className="expiry">Jan 11, 2021</td>
-          <td className="total-jobs">50</td>
-          <td className="used">8</td>
-          <td className="remaining">42</td>
-          <td className="status">Active</td>
-        </tr>
-        {/* End tr */}
-
-        <tr>
-          <td>4</td>
-          <td className="trans-id">#593677663</td>
-          <td className="package">
-            <a href="#">Super CV Pack</a>
-          </td>
-          <td className="expiry">Jan 11, 2021</td>
-          <td className="total-jobs">50</td>
-          <td className="used">8</td>
-          <td className="remaining">42</td>
-          <td className="status">Active</td>
-        </tr>
-        {/* End tr */}
-
-        <tr>
-          <td>5</td>
-          <td className="trans-id">#593677663</td>
-          <td className="package">
-            <a href="#">Gold Jobs package</a>
-          </td>
-          <td className="expiry">Jan 11, 2021</td>
-          <td className="total-jobs">50</td>
-          <td className="used">8</td>
-          <td className="remaining">42</td>
-          <td className="status">Active</td>
-        </tr>
-        {/* End tr */}
-
-        <tr>
-          <td>6</td>
-          <td className="trans-id">#593677663</td>
-          <td className="package">
-            <a href="#">Silver Jobs package</a>
-          </td>
-          <td className="expiry">Jan 11, 2021</td>
-          <td className="total-jobs">50</td>
-          <td className="used">8</td>
-          <td className="remaining">42</td>
-          <td className="status">Active</td>
-        </tr>
-        {/* End tr */}
+     
       </tbody>
     </table>
   );

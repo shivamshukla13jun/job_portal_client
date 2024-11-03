@@ -3,7 +3,7 @@ import RecentPost from "./RecentPost";
 import SearchBox from "./SearchBox";
 import TagList from "./TagList";
 
-const index = () => {
+const index = ({onSearch}) => {
   return (
     <aside className="sidebar blog-sidebar">
       {/* <!-- Recent Post --> */}
@@ -14,19 +14,19 @@ const index = () => {
 
         {/* <!--search box--> */}
         <div className="search-box">
-          <SearchBox />
+          <SearchBox onSearch={onSearch}/>
         </div>
       </div>
 
       {/* <!-- Shop Widget --> */}
-      <div className="sidebar-widget catagory-widget">
+      {/* <div className="sidebar-widget catagory-widget">
         <div className="sidebar-title">
           <h4>Categories</h4>
         </div>
         <ul className="catagory-list">
           <Categories />
         </ul>
-      </div>
+      </div> */}
 
       {/* <!-- Recent Post --> */}
       <div className="sidebar-widget recent-post">

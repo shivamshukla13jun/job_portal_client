@@ -81,6 +81,7 @@ const Experiences = ({ watch, register, setValue, error }) => {
         <button
           className="add-info-btn"
           data-bs-toggle="modal"
+            type="button"
           data-bs-target="#resumeWorkExpModal"
           onClick={() => handleWorkExpFormSubmit()}
         >
@@ -105,6 +106,7 @@ const Experiences = ({ watch, register, setValue, error }) => {
                     <div className="edit-btns">
                       <button
                         data-bs-toggle="modal"
+                        type="button"
                         data-bs-target="#resumeEditWorkExpModal"
                         onClick={() => setEditIndex(index)}
                       >

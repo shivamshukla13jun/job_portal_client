@@ -1,79 +1,69 @@
+import { RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET } from "@/lib/config";
+import { get, post } from "@/services/api";
+import { paths } from "@/services/paths";
+import usePayment from "@/utils/hooks/usePayment";
+import useUserInfo from "@/utils/hooks/useUserInfo";
+import { useQuery,useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Pricing = () => {
-  const pricingCotent = [
-    {
-      id: 1,
-      packageType: "Basic",
-      price: "199",
-      tag: "",
-      features: [
-        "30 job posting",
-        "3 featured job",
-        "Job displayed for 15 days",
-        "Premium Support 24/7",
-      ],
-    },
-    {
-      id: 2,
-      packageType: "Standard",
-      price: "499",
-      tag: "tagged",
-      features: [
-        "40 job posting",
-        "5 featured job",
-        "Job displayed for 20 days",
-        "Premium Support 24/7",
-      ],
-    },
-    {
-      id: 3,
-      packageType: "Extended",
-      price: "799",
-      tag: "",
-      features: [
-        "50 job posting",
-        "10 featured job",
-        "Job displayed for 60 days",
-        "Premium Support 24/7",
-      ],
-    },
-  ];
+  const userInfo = useUserInfo();
+  const { handlePayment } = usePayment('razorpay'); // You can pass 'stripe', 'paypal', etc.
 
+const {data:pricingContent=[],isLoading}=useQuery({
+  queryKey:["plans"],
+  queryFn: async () => {
+    try {
+      let res = (await get('/plan?page=1')).data.data;
+      return res;
+    } catch (error) {
+      console.log(error)
+     return
+    }
+  },
+})
+
+
+if (isLoading) return <div>Loading...</div>
+console.log({userInfo})
   return (
     <div className="pricing-tabs tabs-box wow fadeInUp">
       {/* <!--Tabs Container--> */}
       <div className="row">
-        {pricingCotent.map((item) => (
+        {pricingContent?.map((item) => (
           <div
             className={`pricing-table col-lg-4 col-md-6 col-sm-12 ${item.tag}`}
-            key={item.id}
+            key={item._id}
           >
             <div className="inner-box">
               {item.tag ? (
-                <>
-                  <span className="tag">Recommended</span>
-                </>
-              ) : (
-                ""
-              )}
+                <span className="tag">Recommended</span>
+              ) : null}
 
-              <div className="title">{item.packageType}</div>
+              <div className="title">{item.name}</div>
               <div className="price">
-                ${item.price} <span className="duration">/ monthly</span>
+                ${item.price} 
+                <span className="duration text-capitalize">/ {item.type}</span>
               </div>
               <div className="table-content">
                 <ul>
-                  {item.features.map((feature, i) => (
-                    <li key={i}>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
+                  <li>
+                    <span>{item.jobPostLimit} job postings</span>
+                  </li>
+              
+                  <li>
+                    <span>Job displayed for {item.month > 0 ? item.month * 30 : 15} days</span>
+                  </li>
+                  <li>
+                    <span>Premium Support 24/7</span>
+                  </li>
                 </ul>
               </div>
               <div className="table-footer">
-                <Link to="/shop/cart" className="theme-btn btn-style-three">
-                  Add to Cart
+                <Link onClick={()=>handlePayment(item._id,userInfo)} className="theme-btn btn-style-three">
+                 Buy
                 </Link>
               </div>
             </div>

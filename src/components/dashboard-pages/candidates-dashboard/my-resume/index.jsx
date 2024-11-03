@@ -57,6 +57,7 @@ const index = () => {
         }
       ],
       portfolio: {},
+      portfoliolink:"",
       awards: [
         {
           award_name: '',
@@ -93,6 +94,7 @@ const index = () => {
     const formData = new FormData();
 
     const formattedData = {
+      portfoliolink:data.portfoliolink,
       description: data.description,
       educations: data.educations,
       work_experiences: data.work_experiences,
@@ -134,6 +136,7 @@ const index = () => {
           }
         ],
         portfolio: data.portfolio || {},
+        portfoliolink: data.portfoliolink || "",
         awards: data.awards || [
           {
             award_name: '',

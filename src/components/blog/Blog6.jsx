@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import blogContent from "../../data/blogs";
 
 
-const Blog6 = () => {
+const Blog6 = ({blogContent}) => {
   return (
     <>
-      {blogContent.slice(0, 6).map((item) => (
+      {blogContent?.map((item) => (
         <div className="news-block col-lg-6 col-md-6 col-sm-12" key={item.id}>
           <div className="inner-box">
             <div className="image-box">

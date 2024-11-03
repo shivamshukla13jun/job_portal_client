@@ -23,6 +23,8 @@ import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { toast } from "react-toastify";
 import { decrypt, encrypt } from "@/lib/encrypt";
 import useUserInfo from "@/utils/hooks/useUserInfo";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWishlist, selectWishlist } from "@/store/reducers/Whishlist";
 
 const metadata = {
   title: "Job Single Dyanmic V1 || Chem Pharma - Job Borad ReactJs Template",
@@ -32,7 +34,8 @@ const metadata = {
 const JobSingleDynamicV1 = () => {
   const userInfo = useUserInfo();
   const params = useParams();
-
+  const dispatch=useDispatch()
+  const SavedJobs = useSelector(selectWishlist);
   const id = params.id;
 
   const { data, isLoading } = useQuery({
@@ -77,7 +80,15 @@ const JobSingleDynamicV1 = () => {
     }
     mutation.mutate(data)
   };
-
+  const handleWishist = async (id, operation) => {
+    if (!userInfo._id) {
+      toast.info('Please login as Candidate to Save Job.');
+      return;
+    }
+    if (id && operation) {
+      dispatch(addToWishlist({ id, operation }));
+    }
+  };
   if (isLoading || jobsLoader) return <div>Loading...</div>;
 
   return (
@@ -150,9 +161,11 @@ const JobSingleDynamicV1 = () => {
                   >
                     {data?.isApplied ? 'Applied' : `Apply For Job`}
                   </button>
-                  <button className="bookmark-btn">
-                    <i className="flaticon-bookmark"></i>
-                  </button>
+                  {
+                <button className={`bookmark-btn ${SavedJobs.includes(data?._id)?"saved":"" }`}  type="button" onClick={()=>handleWishist(data?._id,SavedJobs.includes(data?._id)?"remove":"add")}>
+                  <span className="flaticon-bookmark"></span>
+                </button>
+                }
                 </div>
                 {/* End apply for job btn */}
 

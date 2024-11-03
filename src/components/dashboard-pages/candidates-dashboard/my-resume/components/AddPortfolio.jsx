@@ -37,7 +37,6 @@ const AddPortfolio = ({ watch, register, setValue, error }) => {
             id={`upload-portfolio`}
             {...register(`portfolio`)}
             onChange={(e) => {
-              console.log(e)
               const file = e.target.files[0];
               if (file) setValue(`portfolio`, file);
             }}
