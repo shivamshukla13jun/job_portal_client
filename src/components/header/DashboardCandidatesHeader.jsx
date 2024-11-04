@@ -85,15 +85,15 @@ const DashboardCandidatesHeader = () => {
           {/* End .nav-outer */}
 
           <div className="outer-box">
-              <button className="menu-btn">
-                <span className="count">{SavedJobs?.length}</span>
+                  <button onClick={()=>navigate("/candidates-dashboard/saved-jobs")} className="menu-btn">
+                <Link to={"/candidates-dashboard/saved-jobs"} className="count">{SavedJobs?.length}</Link>
                 <span className="icon la la-heart-o"></span>
               </button>
             {/* wishlisted menu */}
 
-            <button className="menu-btn">
+            {/* <button className="menu-btn">
               <span className="icon la la-bell"></span>
-            </button>
+            </button> */}
             {/* End notification-icon */}
 
             {/* <!-- Dashboard Option --> */}

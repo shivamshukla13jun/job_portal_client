@@ -7,11 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { put,get,getById } from "@/services/api";
 import { toast } from "react-toastify";
 import { paths } from "@/services/paths";
+import { useAcceptApplication, useDeleteApplication } from "@/utils/hooks/useApplication";
 
 
 const Applicants = () => {
-  const queryClient = useQueryClient();
   const userInfo=useUserInfo()
+  const handleAccept = useAcceptApplication()
+  const handleDelete = useDeleteApplication()
   const { data, isLoading } = useQuery({
     queryKey: [`application/tracking`,],
     queryFn: async () => {
@@ -22,26 +24,12 @@ const Applicants = () => {
   });
 
   const navigate = useNavigate();
-  const acceptMutation = useMutation({
-    mutationFn: ({_id,status}) => put('/application/status', _id, { status: status }),
-    onSuccess: (res) => {
-      if (res.data.success) {
-        toast.success(res.data.message);
-        queryClient.invalidateQueries([`application/tracking`]);
-      }
-    },
-    onError: (err) => {
-      toast.error(err.response.data.error)
-    }
-  });
-  const handleAccept = (_id,status) => {
-    acceptMutation.mutate({_id,status});
-  };
+ 
 
-  
+  if (isLoading) return <div>Loading...</div>
   return (
     <>
-         {data?.data.map(({_id, candidate }) => (
+         {data?.data.map(({_id, candidate,job }) => (
                   <div
                     className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
                     key={candidate?._id}
@@ -99,6 +87,11 @@ const Applicants = () => {
                               <span className="la la-times-circle"></span>
                             </button>
                           </li>
+                          <li>
+                          <button data-text="Delete Application" onClick={() => handleDelete(_id,job._id)}>
+                            <span className="la la-trash"></span>
+                          </button>
+                        </li>
                         </ul>
                       </div>
                     </div>

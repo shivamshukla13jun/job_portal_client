@@ -79,11 +79,6 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
                                 <span className="la la-eye"></span>
                               </button>
                             </li>
-                            {/* <li>
-                            <button data-text="Delete Aplication">
-                              <span className="la la-trash"></span>
-                            </button>
-                          </li> */}
                           </ul>
                         </div>
                       </td>
@@ -101,3 +96,8 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
 };
 
 export default JobListingsTable;
+{/* <li>
+<button data-text="Delete Aplication">
+  <span className="la la-trash"></span>
+</button>
+</li> */}

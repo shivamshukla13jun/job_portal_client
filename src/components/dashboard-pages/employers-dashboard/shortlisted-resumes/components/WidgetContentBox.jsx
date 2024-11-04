@@ -1,10 +1,10 @@
 import Applicants from "./Applicants";
 
-const WidgetContentBox = ({ data }) => {
+const WidgetContentBox = ({ data ,search}) => {
   return (
     <div className="widget-content">
       <div className="row">
-        <Applicants data={data?.data} />
+        <Applicants data={data?.data} search={search}/>
       </div>
       {/* <!-- Pagination --> */}
       {data?.count > 6 && (
