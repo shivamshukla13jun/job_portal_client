@@ -10,7 +10,7 @@ import DefaulHeader2 from "@/components/header/DefaulHeader2";
 import blogContent from "../../../data/blogs";
 import { useState } from "react";
 import { useEffect } from "react";
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 6;
 
 const index = () => {
    // Define states for search, category, and pagination
@@ -44,7 +44,10 @@ const index = () => {
      startIndex + ITEMS_PER_PAGE
    );
    const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
-  const  onSearch=(value) => setSearchQuery(value)
+  const  onSearch=(value) => {
+    setSearchQuery(value)
+    setCurrentPage(1)
+  }
   return (
     <>
       {/* <!-- Header Span --> */}

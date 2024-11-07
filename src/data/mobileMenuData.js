@@ -103,7 +103,7 @@ const mobileMenudate = [
       },
       {
         name: "Job List V6",
-        routePath: "/job-list-v6",
+        routePath: "/job-list-v1",
       },
       {
         name: "Job List V7",

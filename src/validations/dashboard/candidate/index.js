@@ -11,7 +11,13 @@ export const candidateSchema = Yup.object().shape({
         gender: Yup.string().required('Gender is required'),
         dob: Yup.date().required('Date of birth is required').nullable(),
         marital_status: Yup.string().required('Marital status is required'),
-        upload_cv: Yup.mixed().required('CV upload is required').test('is-file-or-object', 'CV upload must be a file', value => value instanceof File || typeof value === 'object'),
+        upload_cv: Yup.mixed().required('CV upload is required').test('is-file-or-object', 'CV upload must be a file', value => value instanceof File || typeof value === 'object').test('fileFormat', 'Only .doc, .docx, or .pdf files are accepted', (value) => {
+            if (value) {
+              const fileType = value.name.split('.').pop().toLowerCase();
+              return ['doc', 'docx', 'pdf'].includes(fileType);
+            }
+            return false;
+          }),
         profile: Yup.mixed().required('Profile upload is required').test('is-file-or-object', 'Profile upload must be a file', value => value instanceof File || typeof value === 'object'),
     }),
     contact: Yup.object().shape({

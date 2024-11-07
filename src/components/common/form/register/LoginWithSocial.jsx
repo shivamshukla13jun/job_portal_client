@@ -2,15 +2,24 @@ import { get } from "@/services/api";
 import { useMutation } from "@tanstack/react-query";
 
 const LoginWithSocial = ({ type }) => {
-
+  const url = new URLSearchParams();
+console.log({type})
+  if (type) {
+    url.set("state", type.toLowerCase());
+  }
+  
+  console.log(url.toString());
+  
   const mutation = useMutation({
-    mutationFn: (data) => get(`/user/google?state=${type.toLowerCase()}`),
+    mutationFn: () => get(`/user/google?${url.toString()}`),
     onSuccess: (res) => {
       if (res.data.success) {
-        window.location.href = res.data.data
+        window.location.href = res.data.data;
       }
-    }
+    },
   });
+  
+  
 
   return (
     <div className="btn-box row">

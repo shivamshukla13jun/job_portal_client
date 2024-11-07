@@ -6,12 +6,11 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 
-import LoginWithSocial from "./LoginWithSocial";
-
 import { paths } from "@/services/paths";
 import { getById, post } from "@/services/api";
 import { encrypt } from "@/lib/encrypt";
 import { login } from "@/store/reducers/user";
+import LoginWithSocial from "../register/LoginWithSocial";
 
 const FormContent = () => {
   const dispatch = useDispatch();
@@ -33,13 +32,16 @@ const FormContent = () => {
         toast.error(res.data.message);
         localStorage.setItem("email", res.data.data.email)
         navigate(paths.verify + '?email=' + res.data.data.email);
-      } else {
-        sessionStorage.setItem("session", res.data.token)
-        let user = (await getById(`/user`, res.data.data._id)).data.data;
-        let enData = encrypt(user);
-        sessionStorage.setItem("userInfo", enData);
-        dispatch(login(enData));
-        window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : paths.employer_profile;
+      } else if(res.data.success) {
+        if(res?.data?.token){
+          sessionStorage.setItem("session", res.data.token)
+          let user = (await getById(`/user`, res.data.data._id)).data.data;
+          let enData = encrypt(user);
+          sessionStorage.setItem("userInfo", enData);
+          dispatch(login(enData));
+          window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : paths.employer_profile;  
+        }
+       
       }
     },
     onError: (err) => {
@@ -76,9 +78,9 @@ const FormContent = () => {
                 <span className="custom-checkbox"></span> Remember me
               </label> */}
             </div>
-            <Link  to={paths.forgot} className="pwd">
+            <a  href={paths.forgot} className="pwd">
               Forgot password?
-            </Link>
+            </a>
           </div>
         </div>
 

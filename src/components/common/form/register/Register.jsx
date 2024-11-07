@@ -18,7 +18,8 @@ import { get, getById, post } from "@/services/api";
 
 const Register = () => {
   const [type, setType] = useState('Candidate');
-  const [params, setSP] = useSearchParams()
+  const [isSendingCode, setIsSendingCode] = useState(false);
+  const [params, setSP] = useSearchParams();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,12 +32,12 @@ const Register = () => {
       password: "",
       userType: type,
     }
-  })
+  });
 
   const handleType = (value) => {
-    setType(value)
-    setValue("userType", value)
-  }
+    setType(value);
+    setValue("userType", value);
+  };
 
   const { data: types, isLoading } = useQuery({
     queryKey: ['userTypes'],
@@ -44,64 +45,70 @@ const Register = () => {
       let res = await get('/userType/type');
       return res.data.data;
     }
-  })
+  });
 
   const mutation = useMutation({
     mutationFn: (data) => {
       if (data.userType === 'Candidate' || data.userType === 'Employer') {
-        data.userType = types.find(item => item.name.toLowerCase() === data.userType.toLowerCase())._id
-      };
+        data.userType = types.find(item => item.name.toLowerCase() === data.userType.toLowerCase())._id;
+      }
       return post('/user/register', data);
     },
     onSuccess: async (res) => {
       if (res.data.success) {
         toast.success(res.data.message);
-        localStorage.setItem("email", res.data.data.email)
+        localStorage.setItem("email", res.data.data.email);
         navigate(paths.verify + '?email=' + res.data.data.email);
       }
-
-      // sessionStorage.setItem("session", res.data.token)
-      // let user;
-      // if (res.data.data) {
-      //   user = (await getById(`/user`, res.data.data._id)).data.data
-      // }
-
-      // let enData = encrypt(res.data.data);
-      // sessionStorage.setItem("userInfo", enData);
-      // dispatch(login(enData));
-      // window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : paths.employer_profile;
     },
     onError: (err) => {
-      console.log(err)
-      toast.error(err.response.data.error)
+      console.log(err);
+      toast.error(err.response.data.error);
     }
   });
 
   useEffect(() => {
     const sendCode = async () => {
-      let res = await get(`/user/google/callback?state=${params.get("state")}&code=${params.get("code")}`)
-      if (res.data.success) {
-        sessionStorage.setItem("session", res.data.token)
-        let user;
-        if (res.data.data) {
-          user = (await getById(`/user`, res.data.data._id)).data.data
+      setIsSendingCode(true);
+      const url = new URLSearchParams();
+
+      params.get("state")? url.append("state", params.get("state")):url.append("state",type)
+      
+      params.get("code") && url.append("code", params.get("code"));
+      
+
+      try {
+        let res = await get(`/user/google/callback?${url.toString()}`);
+        if (res.data.success) {
+          sessionStorage.setItem("session", res.data.token);
+          let user;
+          if (res.data.data) {
+            user = (await getById(`/user`, res.data.data._id)).data.data;
+          }
+
+          let enData = encrypt(user);
+          sessionStorage.setItem("userInfo", enData);
+          dispatch(login(enData));
+
+          window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : paths.employer_profile;
         }
-
-        let enData = encrypt(user);
-        sessionStorage.setItem("userInfo", enData);
-        dispatch(login(enData));
-        window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : paths.employer_profile;
+      } catch (error) {
+        console.error("Failed to send code:", error);
+        toast.error("Error authenticating with Google. Please try again.");
+      } finally {
+        setIsSendingCode(false);
       }
+    };
+
+    if (params.get("code")) {
+      sendCode();
     }
+  }, [params, dispatch]);
 
-    params.get("code") && sendCode()
-  }, [params.get("code")])
-
-
-  if (isLoading) {
-    return <>Loading....</>
+  // Show loading if either isLoading or isSendingCode is true
+  if (isLoading || isSendingCode) {
+    return <div>Loading....</div>;
   }
-
 
   return (
     <div className="form-inner">
@@ -123,19 +130,27 @@ const Register = () => {
             </Tab>
           </TabList>
         </div>
-        {/* End .form-group */}
 
         <TabPanel>
-          <FormContent handleSubmit={handleSubmit} register={register} mutation={mutation} errors={errors} />
+          <FormContent 
+            handleSubmit={handleSubmit} 
+            register={register} 
+            mutation={mutation} 
+            errors={errors} 
+            disabled={!type}  // Disable if type is not selected
+          />
         </TabPanel>
-        {/* End cadidates Form */}
 
         <TabPanel>
-          <FormContent handleSubmit={handleSubmit} register={register} mutation={mutation} errors={errors} />
+          <FormContent 
+            handleSubmit={handleSubmit} 
+            register={register} 
+            mutation={mutation} 
+            errors={errors} 
+            disabled={!type} // Disable if type is not selected
+          />
         </TabPanel>
-        {/* End Employer Form */}
       </Tabs>
-      {/* End form-group */}
 
       <div className="bottom-box">
         <div className="text">
@@ -153,9 +168,8 @@ const Register = () => {
         <div className="divider">
           <span>or</span>
         </div>
-        <LoginWithSocial type={type} />
+        <LoginWithSocial type={type} disabled={!type} /> {/* Disable if type is not selected */}
       </div>
-      {/* End bottom-box LoginWithSocial */}
     </div>
   );
 };

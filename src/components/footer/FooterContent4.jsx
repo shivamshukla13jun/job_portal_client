@@ -11,7 +11,7 @@ const FooterContent4 = () => {
         { name: "Browse Jobs", route: "/" },
         { name: "Browse Categories", route: "/" },
         { name: "Candidate Dashboard", route: "/" },
-        { name: "Job Alerts", route: "/" },
+        // { name: "Job Alerts", route: "/" },
         { name: "My Bookmarks", route: "/" },
       ],
     },
@@ -23,7 +23,7 @@ const FooterContent4 = () => {
         { name: "Browse Candidates", route: "/" },
         { name: "Employer Dashboard", route: "/" },
         { name: "Add Job", route: "/" },
-        { name: "Job Packages", route: "/" },
+        // { name: "Job Packages", route: "/" },
       ],
     },
     {

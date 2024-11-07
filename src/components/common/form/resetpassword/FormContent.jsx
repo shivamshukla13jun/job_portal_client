@@ -4,14 +4,13 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { ChangePasswordSchema } from "@/validations/login";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { useMutation } from "@tanstack/react-query";
-
-import LoginWithSocial from "./LoginWithSocial";
+import { useMutation } from "@tanstack/react-query"
 
 import { paths } from "@/services/paths";
 import { getById, post } from "@/services/api";
 import { encrypt } from "@/lib/encrypt";
 import { login } from "@/store/reducers/user";
+import LoginWithSocial from "../register/LoginWithSocial";
 
 const FormContent = () => {
   const dispatch = useDispatch();
@@ -31,13 +30,15 @@ const FormContent = () => {
     onSuccess: async (res) => {
       if (!res.data.success) {
         toast.error(res.data.message);
-      } else {
-        sessionStorage.setItem("session", res.data.token)
+      } else if(res?.data.success) {
+      
+         sessionStorage.setItem("session", res.data.token)
         let user = (await getById(`/user`, res.data.data._id)).data.data;
         let enData = encrypt(user);
         sessionStorage.setItem("userInfo", enData);
         dispatch(login(enData));
         window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : paths.employer_profile;
+        
       }
     },
     onError: (err) => {
@@ -87,11 +88,7 @@ const FormContent = () => {
           </Link>
         </div>
 
-        <div className="divider">
-          <span>or</span>
-        </div>
-
-        <LoginWithSocial />
+      
       </div>
       {/* End bottom-box LoginWithSocial */}
     </div>

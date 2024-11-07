@@ -36,6 +36,7 @@ const DashboardEmployerSidebar = () => {
               dispatch(logout());
               sessionStorage.removeItem("session");
               sessionStorage.removeItem("userInfo");
+              window.location.href = paths.login;
             }
           }
           if (item.name === 'Delete Profile') {
@@ -47,7 +48,7 @@ const DashboardEmployerSidebar = () => {
                   toast.success(res.data.message);
                   sessionStorage.removeItem("session");
                   sessionStorage.removeItem("userInfo");
-                  window.location.href = paths.login;
+                  window.location.href = "/";
                 }
               }
             } catch (err) {

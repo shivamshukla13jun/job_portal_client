@@ -111,7 +111,7 @@ const Profile = ({ watch, register, setValue, error }) => {
               <input
                 className="uploadButton-input"
                 type="file"
-                accept="docs/*"
+               accept=".doc,.docx,.pdf"
                 id={`uploadCv`}
                 {...register(`myProfile.upload_cv`)}
                 onChange={(e) => {
@@ -141,7 +141,7 @@ const Profile = ({ watch, register, setValue, error }) => {
               <input
                 className="uploadButton-input"
                 type="file"
-                accept="image/*"
+              ccept="image/*"
                 id={`profile`}
                 {...register(`myProfile.profile`)}
                 onChange={(e) => {

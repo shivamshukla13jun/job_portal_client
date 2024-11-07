@@ -52,7 +52,7 @@ const SearchForm4 = () => {
           <button
             type="submit"
             className="theme-btn btn-style-two"
-            onClick={() => navigate("/job-list-v6")}
+            onClick={() => navigate("/job-list-v1")}
           >
             Find Jobs
           </button>

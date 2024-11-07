@@ -1,45 +1,43 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup"
+import { yupResolver } from "@hookform/resolvers/yup";
 import { ForgotPasswordSchema } from "@/validations/login";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
-
-import LoginWithSocial from "./LoginWithSocial";
-
 import { paths } from "@/services/paths";
 import { getById, post } from "@/services/api";
-import { encrypt } from "@/lib/encrypt";
-import { login } from "@/store/reducers/user";
+import { useState } from "react";
+import LoginPopup from "./LoginPopup";
 
 const FormContent = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(ForgotPasswordSchema),
     defaultValues: {
       email: '',
-    }
-  })
+    },
+  });
 
   const mutation = useMutation({
     mutationFn: (data) => post('/user/forgot', data),
+    onMutate: () => setIsSubmitting(true),
     onSuccess: async (res) => {
+      setIsSubmitting(false);
       if (!res.data.success) {
         toast.error(res.data.message);
       } else {
         let message = (await getById(`/user`, res.data.data._id)).data.message;
-        toast.success(message)
+        toast.success(message);
       }
     },
     onError: (err) => {
-      console.log(err)
-      toast.error(err.response.data.error);
-    }
-  })
+      setIsSubmitting(false);
+      console.error(err);
+      toast.error(err.response?.data?.error || "An error occurred");
+    },
+  });
 
   const handleLoginSubmit = (data) => {
     mutation.mutate(data);
@@ -50,17 +48,26 @@ const FormContent = () => {
       <h3>Enter Registered Email Id</h3>
 
       <form onSubmit={handleSubmit(handleLoginSubmit)}>
-      <div className="form-group">
+        <div className="form-group">
           <label>Email</label>
-          <input className={errors.email ? 'error-border' : ''} type="email" placeholder="Email" required {...register("email")} />
+          <input
+            className={errors.email ? 'error-border' : ''}
+            type="email"
+            placeholder="Email"
+            required
+            {...register("email")}
+          />
           {errors.email && <p className="error">{errors.email.message}</p>}
         </div>
 
-        
-
         <div className="form-group">
-          <button className="theme-btn btn-style-one" type="submit" name="log-in">
-          Send
+          <button
+            className="theme-btn btn-style-one"
+            type="submit"
+            name="log-in"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Sending..." : "Send"}
           </button>
         </div>
       </form>
@@ -70,19 +77,22 @@ const FormContent = () => {
           Don&apos;t have an account?{" "}
           <Link
             to={paths.register}
-            data-bs-toggle={location.pathname.toLowerCase() === paths.login.toLowerCase() ? '' : "modal"}
-            data-bs-target={location.pathname.toLowerCase() === paths.login.toLowerCase() ? '' : "#registerModal"}
+            data-bs-toggle={
+              location.pathname.toLowerCase() === paths.login.toLowerCase()
+                ? ''
+                : "modal"
+            }
+            data-bs-target={
+              location.pathname.toLowerCase() === paths.login.toLowerCase()
+                ? ''
+                : "#registerModal"
+            }
           >
             Signup
           </Link>
         </div>
-
-        <div className="divider">
-          <span>or</span>
-        </div>
-
-        <LoginWithSocial />
       </div>
+      {/* <LoginPopup/> */}
       {/* End bottom-box LoginWithSocial */}
     </div>
   );

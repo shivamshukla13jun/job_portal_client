@@ -16,6 +16,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getById } from "@/services/api";
 import DefaulHeader2 from "@/components/header/DefaulHeader2";
 import { API_CANDIDATE_PATH } from "@/lib/config";
+import { toast } from "react-toastify";
 
 const metadata = {
   title:
@@ -34,7 +35,61 @@ const CandidateSingleDynamicV1 = () => {
       return res;
     }
   });
+  function calculateTotalExperience(employmentArray=[]) {
+    let totalExperienceMonths = 0;
+    if(employmentArray.length===0 ){
+      return ""
+    }
+    employmentArray.forEach(job => {
+        const from = new Date(job.from);
+        const to =new Date( job.to)
 
+        // Calculate the duration in months
+        const months = (to.getFullYear() - from.getFullYear()) * 12 + (to.getMonth() - from.getMonth());
+        totalExperienceMonths += months;
+    });
+
+    // Convert months to years
+    const totalExperienceYears = totalExperienceMonths / 12;
+
+    // Classify into 0-3 years, 3-5 years, etc.
+    if (totalExperienceYears >= 0 && totalExperienceYears < 1) {
+        return "0-1 years";
+    } 
+   else  if (totalExperienceYears >= 0 && totalExperienceYears < 2) {
+        return "0-2 years";
+    } 
+    else if (totalExperienceYears >= 0 && totalExperienceYears < 3) {
+        return "0-3 years";
+    } 
+    else if (totalExperienceYears >= 3 && totalExperienceYears < 5) {
+        return "3-5 years";
+    } else {
+        return "5+ years";
+    }
+}
+  const handleDownload = async () => {
+    const fileUrl = API_CANDIDATE_PATH + data?.candidateId?.cv?.filename;
+  
+    try {
+      // Fetch the file data
+      const response = await fetch(fileUrl);
+      const blob = await response.blob(); // Get the file as a Blob
+  
+      // Create a temporary link element
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob); // Create an object URL for the Blob
+      link.download = data?.candidateId?.cv?.filename; // Set the filename for download
+  
+      // Append the link to the body, trigger the click, then remove the link
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      toast.info('Download failed');
+    }
+  };
+  
   if (isLoading) return <div>Loading...</div>
 
   return (
@@ -87,14 +142,14 @@ const CandidateSingleDynamicV1 = () => {
                 <div className="btn-box">
                   <a
                     className="theme-btn btn-style-one"
-                    href="/images/sample.pdf"
-                    download
+                    onClick={handleDownload}
+
                   >
                     Download CV
                   </a>
-                  <button className="bookmark-btn">
+                  {/* <button className="bookmark-btn">
                     <i className="flaticon-bookmark"></i>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -154,7 +209,7 @@ const CandidateSingleDynamicV1 = () => {
                       <h4>{'Work & Experience'}</h4>
                     </div>
 
-                    {data?.work_experiences?.length > 0 && data.work_experiences.map((workExp) => (
+                    {data?.work_experiences?.length > 0 ? data.work_experiences.map((workExp) => (
                       <div className="resume-block" key={workExp._id}>
                         <div className="inner">
                           <span className="name">{workExp.position[0]?.toUpperCase()}</span>
@@ -170,9 +225,9 @@ const CandidateSingleDynamicV1 = () => {
                           <div className="text">{workExp.description}</div>
                         </div>
                       </div>
-                    ))}
+                    )):<></>}
                   </div>
-
+                  
                   <div className={`resume-outer theme-yellow`}>
                     <div className="upper-title">
                       <h4>{'Awards'}</h4>
@@ -209,7 +264,7 @@ const CandidateSingleDynamicV1 = () => {
                         <li>
                           <i className="icon icon-calendar"></i>
                           <h5>Experience:</h5>
-                          <span>0-2 Years</span>
+                          <span>{data?.candidateId?.employment ?calculateTotalExperience(data?.candidateId?.employment):""}</span>
                         </li>
 
                         <li>
@@ -245,7 +300,13 @@ const CandidateSingleDynamicV1 = () => {
                         <li>
                           <i className="icon icon-degree"></i>
                           <h5>Education Level:</h5>
-                          <span>Master Degree</span>
+                          <span>
+                             {data?.candidateId?.education?.map((val, i,arr) => (
+                            
+                                <a>{val.qualification}</a>
+                            
+                            ))}
+                            </span>
                         </li>
                       </ul>
                     </div>
