@@ -15,9 +15,9 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { API_CANDIDATE_PATH } from "@/lib/config";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { useEffect, useState } from "react";
+import { paths } from "@/services/paths";
 
 const DashboardCandidatesSidebar = () => {
-
   const userInfo = useUserInfo();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
@@ -37,6 +37,8 @@ const DashboardCandidatesSidebar = () => {
           dispatch(logout());
           sessionStorage.removeItem("session");
           sessionStorage.removeItem("userInfo");
+          window.location.href = paths.login;
+
         }
       }
       if (item.name === 'Delete Profile') {
@@ -48,7 +50,7 @@ const DashboardCandidatesSidebar = () => {
               toast.success(res.data.message);
               sessionStorage.removeItem("session");
               sessionStorage.removeItem("userInfo");
-              window.location.href = paths.login;
+              window.location.href = "/";
             }
           }
         } catch (err) {

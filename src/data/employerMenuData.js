@@ -48,13 +48,13 @@ const employerMenu = [
     routePath: "/employers-dashboard/packages",
     active: "",
   },
-  {
-    id: 8,
-    name: "Messages",
-    icon: "la-comment-o",
-    routePath: "/employers-dashboard/messages",
-    active: "",
-  },
+  // {
+  //   id: 8,
+  //   name: "Messages",
+  //   icon: "la-comment-o",
+  //   routePath: "/employers-dashboard/messages",
+  //   active: "",
+  // },
   // {
   //   id: 9,
   //   name: "Resume Alerts",

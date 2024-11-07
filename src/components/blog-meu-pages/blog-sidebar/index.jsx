@@ -40,14 +40,14 @@ const index = ({onSearch}) => {
       </div>
 
       {/* <!-- Shop Widget --> */}
-      <div className="sidebar-widget">
+      {/* <div className="sidebar-widget">
         <div className="sidebar-title">
           <h4>Tags</h4>
         </div>
         <ul className="tag-list">
           <TagList />
         </ul>
-      </div>
+      </div> */}
     </aside>
   );
 };

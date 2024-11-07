@@ -70,9 +70,7 @@ const HeaderNavContent = (props) => {
             <li className={`${pathname === paths.contact ? "current" : ""}`}>
               <Link to={paths.contact}>Contact Us</Link>
             </li>
-            <li className={`${pathname === paths.pricing ? "current" : ""}`}>
-              <Link to={paths.pricing}>Pricing</Link>
-            </li>
+         
 
          
           </ul>

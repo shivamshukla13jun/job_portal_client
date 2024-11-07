@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import blogContent from "../../data/blogs";
 
 
 const Blog6 = ({blogContent}) => {

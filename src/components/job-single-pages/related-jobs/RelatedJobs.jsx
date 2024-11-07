@@ -3,9 +3,11 @@ import jobs from "../../../data/job-featured";
 import { paths } from "@/services/paths";
 import { API_EMPLOYER_PATH } from "@/lib/config";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import { useSelector } from "react-redux";
+import { selectWishlist } from "@/store/reducers/Whishlist";
 
-const RelatedJobs = ({ data }) => {
-
+const RelatedJobs = ({ data,handleWishist }) => {
+  const SavedJobs = useSelector(selectWishlist);
   return (
     <>
       {data.length > 0 && data.map((item) => (
@@ -52,11 +54,14 @@ const RelatedJobs = ({ data }) => {
                   </li>
                 ))}
               </ul>
+              
               {/* End .job-other-info */}
-
-              <button className="bookmark-btn">
+              { handleWishist && (
+                <button className={`bookmark-btn ${SavedJobs.includes(data?._id)?"saved":"" }`}  type="button" onClick={()=>handleWishist(data?._id,SavedJobs.includes(data?._id)?"remove":"add")}>
                 <span className="flaticon-bookmark"></span>
               </button>
+              )}
+           
             </div>
           </div>
         </div>

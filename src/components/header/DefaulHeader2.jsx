@@ -9,10 +9,12 @@ import employerMenu from "@/data/employerMenuData";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { useSelector } from "react-redux";
 import { selectWishlist } from "@/store/reducers/Whishlist";
+import { useNavigate } from "react-router-dom";
 
 const DefaulHeader2 = () => {
   const userInfo = useUserInfo();
   const { pathname } = useLocation();
+  const navigate=useNavigate()
   const SavedJobs = useSelector(selectWishlist);
 
   const [navbar, setNavbar] = useState(false);
@@ -90,15 +92,15 @@ const DefaulHeader2 = () => {
 
           {userInfo?.userType?.name && (
             <div className="outer-box">
-               <button className="menu-btn">
+               {/* <button onClick={()=>navigate("/candidates-dashboard/saved-jobs")} className="menu-btn">
                 <Link to={"/candidates-dashboard/saved-jobs"} className="count">{SavedJobs?.length}</Link>
                 <span className="icon la la-heart-o"></span>
-              </button>
+              </button> */}
               {/* wishlisted menu */}
 
-              <button className="menu-btn">
+              {/* <button className="menu-btn">
                 <span className="icon la la-bell"></span>
-              </button>
+              </button> */}
               {/* End notification-icon */}
 
               {/* <!-- Dashboard Option --> */}

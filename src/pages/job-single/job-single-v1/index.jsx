@@ -37,7 +37,7 @@ const JobSingleDynamicV1 = () => {
   const dispatch=useDispatch()
   const SavedJobs = useSelector(selectWishlist);
   const id = params.id;
-
+  console.log({userInfo})
   const { data, isLoading } = useQuery({
     queryKey: ['job', id],
     queryFn: async () => {
@@ -200,7 +200,7 @@ const JobSingleDynamicV1 = () => {
                   </div>
                   {/* End title box */}
 
-                  <RelatedJobs data={jobsData ||[]} />
+                  <RelatedJobs  data={jobsData ||[]} handleWishist={handleWishist}/>
                 </div>
                 {/* <!-- Related Jobs --> */}
               </div>
@@ -235,9 +235,9 @@ const JobSingleDynamicV1 = () => {
                   <div className="sidebar-widget company-widget">
                     <div className="widget-content">
                       <div className="company-title">
-                        <div className="company-logo">
+                        {/* <div className="company-logo">
                           <img src={data?.logo} alt="resource" />
-                        </div>
+                        </div> */}
                         <h5 className="company-name">{data?.company?.name}</h5>
                         <Link to={`${paths.publicemployer}/${data?.employerId?._id}`} state={{company:data?.company}} className="profile-link">
                           View company profile

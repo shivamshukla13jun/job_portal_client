@@ -89,9 +89,10 @@ const Verify = () => {
         mutationFn: (data) => post('/user/verify', data),
         onSuccess: async (res) => {
             toast.success('User verification completed!');
-            sessionStorage.setItem("session", res.data.token)
+           
             let user;
             if (res.data.success) {
+                sessionStorage.setItem("session", res.data.token)
                 user = (await getById(`/user`, res.data.data._id)).data.data
             }
 

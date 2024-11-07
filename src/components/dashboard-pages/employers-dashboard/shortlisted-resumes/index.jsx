@@ -74,7 +74,7 @@ const handleSerch=(name,value)=>{
                   <WidgetToFilterBox search={search} handleSerch={handleSerch} />
                 </div>
                 {/* End widget top filter box */}
-                <WidgetContentBox data={data} />
+                <WidgetContentBox data={data} search={search}/>
               </div>
               {/* <!-- applicants Widget --> */}
             </div>

@@ -54,7 +54,7 @@ const Index = () => {
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Howdy, Jerome!!" />
+          {/* <BreadCrumb title="Howdy, Jerome!!" /> */}
           {/* breadCrumb */}
 
           <MenuToggler />

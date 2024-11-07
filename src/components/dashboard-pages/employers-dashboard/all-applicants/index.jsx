@@ -39,21 +39,6 @@ const index = () => {
     enabled: !!job
   });
 
-  const acceptMutation = useMutation({
-    mutationFn: ({_id,status}) => put('/application/status', _id, { status: status }),
-    onSuccess: (res) => {
-      if (res.data.success) {
-        toast.success(res.data.message);
-        queryClient.invalidateQueries([`job${job}`]);
-      }
-    },
-    onError: (err) => {
-      toast.error(err.response.data.error)
-    }
-  });
-
- 
-
   if (isLoading || jobLoader) return <div>Loading...</div>
 let title=Array.isArray(jobNames) && jobNames.length>0 ?jobNames?.find((item=>item?.job._id===job))?.title:""
 console.log("title??",title)
@@ -94,7 +79,7 @@ console.log("title??",title)
                   </div>
                   {/* End top widget filter bar */}
 
-                  <WidgetContentBox  data={currentJob} acceptMutation={acceptMutation} title={title} />
+                  <WidgetContentBox  data={currentJob}  title={title} />
                   {/* End widget-content */}
                 </div>
               </div>

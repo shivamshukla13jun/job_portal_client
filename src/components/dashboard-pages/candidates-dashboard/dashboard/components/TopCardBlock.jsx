@@ -8,20 +8,20 @@ const TopCardBlock = ({data}) => {
       metaName: "Applied Jobs",
       uiClass: "ui-blue",
     },
-    {
-      id: 2,
-      icon: "la-file-invoice",
-      countNumber: "9382",
-      metaName: "Job Alerts",
-      uiClass: "ui-red",
-    },
-    {
-      id: 3,
-      icon: "la-comment-o",
-      countNumber: "74",
-      metaName: "Messages",
-      uiClass: "ui-yellow",
-    },
+    // {
+    //   id: 2,
+    //   icon: "la-file-invoice",
+    //   countNumber: "9382",
+    //   metaName: "Job Alerts",
+    //   uiClass: "ui-red",
+    // },
+    // {
+    //   id: 3,
+    //   icon: "la-comment-o",
+    //   countNumber: "74",
+    //   metaName: "Messages",
+    //   uiClass: "ui-yellow",
+    // },
     {
       id: 4,
       icon: "la-bookmark-o",
@@ -35,7 +35,7 @@ const TopCardBlock = ({data}) => {
     <>
       {cardContent.map((item) => (
         <div
-          className="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12"
+          className="ui-block col-xl-6 col-lg-6 col-md-6 col-sm-12"
           key={item.id}
         >
           <div className={`ui-item ${item.uiClass}`}>

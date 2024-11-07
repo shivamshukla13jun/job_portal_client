@@ -48,13 +48,13 @@ const candidateMenus = [
     routePath: "/candidates-dashboard/short-listed-jobs",
     active: "",
   },
-  {
-    id: 7,
-    name: "CV manager",
-    icon: "la la-file-invoice",
-    routePath: "/candidates-dashboard/cv-manager",
-    active: "",
-  },
+  // {
+  //   id: 7,
+  //   name: "CV manager",
+  //   icon: "la la-file-invoice",
+  //   routePath: "/candidates-dashboard/cv-manager",
+  //   active: "",
+  // },
   // {
   //   id: 8,
   //   name: "Packages",
