@@ -117,7 +117,7 @@ const CandidateSingleDynamicV1 = () => {
                   <h4 className="name">{data?.candidateId?.name}</h4>
 
                   <ul className="candidate-info">
-                    <li className="designation">{data?.designation || 'Default Designation'}</li>
+                    <li className="designation">{data?.candidateId?.designation || ''}</li>
                     <li>
                       <span className="icon flaticon-map-locator"></span>
                       {`${data?.candidateId?.contact?.permanent_address?.state}, ${data?.candidateId?.contact?.permanent_address?.country}`}
@@ -276,13 +276,13 @@ const CandidateSingleDynamicV1 = () => {
                         <li>
                           <i className="icon icon-rate"></i>
                           <h5>Current Salary:</h5>
-                          <span>₹ {data?.current_salary}</span>
+                          <span>₹ {data?.current_salary} LPA</span>
                         </li>
 
                         <li>
                           <i className="icon icon-salary"></i>
                           <h5>Expected Salary:</h5>
-                          <span>₹ {data?.expected_salary}</span>
+                          <span>₹ {data?.expected_salary} LPA</span>
                         </li>
 
                         <li>

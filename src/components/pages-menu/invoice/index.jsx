@@ -49,16 +49,6 @@ const index = () => {
             <div className="invoice-footer">
               <ul className="bottom-links">
                 <li>
-                  <a
-                    href="https://themeforest.net/user/ib-themes"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link"
-                  >
-                    www.ibthemespro.com
-                  </a>
-                </li>
-                <li>
                   <a href="invoice@Chem Pharma.com">invoice@Chem Pharma.com</a>
                 </li>
                 <li>

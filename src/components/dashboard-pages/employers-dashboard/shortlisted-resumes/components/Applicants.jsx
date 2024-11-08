@@ -17,7 +17,7 @@ const Applicants = ({ data ,search}) => {
   return (
     <>
     <div className="row">
-      {data?.map(({_id, candidate,job }) => (
+      {data?.map(({_id,resume, candidate,job }) => (
         <div
           className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
           key={candidate?._id}
@@ -45,7 +45,7 @@ const Applicants = ({ data ,search}) => {
                 </li>
                 <li>
                   <span className="icon flaticon-money"></span>
-                  ₹{candidate?.hourlyRate || '17000'}
+                  ₹{resume?.current_salary || '17000'} LPA
                 </li>
               </ul>
 

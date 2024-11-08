@@ -23,6 +23,20 @@ const TopCardBlock = ({data}) => {
     //   uiClass: "ui-yellow",
     // },
     {
+      id: 2,
+      icon: "la-bookmark-o",
+      countNumber:  data?.Applicationdata?.rejectedlist,
+      metaName: "Rejected",
+      uiClass: "ui-red",
+    },
+    {
+      id: 3,
+      icon: "la-bookmark-o",
+      countNumber:  data?.Applicationdata?.pendinglist,
+      metaName: "Pending",
+      uiClass: "ui-yellow",
+    },
+    {
       id: 4,
       icon: "la-bookmark-o",
       countNumber:  data?.Applicationdata?.Shortlist,
@@ -35,7 +49,7 @@ const TopCardBlock = ({data}) => {
     <>
       {cardContent.map((item) => (
         <div
-          className="ui-block col-xl-6 col-lg-6 col-md-6 col-sm-12"
+          className="ui-block col-xl-3 col-lg-34 col-md-3 col-sm-12"
           key={item.id}
         >
           <div className={`ui-item ${item.uiClass}`}>

@@ -44,18 +44,18 @@ const HeaderNavContent = (props) => {
             </li>
             {/* End findjobs menu items */}
 
-            {userInfo?.userType?.name?.toLowerCase() === 'employer' ? (
+            {/* {userInfo?.userType?.name?.toLowerCase() === 'employer' ? (
               <li className={`${isActiveParent(employerItems, pathname) ? "current" : ""}`} >
                 <Link to={paths.employer}>Employers</Link>
               </li>
-            ) : <></>}
+            ) : <></>} */}
             {/* End Employers menu items */}
 
-            {userInfo?.userType?.name?.toLowerCase() === 'candidate' ? (
+            {/* {userInfo?.userType?.name?.toLowerCase() === 'candidate' ? (
               <li className={`${isActiveParent(candidateItems, pathname) ? "current" : ""}`} >
                 <Link to={paths.candidate}>Candidates</Link>
               </li>
-            ) : <></>}
+            ) : <></>} */}
             {/* End Candidates menu items */}
 
             <li className={`${isActiveParentChaild(blogItems, pathname) ? "current" : ""}`} >

@@ -1,4 +1,5 @@
 const ContactInformation = ({ watch, register, setValue, error }) => {
+  
   return (
     <div className="default-form">
       <div className="row">

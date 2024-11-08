@@ -25,13 +25,51 @@ import { jobSchema } from "@/validations/dashboard/employer/job";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 
 const index = () => {
-
+  const defaultValues = {
+    title: 'Software Engineer', // Default job title
+    location: 'San Francisco, CA', // Default job location
+    place: 'California, USA', // Default job place
+    age: 25, // Default age (for candidates)
+    categories: [], // Default job categories
+    opening: 3, // Default number of openings
+    jobtype: 'Full-time', // Default job type (could also be "Part-time", "Contract", etc.)
+    candidate_requirement: {
+      experience: '2-5 years', // Default experience required
+      salary_from: 60000, // Default minimum salary
+      salary_to: 80000, // Default maximum salary
+      bonus: true, // Default to providing bonus
+      job_info: 'We are looking for a passionate and experienced software engineer to join our dynamic team.',
+      skills: [], // Default required skills
+    },
+    personal_info: [
+      {
+        info: 'Candidate must have a Bachelor’s degree in Computer Science or equivalent.',
+        assets: [] // Default assets required
+      }
+    ],
+    timing: {
+      job: '9:00 AM - 6:00 PM', // Default job timing
+      interview: '10:00 AM - 4:00 PM', // Default interview timing
+    },
+    company: {
+      name: 'Tech Solutions Inc.', // Default company name
+      contact_person: 'John Doe', // Default contact person for the job
+      phone: '123-456-7890', // Default phone number
+      email: 'contact@techsolutions.com', // Default company email
+      contact_person_profile: 'h', // Default profile link for contact person
+      size_of_org: 200, // Default size of the organization
+      job_address: '123 Tech Street, San Francisco, CA', // Default job address
+      vacancy: 'Software Engineer' // Default vacancy (job title)
+    }
+  };
+  
   const userInfo = useUserInfo();
   const navigate = useNavigate();
   const queryClient = new QueryClient();
   const { register, handleSubmit, watch, formState: { errors }, setValue, reset } = useForm({
     resolver: yupResolver(jobSchema),
-    defaultValues: {
+    defaultValues:
+     {
       title: '',
       location: '',
       place: '',
@@ -68,6 +106,7 @@ const index = () => {
         vacancy: '',
       }
     }
+    // defaultValues
   });
 
   const mutation = useMutation({

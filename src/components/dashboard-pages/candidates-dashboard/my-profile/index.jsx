@@ -58,6 +58,7 @@ const index = () => {
           middle: '',
           last: '',
         },
+        designation:"",
         gender: '',
         dob: new Date(),
         marital_status: '',
@@ -153,6 +154,7 @@ const index = () => {
     const formattedData = {
       name,coverletter:data.coverletter,
       gender: data.myProfile.gender,
+      designation:data.myProfile.designation,
       email: data.contact.email,
       dob: data.myProfile.dob,
       marital_status: data.myProfile.marital_status,
@@ -190,6 +192,7 @@ const index = () => {
             middle: data.name.split(" ")[2],
             last: data.name.split(" ")[3],
           },
+          designation:data.designation,
           gender: data.gender,
           dob: new Date(data.dob),
           marital_status: data.marital_status,
@@ -231,11 +234,12 @@ const index = () => {
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
+      console.log({errors})
       const errorArray = Object.entries(errors);
       toast.error(errorArray[0][0].toUpperCase() + ' section needs to be filled!')
     }
   }, [errors])
-
+console.log("data",data)
   if (isLoading) return <div>Loading...</div>;
 
   return (

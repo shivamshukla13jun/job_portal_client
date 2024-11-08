@@ -36,45 +36,110 @@ const index = () => {
 
   const { register, handleSubmit, watch, formState: { errors }, setValue, reset } = useForm({
     resolver: yupResolver(resumeSchema),
-    defaultValues: {
-      description: '',
+    // defaultValues: {
+    //   description: '',
+    //   educations: [
+    //     {
+    //       degree: '',
+    //       university: '',
+    //       start_date: new Date(),
+    //       end_date: new Date(),
+    //       description: ''
+    //     }
+    //   ],
+    //   work_experiences: [
+    //     {
+    //       position: '',
+    //       company_name: '',
+    //       start_date: new Date(),
+    //       end_date: new Date(),
+    //       description: ''
+    //     }
+    //   ],
+    //   portfolio: {},
+    //   portfoliolink:"",
+    //   awards: [
+    //     {
+    //       award_name: '',
+    //       start_date: new Date(),
+    //       end_date: new Date(),
+    //       description: ''
+    //     }
+    //   ],
+    //   skills: [],
+    //   current_salary: 0,
+    //   expected_salary: 0,
+    //   languages: [],
+    //   social_media: {
+    //     twitter: '',
+    //     linkedIn: ''
+    //   }
+    // }
+    defaultValues:{ 
+      description: 'Passionate software engineer with 5+ years of experience in developing scalable web applications.',
+  
       educations: [
-        {
-          degree: '',
-          university: '',
-          start_date: new Date(),
-          end_date: new Date(),
-          description: ''
-        }
+          {
+              degree: 'Bachelor of Technology (B.Tech)',
+              university: 'Indian Institute of Technology (IIT) Bombay',
+              start_date: new Date('2015-08-01'),
+              end_date: new Date('2019-06-30'),
+              description: 'Specialized in software engineering with a focus on backend development and cloud computing.',
+          }
       ],
+  
       work_experiences: [
-        {
-          position: '',
-          company_name: '',
-          start_date: new Date(),
-          end_date: new Date(),
-          description: ''
-        }
+          {
+              position: 'Software Engineer',
+              company_name: 'TechCorp Solutions',
+              start_date: new Date('2019-07-01'),
+              end_date: new Date('2022-05-15'),
+              description: 'Developed and maintained core features of a cloud-based SaaS product. Led a team of 5 engineers and collaborated with cross-functional teams to improve product scalability and performance.',
+          },
+          {
+              position: 'Senior Software Engineer',
+              company_name: 'Innovative Solutions',
+              start_date: new Date('2022-06-01'),
+              end_date: new Date(),  // Current position
+              description: 'Leading the architecture and development of a new microservices-based platform. Optimizing systems for high performance and low latency.',
+          }
       ],
-      portfolio: {},
-      portfoliolink:"",
+  
+      portfolio: {   },
+  
+      portfoliolink: 'https://github.com/johndoe',
+  
       awards: [
-        {
-          award_name: '',
-          start_date: new Date(),
-          end_date: new Date(),
-          description: ''
-        }
+          {
+              award_name: 'Employee of the Year',
+              start_date: new Date('2021-12-01'),
+              end_date: new Date('2021-12-31'),
+              description: 'Recognized for exceptional performance in leading a critical project and delivering on-time results.',
+          }
       ],
-      skills: [],
-      current_salary: 0,
-      expected_salary: 0,
-      languages: [],
+  
+      skills: [
+          { label: 'JavaScript', value: 'Expert' },
+          { label: 'Node.js', value: 'Advanced' },
+          { label: 'React', value: 'Advanced' },
+          { label: 'AWS', value: 'Intermediate' },
+          { label: 'Docker', value: 'Intermediate' },
+      ],
+  
+      current_salary: 80000,  // Example salary in USD or INR as per your locale
+      expected_salary: 100000,
+  
+      languages: [
+          { label: 'English', value: 'Fluent' },
+          { label: 'Hindi', value: 'Fluent' },
+          { label: 'Spanish', value: 'Intermediate' },
+      ],
+  
       social_media: {
-        twitter: '',
-        linkedIn: ''
+          twitter: 'https://twitter.com/johndoe',
+          linkedIn: 'https://www.linkedin.com/in/johndoe',
       }
-    }
+  }
   });
 
   const mutation = useMutation({

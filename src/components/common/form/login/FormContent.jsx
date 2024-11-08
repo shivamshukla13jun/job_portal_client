@@ -33,14 +33,19 @@ const FormContent = () => {
         localStorage.setItem("email", res.data.data.email)
         navigate(paths.verify + '?email=' + res.data.data.email);
       } else if(res.data.success) {
-        if(res?.data?.token){
+          if(!res.data?.data?.user_verified && !res.data?.token){
+              toast.success(res.data.message);
+              localStorage.setItem("email", res.data.data.email);
+              navigate(paths.verify + '?email=' + res.data.data.email);
+              return 
+          }
           sessionStorage.setItem("session", res.data.token)
           let user = (await getById(`/user`, res.data.data._id)).data.data;
           let enData = encrypt(user);
           sessionStorage.setItem("userInfo", enData);
           dispatch(login(enData));
           window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : paths.employer_profile;  
-        }
+      
        
       }
     },

@@ -8,16 +8,11 @@ export const candidateSchema = Yup.object().shape({
             middle: Yup.string().required('Middle name is required'),
             last: Yup.string().required('Last name is required'),
         }),
+        designation:Yup.string().required('Designation is required'),
         gender: Yup.string().required('Gender is required'),
         dob: Yup.date().required('Date of birth is required').nullable(),
         marital_status: Yup.string().required('Marital status is required'),
-        upload_cv: Yup.mixed().required('CV upload is required').test('is-file-or-object', 'CV upload must be a file', value => value instanceof File || typeof value === 'object').test('fileFormat', 'Only .doc, .docx, or .pdf files are accepted', (value) => {
-            if (value) {
-              const fileType = value.name.split('.').pop().toLowerCase();
-              return ['doc', 'docx', 'pdf'].includes(fileType);
-            }
-            return false;
-          }),
+        upload_cv: Yup.mixed().required('CV upload is required').test('is-file-or-object', 'CV upload must be a file', value => value instanceof File || typeof value === 'object'),
         profile: Yup.mixed().required('Profile upload is required').test('is-file-or-object', 'Profile upload must be a file', value => value instanceof File || typeof value === 'object'),
     }),
     contact: Yup.object().shape({
@@ -78,7 +73,8 @@ export const candidateSchema = Yup.object().shape({
             overall: Yup.number().required('Overall score is required').moreThan(0, 'Overall score is required')
 
         }),
-        score_card: Yup.mixed().required('Score card upload is required')
+        score_card: Yup.mixed().required('Score card upload is required').test('is-file-or-object', 'Score card  upload must be a file', value => value instanceof File || typeof value === 'object')
+        
     }),
     coverletter: Yup.string().required('Please add cover letter'),
     hear_about_us: Yup.string().required('Please specify how you heard about us')

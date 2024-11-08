@@ -170,11 +170,12 @@ const EducationalQualification = ({ watch, register, setValue, error }) => {
         </div>
 
         <div className='form-group col-lg-12 col-md-12' style={{ marginBottom: '0px' }}>
-          {error?.education?.slice(0, 1).map(item =>
-            <span className="error error-border" key={item?.certificate?.message}>
-              {item?.certificate?.message + ', ' + item?.name?.message + ', ' + item?.qualification?.message + "!"}
-            </span>
-          )}
+          {/* {error?.education?.slice(0, 1).map(item =>
+          <span className="error error-border" key={item?.certificate?.message}>
+          {`${item?.certificate?.message || ''}, ${item?.name?.message || ''}, ${item?.qualification?.message || ''}!`}
+        </span>
+        
+          )} */}
         </div>
       </div>
     </div>

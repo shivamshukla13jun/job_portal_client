@@ -15,6 +15,7 @@ import { paths } from "@/services/paths";
 import LoginWithSocial from "./LoginWithSocial";
 import FormContent from "./FormContent";
 import { get, getById, post } from "@/services/api";
+import Spinner from "@/utils/hooks/Spinner";
 
 const Register = () => {
   const [type, setType] = useState('Candidate');
@@ -107,7 +108,7 @@ const Register = () => {
 
   // Show loading if either isLoading or isSendingCode is true
   if (isLoading || isSendingCode) {
-    return <div>Loading....</div>;
+    return <Spinner/>;
   }
 
   return (

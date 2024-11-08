@@ -75,15 +75,15 @@ const FilterSidebar = ({ search, setSearch,data }) => {
         </div>
         {/* <!-- Filter Block --> */}
 
-        <div className="filter-block">
+        {/* <div className="filter-block">
           <h4>Tags</h4>
           <Tag search={search} setSearch={setSearch} />
-        </div>
+        </div> */}
         {/* <!-- Filter Block --> */}
       </div>
       {/* Filter Outer */}
 
-      <CallToActions />
+      {/* <CallToActions /> */}
       {/* <!-- End Call To Action --> */}
     </div>
   );

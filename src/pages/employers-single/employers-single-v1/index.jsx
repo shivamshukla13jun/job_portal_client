@@ -101,13 +101,13 @@ const EmployersSingleV1 = () => {
                 {/* End .content */}
 
                 <div className="btn-box">
-                  <button
+                  {/* <button
                     className="theme-btn btn-style-one"
                     data-bs-toggle="modal"
                     data-bs-target="#privateMessage"
                   >
                     Private Message
-                  </button>
+                  </button> */}
                   {/* <button className="bookmark-btn">
                     <i className="flaticon-bookmark"></i>
                   </button> */}

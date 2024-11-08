@@ -53,7 +53,7 @@ const Resume = ({ watch, register, setValue, error, handleSubmit, handleRegister
         </div>
 
         <div className="form-group col-lg-6 col-md-12">
-          <label>Current Salary <span className='required-form'>*</span></label>
+          <label>Current Salary (LPA)<span className='required-form'>*</span></label>
           <input
             type="number"
             min={0}
@@ -70,7 +70,7 @@ const Resume = ({ watch, register, setValue, error, handleSubmit, handleRegister
 
 
         <div className="form-group col-lg-6 col-md-12">
-          <label>Expected Salary  <span className='required-form'>*</span></label>
+          <label>Expected Salary (LPA) <span className='required-form'>*</span></label>
           <input
             type="number"
             min={0}

@@ -37,7 +37,7 @@ const WidgetContentBox = ({ data, title }) => {
               {
                 !data ||!data.data || data.data.length === 0?(<p>No candidates found.</p>):(
                   <div className="row">
-                  {data?.data.map(({_id, candidate,job }) => (
+                  {data?.data.map(({_id, candidate,resume,job }) => (
                     <div
                       className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
                       key={candidate?._id}
@@ -65,7 +65,7 @@ const WidgetContentBox = ({ data, title }) => {
                             </li>
                             <li>
                               <span className="icon flaticon-money"></span>
-                              ₹{candidate?.hourlyRate || '17000'}
+                              ₹{resume?.current_salary || '17000'} LPA
                             </li>
                           </ul>
   

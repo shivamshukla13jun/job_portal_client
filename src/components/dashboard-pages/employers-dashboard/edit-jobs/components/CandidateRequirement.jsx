@@ -80,7 +80,7 @@ const CandidateRequirement = ({ watch, register, setValue, error }) => {
 
                 <div className="form-group col-lg-12 col-md-12">
                     <label>
-                        Job Description<span className="required-form">*</span>
+                     Description<span className="required-form">*</span>
                     </label>
                     <CKEditor
                     editor={ClassicEditor}

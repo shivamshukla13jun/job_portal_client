@@ -18,7 +18,7 @@ export const jobSchema = Yup.object().shape({
         salary_from: Yup.number().required('Salary from is required').min(0, 'Salary must be a positive number'),
         salary_to: Yup.number().required('Salary to is required').min(Yup.ref('salary_from'), 'Salary to must be greater than or equal to Salary from'),
         bonus: Yup.boolean().required('Bonus is required'),
-        job_info: Yup.string().required('Job info is required'),
+        job_info: Yup.string().required('Job description is required'),
         skills: Yup.array().of(
             Yup.object().shape({
                 value: Yup.string().required('Skill value is required'),

@@ -4,7 +4,7 @@ const CallToAction2 = () => {
   return (
     <section
       className="call-to-action-two"
-      style={{ backgroundImage: "url(/images/jp/about/about-banner.png)" }}
+      style={{ backgroundImage: "url(/images/jp/about/about-banner.jpg)" }}
     >
       <div className="auto-container" data-aos="fade-up">
         <div className="sec-title light text-center">

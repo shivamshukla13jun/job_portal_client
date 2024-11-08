@@ -52,8 +52,11 @@ const Profile = ({ watch, register, setValue, error }) => {
             <input type="text" {...register("myProfile.candidate_name.last")} className={error?.myProfile?.candidate_name?.last?.message ? 'error' : ''} placeholder="Last name" required />
           </div>
         </div>
-
-        <div className="form-group col-lg-12 col-md-12">
+        <div className="form-group col-lg-6 col-md-6">
+          <label>Designation</label>
+          <input type="text" className={error?.myProfile?.designation?.message ? 'error' : ''} {...register("myProfile.designation")} placeholder="Engineer" required />
+        </div>
+        <div className="form-group col-lg-6 col-md-6">
           <label>Gender</label>
           <div className="d-flex justify-content-between ms-2" style={{ width: "60%" }}>
             <div className="d-flex align-items-center">
