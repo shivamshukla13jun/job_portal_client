@@ -7,9 +7,9 @@ const PersonalDetails = ({ watch, register, setValue, error }) => {
 
     const info = [
         { value: preferredLanguageValues, label: "Preferred Language" },
-        { value: assetValues, label: "Assets" },
+        // { value: assetValues, label: "Assets" },
         { value: degreeSpecialisationValues, label: "Degree and Specialisation" },
-        { value: certificationValues, label: "Certification" },
+        // { value: certificationValues, label: "Certification" },
         { value: preferredIndustryValues, label: "Preferred Industry" }
     ];
 
@@ -17,10 +17,10 @@ const PersonalDetails = ({ watch, register, setValue, error }) => {
         <div className="default-form">
             <div className='row'>
 
-                <div className="form-group col-lg-6 col-md-12">
+                {/* <div className="form-group col-lg-6 col-md-12">
                     <label>Age<span className='required-form'>*</span> </label>
                     <input type='number' {...register("age")} placeholder='Age' min={10} max={100} />
-                </div>
+                </div> */}
                 {info.map((item, index) => (
                     <div className="form-group col-lg-6 col-md-12" key={item.label + index}>
                         <label>{item.label}<span className='required-form'>*</span> </label>

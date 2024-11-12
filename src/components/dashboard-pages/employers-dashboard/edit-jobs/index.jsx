@@ -44,12 +44,12 @@ const EditJob = () => {
       location: '',
       place: '',
       categories: [],
-      age: 18,
+      // age: 18,
       opening: 1,
       candidate_requirement: {
         experience: '',
-        salary_from: 10000,
-        salary_to: 12000,
+        salary_from: null,
+        salary_to: null,
         bonus: false,
         job_info: '',
         skills: [],
@@ -60,20 +60,20 @@ const EditJob = () => {
           assets: []
         }
       ],
-      timing: {
-        job: '',
-        interview: ''
-      },
-      company: {
-        name: '',
-        contact_person: '',
-        phone: '',
-        email: '',
-        contact_person_profile: '',
-        size_of_org: 20,
-        job_address: '',
-        vacancy: '',
-      }
+      // timing: {
+      //   job: '',
+      //   interview: ''
+      // },
+      // company: {
+      //   name: '',
+      //   contact_person: '',
+      //   phone: '',
+      //   email: '',
+      //   contact_person_profile: '',
+      //   size_of_org: 20,
+      //   job_address: '',
+      //   vacancy: '',
+      // }
     }
   });
 
@@ -105,30 +105,30 @@ const EditJob = () => {
         categories: data.categories || [],
         jobtype: data.jobtype || [],
         opening: data.opening || 1,
-        age: data.age || 18,
+        // age: data.age || 18,
         candidate_requirement: {
           experience: data.candidate_requirement.experience || '',
-          salary_from: data.candidate_requirement.salary_from || 10000,
-          salary_to: data.candidate_requirement.salary_to || 12000,
+          salary_from: data.candidate_requirement.salary_from || null,
+          salary_to: data.candidate_requirement.salary_to || null,
           bonus: data.candidate_requirement.bonus || false,
           job_info: data.candidate_requirement.job_info || '',
           skills: data.candidate_requirement.skills || [],
         },
         personal_info: data.personal_info || [{ info: '', assets: [] }],
-        timing: {
-          job: data.timing.job || '',
-          interview: data.timing.interview || ''
-        },
-        company: {
-          name: data.company.name || '',
-          contact_person: data.company.contact_person || '',
-          phone: data.company.phone || '',
-          email: data.company.email || '',
-          contact_person_profile: data.company.contact_person_profile || '',
-          size_of_org: data.company.size_of_org || 20,
-          job_address: data.company.job_address || '',
-          vacancy: data.company.vacancy || '',
-        }
+        // timing: {
+        //   job: data.timing.job || '',
+        //   interview: data.timing.interview || ''
+        // },
+        // company: {
+        //   name: data.company.name || '',
+        //   contact_person: data.company.contact_person || '',
+        //   phone: data.company.phone || '',
+        //   email: data.company.email || '',
+        //   contact_person_profile: data.company.contact_person_profile || '',
+        //   size_of_org: data.company.size_of_org || 20,
+        //   job_address: data.company.job_address || '',
+        //   vacancy: data.company.vacancy || '',
+        // }
       });
     }
 
@@ -220,8 +220,7 @@ const EditJob = () => {
                 </div>
               </div>
 
-              <div className="col-lg-12">
-                {/* <!-- Ls widget --> */}
+              {/* <div className="col-lg-12">
                 <div className="ls-widget">
                   <div className="tabs-box">
                     <div className="widget-title">
@@ -236,7 +235,6 @@ const EditJob = () => {
               </div>
 
               <div className="col-lg-12">
-                {/* <!-- Ls widget --> */}
                 <div className="ls-widget">
                   <div className="tabs-box">
                     <div className="widget-title">
@@ -248,7 +246,7 @@ const EditJob = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="d-flex justify-content-end">
                 <button

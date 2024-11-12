@@ -44,7 +44,13 @@ export const candidateSchema = Yup.object().shape({
             certificate: Yup.mixed().required('Certificate upload is required').test('is-file-or-object', 'Certificate upload must be a file', value => value instanceof File || typeof value === 'object'),
         }).required('Education is required')
     ).required('Education is required'),
-    registration_certificate: Yup.mixed().required('Registration Certificate upload is required').test('is-file-or-object', 'Registration Certificate upload must be a file', value => value instanceof File || typeof value === 'object'),
+    achievement: Yup.array().of(
+        Yup.object({
+          year: Yup.string().required('Achievement Year is required'),
+          description: Yup.string().required('Achievement Description is required'),
+        })
+      ).nullable(),
+    // registration_certificate: Yup.mixed().required('Registration Certificate upload is required').test('is-file-or-object', 'Registration Certificate upload must be a file', value => value instanceof File || typeof value === 'object'),
     employment: Yup.array().of(
         Yup.object().shape({
             name: Yup.string().required('Company name is required'),

@@ -17,9 +17,12 @@ import BusinessDetail from "./components/BusinessDetail";
 import { getById, put } from "@/services/api";
 import { employerSchema } from "@/validations/dashboard/employer";
 import useUserInfo from "@/utils/hooks/useUserInfo";
+import { API_EMPLOYER_PATH } from "@/lib/config";
 
 const index = () => {
     const userInfo = useUserInfo();
+    const [previewData, setPreviewData] = useState(null);
+    const [showPreview, setShowPreview] = useState(false);
 
     const { data, isLoading } = useQuery({
         queryKey: [`employer${userInfo._id}`],
@@ -41,7 +44,7 @@ const index = () => {
             },
             email: '',
             business_gst: '',
-            pan_card: '',
+            categories: [],
             phone_area: '',
             phone: '',
             address: {
@@ -75,12 +78,11 @@ const index = () => {
 
     const handleRegisterSubmit = async (data) => {
         const formData = new FormData();
-
         const name = `${data.name.first} ${data.name.middle} ${data.name.last}`;
         const formattedData = {
             business_name: data.business_name,
             business_gst: data.business_gst,
-            pan_card: data.pan_card,
+            categories: data.categories,
             email: data.email,
             name: name,
             phone_area: data.phone_area,
@@ -100,15 +102,44 @@ const index = () => {
             logo: data.logo,
             videos: data.videos,
             pictures: data.pictures
+        };
+
+        const logo = watch("logo");
+        if (Object.keys(logo).length > 0) {
+            formData.append("logo", logo);
         }
-
-        formData.append("parse", JSON.stringify(formattedData))
-
-        formData.append("logo", watch("logo"));
-        formData.append("video[]", watch("videos"));
-        formData.append("picture[]", watch("pictures"));
-
+        const videos = watch("videos");
+        if (Object.keys(videos).length > 0) {
+            formData.append("videos[]", videos);
+        }
+        const pictures = watch("pictures");
+        if (Object.keys(pictures).length > 0) {
+            formData.append("pictures[]", pictures);
+        }
+        formData.append("parse", JSON.stringify(formattedData));
         mutation.mutate(formData);
+    };
+
+    const handlePreview = () => {
+        const currentData = {
+            business_name: watch("business_name"),
+            name: watch("name"),
+            email: watch("email"),
+            business_gst: watch("business_gst"),
+            categories: watch("categories"),
+            phone_area: watch("phone_area"),
+            phone: watch("phone"),
+            address: watch("address"),
+            product_services: watch("product_services"),
+            url: watch("url"),
+            year_established: watch("year_established"),
+            logo: watch("logo"),
+            keywords: watch("keywords"),
+            videos: watch("videos"),
+            pictures: watch("pictures"),
+        };
+        setPreviewData(currentData);
+        setShowPreview(true);
     };
 
     useEffect(() => {
@@ -122,7 +153,7 @@ const index = () => {
                 },
                 email: data.email || '',
                 business_gst: data.business_gst || '',
-                pan_card: data.pan_card || '',
+                categories: data.categories || '',
                 phone_area: data.phone_area || '',
                 phone: data.phone || '',
                 address: {
@@ -142,85 +173,91 @@ const index = () => {
                 pictures: data.pictures || {},
             });
         }
-
-        return () => {
-            reset();
-        }
-
     }, [data, reset]);
-
-    useEffect(() => {
-        if (Object.keys(errors).length > 0) {
-            const errorArray = Object.entries(errors);
-            toast.error(errorArray[0][1].message)
-        }
-    }, [errors])
 
     if (isLoading) return <div>Loading...</div>;
 
     return (
         <div className="page-wrapper dashboard">
-            <span className="header-span"></span>
-            {/* <!-- Header Span for hight --> */}
-
             <LoginPopup />
-            {/* End Login Popup Modal */}
-
             <DashboardHeader />
-            {/* End Header */}
-
             <MobileMenu />
-            {/* End MobileMenu */}
-
             <DashboardEmployerSidebar />
-            {/* <!-- End User Sidebar Menu --> */}
-
-            {/* <!-- Dashboard --> */}
             <section className="user-dashboard">
-                <form className="dashboard-outer" >
-                    <div className="dashboard-outer">
-                        <BreadCrumb title="Company Profile!" />
-                        {/* breadCrumb */}
+                <form className="dashboard-outer">
+                    <BreadCrumb title="Company Profile!" />
+                    <MenuToggler />
+                    <BusinessDetail watch={watch} register={register} setValue={setValue} error={errors} />
 
-                        <MenuToggler />
-                        {/* Collapsible sidebar button */}
-
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <div className="ls-widget">
-                                    <div className="tabs-box">
-                                        <div className="widget-title">
-                                            <h4>Business Details</h4>
-                                        </div>
-                                        <div className="widget-content">
-                                            <BusinessDetail watch={watch} register={register} setValue={setValue} error={errors} />
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* <!-- Business Details --> */}
-
-                            </div>
-                            <div className="d-flex justify-content-end">
-                                <button
-                                    onClick={handleSubmit(handleRegisterSubmit)}
-                                    className="theme-btn btn-style-one"
-                                >
-                                    Submit
-                                </button>
-                            </div>
-                        </div>
-                        {/* End .row */}
+                    <div className="d-flex justify-content-end">
+                        <button
+                            type="button"
+                            onClick={handlePreview}
+                            className="theme-btn btn-style-one"
+                        >
+                            Preview
+                        </button>
+                        <button
+                            onClick={handleSubmit(handleRegisterSubmit)}
+                            className="theme-btn btn-style-one"
+                        >
+                            Submit
+                        </button>
                     </div>
-                    {/* End dashboard-outer */}
                 </form>
 
-            </section>
-            {/* <!-- End Dashboard --> */}
+                {showPreview && previewData && (
+                    <div className="preview-modal">
+                        <h4>Preview Data</h4>
+                        <div className="preview-content">
+                            <p><strong>Business Name:</strong> {previewData.business_name}</p>
+                            <p><strong>Name:</strong> {`${previewData.name.first} ${previewData.name.middle} ${previewData.name.last}`}</p>
+                            <p><strong>Email:</strong> {previewData.email}</p>
+                            <p><strong>GST Number:</strong> {previewData.business_gst}</p>
+                            <p><strong>Job Sector:</strong> {previewData.categories?.map((item=>item?.label)).join(", ")}</p>
+                            <p><strong>Phone:</strong> ({previewData.phone_area}) {previewData.phone}</p>
+                            <p><strong>Address:</strong> {`${previewData.address.lane1}, ${previewData.address.lane2}, ${previewData.address.city}, ${previewData.address.state}, ${previewData.address.pin_code}, ${previewData.address.country}`}</p>
+                            <p><strong>Product/Services:</strong> {previewData.product_services}</p>
+                            <p><strong>Website URL:</strong> {previewData.url}</p>
+                            <p><strong>Year Established:</strong> {previewData.year_established}</p>
+                            <p><strong>Keywords:</strong> {previewData.keywords}</p>
+                            {/* Display file inputs if they exist */}
+                            {Object.keys(previewData.logo).length>0 && <p><strong>Logo:</strong> 
+                                <span className="company-logo">
+                                <img
+                                  src={API_EMPLOYER_PATH + previewData?.logo?.filename}
+                                  alt="logo"
+                                  width={200}
+                                  height={300}
+                                />
+                              </span></p>}
+                            {Object.keys(previewData.videos).length>0 && <p><strong>Videos:</strong> 
+                                <span className="company-logo">
+                                <img
+                                  src={API_EMPLOYER_PATH + previewData?.videos?.filename}
+                                  alt="logo"
+                                  width={200}
+                                  height={300}
+                                />
+                              </span></p>}
+                            {Object.keys(previewData.pictures).length>0 && <p><strong>Pictures:</strong> 
+                                <span className="company-logo">
+                                <img
+                                  src={API_EMPLOYER_PATH + previewData?.pictures?.filename}
+                                  alt="logo"
+                                    width={200}
+                                  height={300}
+                                />
+                              </span></p>}
+                              
+                        </div>
+                        <button onClick={() => setShowPreview(false)}>Close Preview</button>
+                    </div>
+                )}
 
+            </section>
             <CopyrightFooter />
-            {/* <!-- End Copyright --> */}
         </div>
-        // End page-wrapper
     );
 };
 

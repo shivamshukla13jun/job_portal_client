@@ -3,7 +3,12 @@ import * as Yup from "yup"
 export const employerSchema = Yup.object().shape({
     business_name: Yup.string().required('Business name is required'),
     business_gst: Yup.string().required('GST is required'),
-    pan_card: Yup.string().required('PAN card is required'),
+    categories: Yup.array().of(
+        Yup.object().shape({
+            value: Yup.string().required('Job Sector value is required'),
+            label: Yup.string().required('Job Sector label is required'),
+        })
+    ).min(1, 'At least one category is required'),
     name: Yup.object().shape({
         // title: Yup.string().required('Title is required'),
         first: Yup.string().required('First name is required'),
@@ -32,32 +37,6 @@ export const employerSchema = Yup.object().shape({
     year_established: Yup.date().required('Year established is required'),
     keywords: Yup.string().required('Keyword is required'),
     logo: Yup.mixed().required('Logo upload is required').test('is-file-or-object', 'Logo upload must be a file', value => value instanceof File || typeof value === 'object'),
-    videos: Yup.mixed().required('Video upload is required').test('is-file-or-object', 'Video upload must be a file', value => value instanceof File || typeof value === 'object'),
-    pictures: Yup.mixed().required('Picture upload is required').test('is-file-or-object', 'Picture upload must be a file', value => value instanceof File || typeof value === 'object'),
+    videos: Yup.mixed().test('is-file-or-object', 'Video upload must be a file', value => value instanceof File || typeof value === 'object'),
+    pictures: Yup.mixed().test('is-file-or-object', 'Picture upload must be a file', value => value instanceof File || typeof value === 'object'),
 });
-
-
-const employerSchemas = {
-    business_name: '',
-    business_gst: '',
-    pan_card: '',
-    email: '',
-    name: '',
-    phone_area: '',
-    phone: '',
-    address: {
-        lane1: '',
-        lane2: '',
-        city: '',
-        state: '',
-        pin_code: '',
-        country: ''
-    },
-    product_services: '',
-    url: '',
-    year_established: '',
-    keywords: [],
-    logo: {},
-    video: {},
-    picture: {},
-};

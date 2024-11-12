@@ -94,7 +94,8 @@ const index = () => {
           certificate: {},
         }
       ],
-      registration_certificate: {},
+      "achievement": [],
+      // registration_certificate: {},
       employment: [
         {
           name: '',
@@ -112,19 +113,19 @@ const index = () => {
           note: ''
         }
       ],
-      english_language: {
-        certification_attempted: '',
-        recent_test: new Date(),
-        test_score: {
-          listening: 0,
-          reading: 0,
-          writing: 0,
-          speaking: 0,
-          overall: 0
-        },
-        score_card: {},
-      },
-      coverletter:"",
+      // english_language: {
+      //   certification_attempted: '',
+      //   recent_test: new Date(),
+      //   test_score: {
+      //     listening: 0,
+      //     reading: 0,
+      //     writing: 0,
+      //     speaking: 0,
+      //     overall: 0
+      //   },
+      //   score_card: {},
+      // },
+      // coverletter:"",
       hear_about_us: ''
     }
   });
@@ -166,14 +167,15 @@ const index = () => {
       hear_about_us: watch("hear_about_us").split(","),
       cv: data.myProfile.upload_cv,
       profile: data.myProfile.profile,
-      registration_certificate: data.registration_certificate,
+      "achievement": data.achievement,
+      // registration_certificate: data.registration_certificate,
     }
 
     formData.append("parse", JSON.stringify(formattedData))
 
     formData.append("upload_cv", watch("myProfile.upload_cv"));
     formData.append("profile", watch("myProfile.profile"));
-    formData.append("registration_certificate", watch("registration_certificate"));
+    // formData.append("registration_certificate", watch("registration_certificate"));
     formData.append("score_card", watch("english_language.score_card"));
 
     if (data.education.length > 0) {
@@ -210,7 +212,7 @@ const index = () => {
           from: new Date(edu.from),
           to: new Date(edu.to),
         })),
-        registration_certificate: data.registration_certificate,
+        // registration_certificate: data.registration_certificate,
         employment: data.employment.map(emp => ({
           ...emp,
           from: new Date(emp.from),
@@ -309,18 +311,17 @@ console.log("data",data)
               </div>
               {/* <!-- Educational Qualification --> */}
 
-              <div className="ls-widget">
+              {/* <div className="ls-widget">
                 <div className="tabs-box">
                   <div className="widget-title flex-column align-items-start">
                     <h4>Registrations & Certifications</h4>
                     <p>Please note that by providing this information you are consenting to us to conduct reference checks.</p>
                   </div>
-                  {/* End widget-title */}
                   <div className="widget-content">
                     <RegistrationCertification watch={watch} register={register} setValue={setValue} error={errors} />
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* <!-- Registrations & Certifications --> */}
 
               <div className="ls-widget">

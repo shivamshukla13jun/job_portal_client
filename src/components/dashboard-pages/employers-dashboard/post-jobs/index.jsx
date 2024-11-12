@@ -73,14 +73,14 @@ const index = () => {
       title: '',
       location: '',
       place: '',
-      age: 18,
+      // age: 18,
       categories: [],
       opening: 1,
       jobtype:"",
       candidate_requirement: {
         experience: '',
-        salary_from: 10000,
-        salary_to: 12000,
+        salary_from: null,
+        salary_to: null,
         bonus: false,
         job_info: '',
         skills: [],
@@ -91,20 +91,20 @@ const index = () => {
           assets: []
         }
       ],
-      timing: {
-        job: '',
-        interview: ''
-      },
-      company: {
-        name: '',
-        contact_person: '',
-        phone: '',
-        email: '',
-        contact_person_profile: '',
-        size_of_org: 20,
-        job_address: '',
-        vacancy: '',
-      }
+      // timing: {
+      //   job: '',
+      //   interview: ''
+      // },
+      // company: {
+      //   name: '',
+      //   contact_person: '',
+      //   phone: '',
+      //   email: '',
+      //   contact_person_profile: '',
+      //   size_of_org: 20,
+      //   job_address: '',
+      //   vacancy: '',
+      // }
     }
     // defaultValues
   });
@@ -208,8 +208,7 @@ const index = () => {
                 </div>
               </div>
 
-              <div className="col-lg-12">
-                {/* <!-- Ls widget --> */}
+              {/* <div className="col-lg-12">
                 <div className="ls-widget">
                   <div className="tabs-box">
                     <div className="widget-title">
@@ -224,7 +223,6 @@ const index = () => {
               </div>
 
               <div className="col-lg-12">
-                {/* <!-- Ls widget --> */}
                 <div className="ls-widget">
                   <div className="tabs-box">
                     <div className="widget-title">
@@ -236,7 +234,7 @@ const index = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="d-flex justify-content-end">
                 <button

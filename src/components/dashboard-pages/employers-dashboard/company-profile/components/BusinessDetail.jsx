@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import DatePicker from '@/components/common/date-picker/DatePicker';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-
+import { categories } from "@/data/category";
+import Select from "react-select";
 const BusinessDetail = ({ watch, register, setValue, error }) => {
     const logoRef = useRef(null);
     const picturesRef = useRef(null);
@@ -52,6 +51,7 @@ const BusinessDetail = ({ watch, register, setValue, error }) => {
         }
     }, [logoRef, picturesRef, videosRef, error])
 
+    console.log("categories????",watch("categories"))
     return (
         <div className="default-form">
             <div className="row">
@@ -66,9 +66,23 @@ const BusinessDetail = ({ watch, register, setValue, error }) => {
                 </div>
 
                 <div className="form-group col-lg-12 col-md-12">
-                    <label>PAN Card No. <span className='required-form'>*</span></label>
-                    <input type="text" className={`${error?.pan_card?.message ? 'error' : ''}`} {...register("pan_card")} placeholder="0 123 456 7890" required />
+                <label>
+                    Job Sector <span className="required-form">*</span>
+                    </label>
+                    <Select
+                        isMulti
+                        name="categories-add"
+                        className={`basic-multi-select ${error?.categories?.message ? 'error-border' : ''}`}
+                        classNamePrefix="select"
+                        options={categories}
+                        value={watch("categories") ? watch("categories") : []}
+                        onChange={(data) => setValue("categories", data)}
+                    />
+                    {/* <label>PAN Card No. <span className='required-form'>*</span></label>
+                    <input type="text" className={`${error?.categories?.message ? 'error' : ''}`} {...register("categories")} placeholder="0 123 456 7890" required />
+                 */}
                 </div>
+                   
 
                 <label style={{ fontWeight: "500", marginBottom: "10px", lineHeight: "20px" }}>Contact Name <span className='required-form'>*</span></label>
                 <div className="form-group col-lg-4 col-md-12">
@@ -179,12 +193,13 @@ const BusinessDetail = ({ watch, register, setValue, error }) => {
                 </div>
 
                 <div className="form-group">
-                    <label> Videos <span className='required-form'>*</span></label>
+                    <label> Videos </label>
                     <div className="uploading-outer" ref={videosRef} style={{ border: "none", padding: 0, margin: 0 }}>
                         <div className="uploadButton">
                             <input
                                 className="uploadButton-input"
                                 type="file"
+
                                 accept="image/*"
                                 id={`upload-video`}
                                 {...register(`video`)}
@@ -206,7 +221,7 @@ const BusinessDetail = ({ watch, register, setValue, error }) => {
                 </div>
 
                 <div className="form-group">
-                    <label> Pictures <span className='required-form'>*</span></label>
+                    <label> Pictures </label>
                     <div className="uploading-outer" ref={picturesRef} style={{ border: "none", padding: 0, margin: 0 }}>
                         <div className="uploadButton">
                             <input

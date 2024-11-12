@@ -53,7 +53,7 @@ const Profile = ({ watch, register, setValue, error }) => {
           </div>
         </div>
         <div className="form-group col-lg-6 col-md-6">
-          <label>Designation</label>
+          <label>Current Designation</label>
           <input type="text" className={error?.myProfile?.designation?.message ? 'error' : ''} {...register("myProfile.designation")} placeholder="Engineer" required />
         </div>
         <div className="form-group col-lg-6 col-md-6">
@@ -137,7 +137,7 @@ const Profile = ({ watch, register, setValue, error }) => {
 
         <div className="form-group">
           <label>
-            Upload your profile image
+            Upload your picture
           </label>
           <div className="uploading-outer" ref={profileRef} style={{ border: "none", padding: 0, margin: 0 }}>
             <div className="uploadButton">
