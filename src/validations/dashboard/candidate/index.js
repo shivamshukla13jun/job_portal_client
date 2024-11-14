@@ -38,10 +38,10 @@ export const candidateSchema = Yup.object().shape({
     education: Yup.array().of(
         Yup.object().shape({
             name: Yup.string().required('Institution name is required'),
-            from: Yup.date().required('Start date is required'),
-            to: Yup.date().required('End date is required'),
+            // from: Yup.date().required('Start date is required'),
+            to: Yup.date().required('Passing Year is required'),
             qualification: Yup.string().required('Qualification is required'),
-            certificate: Yup.mixed().required('Certificate upload is required').test('is-file-or-object', 'Certificate upload must be a file', value => value instanceof File || typeof value === 'object'),
+            // certificate: Yup.mixed().required('Certificate upload is required').test('is-file-or-object', 'Certificate upload must be a file', value => value instanceof File || typeof value === 'object'),
         }).required('Education is required')
     ).required('Education is required'),
     achievement: Yup.array().of(
@@ -49,7 +49,7 @@ export const candidateSchema = Yup.object().shape({
           year: Yup.string().required('Achievement Year is required'),
           description: Yup.string().required('Achievement Description is required'),
         })
-      ).nullable(),
+      ).notRequired(),
     // registration_certificate: Yup.mixed().required('Registration Certificate upload is required').test('is-file-or-object', 'Registration Certificate upload must be a file', value => value instanceof File || typeof value === 'object'),
     employment: Yup.array().of(
         Yup.object().shape({
@@ -58,6 +58,13 @@ export const candidateSchema = Yup.object().shape({
             department: Yup.string().required('Department is required'),
             from: Yup.date().required('Start date is required'),
             to: Yup.date().required('End date is required'),
+            categories: Yup.array().of(
+                Yup.object().shape({
+                    value: Yup.string().required('Job Sector value is required'),
+                    label: Yup.string().required('Job Sector label is required'),
+                })
+            ).min(1, 'At least Job Sector is required'),
+            scope: Yup.date().required('Scope to Work is required'),
         })
     ).required('Employment is required'),
     references: Yup.array().of(
@@ -68,21 +75,21 @@ export const candidateSchema = Yup.object().shape({
             note: Yup.string().required('Reference name is required'),
         })
     ).required('References is required'),
-    english_language: Yup.object().shape({
-        certification_attempted: Yup.string().required('Certification attempted is required'),
-        recent_test: Yup.date().required('Recent test is required'),
-        test_score: Yup.object().shape({
-            listening: Yup.number().required('Listening score is required').moreThan(0, 'Listening score is required'),
-            reading: Yup.number().required('Reading score is required').moreThan(0, 'Reading score is required'),
-            writing: Yup.number().required('Writing score is required').moreThan(0, 'Writing score is required'),
-            speaking: Yup.number().required('Speaking score is required').moreThan(0, 'Speaking score is required'),
-            overall: Yup.number().required('Overall score is required').moreThan(0, 'Overall score is required')
+    // english_language: Yup.object().shape({
+    //     certification_attempted: Yup.string().required('Certification attempted is required'),
+    //     recent_test: Yup.date().required('Recent test is required'),
+    //     test_score: Yup.object().shape({
+    //         listening: Yup.number().required('Listening score is required').moreThan(0, 'Listening score is required'),
+    //         reading: Yup.number().required('Reading score is required').moreThan(0, 'Reading score is required'),
+    //         writing: Yup.number().required('Writing score is required').moreThan(0, 'Writing score is required'),
+    //         speaking: Yup.number().required('Speaking score is required').moreThan(0, 'Speaking score is required'),
+    //         overall: Yup.number().required('Overall score is required').moreThan(0, 'Overall score is required')
 
-        }),
-        score_card: Yup.mixed().required('Score card upload is required').test('is-file-or-object', 'Score card  upload must be a file', value => value instanceof File || typeof value === 'object')
+    //     }),
+    //     score_card: Yup.mixed().required('Score card upload is required').test('is-file-or-object', 'Score card  upload must be a file', value => value instanceof File || typeof value === 'object')
         
-    }),
-    coverletter: Yup.string().required('Please add cover letter'),
+    // }),
+    // coverletter: Yup.string().required('Please add cover letter'),
     hear_about_us: Yup.string().required('Please specify how you heard about us')
 });
 

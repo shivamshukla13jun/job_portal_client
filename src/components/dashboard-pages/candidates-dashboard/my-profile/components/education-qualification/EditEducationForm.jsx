@@ -21,9 +21,8 @@ const EditEducationForm = ({ watch, register, setValue, error, index }) => {
                     <input type="text" {...register(`education.${index}.qualification`)} placeholder="B.COM / B.Tech" required />
                 </div>
 
-                <div className="form-group col-lg-6 col-md-12">
+                {/* <div className="form-group col-lg-6 col-md-12">
                     <label>Start Date</label>
-                    {/* <input type="text" placeholder="" required /> */}
                     <div>
                         <DatePicker
                             id='educationFromDate'
@@ -31,10 +30,10 @@ const EditEducationForm = ({ watch, register, setValue, error, index }) => {
                             onChange={(date) => setValue(`education.${index}.from`, date)}
                         />
                     </div>
-                </div>
+                </div> */}
 
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>End Date</label>
+                    <label>Passing Year</label>
                     <div>
                         <DatePicker
                             id='educationToDate'
@@ -44,7 +43,7 @@ const EditEducationForm = ({ watch, register, setValue, error, index }) => {
                     </div>
                 </div>
 
-                <div className="form-group col-lg-12 col-md-12">
+                {/* <div className="form-group col-lg-12 col-md-12">
                     <label>Certificate</label>
                     <div className="uploading-outer" style={{ border: "none", padding: 0, margin: 0 }}>
                         <div className="uploadButton">
@@ -70,7 +69,7 @@ const EditEducationForm = ({ watch, register, setValue, error, index }) => {
                             </label>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="form-group col-lg-12 col-md-12" style={{ marginBottom: 0 }}>
                     <div role='button' data-bs-dismiss="modal" className="theme-btn btn-style-one">

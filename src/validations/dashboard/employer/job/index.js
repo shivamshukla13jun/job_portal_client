@@ -10,7 +10,7 @@ export const jobSchema = Yup.object().shape({
             value: Yup.string().required('Job Sector value is required'),
             label: Yup.string().required('Job Sector label is required'),
         })
-    ).min(1, 'At least one category is required'),
+    ).min(1, 'At least Job Sector is required'),
     opening: Yup.number().required('Opening is required').min(1, 'Opening must be at least 1'),
     // age: Yup.number().required('Age is required'),
     candidate_requirement: Yup.object().shape({

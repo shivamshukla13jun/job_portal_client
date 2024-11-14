@@ -137,7 +137,7 @@ const EmploymentDetail = ({ watch, register, setValue, error }) => {
                         data-bs-target="#employmentDetail"
                         onClick={handleEmploymentFormSubmit}
                     >
-                        Add Employment Details
+                        Add Employment History
                     </div>
                 </div>
 

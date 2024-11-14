@@ -88,10 +88,10 @@ const index = () => {
       education: [
         {
           name: '',
-          from: new Date(),
+          // from: new Date(),
           to: new Date(),
           qualification: '',
-          certificate: {},
+          // certificate: {},
         }
       ],
       "achievement": [],
@@ -101,6 +101,8 @@ const index = () => {
           name: '',
           position: '',
           department: '',
+          categories:[],
+          scope:"",
           from: new Date(),
           to: new Date(),
         }
@@ -176,11 +178,11 @@ const index = () => {
     formData.append("upload_cv", watch("myProfile.upload_cv"));
     formData.append("profile", watch("myProfile.profile"));
     // formData.append("registration_certificate", watch("registration_certificate"));
-    formData.append("score_card", watch("english_language.score_card"));
+    // formData.append("score_card", watch("english_language.score_card"));
 
-    if (data.education.length > 0) {
-      data.education.forEach((_, index) => formData.append("certificate[]", watch(`education.${index}.certificate`)));
-    }
+    // if (data.education.length > 0) {
+    //   data.education.forEach((_, index) => formData.append("certificate[]", watch(`education.${index}.certificate`)));
+    // }
     mutation.mutate(formData);
   };
 
@@ -209,7 +211,7 @@ const index = () => {
         },
         education: data.education.map(edu => ({
           ...edu,
-          from: new Date(edu.from),
+          // from: new Date(edu.from),
           to: new Date(edu.to),
         })),
         // registration_certificate: data.registration_certificate,
@@ -219,11 +221,11 @@ const index = () => {
           to: new Date(emp.to),
         })),
         references: data.references,
-        english_language: {
-          ...data.english_language,
-          recent_test: new Date(data.english_language.recent_test),
-        },
-        coverletter:data.coverletter || "",
+        // english_language: {
+        //   ...data.english_language,
+        //   recent_test: new Date(data.english_language.recent_test),
+        // },
+        // coverletter:data.coverletter || "",
         hear_about_us: data.hear_about_us.join(","),
       });
     }
@@ -327,7 +329,7 @@ console.log("data",data)
               <div className="ls-widget">
                 <div className="tabs-box">
                   <div className="widget-title">
-                    <h4>Employment Details</h4>
+                    <h4>Employment History</h4>
                   </div>
                   {/* End widget-title */}
                   <div className="widget-content">
@@ -335,7 +337,7 @@ console.log("data",data)
                   </div>
                 </div>
               </div>
-              {/* <!-- Employment Details --> */}
+              {/* <!-- Employment History --> */}
 
               <div className="ls-widget">
                 <div className="tabs-box">
@@ -351,31 +353,29 @@ console.log("data",data)
               </div>
               {/* <!-- References --> */}
 
-              <div className="ls-widget">
+              {/* <div className="ls-widget">
                 <div className="tabs-box">
                   <div className="widget-title flex-column align-items-start">
                     <h4>English Language Certifications</h4>
                     <p>IELTS / OET</p>
                   </div>
-                  {/* End widget-title */}
                   <div className="widget-content">
                     <EnglishCertification watch={watch} register={register} setValue={setValue} error={errors} />
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* <!-- English Language Certifications --> */}
 
-              <div className="ls-widget">
+              {/* <div className="ls-widget">
                 <div className="tabs-box">
                   <div className="widget-title">
                     <h4>Cover Letter</h4>
                   </div>
-                  {/* End widget-title */}
                   <div className="widget-content">
                  <CoverLetter watch={watch} register={register} setValue={setValue} error={errors}/>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* <!-- Conclusion --> */}
               <div className="ls-widget">
                 <div className="tabs-box">

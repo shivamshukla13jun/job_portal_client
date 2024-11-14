@@ -1,6 +1,6 @@
 import DatePicker from '@/components/common/date-picker/DatePicker'
 import React, { useState } from 'react'
-
+import Select from "react-select";
 const EditEmploymentForm = ({ watch, register, setValue, error, index }) => {
 
     if (index === null) {
@@ -25,7 +25,30 @@ const EditEmploymentForm = ({ watch, register, setValue, error, index }) => {
                     <label>Department</label>
                     <input type="text" {...register(`employment.${index}.department`)} placeholder="Engineer" required />
                 </div>
-
+                <div className="form-group col-lg-12 col-md-12">
+                <label>
+                    Job Sector <span className="required-form">*</span>
+                    </label>
+                    <Select
+                        isMulti
+                        name="categories-add"
+                        className={`basic-multi-select`}
+                        classNamePrefix="select"
+                        options={categories}
+                        value={watch(`employment.${index}.categories`) ? watch(`employment.${index}.categories`) : []}
+                        onChange={(data) => setValue(`employment.${index}.categories`, data)}
+                    />
+                </div>
+                <div className="form-group col-lg-12 col-md-12">
+                    <label>Scope to Work</label>
+                    <input
+                        type="text"
+                        {...register(`employment.${index}.scope`)}
+                        onChange={(e) => setValue(`employment.${index}.scope`, e.target.value)}
+                        placeholder="Engineer"
+                        required
+                    />
+                </div>
                 <div className="form-group col-lg-6 col-md-12">
                     <label>From Date</label>
                     <div>
