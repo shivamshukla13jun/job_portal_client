@@ -1,7 +1,9 @@
 import DatePicker from '@/components/common/date-picker/DatePicker'
+import { categories } from '@/data/category';
 import React, { useState } from 'react'
+import { Controller } from 'react-hook-form';
 import Select from "react-select";
-const EditEmploymentForm = ({ watch, register, setValue, error, index }) => {
+const EditEmploymentForm = ({ watch, register, setValue, error, index ,control}) => {
 
     if (index === null) {
         return;
@@ -25,30 +27,41 @@ const EditEmploymentForm = ({ watch, register, setValue, error, index }) => {
                     <label>Department</label>
                     <input type="text" {...register(`employment.${index}.department`)} placeholder="Engineer" required />
                 </div>
-                <div className="form-group col-lg-12 col-md-12">
-                <label>
-                    Job Sector <span className="required-form">*</span>
-                    </label>
-                    <Select
-                        isMulti
-                        name="categories-add"
-                        className={`basic-multi-select`}
-                        classNamePrefix="select"
-                        options={categories}
-                        value={watch(`employment.${index}.categories`) ? watch(`employment.${index}.categories`) : []}
-                        onChange={(data) => setValue(`employment.${index}.categories`, data)}
-                    />
-                </div>
-                <div className="form-group col-lg-12 col-md-12">
-                    <label>Scope to Work</label>
+                     <div className="form-group col-lg-12 col-md-12">
+                        <label>
+                            Job Sector <span className="required-form">*</span>
+                        </label>
+                        <Controller
+                            name={`employment.${index}.categories`}
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                            <Select
+                                {...field}
+                                isMulti
+                                options={categories}
+                                className="basic-multi-select"
+                                classNamePrefix="select"
+                            />
+                            )}
+                        />
+                        {error.employment?.[index]?.categories && (
+                            <span className="text-red-500">This field is required</span>
+                        )}
+                    </div>
+
+                    <div className="form-group col-lg-12 col-md-12">
+                    <label>Scope of Work</label>
                     <input
                         type="text"
+                        className="form-control"
                         {...register(`employment.${index}.scope`)}
-                        onChange={(e) => setValue(`employment.${index}.scope`, e.target.value)}
-                        placeholder="Engineer"
-                        required
+                        placeholder="Scope"
                     />
-                </div>
+                    {error?.employment?.[index]?.scope && (
+                        <span className="text-red-500">This field is required</span>
+                    )}
+                    </div>
                 <div className="form-group col-lg-6 col-md-12">
                     <label>From Date</label>
                     <div>

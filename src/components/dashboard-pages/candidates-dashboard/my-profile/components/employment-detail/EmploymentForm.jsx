@@ -1,4 +1,5 @@
 import DatePicker from '@/components/common/date-picker/DatePicker'
+import { categories } from '@/data/category';
 import React, { useState } from 'react'
 import Select from "react-select";
 const EmploymentForm = ({ watch, register, setValue, error }) => {

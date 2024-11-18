@@ -8,30 +8,28 @@ import { toast } from "react-toastify";
 import MobileMenu from "@/components/header/MobileMenu";
 import DashboardCandidatesSidebar from "@/components/header/DashboardCandidatesSidebar";
 import DashboardCandidatesHeader from "@/components/header/DashboardCandidatesHeader";
-
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
-
 import LoginPopup from "../../../common/form/login/LoginPopup";
 import ContactInformation from "./components/ContactInformation";
 import EducationalQualification from "./components/EducationalQualification";
-import RegistrationCertification from "./components/RegistrationCertification";
 import EmploymentDetail from "./components/EmploymentDetail";
 import Reference from "./components/Reference";
-import EnglishCertification from "./components/EnglishCertification";
 import Conclusion from "./components/Conclusion";
 import Profile from "./components/Profile";
 
 import { candidateSchema } from "@/validations/dashboard/candidate";
 import { getById, post, put, putMultiForm } from "@/services/api";
 import { decrypt, encrypt } from "@/lib/encrypt";
-import { userInfo } from "@/store/reducers/user";
 import useUserInfo from "@/utils/hooks/useUserInfo";
-import CoverLetter from "./components/CoverLetter";
+import Achievements from "./components/Achievements";
+import PreviewOrginalData from "./components/PreviewOrginalData";
 
 const index = () => {
   const userInfo = useUserInfo();
+  const [isPreviewVisible, setIsPreviewVisible] = useState(false);
+  const [previewData, setPreviewData] = useState(null);
 
   const { data, isLoading } = useQuery({
     queryKey: [`candidate${userInfo._id}`],
@@ -48,7 +46,7 @@ const index = () => {
     enabled: !!userInfo._id,
   });
 
-  const { register, handleSubmit, watch, formState: { errors }, setValue, reset } = useForm({
+  const { register,control, handleSubmit, watch,getValues, formState: { errors }, setValue, reset } = useForm({
     resolver: yupResolver(candidateSchema),
     defaultValues: {
       myProfile: {
@@ -88,14 +86,11 @@ const index = () => {
       education: [
         {
           name: '',
-          // from: new Date(),
           to: new Date(),
           qualification: '',
-          // certificate: {},
         }
       ],
       "achievement": [],
-      // registration_certificate: {},
       employment: [
         {
           name: '',
@@ -115,19 +110,7 @@ const index = () => {
           note: ''
         }
       ],
-      // english_language: {
-      //   certification_attempted: '',
-      //   recent_test: new Date(),
-      //   test_score: {
-      //     listening: 0,
-      //     reading: 0,
-      //     writing: 0,
-      //     speaking: 0,
-      //     overall: 0
-      //   },
-      //   score_card: {},
-      // },
-      // coverletter:"",
+    
       hear_about_us: ''
     }
   });
@@ -165,24 +148,16 @@ const index = () => {
       education: data.education,
       employment: data.employment,
       references: data.references,
-      english_language: data.english_language,
       hear_about_us: watch("hear_about_us").split(","),
       cv: data.myProfile.upload_cv,
       profile: data.myProfile.profile,
       "achievement": data.achievement,
-      // registration_certificate: data.registration_certificate,
     }
 
     formData.append("parse", JSON.stringify(formattedData))
 
     formData.append("upload_cv", watch("myProfile.upload_cv"));
     formData.append("profile", watch("myProfile.profile"));
-    // formData.append("registration_certificate", watch("registration_certificate"));
-    // formData.append("score_card", watch("english_language.score_card"));
-
-    // if (data.education.length > 0) {
-    //   data.education.forEach((_, index) => formData.append("certificate[]", watch(`education.${index}.certificate`)));
-    // }
     mutation.mutate(formData);
   };
 
@@ -211,21 +186,15 @@ const index = () => {
         },
         education: data.education.map(edu => ({
           ...edu,
-          // from: new Date(edu.from),
           to: new Date(edu.to),
         })),
-        // registration_certificate: data.registration_certificate,
+        achievement:data.achievement || [],
         employment: data.employment.map(emp => ({
           ...emp,
           from: new Date(emp.from),
           to: new Date(emp.to),
         })),
         references: data.references,
-        // english_language: {
-        //   ...data.english_language,
-        //   recent_test: new Date(data.english_language.recent_test),
-        // },
-        // coverletter:data.coverletter || "",
         hear_about_us: data.hear_about_us.join(","),
       });
     }
@@ -235,7 +204,12 @@ const index = () => {
     }
 
   }, [data, reset]);
-
+  const handlePreview = (value) => {
+    // Collect data for preview
+    const formData = getValues(); // `getValues` from useForm
+    setPreviewData(formData);
+    setIsPreviewVisible(value);
+  };
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       console.log({errors})
@@ -311,21 +285,19 @@ console.log("data",data)
                   </div>
                 </div>
               </div>
-              {/* <!-- Educational Qualification --> */}
+             
 
-              {/* <div className="ls-widget">
+              <div className="ls-widget">
                 <div className="tabs-box">
-                  <div className="widget-title flex-column align-items-start">
-                    <h4>Registrations & Certifications</h4>
-                    <p>Please note that by providing this information you are consenting to us to conduct reference checks.</p>
+                  <div className="widget-title">
+                    <h4>Acievement </h4>
                   </div>
+                  {/* End widget-title */}
                   <div className="widget-content">
-                    <RegistrationCertification watch={watch} register={register} setValue={setValue} error={errors} />
+                    <Achievements watch={watch} register={register} setValue={setValue} error={errors} control={control}/>
                   </div>
                 </div>
-              </div> */}
-              {/* <!-- Registrations & Certifications --> */}
-
+              </div>
               <div className="ls-widget">
                 <div className="tabs-box">
                   <div className="widget-title">
@@ -333,7 +305,7 @@ console.log("data",data)
                   </div>
                   {/* End widget-title */}
                   <div className="widget-content">
-                    <EmploymentDetail watch={watch} register={register} setValue={setValue} error={errors} />
+                    <EmploymentDetail watch={watch} register={register} setValue={setValue} error={errors} control={control}/>
                   </div>
                 </div>
               </div>
@@ -351,31 +323,7 @@ console.log("data",data)
                   </div>
                 </div>
               </div>
-              {/* <!-- References --> */}
-
-              {/* <div className="ls-widget">
-                <div className="tabs-box">
-                  <div className="widget-title flex-column align-items-start">
-                    <h4>English Language Certifications</h4>
-                    <p>IELTS / OET</p>
-                  </div>
-                  <div className="widget-content">
-                    <EnglishCertification watch={watch} register={register} setValue={setValue} error={errors} />
-                  </div>
-                </div>
-              </div> */}
-              {/* <!-- English Language Certifications --> */}
-
-              {/* <div className="ls-widget">
-                <div className="tabs-box">
-                  <div className="widget-title">
-                    <h4>Cover Letter</h4>
-                  </div>
-                  <div className="widget-content">
-                 <CoverLetter watch={watch} register={register} setValue={setValue} error={errors}/>
-                  </div>
-                </div>
-              </div> */}
+            
               {/* <!-- Conclusion --> */}
               <div className="ls-widget">
                 <div className="tabs-box">
@@ -390,8 +338,15 @@ console.log("data",data)
               </div>
               {/* <!-- Conclusion --> */}
             </div>
-
+            {isPreviewVisible && previewData && <PreviewOrginalData previewData={previewData}/>}
             <div className="d-flex justify-content-end">
+              
+              <button
+                onClick={()=>handlePreview(isPreviewVisible?false:true)}
+                className="theme-btn btn-style-one"
+              >
+                Preview
+              </button>
               <button
                 onClick={handleSubmit(handleRegisterSubmit)}
                 className="theme-btn btn-style-one"

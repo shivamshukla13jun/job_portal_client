@@ -64,7 +64,7 @@ export const candidateSchema = Yup.object().shape({
                     label: Yup.string().required('Job Sector label is required'),
                 })
             ).min(1, 'At least Job Sector is required'),
-            scope: Yup.date().required('Scope to Work is required'),
+            scope: Yup.string().required('Scope to Work is required'),
         })
     ).required('Employment is required'),
     references: Yup.array().of(

@@ -78,7 +78,11 @@ const index = () => {
 
     const handleRegisterSubmit = async (data) => {
         const formData = new FormData();
-        const name = `${data.name.first} ${data.name.middle} ${data.name.last}`;
+        
+        // Format the name
+        const name = `${data.name.first} ${data.name.middle} ${data.name.last}`.trim();
+        
+        // Create the base data object
         const formattedData = {
             business_name: data.business_name,
             business_gst: data.business_gst,
@@ -98,25 +102,33 @@ const index = () => {
             keywords: data.keywords,
             product_services: data.product_services,
             url: data.url,
-            year_established: data.year_established,
-            logo: data.logo,
-            videos: data.videos,
-            pictures: data.pictures
+            year_established: data.year_established
         };
-
+    
+        // Handle single file uploads
         const logo = watch("logo");
-        if (Object.keys(logo).length > 0) {
+        if (logo instanceof File) {
             formData.append("logo", logo);
         }
-        const videos = watch("videos");
-        if (Object.keys(videos).length > 0) {
-            formData.append("videos[]", videos);
+    
+        const video = watch("videos");
+        if (video instanceof File) {
+            formData.append("videos[]", video);
         }
-        const pictures = watch("pictures");
-        if (Object.keys(pictures).length > 0) {
-            formData.append("pictures[]", pictures);
+    
+        const picture = watch("pictures");
+        if (picture instanceof File) {
+            formData.append("pictures[]", picture);
         }
+    
+        // Append the JSON data
         formData.append("parse", JSON.stringify(formattedData));
+    
+        // Log FormData contents for debugging
+        for (let pair of formData.entries()) {
+            console.log('FormData:', pair[0], pair[1]);
+        }
+    
         mutation.mutate(formData);
     };
 

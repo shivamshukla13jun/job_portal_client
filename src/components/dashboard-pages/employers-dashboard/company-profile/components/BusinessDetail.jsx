@@ -165,87 +165,89 @@ const BusinessDetail = ({ watch, register, setValue, error }) => {
                     <label>Target Keywords <span className='required-form'>*</span></label>
                     <input type="text" className={`${error?.keywords?.message ? 'error' : ''}`} {...register("keywords")} placeholder="Please keyword." required />
                 </div>
-                <div className="form-group">
-                    <label> Business / Company Logo <span className='required-form'>*</span></label>
-                    <div className="uploading-outer" ref={logoRef} style={{ border: "none", padding: 0, margin: 0 }}>
-                        <div className="uploadButton">
-                            <input
-                                className="uploadButton-input"
-                                type="file"
-                                accept="image/*"
-                                id={`upload-logo`}
-                                {...register(`logo`)}
-                                onChange={(e) => {
-                                    const file = e.target.files[0];
-                                    if (file) {
-                                        setValue(`logo`, file);
-                                    }
-                                }}
-                            />
-                            <label
-                                className="uploadButton-button ripple-effect"
-                                htmlFor={`upload-logo`}
-                            >
-                                {(watch(`logo`)?.name || watch(`logo`)?.originalname) || "Upload File"}
-                            </label>
-                        </div>
+             {/* Logo upload component */}
+            <div className="form-group">
+                <label>Business / Company Logo <span className='required-form'>*</span></label>
+                <div className="uploading-outer" ref={logoRef} style={{ border: "none", padding: 0, margin: 0 }}>
+                    <div className="uploadButton">
+                        <input
+                            className="uploadButton-input"
+                            type="file"
+                            accept="image/*"
+                            id="upload-logo"
+                            {...register("logo")}
+                            onChange={(e) => {
+                                const file = e.target.files[0];
+                                if (file) {
+                                    setValue("logo", file);
+                                }
+                            }}
+                        />
+                        <label
+                            className="uploadButton-button ripple-effect"
+                            htmlFor="upload-logo"
+                        >
+                            {watch("logo")?.name || watch("logo")?.originalname || "Upload Logo"}
+                        </label>
                     </div>
                 </div>
+            </div>
 
-                <div className="form-group">
-                    <label> Videos </label>
-                    <div className="uploading-outer" ref={videosRef} style={{ border: "none", padding: 0, margin: 0 }}>
-                        <div className="uploadButton">
-                            <input
-                                className="uploadButton-input"
-                                type="file"
-
-                                accept="image/*"
-                                id={`upload-video`}
-                                {...register(`video`)}
-                                onChange={(e) => {
-                                    const file = e.target.files[0];
-                                    if (file) {
-                                        setValue(`videos`, file);
-                                    }
-                                }}
-                            />
-                            <label
-                                className="uploadButton-button ripple-effect"
-                                htmlFor={`upload-video`}
-                            >
-                                {(watch(`videos`)?.name || watch(`videos`)?.originalname) || "Upload File"}
-                            </label>
-                        </div>
+            {/* Video upload component */}
+            <div className="form-group">
+                <label>Video</label>
+                <div className="uploading-outer" ref={videosRef} style={{ border: "none", padding: 0, margin: 0 }}>
+                    <div className="uploadButton">
+                        <input
+                            className="uploadButton-input"
+                            type="file"
+                            accept="video/*"  // Changed to accept video files
+                            id="upload-video"
+                            {...register("videos")}
+                            onChange={(e) => {
+                                const file = e.target.files[0];
+                                if (file) {
+                                    setValue("videos", file);
+                                }
+                            }}
+                        />
+                        <label
+                            className="uploadButton-button ripple-effect"
+                            htmlFor="upload-video"
+                        >
+                            {watch("videos")?.name || watch("videos")?.originalname || "Upload Video"}
+                        </label>
                     </div>
                 </div>
+            </div>
 
-                <div className="form-group">
-                    <label> Pictures </label>
-                    <div className="uploading-outer" ref={picturesRef} style={{ border: "none", padding: 0, margin: 0 }}>
-                        <div className="uploadButton">
-                            <input
-                                className="uploadButton-input"
-                                type="file"
-                                accept="image/*"
-                                id={`upload-picture`}
-                                {...register(`pictures`)}
-                                onChange={(e) => {
-                                    const file = e.target.files[0];
-                                    if (file) {
-                                        setValue(`pictures`, file);
-                                    }
-                                }}
-                            />
-                            <label
-                                className="uploadButton-button ripple-effect"
-                                htmlFor={`upload-picture`}
-                            >
-                                {(watch(`pictures`)?.name || watch(`pictures`)?.originalname) || "Upload File"}
-                            </label>
-                        </div>
+            {/* Picture upload component */}
+            <div className="form-group">
+                <label>Picture</label>
+                <div className="uploading-outer" ref={picturesRef} style={{ border: "none", padding: 0, margin: 0 }}>
+                    <div className="uploadButton">
+                        <input
+                            className="uploadButton-input"
+                            type="file"
+                            accept="image/*"
+                            id="upload-picture"
+                            {...register("pictures")}
+                            onChange={(e) => {
+                                const file = e.target.files[0];
+                                if (file) {
+                                    setValue("pictures", file);
+                                }
+                            }}
+                        />
+                        <label
+                            className="uploadButton-button ripple-effect"
+                            htmlFor="upload-picture"
+                        >
+                            {watch("pictures")?.name || watch("pictures")?.originalname || "Upload Picture"}
+                        </label>
                     </div>
                 </div>
+            </div>
 
             </div>
         </div>

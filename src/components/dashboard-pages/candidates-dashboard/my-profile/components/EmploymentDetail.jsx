@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import EmploymentForm from './employment-detail/EmploymentForm'
 import EditEmploymentForm from './employment-detail/EditEmploymentForm';
 
-const EmploymentDetail = ({ watch, register, setValue, error }) => {
+const EmploymentDetail = ({ watch, register, setValue, error ,control}) => {
     const [editIndex, setEditIndex] = useState(null);
     const [isAdding, setIsAdding] = useState(false);
     const employmentModalRef = useRef(null);
@@ -11,7 +11,15 @@ const EmploymentDetail = ({ watch, register, setValue, error }) => {
         const currentEmployment = watch("employment") || [];
         const cleanedEmployment = currentEmployment.filter(isEmploymentEntryFilled).length > 0
             ? currentEmployment.filter(isEmploymentEntryFilled)
-            : [{ name: '', position: '', department: '', from: new Date(), to: new Date(), }];
+            : [{ 
+                name: '',
+                position: '',
+                department: '',
+                categories:[],
+                scope:"",
+                from: new Date(),
+                to: new Date(),
+            }];
         setValue("employment", cleanedEmployment);
     }, []);
 
@@ -41,6 +49,8 @@ const EmploymentDetail = ({ watch, register, setValue, error }) => {
                 name: '',
                 position: '',
                 department: '',
+                categories:[],
+                scope:"",
                 from: new Date(),
                 to: new Date(),
             };
@@ -51,7 +61,7 @@ const EmploymentDetail = ({ watch, register, setValue, error }) => {
     }
 
     const isEmploymentEntryFilled = (entry) => {
-        return entry.name !== '' && entry.position !== '' && entry.department !== '';
+        return entry.name !== '' && entry.position !== ''&& entry.scope !== '' && entry.department !== '';
     }
 
     const handleDeleteEmployment = (index) => {
@@ -88,6 +98,8 @@ const EmploymentDetail = ({ watch, register, setValue, error }) => {
                                                 <th scope="col">Employer Name</th>
                                                 <th scope="col">Position</th>
                                                 <th scope="col">Department</th>
+                                                <th scope="col">Job Sector</th>
+                                                <th scope="col">Scope To Work</th>
                                                 <th scope="col">From Date</th>
                                                 <th scope="col">Till Date</th>
                                                 <th scope="col">Action</th>
@@ -99,6 +111,8 @@ const EmploymentDetail = ({ watch, register, setValue, error }) => {
                                                 <td>{item.name}</td>
                                                 <td>{item.position}</td>
                                                 <td>{item.department}</td>
+                                                <td>{item?.categories?.map((item=>item.label)).join(",")}</td>
+                                                <td>{item.scope}</td>
                                                 <td>{new Date(item.from).toDateString()}</td>
                                                 <td>{new Date(item.to).toDateString()}</td>
                                                 <td>
@@ -152,7 +166,7 @@ const EmploymentDetail = ({ watch, register, setValue, error }) => {
 
                             <div className="modal-body">
                                 <div id="login-modal">
-                                    <EmploymentForm watch={watch} register={register} setValue={setValue} error={error} />
+                                    <EmploymentForm watch={watch} register={register} setValue={setValue} error={error} control={control} />
                                 </div>
                             </div>
                         </div>
@@ -176,6 +190,7 @@ const EmploymentDetail = ({ watch, register, setValue, error }) => {
                                         setValue={setValue}
                                         error={error}
                                         index={editIndex}
+                                        control={control}
                                     />
                                 </div>
                             </div>
@@ -185,8 +200,8 @@ const EmploymentDetail = ({ watch, register, setValue, error }) => {
 
                 <div className='form-group col-lg-12 col-md-12' style={{ marginBottom: '0px' }}>
                     {error?.employment?.slice(0, 1).map(item =>
-                        <span className="error error-border" key={item.position.message}>
-                            {item.name.message + ', ' + item.position.message + ', ' + item.department.message + "!"}
+                        <span className="error error-border" key={item?.position?.message}>
+                            {item?.name?.message + ', ' + item?.position?.message + ', ' + item.department?.message + "!"}
                         </span>
                     )}
                 </div>
