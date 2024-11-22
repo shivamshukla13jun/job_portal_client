@@ -42,6 +42,13 @@ const employerMenu = [
     active: "",
   },
   {
+    id: 6,
+    name: "Sub Employer List",
+    icon: "la-bookmark-o",
+    routePath: "/employers-dashboard/SubEmployer",
+    active: "",
+  },
+  {
     id: 7,
     name: "Packages",
     icon: "la-box",

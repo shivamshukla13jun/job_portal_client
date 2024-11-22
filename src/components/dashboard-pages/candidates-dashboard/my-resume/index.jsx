@@ -34,112 +34,48 @@ const index = () => {
     enabled: !!userInfo._id
   });
 
-  const { register, handleSubmit, watch, formState: { errors }, setValue, reset } = useForm({
+  const { register, handleSubmit, watch, formState: { errors },control, setValue, reset } = useForm({
     resolver: yupResolver(resumeSchema),
-    // defaultValues: {
-    //   description: '',
-    //   educations: [
-    //     {
-    //       degree: '',
-    //       university: '',
-    //       start_date: new Date(),
-    //       end_date: new Date(),
-    //       description: ''
-    //     }
-    //   ],
-    //   work_experiences: [
-    //     {
-    //       position: '',
-    //       company_name: '',
-    //       start_date: new Date(),
-    //       end_date: new Date(),
-    //       description: ''
-    //     }
-    //   ],
-    //   portfolio: {},
-    //   portfoliolink:"",
-    //   awards: [
-    //     {
-    //       award_name: '',
-    //       start_date: new Date(),
-    //       end_date: new Date(),
-    //       description: ''
-    //     }
-    //   ],
-    //   skills: [],
-    //   current_salary: 0,
-    //   expected_salary: 0,
-    //   languages: [],
-    //   social_media: {
-    //     twitter: '',
-    //     linkedIn: ''
-    //   }
-    // }
-    defaultValues:{ 
-      description: 'Passionate software engineer with 5+ years of experience in developing scalable web applications.',
-  
+    defaultValues: {
+      description: '',
       educations: [
-          {
-              degree: 'Bachelor of Technology (B.Tech)',
-              university: 'Indian Institute of Technology (IIT) Bombay',
-              start_date: new Date('2015-08-01'),
-              end_date: new Date('2019-06-30'),
-              description: 'Specialized in software engineering with a focus on backend development and cloud computing.',
-          }
+        {
+          degree: '',
+          university: '',
+          start_date: new Date(),
+          end_date: new Date(),
+          description: ''
+        }
       ],
-  
       work_experiences: [
-          {
-              position: 'Software Engineer',
-              company_name: 'TechCorp Solutions',
-              start_date: new Date('2019-07-01'),
-              end_date: new Date('2022-05-15'),
-              description: 'Developed and maintained core features of a cloud-based SaaS product. Led a team of 5 engineers and collaborated with cross-functional teams to improve product scalability and performance.',
-          },
-          {
-              position: 'Senior Software Engineer',
-              company_name: 'Innovative Solutions',
-              start_date: new Date('2022-06-01'),
-              end_date: new Date(),  // Current position
-              description: 'Leading the architecture and development of a new microservices-based platform. Optimizing systems for high performance and low latency.',
-          }
+        // {
+        //   position: '',
+        //   company_name: '',
+        //   start_date: new Date(),
+        //   end_date: new Date(),
+        //   description: ''
+        // }
       ],
-  
-      portfolio: {   },
-  
-      portfoliolink: 'https://github.com/johndoe',
-  
+      portfolio: {},
+      portfoliolink:"",
       awards: [
-          {
-              award_name: 'Employee of the Year',
-              start_date: new Date('2021-12-01'),
-              end_date: new Date('2021-12-31'),
-              description: 'Recognized for exceptional performance in leading a critical project and delivering on-time results.',
-          }
+        {
+          award_name: '',
+          start_date: new Date(),
+          end_date: new Date(),
+          description: ''
+        }
       ],
-  
-      skills: [
-          { label: 'JavaScript', value: 'Expert' },
-          { label: 'Node.js', value: 'Advanced' },
-          { label: 'React', value: 'Advanced' },
-          { label: 'AWS', value: 'Intermediate' },
-          { label: 'Docker', value: 'Intermediate' },
-      ],
-  
-      current_salary: 80000,  // Example salary in USD or INR as per your locale
-      expected_salary: 100000,
-  
-      languages: [
-          { label: 'English', value: 'Fluent' },
-          { label: 'Hindi', value: 'Fluent' },
-          { label: 'Spanish', value: 'Intermediate' },
-      ],
-  
+      skills: [],
+      current_salary: 0,
+      expected_salary: 0,
+      languages: [],
       social_media: {
-          twitter: 'https://twitter.com/johndoe',
-          linkedIn: 'https://www.linkedin.com/in/johndoe',
+        twitter: '',
+        linkedIn: ''
       }
-  }
+    }
+  
   });
 
   const mutation = useMutation({
@@ -192,13 +128,13 @@ const index = () => {
           }
         ],
         work_experiences: data.work_experiences || [
-          {
-            position: '',
-            company_name: '',
-            start_date: '',
-            end_date: '',
-            description: ''
-          }
+          // {
+          //   position: '',
+          //   company_name: '',
+          //   start_date: '',
+          //   end_date: '',
+          //   description: ''
+          // }
         ],
         portfolio: data.portfolio || {},
         portfoliolink: data.portfoliolink || "",
@@ -260,7 +196,7 @@ const index = () => {
       }
     }
   }, [errors]);
-
+console.log("work_experiences?????????????",watch('work_experiences'))
   if (isLoading) return <div>Loading...</div>
 
   return (
@@ -306,6 +242,7 @@ const index = () => {
                       error={errors}
                       handleSubmit={handleSubmit}
                       handleRegisterSubmit={handleRegisterSubmit}
+                      control={control}
                     />
                   </div>
                   {/* End widget-content */}

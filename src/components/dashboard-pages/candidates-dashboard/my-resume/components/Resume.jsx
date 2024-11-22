@@ -5,7 +5,7 @@ import Experiences from "./Experiences";
 import Language from "./Language";
 import SkillsMultiple from "./SkillsMultiple";
 
-const Resume = ({ watch, register, setValue, error, handleSubmit, handleRegisterSubmit }) => {
+const Resume = ({ watch, register, setValue, error, handleSubmit, handleRegisterSubmit,control }) => {
 
   return (
     <form className="default-form" onSubmit={handleSubmit(handleRegisterSubmit)}>
@@ -23,7 +23,7 @@ const Resume = ({ watch, register, setValue, error, handleSubmit, handleRegister
         <div className="form-group col-lg-12 col-md-12">
           <Education watch={watch} register={register} setValue={setValue} error={error} />
 
-          <Experiences watch={watch} register={register} setValue={setValue} error={error} />
+          <Experiences watch={watch} register={register} setValue={setValue} error={error} control={control} />
         </div>
 
         <div className="form-group col-lg-12 col-md-12">

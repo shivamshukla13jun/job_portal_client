@@ -68,11 +68,12 @@ import { paths } from "./services/paths";
 import ForgotPasswordPage from "./pages/others/forgot";
 import ResetPassword from "./pages/others/resetpassword";
 import SavedJobsPage from "./pages/candidates-dashboard/saved-jobs";
+import SubEmployer from "./pages/employers-dashboard/subemployers";
 
 function App() {
 
   const userInfo = sessionStorage.getItem("userInfo") ? JSON.parse(decrypt(sessionStorage.getItem("userInfo")))?.userType?.name?.toLowerCase() : null;
-
+  
   const query = new QueryClient({
     defaultOptions: {
       queries: {
@@ -134,6 +135,7 @@ function App() {
                 <Route path="employers-dashboard" element={userInfo === 'employer' ? <Outlet /> : <Navigate to={paths.home} />}  >
                   <Route path="dashboard" element={<DashboardEmploeeDBPage />} />
                   <Route path="company-profile" element={<CompanyProfileEmploeeDBPage />} />
+                  <Route path="SubEmployer" element={<SubEmployer />} />
                   <Route path="post-jobs" element={<PostJobsEmploeeDBPage />} />
                   <Route path="edit-job/:id" element={<EditJob />} />
                   <Route path="manage-jobs" element={<ManageJobsEmploeeDBPage />} />

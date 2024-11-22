@@ -13,10 +13,10 @@ const CompanyInfo = ({ data }) => {
         Founded in: <span>{new Date(data?.employerId?.year_established).getFullYear()}</span>
       </li>
       <li>
-        Phone: <span>{data?.company?.phone}</span>
+        Phone: <span>{data?.employerId?.phone}</span>
       </li>
       <li>
-        Email: <span>{data?.company?.email}</span>
+        Email: <span>{data?.employerId?.email}</span>
       </li>
       <li>
         Location: <span>{data?.location}</span>

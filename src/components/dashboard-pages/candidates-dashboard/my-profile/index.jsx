@@ -24,11 +24,11 @@ import { getById, post, put, putMultiForm } from "@/services/api";
 import { decrypt, encrypt } from "@/lib/encrypt";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import Achievements from "./components/Achievements";
-import PreviewOrginalData from "./components/PreviewOrginalData";
+import PreviewOriginalDataModal from "./components/PreviewOrginalData";
+
 
 const index = () => {
   const userInfo = useUserInfo();
-  const [isPreviewVisible, setIsPreviewVisible] = useState(false);
   const [previewData, setPreviewData] = useState(null);
 
   const { data, isLoading } = useQuery({
@@ -204,12 +204,7 @@ const index = () => {
     }
 
   }, [data, reset]);
-  const handlePreview = (value) => {
-    // Collect data for preview
-    const formData = getValues(); // `getValues` from useForm
-    setPreviewData(formData);
-    setIsPreviewVisible(value);
-  };
+
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       console.log({errors})
@@ -338,11 +333,11 @@ console.log("data",data)
               </div>
               {/* <!-- Conclusion --> */}
             </div>
-            {isPreviewVisible && previewData && <PreviewOrginalData previewData={previewData}/>}
+          <PreviewOriginalDataModal previewData={previewData} setPreviewData={setPreviewData}/>
             <div className="d-flex justify-content-end">
               
               <button
-                onClick={()=>handlePreview(isPreviewVisible?false:true)}
+                onClick={()=>setPreviewData(watch())}
                 className="theme-btn btn-style-one"
               >
                 Preview
