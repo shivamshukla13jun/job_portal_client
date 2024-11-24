@@ -10,6 +10,7 @@ import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { useSelector } from "react-redux";
 import { selectWishlist } from "@/store/reducers/Whishlist";
 import { useNavigate } from "react-router-dom";
+import SubemployerMenu from "@/data/SubemployerMenuData";
 
 const DefaulHeader2 = () => {
   const userInfo = useUserInfo();
@@ -92,17 +93,7 @@ const DefaulHeader2 = () => {
 
           {userInfo?.userType?.name && (
             <div className="outer-box">
-               {/* <button onClick={()=>navigate("/candidates-dashboard/saved-jobs")} className="menu-btn">
-                <Link to={"/candidates-dashboard/saved-jobs"} className="count">{SavedJobs?.length}</Link>
-                <span className="icon la la-heart-o"></span>
-              </button> */}
-              {/* wishlisted menu */}
-
-              {/* <button className="menu-btn">
-                <span className="icon la la-bell"></span>
-              </button> */}
-              {/* End notification-icon */}
-
+            
               {/* <!-- Dashboard Option --> */}
               {userInfo && userInfo?.userType?.name?.toLowerCase() === 'candidate' && (
                 <div className="dropdown dashboard-option">
@@ -155,6 +146,37 @@ const DefaulHeader2 = () => {
 
                   <ul className="dropdown-menu">
                     {employerMenu.map((item) => (
+                      <li
+                        className={`${isActiveLink(item.routePath, pathname) ? "active" : ""} mb-1`}
+                        key={item.id}
+                      >
+                        <Link to={item.routePath}>
+                          <i className={`la ${item.icon}`}></i> {item.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {userInfo && userInfo?.userType?.name?.toLowerCase() === 'subemployer' && (
+                <div className="dropdown dashboard-option">
+                  <a
+                    className="dropdown-toggle"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      alt="avatar"
+                      className="thumb"
+                      src={API_EMPLOYER_PATH + userInfo?.userTypeValue?.logo?.filename}
+                      style={{ objectFit: "contain" }}
+                    />
+                    <span className="name">{userInfo?.userTypeValue?.business_name ? capitalizeFirstLetter(userInfo?.userTypeValue?.business_name?.split(" ")[0]) : 'My account'}</span>
+                  </a>
+
+                  <ul className="dropdown-menu">
+                    {SubemployerMenu.map((item) => (
                       <li
                         className={`${isActiveLink(item.routePath, pathname) ? "active" : ""} mb-1`}
                         key={item.id}

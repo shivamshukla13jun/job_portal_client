@@ -45,7 +45,7 @@ const employerMenu = [
     id: 6,
     name: "Sub Employer List",
     icon: "la-bookmark-o",
-    routePath: "/employers-dashboard/SubEmployer",
+    routePath: "/employers-dashboard/subemployer",
     active: "",
   },
   {
@@ -55,20 +55,6 @@ const employerMenu = [
     routePath: "/employers-dashboard/packages",
     active: "",
   },
-  // {
-  //   id: 8,
-  //   name: "Messages",
-  //   icon: "la-comment-o",
-  //   routePath: "/employers-dashboard/messages",
-  //   active: "",
-  // },
-  // {
-  //   id: 9,
-  //   name: "Resume Alerts",
-  //   icon: "la-bell",
-  //   routePath: "/employers-dashboard/resume-alerts",
-  //   active: "",
-  // },
   {
     id: 10,
     name: "Change Password",

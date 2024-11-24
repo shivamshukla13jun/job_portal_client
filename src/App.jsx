@@ -69,11 +69,12 @@ import ForgotPasswordPage from "./pages/others/forgot";
 import ResetPassword from "./pages/others/resetpassword";
 import SavedJobsPage from "./pages/candidates-dashboard/saved-jobs";
 import SubEmployer from "./pages/employers-dashboard/subemployers";
+import DashboardSubemplyerDBPage from "./pages/subemployers-dashboard/dashboard";
 
 function App() {
 
   const userInfo = sessionStorage.getItem("userInfo") ? JSON.parse(decrypt(sessionStorage.getItem("userInfo")))?.userType?.name?.toLowerCase() : null;
-  
+  console.log({userInfo})
   const query = new QueryClient({
     defaultOptions: {
       queries: {
@@ -135,7 +136,7 @@ function App() {
                 <Route path="employers-dashboard" element={userInfo === 'employer' ? <Outlet /> : <Navigate to={paths.home} />}  >
                   <Route path="dashboard" element={<DashboardEmploeeDBPage />} />
                   <Route path="company-profile" element={<CompanyProfileEmploeeDBPage />} />
-                  <Route path="SubEmployer" element={<SubEmployer />} />
+                  <Route path="subemployer" element={<SubEmployer />} />
                   <Route path="post-jobs" element={<PostJobsEmploeeDBPage />} />
                   <Route path="edit-job/:id" element={<EditJob />} />
                   <Route path="manage-jobs" element={<ManageJobsEmploeeDBPage />} />
@@ -144,6 +145,12 @@ function App() {
                   <Route path="packages" element={<PackageEmploeeDBPage />} />
                   <Route path="messages" element={<MessageEmploeeDBPage />} />
                   <Route path="resume-alerts" element={<ResumeAlertsEmploeeDBPage />} />
+                  <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
+                </Route>
+                <Route path="subemployers-dashboard" element={userInfo === 'subemployer' ? <Outlet /> : <Navigate to={paths.home} />}  >
+                  <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
+                  <Route path="company-profile" element={<CompanyProfileEmploeeDBPage />} />
+                  <Route path="shortlisted-resumes" element={<ShortListedResumeEmploeeDBPage />} />
                   <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
                 </Route>
 

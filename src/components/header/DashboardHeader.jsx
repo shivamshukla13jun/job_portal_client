@@ -46,6 +46,7 @@ const DashboardHeader = () => {
           window.location.href = paths.login;
         }
       } catch (err) {
+        console.log(err)
         toast.error(err.response.data.error)
       }
 

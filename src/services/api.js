@@ -23,8 +23,9 @@ request.interceptors.request.use((config) => {
 request.interceptors.response.use(
     (response) => response,
     (error) => {
+        console.log(error)
         if (error.response && error.response.status === 403) {
-            window.location.href = paths.login;
+            // window.location.href = paths.login;
         }
         return Promise.reject(error);
     }
@@ -44,6 +45,7 @@ const post = (url, data) => {
 };
 
 const put = (url, id, data) => {
+    console.log({data})
     return request.put(`${url}/${id}`, data);
 };
 
@@ -57,4 +59,4 @@ const del = (url, id) => {
     return request.delete(`${url}/${id}`);
 };
 
-export { get, getById, post, put, putMultiForm, del };
+export { get, getById, post, put, putMultiForm, del,request };

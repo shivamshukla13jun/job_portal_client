@@ -1,5 +1,4 @@
 import React from 'react'
-import SubEmployerList from './SubEmployerList'
 import LoginPopup from '@/components/common/form/login/LoginPopup';
 import DashboardHeader from '@/components/header/DashboardHeader';
 import DashboardEmployerSidebar from '@/components/header/DashboardEmployerSidebar';
@@ -7,6 +6,7 @@ import MobileMenu from '@/components/header/MobileMenu';
 import Breadcrumb from '@/components/common/Breadcrumb';
 import MenuToggler from '@/components/dashboard-pages/MenuToggler';
 import CopyrightFooter from '@/components/dashboard-pages/CopyrightFooter';
+import SubEmployerList from './SubEmployerList';
 const SubEmployer = () => {
   return (
 

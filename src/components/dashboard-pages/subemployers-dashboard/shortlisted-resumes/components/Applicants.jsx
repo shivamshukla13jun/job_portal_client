@@ -7,13 +7,36 @@ import { useMutation,useQueryClient } from "@tanstack/react-query";
 import { del, get, put } from "@/services/api";
 import { toast } from "react-toastify";
 import { useAcceptApplication, useDeleteApplication } from "@/utils/hooks/useApplication";
+import MeetingSchadule from "./MeetingSchadule";
+import { useState } from "react";
 
 
 const Applicants = ({ data ,search}) => {
-  const navigate=useNavigate()
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+
+  const handleAccept = (id,subemployerid)=>{
+    setCreateModalOpen(id)
+  }
+  const handleDownload = async (fileUrl,filename) => {
+    try {
+      console.log("fileurl",fileUrl)
+      // Fetch the file data
+      const response = await fetch(fileUrl);
+      const blob = await response.blob(); // Get the file as a Blob
   
-  const handleAccept = useAcceptApplication()
-  const handleDelete = useDeleteApplication(search)
+      // Create a temporary link element
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob); // Create an object URL for the Blob
+      link.download = filename; // Set the filename for download
+  
+      // Append the link to the body, trigger the click, then remove the link
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      toast.info('Download failed');
+    }
+  };
   return (
     <>
     <div className="row">
@@ -31,9 +54,9 @@ const Applicants = ({ data ,search}) => {
                 />
               </figure>
               <h4 className="name">
-                <Link to={`${paths.publiccandidate}/${candidate?._id}`}>
+                {/* <Link to={`${paths.publiccandidate}/${candidate?._id}`}> */}
                   {candidate?.name}
-                </Link>
+                {/* </Link> */}
               </h4>
               <ul className="candidate-info">
                 <li className="designation">
@@ -61,31 +84,37 @@ const Applicants = ({ data ,search}) => {
             <div className="option-box">
               <ul className="option-list">
                 <li>
-                  <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${candidate._id}`)}>
-                    <span className="la la-eye"></span>
+                  <button data-text="Download Cv" onClick={() => handleDownload(API_CANDIDATE_PATH + candidate?.cv?.originalname,candidate?.cv?.filename)}>
+                    <span className="la la-download"></span>
                   </button>
                 </li>
                 <li>
-                  <button data-text="Approve Application" onClick={() => handleAccept(_id,'shortlisted')}>
-                    <span className="la la-check"></span>
+                  <button data-text="Create Meeting" onClick={() => handleAccept(candidate,'shortlisted')}>
+                    <span className="la la-plus"></span>
                   </button>
                 </li>
-                <li>
+                {/* <li>
                   <button data-text="Reject Application" onClick={() => handleAccept(_id,"rejected")}>
                     <span className="la la-times-circle"></span>
                   </button>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <button data-text="Delete Application" onClick={() => handleDelete(_id,job._id)}>
                     <span className="la la-trash"></span>
                   </button>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
         </div>
       ))}
     </div>
+                {createModalOpen && (
+                    <MeetingSchadule 
+                        isOpen={createModalOpen}
+                        onClose={() => setCreateModalOpen(false)}
+                    />
+                )}
   </>
   );
 };

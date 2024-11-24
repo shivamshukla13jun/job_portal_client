@@ -1,7 +1,6 @@
 import MobileMenu from "../../../header/MobileMenu";
 import DashboardHeader from "../../../header/DashboardHeader";
 import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardEmployerSidebar from "../../../header/DashboardEmployerSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import TopCardBlock from "./components/TopCardBlock";
 import ProfileChart from "./components/ProfileChart";
@@ -12,20 +11,21 @@ import MenuToggler from "../../MenuToggler";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { get } from "@/services/api";
+import { get, getById } from "@/services/api";
+import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
 
 const Index = () => {
   const userInfo = useUserInfo();
   const [statrtdate, setStartdate] = useState("")
-
+console.log("userInfo dshboad",userInfo)
 
   const { data, isLoading } = useQuery({
     queryKey: [`dashboard/employer`, statrtdate],
     queryFn: async () => {
-      let res = (await get(`dashboard/employer`)).data.data
+      let res = (await getById(`dashboard/employer`,userInfo?.parentEmployerId)).data.data
       return res;
     },
-    enabled: !!userInfo._id
+    enabled: !!userInfo?.parentEmployerId
   });
 
   if (isLoading) return <div>Loading...</div>
@@ -43,7 +43,7 @@ const Index = () => {
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <DashboardEmployerSidebar />
+      <DashboardSubEmployerSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
@@ -83,21 +83,6 @@ const Index = () => {
             </div>
             {/* End .col */}
 
-            <div className="col-lg-12">
-              {/* <!-- applicants Widget --> */}
-              <div className="applicants-widget ls-widget">
-                <div className="widget-title">
-                  <h4>Recent Applicants</h4>
-                </div>
-                <div className="widget-content">
-                  <div className="row">
-                    {/* <!-- Candidate block three --> */}
-
-                    <Applicants />
-                  </div>
-                </div>
-              </div>
-            </div>
             {/* End .col */}
           </div>
           {/* End .row profile and notificatins */}

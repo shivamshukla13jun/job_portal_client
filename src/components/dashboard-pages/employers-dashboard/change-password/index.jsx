@@ -1,7 +1,6 @@
 import MobileMenu from "../../../header/MobileMenu";
 import DashboardHeader from "../../../header/DashboardHeader";
 import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardEmployerSidebar from "../../../header/DashboardEmployerSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import Form from "./components/Form";
@@ -16,6 +15,7 @@ import { resetAuthenticatedSchema } from "@/validations/login";
 import { toast } from "react-toastify";
 import { decrypt } from "@/lib/encrypt";
 import useUserInfo from "@/utils/hooks/useUserInfo";
+import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
 
 const index = () => {
 
@@ -66,7 +66,7 @@ const index = () => {
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <DashboardEmployerSidebar />
+      <DashboardSubEmployerSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

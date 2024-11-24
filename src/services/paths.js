@@ -12,6 +12,7 @@ export const paths = {
     publicemployer: '/employer',
     publiccandidate: '/candidate',
     employer_profile: '/employers-dashboard/company-profile',
+    sub_employer_profile: '/subemployers-dashboard/dashboard',
     employer_all_applicants: '/employers-dashboard/all-applicants',
     manage_jobs: '/employers-dashboard/manage-jobs',
     edit_job: '/employers-dashboard/edit-job',

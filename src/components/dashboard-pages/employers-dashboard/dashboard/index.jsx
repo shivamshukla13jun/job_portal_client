@@ -12,20 +12,21 @@ import MenuToggler from "../../MenuToggler";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { get } from "@/services/api";
+import { get, getById } from "@/services/api";
 
 const Index = () => {
   const userInfo = useUserInfo();
   const [statrtdate, setStartdate] = useState("")
+  console.log("userInfo dshboad",userInfo)
 
 
   const { data, isLoading } = useQuery({
     queryKey: [`dashboard/employer`, statrtdate],
     queryFn: async () => {
-      let res = (await get(`dashboard/employer`)).data.data
+      let res = (await getById(`dashboard/employer`,userInfo?.userTypeValue?._id)).data.data
       return res;
     },
-    enabled: !!userInfo._id
+    enabled: !!userInfo?.userTypeValue?._id
   });
 
   if (isLoading) return <div>Loading...</div>

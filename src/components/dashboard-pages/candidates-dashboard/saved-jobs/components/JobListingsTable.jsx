@@ -40,10 +40,6 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
 
               <tbody>
                 {data?.length > 0 && data.map((item) => {
-                  const { _id,company,title } = item;
-                  if (!_id || !title || !company) {
-                    return null;
-                  }
                   return (
                     <tr key={item?._id}>
                       <td>

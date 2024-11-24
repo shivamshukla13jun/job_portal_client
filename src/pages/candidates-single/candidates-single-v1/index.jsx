@@ -89,7 +89,12 @@ const CandidateSingleDynamicV1 = () => {
       toast.info('Download failed');
     }
   };
-  
+  const handleSelectCV=()=>{
+    toast.info("Cv Selected")
+  }
+  const handleForwardCV=()=>{
+    toast.info("Cv Forwarded")
+  }
   if (isLoading) return <div>Loading...</div>
 
   return (
@@ -139,18 +144,28 @@ const CandidateSingleDynamicV1 = () => {
                   </ul>
                 </div>
 
-                <div className="btn-box">
-                  <a
-                    className="theme-btn btn-style-one"
-                    onClick={handleDownload}
+                <div className="d-flex">
+  <a
+    className="theme-btn btn-style-one me-2"
+    onClick={handleDownload}
+  >
+    Download CV
+  </a>
+  <a
+    className="theme-btn btn-style-one me-2"
+    onClick={handleSelectCV}
+  >
+    Select CV
+  </a>
+  <a
+    className="theme-btn btn-style-one"
+    onClick={handleForwardCV}
+  >
+    Forward CV
+  </a>
+</div>
 
-                  >
-                    Download CV
-                  </a>
-                  {/* <button className="bookmark-btn">
-                    <i className="flaticon-bookmark"></i>
-                  </button> */}
-                </div>
+
               </div>
             </div>
             {/*  <!-- Candidate block Five --> */}
