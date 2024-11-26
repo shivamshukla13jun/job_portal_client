@@ -92,9 +92,9 @@ const DashboardHeader = () => {
             </button> */}
             {/* wishlisted menu */}
 
-            <button className="menu-btn">
+            {/* <button className="menu-btn">
               <span className="icon la la-bell"></span>
-            </button>
+            </button> */}
             {/* End notification-icon */}
 
             {/* <!-- Dashboard Option --> */}

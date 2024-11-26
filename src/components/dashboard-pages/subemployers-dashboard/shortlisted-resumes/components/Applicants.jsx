@@ -1,12 +1,6 @@
-import { Link } from "react-router-dom";
-import candidatesData from "../../../../../data/candidates";
-import { paths } from "@/services/paths";
+
 import { API_CANDIDATE_PATH } from "@/lib/config";
-import { useNavigate } from "react-router-dom";
-import { useMutation,useQueryClient } from "@tanstack/react-query";
-import { del, get, put } from "@/services/api";
 import { toast } from "react-toastify";
-import { useAcceptApplication, useDeleteApplication } from "@/utils/hooks/useApplication";
 import MeetingSchadule from "./MeetingSchadule";
 import { useState } from "react";
 
@@ -40,31 +34,31 @@ const Applicants = ({ data ,search}) => {
   return (
     <>
     <div className="row">
-      {data?.map(({_id,resume, candidate,job }) => (
+      {data?.map(({_id,resume, candidateId,job }) => (
         <div
           className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
-          key={candidate?._id}
+          key={candidateId?._id}
         >
           <div className="inner-box">
             <div className="content">
               <figure className="image">
                 <img
-                  src={API_CANDIDATE_PATH + candidate?.profile?.filename}
+                  src={API_CANDIDATE_PATH + candidateId?.profile?.filename}
                   alt="candidates"
                 />
               </figure>
               <h4 className="name">
-                {/* <Link to={`${paths.publiccandidate}/${candidate?._id}`}> */}
-                  {candidate?.name}
+                {/* <Link to={`${paths.publiccandidate}/${candidateId?._id}`}> */}
+                  {candidateId?.name}
                 {/* </Link> */}
               </h4>
               <ul className="candidate-info">
                 <li className="designation">
-                  {candidate?.designation || "Designation"}
+                  {candidateId?.designation || "Designation"}
                 </li>
                 <li>
                   <span className="icon flaticon-map-locator"></span>{" "}
-                  {candidate?.contact?.current_address?.country}
+                  {candidateId?.contact?.current_address?.country}
                 </li>
                 <li>
                   <span className="icon flaticon-money"></span>
@@ -73,7 +67,7 @@ const Applicants = ({ data ,search}) => {
               </ul>
 
               <ul className="post-tags">
-                {candidate?.education?.map((val, i) => (
+                {candidateId?.education?.map((val, i) => (
                   <li key={i}>
                     <a>{val.qualification}</a>
                   </li>
@@ -84,12 +78,12 @@ const Applicants = ({ data ,search}) => {
             <div className="option-box">
               <ul className="option-list">
                 <li>
-                  <button data-text="Download Cv" onClick={() => handleDownload(API_CANDIDATE_PATH + candidate?.cv?.originalname,candidate?.cv?.filename)}>
+                  <button data-text="Download Cv" onClick={() => handleDownload(API_CANDIDATE_PATH + candidateId?.cv?.originalname,candidateId?.cv?.filename)}>
                     <span className="la la-download"></span>
                   </button>
                 </li>
                 <li>
-                  <button data-text="Create Meeting" onClick={() => handleAccept(candidate,'shortlisted')}>
+                  <button data-text="Create Meeting" onClick={() => handleAccept(candidateId,'shortlisted')}>
                     <span className="la la-plus"></span>
                   </button>
                 </li>

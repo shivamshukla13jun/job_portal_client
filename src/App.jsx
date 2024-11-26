@@ -35,6 +35,7 @@ import ContactPage from "./pages/others/contact";
 import NotFoundPage from "./pages/others/404";
 import DashboardEmploeeDBPage from "./pages/employers-dashboard/dashboard";
 import CompanyProfileEmploeeDBPage from "./pages/employers-dashboard/company-profile";
+import CompanyProfileSubEmploeeDBPage  from "./pages/subemployers-dashboard/company-profile";
 import PostJobsEmploeeDBPage from "./pages/employers-dashboard/post-jobs";
 import ManageJobsEmploeeDBPage from "./pages/employers-dashboard/manage-jobs";
 import AllApplicantsEmploeesPage from "./pages/employers-dashboard/all-applicants";
@@ -149,7 +150,7 @@ function App() {
                 </Route>
                 <Route path="subemployers-dashboard" element={userInfo === 'subemployer' ? <Outlet /> : <Navigate to={paths.home} />}  >
                   <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
-                  <Route path="company-profile" element={<CompanyProfileEmploeeDBPage />} />
+                  <Route path="company-profile" element={<CompanyProfileSubEmploeeDBPage />} />
                   <Route path="shortlisted-resumes" element={<ShortListedResumeEmploeeDBPage />} />
                   <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
                 </Route>

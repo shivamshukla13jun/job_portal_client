@@ -19,6 +19,7 @@ import { employerSchema } from "@/validations/dashboard/employer";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import BusinessPreviewModal from "./components/BusinessPreviewModal";
 import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
+import DashboardEmployerSidebar from "@/components/header/DashboardEmployerSidebar";
 
 const index = () => {
     const userInfo = useUserInfo();
@@ -173,7 +174,7 @@ const [previewData,setPreviewData]=useState(null)
             <LoginPopup />
             <DashboardHeader />
             <MobileMenu />
-            <DashboardSubEmployerSidebar />
+            <DashboardEmployerSidebar />
             <section className="user-dashboard">
                 <form className="dashboard-outer">
                     <BreadCrumb title="Company Profile!" />

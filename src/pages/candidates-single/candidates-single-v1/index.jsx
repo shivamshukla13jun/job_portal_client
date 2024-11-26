@@ -13,10 +13,14 @@ import { useParams } from "react-router-dom";
 
 import MetaComponent from "@/components/common/MetaComponent";
 import { useQuery } from "@tanstack/react-query";
-import { getById } from "@/services/api";
+import { get, getById } from "@/services/api";
 import DefaulHeader2 from "@/components/header/DefaulHeader2";
 import { API_CANDIDATE_PATH } from "@/lib/config";
 import { toast } from "react-toastify";
+import useForwardCV from "@/utils/hooks/useForwardCV";
+import useUserInfo from "@/utils/hooks/useUserInfo";
+import ForwardCVModal from "./ForwardCVModal";
+import { useState } from "react";
 
 const metadata = {
   title:
@@ -26,7 +30,12 @@ const metadata = {
 
 const CandidateSingleDynamicV1 = () => {
   let params = useParams();
+  const userInfo=useUserInfo()
+  const [isForwardModalOpen, setIsForwardModalOpen] = useState(false);
+
+  console.log("userInfo???????????",userInfo?.userTypeValue?._id)
   const id = params.id;
+  const { handleForwardCV, isLoading: isForwarding } = useForwardCV();
 
   const { data, isLoading } = useQuery({
     queryKey: [`resume${id}`],
@@ -34,6 +43,15 @@ const CandidateSingleDynamicV1 = () => {
       let res = (await getById('resume', id)).data.data;
       return res;
     }
+  });
+
+  const { data: SubEmployers = [], isLoading: SubEmployersLoading } = useQuery({
+    queryKey: [`employer/getSubEmployers`, id],
+    queryFn: async () => {
+      let res = (await getById('employer/getSubEmployers', userInfo?.userTypeValue?._id)).data.data;
+      return res;
+    },
+    enabled: Boolean(userInfo?.userTypeValue?._id)
   });
   function calculateTotalExperience(employmentArray=[]) {
     let totalExperienceMonths = 0;
@@ -92,9 +110,7 @@ const CandidateSingleDynamicV1 = () => {
   const handleSelectCV=()=>{
     toast.info("Cv Selected")
   }
-  const handleForwardCV=()=>{
-    toast.info("Cv Forwarded")
-  }
+ console.log("SubEmployers",SubEmployers)
   if (isLoading) return <div>Loading...</div>
 
   return (
@@ -145,25 +161,27 @@ const CandidateSingleDynamicV1 = () => {
                 </div>
 
                 <div className="d-flex">
-  <a
-    className="theme-btn btn-style-one me-2"
-    onClick={handleDownload}
-  >
-    Download CV
-  </a>
-  <a
-    className="theme-btn btn-style-one me-2"
-    onClick={handleSelectCV}
-  >
-    Select CV
-  </a>
-  <a
-    className="theme-btn btn-style-one"
-    onClick={handleForwardCV}
-  >
-    Forward CV
-  </a>
-</div>
+                  <a
+                    className="theme-btn btn-style-one me-2"
+                    onClick={handleDownload}
+                  >
+                    Download CV
+                  </a>
+                  <a
+                    className="theme-btn btn-style-one me-2"
+                    onClick={handleSelectCV}
+                  >
+                    Select CV
+                  </a>
+                  <a
+                    className="theme-btn btn-style-one"
+                    disabled={isForwarding}
+                    onClick={() => setIsForwardModalOpen(true)}
+                  >
+                  {isForwarding ? 'Forwarding...' : 'Forward CV'}
+
+                  </a>
+                </div>
 
 
               </div>
@@ -367,6 +385,15 @@ const CandidateSingleDynamicV1 = () => {
         {/* <!-- job-detail-outer--> */}
       </section>
       {/* <!-- End Job Detail Section --> */}
+ {/* Forward CV Modal */}
+      <ForwardCVModal
+        isOpen={isForwardModalOpen}
+        onClose={() => setIsForwardModalOpen(false)}
+        subEmployers={SubEmployers}
+        candidateId={data?.candidateId?._id}
+        onForward={handleForwardCV}
+        SubEmployersLoading={SubEmployersLoading}
+      />
 
       <FooterDefault footerStyle="alternate5" />
       {/* <!-- End Main Footer --> */}
