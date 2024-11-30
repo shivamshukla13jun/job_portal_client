@@ -1,19 +1,12 @@
-import candidates from "@/data/candidates";
-import candidateResume from "@/data/candidateResume";
-import LoginPopup from "@/components/common/form/login/LoginPopup";
+
 import FooterDefault from "@/components/footer/common-footer";
-import DefaulHeader from "@/components/header/DefaulHeader";
 import MobileMenu from "@/components/header/MobileMenu";
-import Contact from "@/components/candidates-single-pages/shared-components/Contact";
-import GalleryBox from "@/components/candidates-single-pages/shared-components/GalleryBox";
 import Social from "@/components/candidates-single-pages/social/Social";
 import JobSkills from "@/components/candidates-single-pages/shared-components/JobSkills";
-import AboutVideo from "@/components/candidates-single-pages/shared-components/AboutVideo";
 import { useParams } from "react-router-dom";
-
 import MetaComponent from "@/components/common/MetaComponent";
 import { useQuery } from "@tanstack/react-query";
-import { get, getById } from "@/services/api";
+import {  getById } from "@/services/api";
 import DefaulHeader2 from "@/components/header/DefaulHeader2";
 import { API_CANDIDATE_PATH } from "@/lib/config";
 import { toast } from "react-toastify";

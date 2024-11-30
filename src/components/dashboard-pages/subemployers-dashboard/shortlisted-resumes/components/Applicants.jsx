@@ -3,6 +3,7 @@ import { API_CANDIDATE_PATH } from "@/lib/config";
 import { toast } from "react-toastify";
 import MeetingSchadule from "./MeetingSchadule";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const Applicants = ({ data ,search}) => {
@@ -48,9 +49,9 @@ const Applicants = ({ data ,search}) => {
                 />
               </figure>
               <h4 className="name">
-                {/* <Link to={`${paths.publiccandidate}/${candidateId?._id}`}> */}
+                <Link to={`${paths.publiccandidate}/${candidateId?._id}`}>
                   {candidateId?.name}
-                {/* </Link> */}
+                </Link>
               </h4>
               <ul className="candidate-info">
                 <li className="designation">
@@ -77,8 +78,13 @@ const Applicants = ({ data ,search}) => {
 
             <div className="option-box">
               <ul className="option-list">
+              <li>
+                  <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${candidateId._id}`)}>
+                    <span className="la la-eye"></span>
+                  </button>
+                </li>
                 <li>
-                  <button data-text="Download Cv" onClick={() => handleDownload(API_CANDIDATE_PATH + candidateId?.cv?.originalname,candidateId?.cv?.filename)}>
+                  <button data-text="Download Cv" onClick={() => handleDownload(API_CANDIDATE_PATH + candidateId?.cv?.filename,candidateId?.cv?.originalname)}>
                     <span className="la la-download"></span>
                   </button>
                 </li>

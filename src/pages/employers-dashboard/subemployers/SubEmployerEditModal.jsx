@@ -23,12 +23,14 @@ const SubEmployerEditModal = ({ subEmployer, isOpen, onClose }) => {
         mutationFn: (data) => put("sub-employers",subEmployer._id, data),
         onSuccess: () => {
             toast.success('Sub-employer updated successfully');
-            queryClient.invalidateQueries(['subEmployers']);
+            queryClient.invalidateQueries(['sub-employers']);
             onClose();
         },
         onError: (error) => {
-            toast.error('Failed to update sub-employer');
+            // toast.error('Failed to update sub-employer');
             console.error(error);
+            toast.error(error?.response?.data?.error);
+
         }
     });
 

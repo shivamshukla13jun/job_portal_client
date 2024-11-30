@@ -71,11 +71,10 @@ import ResetPassword from "./pages/others/resetpassword";
 import SavedJobsPage from "./pages/candidates-dashboard/saved-jobs";
 import SubEmployer from "./pages/employers-dashboard/subemployers";
 import DashboardSubemplyerDBPage from "./pages/subemployers-dashboard/dashboard";
-
+import UnauthorizedPage from "./pages/others/UnauthorizedPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
 
-  const userInfo = sessionStorage.getItem("userInfo") ? JSON.parse(decrypt(sessionStorage.getItem("userInfo")))?.userType?.name?.toLowerCase() : null;
-  console.log({userInfo})
   const query = new QueryClient({
     defaultOptions: {
       queries: {
@@ -106,21 +105,14 @@ function App() {
               <Route path="/">
                 <Route index element={<Home />} />
                 <Route path="home-1" element={<HomePage1 />} />
-
                 <Route path="job-list-v1" element={<JobListPage1 />} />
                 <Route path="job/:id" element={<JobSingleDynamicV1 />} />
-
                 <Route path="employers-list-v1" element={<EmployerListPage1 />} />
-
                 <Route path="employer/:id" element={<EmployersSingleV1 />} />
-
                 <Route path="candidates-list-v1" element={<CandidateListPage1 />} />
-
                 <Route path="candidate/:id" element={<CandidateSingleDynamicV1 />} />
-
                 <Route path="blog-list-v1" element={<BlogListpage1 />} />
                 <Route path="blog-details/:id" element={<BlogDetailsDynamic />} />
-
                 <Route path="about" element={<AboutPage />} />
                 <Route path="pricing" element={<PricingPage />} />
                 <Route path="faq" element={<FaqPage />} />
@@ -132,9 +124,14 @@ function App() {
                 <Route path="resetpassword" element={<ResetPassword/>} />
                 <Route path="forgot" element={<ForgotPasswordPage />} />
                 <Route path="verify" element={<Verify />} />
+                <Route path="/unauthorized" element={<UnauthorizedPage />} />
                 <Route path="*" element={<NotFoundPage />} />
-
-                <Route path="employers-dashboard" element={userInfo === 'employer' ? <Outlet /> : <Navigate to={paths.home} />}  >
+                <Route path="employers-dashboard" element={
+                  <ProtectedRoute  requiredRole="employer">
+                    <Outlet />
+                  </ProtectedRoute>
+                }
+              >  
                   <Route path="dashboard" element={<DashboardEmploeeDBPage />} />
                   <Route path="company-profile" element={<CompanyProfileEmploeeDBPage />} />
                   <Route path="subemployer" element={<SubEmployer />} />
@@ -148,14 +145,27 @@ function App() {
                   <Route path="resume-alerts" element={<ResumeAlertsEmploeeDBPage />} />
                   <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
                 </Route>
-                <Route path="subemployers-dashboard" element={userInfo === 'subemployer' ? <Outlet /> : <Navigate to={paths.home} />}  >
+                <Route 
+                path="subemployers-dashboard" 
+                element={
+                  <ProtectedRoute requiredRole="subemployer">
+                    <Outlet />
+                  </ProtectedRoute>
+                }
+              >
                   <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
                   <Route path="company-profile" element={<CompanyProfileSubEmploeeDBPage />} />
                   <Route path="shortlisted-resumes" element={<ShortListedResumeEmploeeDBPage />} />
                   <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
                 </Route>
-
-                <Route path="candidates-dashboard" element={userInfo === 'candidate' ? <Outlet /> : <Navigate to={paths.home} />}  >
+                <Route 
+                path="candidates-dashboard" 
+                element={
+                  <ProtectedRoute requiredRole="candidate">
+                    <Outlet />
+                  </ProtectedRoute>
+                }
+              >
                   <Route path="dashboard" element={<DashboardPage />} />
                   <Route path="applied-jobs" element={<AppliedJobsPage />} />
                   <Route path="saved-jobs" element={<SavedJobsPage />} />
@@ -168,23 +178,17 @@ function App() {
                   <Route path="packages" element={<PackagePage />} />
                   <Route path="short-listed-jobs" element={<ShortListedJobsPage />} />
                 </Route>
-
                 <Route path="shop" >
-
                   <Route path="shop-list" element={<ShopListPage />} />
                   <Route path="shop-single/:id" element={<ShopSingleDyanmic />} />
                   <Route path="cart" element={<CartPage />} />
                   <Route path="checkout" element={<CheckoutPage />} />
                   <Route path="order-completed" element={<OrderCompletedPage />} />
                 </Route>
-
               </Route>
             </Routes>
             <ScrollTopBehaviour />
           </BrowserRouter>
-
-
-
           {/* Toastify */}
           <ToastContainer
             position="bottom-right"
@@ -205,5 +209,4 @@ function App() {
     </QueryClientProvider>
   )
 }
-
 export default App

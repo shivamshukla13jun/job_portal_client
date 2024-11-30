@@ -37,7 +37,7 @@ const useForwardCV = () => {
         toast.success(response.data.message || 'CV forwarded successfully');
         
         // Optional: Navigate to manage jobs page or any other appropriate page
-        navigate(paths.manage_jobs);
+        navigate(paths.employer_all_applicants);
 
         return true;
       } else {
