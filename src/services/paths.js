@@ -7,6 +7,7 @@ export const paths = {
     packages:"/employers-dashboard/packages",
     verify: '/verify',
     candidate: '/candidates-dashboard/dashboard',
+    admin: '/admin-dashboard/employers',
     employer: '/employers-dashboard/dashboard',
     candidate_profile: '/candidates-dashboard/my-profile',
     publicemployer: '/employer',
