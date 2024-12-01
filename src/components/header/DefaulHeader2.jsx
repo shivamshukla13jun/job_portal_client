@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { selectWishlist } from "@/store/reducers/Whishlist";
 import { useNavigate } from "react-router-dom";
 import SubemployerMenu from "@/data/SubemployerMenuData";
+import AdminMenuData from "@/data/AdminMenuData";
 
 const DefaulHeader2 = () => {
   const userInfo = useUserInfo();
@@ -63,11 +64,7 @@ const DefaulHeader2 = () => {
           {/* <!-- Add Listing --> */}
           {Object.keys(userInfo).length <= 0 &&
             (<>
-              {userInfo && userInfo?.userType?.name?.toLowerCase() === 'candidate' && (
-                <Link to="/candidates-dashboard/cv-manager" className="upload-cv">
-                  Upload your CV
-                </Link>
-              )}
+            
               {/* <!-- Login/Register --> */}
               <div className="btn-box">
                 <a
@@ -177,6 +174,37 @@ const DefaulHeader2 = () => {
 
                   <ul className="dropdown-menu">
                     {SubemployerMenu.map((item) => (
+                      <li
+                        className={`${isActiveLink(item.routePath, pathname) ? "active" : ""} mb-1`}
+                        key={item.id}
+                      >
+                        <Link to={item.routePath}>
+                          <i className={`la ${item.icon}`}></i> {item.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {userInfo && userInfo?.userType?.name?.toLowerCase() === 'admin' && (
+                <div className="dropdown dashboard-option">
+                  <a
+                    className="dropdown-toggle"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      alt="avatar"
+                      className="thumb"
+                      src={API_EMPLOYER_PATH + userInfo?.userTypeValue?.logo?.filename}
+                      style={{ objectFit: "contain" }}
+                    />
+                    <span className="name">{userInfo?.userTypeValue?.business_name ? capitalizeFirstLetter(userInfo?.userTypeValue?.business_name?.split(" ")[0]) : 'My account'}</span>
+                  </a>
+
+                  <ul className="dropdown-menu">
+                    {AdminMenuData.map((item) => (
                       <li
                         className={`${isActiveLink(item.routePath, pathname) ? "active" : ""} mb-1`}
                         key={item.id}

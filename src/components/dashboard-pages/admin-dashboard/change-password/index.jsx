@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import { decrypt } from "@/lib/encrypt";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
-import DashboardEmployerSidebar from "@/components/header/DashboardEmployerSidebar";
+import DashboardAdminSidebar from "@/components/header/DashboardAdminSidebar";
 
 const index = () => {
 
@@ -67,7 +67,7 @@ const index = () => {
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <DashboardEmployerSidebar />
+      <DashboardAdminSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

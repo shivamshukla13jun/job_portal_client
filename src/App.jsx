@@ -1,5 +1,6 @@
 
 import Aos from "aos";
+import { QueryClientProvider, QueryClient, keepPreviousData } from "@tanstack/react-query";
 import "aos/dist/aos.css";
 import "./styles/index.scss";
 import { useEffect } from "react";
@@ -33,9 +34,29 @@ import TermsPage from "./pages/others/terms";
 import InvoicePage from "./pages/others/invoice";
 import ContactPage from "./pages/others/contact";
 import NotFoundPage from "./pages/others/404";
+import LoginPage from "./pages/others/login";
+import RegisterPage from "./pages/others/register";
+import ShopListPage from "./pages/shop/shop-list";
+import ShopSingleDyanmic from "./pages/shop/shop-single";
+import CartPage from "./pages/shop/cart";
+import CheckoutPage from "./pages/shop/checkout";
+import OrderCompletedPage from "./pages/shop/order-completed";
+import Verify from "./pages/others/verify";
+import ForgotPasswordPage from "./pages/others/forgot";
+import ResetPassword from "./pages/others/resetpassword";
+// admin
+import AdminDashboardEmploeeDBPage from "./pages/admin-dashboard/dashboard";
+import Companies from "./pages/admin-dashboard/company-profile";
+import SubEmployers from "./pages/admin-dashboard/subemployers";
+import ManageJobs from "./pages/admin-dashboard/manage-jobs";
+import AllApplicants from "./pages/admin-dashboard/all-applicants";
+import Packages from "./pages/admin-dashboard/packages";
+import ChangePassword from "./pages/admin-dashboard/change-password";
+import { SubEmployerList, EmployerList, CandidateList } from "./components/dashboard-pages/admin-dashboard/UsersList";
+
+// eemployers
 import DashboardEmploeeDBPage from "./pages/employers-dashboard/dashboard";
 import CompanyProfileEmploeeDBPage from "./pages/employers-dashboard/company-profile";
-import CompanyProfileSubEmploeeDBPage  from "./pages/subemployers-dashboard/company-profile";
 import PostJobsEmploeeDBPage from "./pages/employers-dashboard/post-jobs";
 import ManageJobsEmploeeDBPage from "./pages/employers-dashboard/manage-jobs";
 import AllApplicantsEmploeesPage from "./pages/employers-dashboard/all-applicants";
@@ -44,6 +65,9 @@ import PackageEmploeeDBPage from "./pages/employers-dashboard/packages";
 import MessageEmploeeDBPage from "./pages/employers-dashboard/messages";
 import ResumeAlertsEmploeeDBPage from "./pages/employers-dashboard/resume-alerts";
 import ChangePasswordEmploeeDBPage from "./pages/employers-dashboard/change-password";
+import EditJob from "./components/dashboard-pages/employers-dashboard/edit-jobs";
+import SubEmployer from "./pages/employers-dashboard/subemployers";
+// candidates
 import DashboardPage from "./pages/candidates-dashboard/dashboard";
 import AppliedJobsPage from "./pages/candidates-dashboard/applied-jobs";
 import ChangePasswordPage from "./pages/candidates-dashboard/change-password";
@@ -54,23 +78,12 @@ import MyProfilePage from "./pages/candidates-dashboard/my-profile";
 import MyResumePage from "./pages/candidates-dashboard/my-resume";
 import PackagePage from "./pages/candidates-dashboard/packages";
 import ShortListedJobsPage from "./pages/candidates-dashboard/short-listed-jobs";
-import LoginPage from "./pages/others/login";
-import RegisterPage from "./pages/others/register";
-import ShopListPage from "./pages/shop/shop-list";
-import ShopSingleDyanmic from "./pages/shop/shop-single";
-import CartPage from "./pages/shop/cart";
-import CheckoutPage from "./pages/shop/checkout";
-import OrderCompletedPage from "./pages/shop/order-completed";
-import { QueryClientProvider, QueryClient, keepPreviousData } from "@tanstack/react-query";
-import Verify from "./pages/others/verify";
-import EditJob from "./components/dashboard-pages/employers-dashboard/edit-jobs";
-import { decrypt } from "./lib/encrypt";
-import { paths } from "./services/paths";
-import ForgotPasswordPage from "./pages/others/forgot";
-import ResetPassword from "./pages/others/resetpassword";
 import SavedJobsPage from "./pages/candidates-dashboard/saved-jobs";
-import SubEmployer from "./pages/employers-dashboard/subemployers";
+
+// subemployers 
+import CompanyProfileSubEmploeeDBPage  from "./pages/subemployers-dashboard/company-profile";
 import DashboardSubemplyerDBPage from "./pages/subemployers-dashboard/dashboard";
+// authotrizations
 import UnauthorizedPage from "./pages/others/UnauthorizedPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
@@ -144,6 +157,20 @@ function App() {
                   <Route path="messages" element={<MessageEmploeeDBPage />} />
                   <Route path="resume-alerts" element={<ResumeAlertsEmploeeDBPage />} />
                   <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
+                </Route>
+                <Route path="admin-dashboard" element={
+                  <ProtectedRoute requiredRole="admin">
+                    <Outlet />
+                  </ProtectedRoute>
+                }>  
+                  <Route path="sub-employers" element={<SubEmployerList />} />
+                  <Route path="employers" element={<EmployerList />} />
+                  <Route path="candidates" element={<CandidateList />} />
+                  <Route path="dashboard" element={<AdminDashboardEmploeeDBPage />} />
+                  <Route path="manage-jobs" element={<ManageJobs />} />
+                  <Route path="all-applicants" element={<AllApplicants />} />
+                  <Route path="packages" element={<Packages />} />
+                  <Route path="change-password" element={<ChangePassword />} />
                 </Route>
                 <Route 
                 path="subemployers-dashboard" 
