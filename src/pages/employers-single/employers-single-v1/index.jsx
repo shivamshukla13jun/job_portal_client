@@ -67,7 +67,7 @@ const EmployersSingleV1 = () => {
                   <span className="company-logo">
                     <img src={API_EMPLOYER_PATH + data?.employerDetails?.logo?.filename} alt="logo" />
                   </span>
-                  <h4>{state?.company?.name || data?.employerDetails?.name}</h4>
+                  <h4>{data?.employerDetails?.business_name}</h4>
 
                   <ul className="job-info">
                     <li>
@@ -125,7 +125,7 @@ const EmployersSingleV1 = () => {
                     <div className="apply-modal-content modal-content">
                       <div className="text-center">
                         <h3 className="title">
-                          Send message to {data?.employerDetails?.name}
+                          Send message to {data?.employerDetails?.business_name}
                         </h3>
                         <button
                           type="button"
@@ -185,9 +185,9 @@ const EmployersSingleV1 = () => {
                         {/* <li>
                           Primary industry: <span>Software</span>
                         </li> */}
-                        <li>
+                        {/* <li>
                           Company size: <span>{state?.company?.size_of_org || data?.employerDetails?.company?.size_of_org }</span>
-                        </li>
+                        </li> */}
                         <li>
                           Founded in: <span>{new Date(data?.employerDetails?.year_established).getFullYear()}</span>
                         </li>
@@ -200,10 +200,10 @@ const EmployersSingleV1 = () => {
                         <li>
                           Location: <span> {data?.employerDetails?.address?.city + ", "+data?.employerDetails?.address?.state}</span>
                         </li>
-                        <li>
-                          Social media:
+                        {/* <li>
+                          Social media:s
                           <Social />
-                        </li>
+                        </li> */}
                       </ul>
                       {/* End compnay-info */}
 
@@ -213,7 +213,7 @@ const EmployersSingleV1 = () => {
                           className="theme-btn btn-style-three"
                           style={{ textTransform: "lowercase" }}
                         >
-                          www.{data?.name}.com
+                       {data?.employerDetails?.url}
                         </a>
                       </div>
                       {/* btn-box */}

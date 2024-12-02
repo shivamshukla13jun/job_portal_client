@@ -238,7 +238,7 @@ const JobSingleDynamicV1 = () => {
                         {/* <div className="company-logo">
                           <img src={data?.logo} alt="resource" />
                         </div> */}
-                        <h5 className="company-name">{data?.company?.name}</h5>
+                        <h5 className="company-name">{data?.employerId?.business_name}</h5>
                         <Link to={`${paths.publicemployer}/${data?.employerId?._id}`} state={{company:data?.company}} className="profile-link">
                           View company profile
                         </Link>

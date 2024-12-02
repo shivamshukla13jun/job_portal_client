@@ -3,7 +3,7 @@ import { API_DEV, API_PROD } from "@/lib/config";
 import { paths } from "./paths";
 
 const request = axios.create({
-    baseURL: API_DEV,
+    baseURL: API_PROD,
     withCredentials: true,
     // headers: {
     //     Authorization: `Bearer ${sessionStorage.getItem("session")}`
@@ -11,9 +11,12 @@ const request = axios.create({
 });
 
 request.interceptors.request.use((config) => {
+    console.log("config data???",config.data)
     if(sessionStorage.getItem("session")){
-
         config.headers.Authorization = `Bearer ${sessionStorage.getItem("session") ||""}`;
+    }
+    if(config?.data?.token){
+        config.headers.Authorization = `Bearer ${config.data.token ||""}`;
     }
     return config;
 }, (error) => {

@@ -25,12 +25,9 @@ const FormContent = () => {
     onMutate: () => setIsSubmitting(true),
     onSuccess: async (res) => {
       setIsSubmitting(false);
-      if (!res.data.success) {
-        toast.error(res.data.message);
-      } else {
-        let message = (await getById(`/user`, res.data.data._id)).data.message;
-        toast.success(message);
-      }
+      if (res.data.success) {
+        toast.info(res.data.message);
+      } 
     },
     onError: (err) => {
       setIsSubmitting(false);

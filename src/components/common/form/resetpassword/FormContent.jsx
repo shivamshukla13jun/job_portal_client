@@ -16,12 +16,13 @@ const FormContent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
+  const  token=location.search.split("?token=")[1]
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(ChangePasswordSchema),
     defaultValues: {
       newPassword: '',
-      comparePassword: ''
+      comparePassword: '',
+      token:token
     }
   })
 
@@ -37,7 +38,7 @@ const FormContent = () => {
         let enData = encrypt(user);
         sessionStorage.setItem("userInfo", enData);
         dispatch(login(enData));
-        window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : paths.employer_profile;
+        window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : user.userType.name==="Subemployer"?paths.sub_employer_profile:user.userType.name==="Admin"?paths.admin:paths.employer_profile;  
         
       }
     },

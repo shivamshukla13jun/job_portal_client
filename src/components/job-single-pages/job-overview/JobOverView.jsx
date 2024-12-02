@@ -22,11 +22,11 @@ const JobOverView = ({ data }) => {
           <h5>Job Title:</h5>
           <span>{data?.title}</span>
         </li>
-        <li>
-          <i className="icon icon-clock"></i>
-          <h5>Hours:</h5>
-          <span>50h / week</span>
-        </li>
+          {/* <li>
+            <i className="icon icon-clock"></i>
+            <h5>Hours:</h5>
+            <span>50h / week</span>
+          </li> */}
         {/* <li>
           <i className="icon icon-rate"></i>
           <h5>Rate:</h5>
