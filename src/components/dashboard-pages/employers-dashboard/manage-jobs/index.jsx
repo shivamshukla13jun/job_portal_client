@@ -10,16 +10,19 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { del, get } from "@/services/api";
 import { toast } from "react-toastify";
 import useUserInfo from "@/utils/hooks/useUserInfo";
+import Pagination from "@/utils/hooks/usePagination";
+import { useState } from "react";
 
 const index = () => {
   const userInfo = useUserInfo();
   const queryClient = useQueryClient();
-
+  const [page,setPage]=useState(1)
+  const [limit,setLimit]=useState(2)
   const { data, isLoading } = useQuery({
-    queryKey: [`jobs${userInfo._id}`],
+    queryKey: [`jobs${userInfo._id}`,page],
     queryFn: async () => {
-      const res = await get('/job/employer');
-      return res.data.data;
+      const res = await get(`/job/employer?page=${page}&limit=${limit}`);
+      return res.data;
     },
     enabled: !!userInfo._id
   });
@@ -75,7 +78,9 @@ const index = () => {
             <div className="col-lg-12">
               {/* <!-- Ls widget --> */}
               <div className="ls-widget">
-                <JobListingsTable data={data} handleJobDelete={handleJobDelete} />
+                <JobListingsTable data={data?.data || []} handleJobDelete={handleJobDelete} />
+                {data?.totalpages &&  <Pagination Page={page} limit={limit} totalPages={data?.totalpages || 0} handlePageChange={(page)=>setPage(page)} /> }
+                
               </div>
             </div>
           </div>

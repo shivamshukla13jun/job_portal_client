@@ -9,7 +9,6 @@ import MenuToggler from "../../MenuToggler";
 import { useQuery } from "@tanstack/react-query";
 import { get } from "@/services/api";
 import { useState } from "react";
-import usePaginationhook from "@/utils/hooks/usePagination";
 
 const index = () => {
 
