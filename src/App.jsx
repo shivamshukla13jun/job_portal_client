@@ -83,6 +83,7 @@ import SavedJobsPage from "./pages/candidates-dashboard/saved-jobs";
 // subemployers 
 import CompanyProfileSubEmploeeDBPage  from "./pages/subemployers-dashboard/company-profile";
 import DashboardSubemplyerDBPage from "./pages/subemployers-dashboard/dashboard";
+import ShortListedResumeSubemployeeEmploeeDBPage from "./pages/subemployers-dashboard/shortlisted-resumes";
 // authotrizations
 import UnauthorizedPage from "./pages/others/UnauthorizedPage";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -182,7 +183,7 @@ function App() {
               >
                   <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
                   <Route path="company-profile" element={<CompanyProfileSubEmploeeDBPage />} />
-                  <Route path="shortlisted-resumes" element={<ShortListedResumeEmploeeDBPage />} />
+                  <Route path="shortlisted-resumes" element={<ShortListedResumeSubemployeeEmploeeDBPage />} />
                   <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
                 </Route>
                 <Route 

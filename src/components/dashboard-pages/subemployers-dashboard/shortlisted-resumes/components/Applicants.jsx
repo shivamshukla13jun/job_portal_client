@@ -4,17 +4,18 @@ import { toast } from "react-toastify";
 import MeetingSchadule from "./MeetingSchadule";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { paths } from "@/services/paths";
+import { useNavigate } from "react-router-dom";
 
 const Applicants = ({ data ,search}) => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
-
+  const navigate=useNavigate()
   const handleAccept = (id,subemployerid)=>{
     setCreateModalOpen(id)
   }
   const handleDownload = async (fileUrl,filename) => {
     try {
-      console.log("fileurl",fileUrl)
+      //console.log("fileurl",fileUrl)
       // Fetch the file data
       const response = await fetch(fileUrl);
       const blob = await response.blob(); // Get the file as a Blob

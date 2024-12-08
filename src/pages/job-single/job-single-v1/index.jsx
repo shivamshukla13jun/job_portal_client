@@ -37,7 +37,7 @@ const JobSingleDynamicV1 = () => {
   const dispatch=useDispatch()
   const SavedJobs = useSelector(selectWishlist);
   const id = params.id;
-  console.log({userInfo})
+  //console.log({userInfo})
   const { data, isLoading } = useQuery({
     queryKey: ['job', id],
     queryFn: async () => {

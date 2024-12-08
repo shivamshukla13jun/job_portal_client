@@ -15,13 +15,13 @@ function useWhishlist() {
     queryFn: async () => {
       try {
         const res = (await get('/whishlist')).data.data;
-        console.log({ res });
+        //console.log({ res });
         if (Array.isArray(res)) {
           setSavedJobs(res);
         }
         return res;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
         if (error.response?.data?.error === 'Failed to find cv!') {
           toast.info('Please fill the information to get going!');
         }

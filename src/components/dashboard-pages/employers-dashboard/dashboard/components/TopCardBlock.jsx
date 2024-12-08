@@ -30,7 +30,7 @@ const TopCardBlock = ({data}) => {
       uiClass: "ui-green",
     },
   ];
-console.log("data?????",data)
+//console.log("data?????",data)
   return (
     <>
       {cardContent.map((item) => (

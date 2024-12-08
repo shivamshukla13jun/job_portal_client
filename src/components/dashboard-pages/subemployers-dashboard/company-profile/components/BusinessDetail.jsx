@@ -51,7 +51,7 @@ const BusinessDetail = ({ watch, register, setValue, error }) => {
         }
     }, [logoRef, picturesRef, videosRef, error])
 
-    console.log("categories????",watch("categories"))
+    //console.log("categories????",watch("categories"))
     return (
         <div className="default-form">
             <div className="row">

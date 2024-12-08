@@ -1,6 +1,6 @@
 const WidgetTopFilterBox = ({ data, job, setJob }) => {
 
-  console.log({data})
+  //console.log({data})
 
   return (
     <div className="chosen-outer">

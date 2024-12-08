@@ -68,7 +68,7 @@ export const data = {
 };
 
 const ProfileChart = ({ data:dashboarddata}) => {
-  console.log("dashboarddata",dashboarddata)
+  //console.log("dashboarddata",dashboarddata)
   return (
     <div className="tabs-box">
       <div className="widget-title">

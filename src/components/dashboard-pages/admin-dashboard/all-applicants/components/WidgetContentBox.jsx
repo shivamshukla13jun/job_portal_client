@@ -6,7 +6,7 @@ import { API_CANDIDATE_PATH } from "@/lib/config";
 import { useAcceptApplication, useDeleteApplication } from "@/utils/hooks/useApplication";
 
 const WidgetContentBox = ({ data, title }) => {
-  console.log("data????", data);
+  //console.log("data????", data);
 
   const navigate = useNavigate();
 

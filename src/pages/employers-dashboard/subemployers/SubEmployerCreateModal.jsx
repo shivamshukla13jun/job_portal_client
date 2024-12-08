@@ -16,6 +16,7 @@ const SubEmployerCreateModal = ({ isOpen, onClose }) => {
             name: "",
             email: "",
             phone: "",
+            password:"",
             dashboardPermissions: SubemployerdashboardResources.reduce((acc, resource) => {
                 acc[resource.resource] = Object.values(AccessLevel).reduce((permAcc, perm) => {
                     permAcc[perm] = false; // Default all permissions to false
@@ -54,7 +55,7 @@ const SubEmployerCreateModal = ({ isOpen, onClose }) => {
 
     // Dynamically watch `dashboardPermissions`
     const permissionsWatch = watch("dashboardPermissions");
-    console.log("Live Dashboard Permissions:", permissionsWatch);
+    //console.log("Live Dashboard Permissions:", permissionsWatch);
 
     return (
         <Modal show={isOpen} onHide={onClose}>

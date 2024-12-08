@@ -67,7 +67,7 @@ const [previewData,setPreviewData]=useState(null)
     const mutation = useMutation({
         mutationFn: (data) => put(`/employer`, userInfo._id, data),
         onSuccess: (res) => {
-            console.log(res);
+            //console.log(res);
             toast.success(res.data.message)
         },
         onError: (err) => {
@@ -125,7 +125,7 @@ const [previewData,setPreviewData]=useState(null)
     
         // Log FormData contents for debugging
         for (let pair of formData.entries()) {
-            console.log('FormData:', pair[0], pair[1]);
+            //console.log('FormData:', pair[0], pair[1]);
         }
     
         mutation.mutate(formData);

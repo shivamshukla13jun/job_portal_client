@@ -1,6 +1,6 @@
 import React from "react";
 const JobDetailsDescriptions = ({ data }) => {
-  console.log("personal_info",data?.personal_info)
+  //console.log("personal_info",data?.personal_info)
   return (
     <div className="job-detail">
       <h4>Job Description</h4>

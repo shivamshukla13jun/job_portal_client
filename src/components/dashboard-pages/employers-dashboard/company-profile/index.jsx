@@ -68,7 +68,7 @@ const [previewData,setPreviewData]=useState(null)
     const mutation = useMutation({
         mutationFn: (data) => put(`/employer`, userInfo._id, data),
         onSuccess: (res) => {
-            console.log(res);
+            //console.log(res);
             toast.success(res.data.message)
         },
         onError: (err) => {
@@ -126,7 +126,7 @@ const [previewData,setPreviewData]=useState(null)
     
         // Log FormData contents for debugging
         for (let pair of formData.entries()) {
-            console.log('FormData:', pair[0], pair[1]);
+            //console.log('FormData:', pair[0], pair[1]);
         }
     
         mutation.mutate(formData);
@@ -176,7 +176,8 @@ const [previewData,setPreviewData]=useState(null)
             <MobileMenu />
             <DashboardEmployerSidebar />
             <section className="user-dashboard">
-                <form className="dashboard-outer">
+               <div className="dashboard-outer">
+               <form className="dashboard-outer">
                     <BreadCrumb title="Company Profile!" />
                     <MenuToggler />
                     <BusinessDetail watch={watch} register={register} setValue={setValue} error={errors} />
@@ -185,7 +186,7 @@ const [previewData,setPreviewData]=useState(null)
                         <button
                             type="button"
                             onClick={()=>setPreviewData(watch())}
-                            className="theme-btn btn-style-one"
+                            className="theme-btn btn-style-two"
                         >
                             Preview
                         </button>
@@ -197,6 +198,7 @@ const [previewData,setPreviewData]=useState(null)
                         </button>
                     </div>
                 </form>
+               </div>
 
                <BusinessPreviewModal previewData={previewData} setPreviewData={setPreviewData}/>
 

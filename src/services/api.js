@@ -3,7 +3,7 @@ import { API_DEV, API_PROD } from "@/lib/config";
 import { paths } from "./paths";
 
 const request = axios.create({
-    baseURL: API_PROD,
+    baseURL: API_DEV,
     withCredentials: true,
     // headers: {
     //     Authorization: `Bearer ${sessionStorage.getItem("session")}`
@@ -11,7 +11,7 @@ const request = axios.create({
 });
 
 request.interceptors.request.use((config) => {
-    console.log("config data???",config.data)
+    //console.log("config data???",config.data)
     if(sessionStorage.getItem("session")){
         config.headers.Authorization = `Bearer ${sessionStorage.getItem("session") ||""}`;
     }
@@ -26,7 +26,7 @@ request.interceptors.request.use((config) => {
 request.interceptors.response.use(
     (response) => response,
     (error) => {
-        console.log(error)
+        //console.log(error)
         if (error.response && error.response.status === 403) {
             // window.location.href = paths.login;
         }
@@ -48,7 +48,7 @@ const post = (url, data) => {
 };
 
 const put = (url, id, data) => {
-    console.log({data})
+    //console.log({data})
     return request.put(`${url}/${id}`, data);
 };
 

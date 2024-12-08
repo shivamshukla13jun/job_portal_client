@@ -43,6 +43,16 @@ const SubEMployerForm = ({control,register,errors}) => {
                             {errors.phone?.message}
                         </Form.Control.Feedback>
                     </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            {...register('password',)}
+                            isInvalid={!!errors.password}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.password?.message}
+                        </Form.Control.Feedback>
+                    </Form.Group>
 
                     {/* <Form.Group className="mb-3">
                         <Form.Label>Dashboard Permissions</Form.Label>

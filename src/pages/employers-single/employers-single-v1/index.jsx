@@ -24,7 +24,7 @@ const metadata = {
 const EmployersSingleV1 = () => {
   let params = useParams();
   let {state} = useLocation();
-  console.log(state)
+  //console.log(state)
   const id = params.id;
 
   const { data, isLoading } = useQuery({

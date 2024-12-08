@@ -30,7 +30,7 @@ const SubEmployerManagement = () => {
         let res=await get('sub-employers')
         return res?.data?.data;
        } catch (error) {
-        console.log(error)
+        //console.log(error)
        }
         },
         onError: (error) => setError(error?.message),
@@ -43,7 +43,7 @@ const SubEmployerManagement = () => {
             try {
               await  post('sub-employers', data)
             } catch (error) {
-                console.log(error)
+                //console.log(error)
             }
         },
         onSuccess: () => {
@@ -60,7 +60,7 @@ const SubEmployerManagement = () => {
             try {
                 await put('sub-employers',id, data)
             } catch (error) {
-                console.log(error)
+                //console.log(error)
             }
         },
         onSuccess: () => {

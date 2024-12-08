@@ -17,7 +17,7 @@ import { get, getById } from "@/services/api";
 const Index = () => {
   const userInfo = useUserInfo();
   const [statrtdate, setStartdate] = useState("")
-  console.log("userInfo dshboad",userInfo)
+  //console.log("userInfo dshboad",userInfo)
 
 
   const { data, isLoading } = useQuery({

@@ -63,7 +63,7 @@ const Register = () => {
       }
     },
     onError: (err) => {
-      console.log(err);
+      //console.log(err);
       toast.error(err.response.data.error);
     }
   });

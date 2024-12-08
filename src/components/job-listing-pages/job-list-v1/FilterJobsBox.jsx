@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const FilterJobsBox = ({ jobs, search, queryParams, setSearch,data }) => {
-  console.log("data????????????//",data)
+  //console.log("data????????????//",data)
 const userInfo=useUserInfo()
 const navigate=useNavigate()
 const dispatch = useDispatch();

@@ -2,10 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { API_EMPLOYER_PATH } from "@/lib/config.js";
 import { paths } from "@/services/paths.js";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter.js";
+import { useDeleteApplication } from "@/utils/hooks/useApplication";
 
 const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
   const navigate = useNavigate();
- 
+  const handleDelete = useDeleteApplication()
+
   return (
     <div className="tabs-box">
       <div className="widget-title">
@@ -79,11 +81,11 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
                                 <span className="la la-eye"></span>
                               </button>
                             </li>
-                            {/* <li>
-                            <button data-text="Delete Aplication">
+                            <li>
+                            <button data-text="Delete Application" onClick={() => handleDelete(item?._id,item?.job?._id)}>
                               <span className="la la-trash"></span>
                             </button>
-                          </li> */}
+                          </li>
                           </ul>
                         </div>
                       </td>

@@ -13,6 +13,7 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import useDebounce from "@/utils/hooks/useDebounce";
 import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
+import DashboardEmployerSidebar from "@/components/header/DashboardEmployerSidebar";
 
 const index = () => {
   const userInfo = useUserInfo();
@@ -55,7 +56,7 @@ const handleSerch=(name,value)=>{
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <DashboardSubEmployerSidebar />
+      <DashboardEmployerSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

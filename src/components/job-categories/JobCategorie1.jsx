@@ -7,7 +7,7 @@ const JobCategorie1 = () => {
   return (
     <>
       {categories.slice(0, 9).map((item, index) => {
-        console.log(index)
+        //console.log(index)
         return (
           <div
             className="category-block col-lg-4 col-md-6 col-sm-12"

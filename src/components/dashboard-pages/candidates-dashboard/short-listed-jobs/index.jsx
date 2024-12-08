@@ -31,7 +31,7 @@ const handleSerch=(name,value)=>{
       return res;
     }
   });
-  console.log("data???",data)
+  //console.log("data???",data)
 
   if (isLoading) return <div>Loading...</div>
 

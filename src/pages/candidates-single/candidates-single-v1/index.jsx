@@ -26,7 +26,7 @@ const CandidateSingleDynamicV1 = () => {
   const userInfo=useUserInfo()
   const [isForwardModalOpen, setIsForwardModalOpen] = useState(false);
 
-  console.log("userInfo???????????",userInfo?.userTypeValue?._id)
+  //console.log("userInfo???????????",userInfo?.userTypeValue?._id)
   const id = params.id;
   const { handleForwardCV, isLoading: isForwarding } = useForwardCV();
 
@@ -103,7 +103,7 @@ const CandidateSingleDynamicV1 = () => {
   const handleSelectCV=()=>{
     toast.info("Cv Selected")
   }
- console.log("SubEmployers",SubEmployers)
+ //console.log("SubEmployers",SubEmployers)
   if (isLoading) return <div>Loading...</div>
 
   return (
@@ -160,13 +160,16 @@ const CandidateSingleDynamicV1 = () => {
                   >
                     Download CV
                   </a>
+
                   <a
                     className="theme-btn btn-style-one me-2"
                     onClick={handleSelectCV}
                   >
                     Select CV
                   </a>
-                  <a
+                  {
+                    userInfo && userInfo?.userType?.name?.toLowerCase() === 'employer' && 
+                    <a
                     className="theme-btn btn-style-one"
                     disabled={isForwarding}
                     onClick={() => setIsForwardModalOpen(true)}
@@ -174,6 +177,8 @@ const CandidateSingleDynamicV1 = () => {
                   {isForwarding ? 'Forwarding...' : 'Forward CV'}
 
                   </a>
+                  }
+                 
                 </div>
 
 

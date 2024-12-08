@@ -25,13 +25,13 @@ const handleSerch=(name,value)=>{
   }))
 }
   const { data, isLoading } = useQuery({
-    queryKey: ['whishlist/all',search.createdAt],
+    queryKey: ['whishlist/all','whishlist',search.createdAt],
     queryFn: async () => {
       let res = (await get(`/whishlist/all?createdAt=${search.createdAt}`)).data.data;
       return res;
     }
   });
-console.log({data})
+//console.log({data})
   if (isLoading) return <div>Loading...</div>
 
   return (

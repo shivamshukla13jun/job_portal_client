@@ -24,7 +24,7 @@ const ContactForm = () => {
   const { mutate, isLoading, error, data } = useMutation( {
     mutationFn:(data)=>post("utilities/ContactUs",data),
     onSuccess: (data) => {
-      console.log('Form submitted successfully', data);
+      //console.log('Form submitted successfully', data);
       // You can show a success message or reset the form here
     },
     onError: (error) => {

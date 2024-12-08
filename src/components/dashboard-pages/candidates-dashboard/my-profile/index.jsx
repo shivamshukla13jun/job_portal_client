@@ -207,12 +207,12 @@ const index = () => {
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
-      console.log({errors})
+      //console.log({errors})
       const errorArray = Object.entries(errors);
       toast.error(errorArray[0][0].toUpperCase() + ' section needs to be filled!')
     }
   }, [errors])
-console.log("data",data)
+//console.log("data",data)
   if (isLoading) return <div>Loading...</div>;
 
   return (
@@ -338,7 +338,7 @@ console.log("data",data)
               
               <button
                 onClick={()=>setPreviewData(watch())}
-                className="theme-btn btn-style-one"
+                className="theme-btn btn-style-two"
               >
                 Preview
               </button>

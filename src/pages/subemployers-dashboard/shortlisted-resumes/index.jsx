@@ -1,4 +1,4 @@
-import ShortlistedResumes from "@/components/dashboard-pages/employers-dashboard/shortlisted-resumes";
+import ShortlistedResumes from "@/components/dashboard-pages/subemployers-dashboard/shortlisted-resumes";
 
 import MetaComponent from "@/components/common/MetaComponent";
 

@@ -19,7 +19,7 @@ const {data:pricingContent=[],isLoading}=useQuery({
       let res = (await get('/plan?page=1')).data.data;
       return res;
     } catch (error) {
-      console.log(error)
+      //console.log(error)
      return
     }
   },
@@ -27,7 +27,7 @@ const {data:pricingContent=[],isLoading}=useQuery({
 
 
 if (isLoading) return <div>Loading...</div>
-console.log({userInfo})
+//console.log({userInfo})
   return (
     <div className="pricing-tabs tabs-box wow fadeInUp">
       {/* <!--Tabs Container--> */}

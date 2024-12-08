@@ -27,7 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 // if (import.meta.hot) {
 //   import.meta.hot.accept('./App.jsx', () => {
-//     console.log('HMR update')
+//     //console.log('HMR update')
 //     render()
 //   })
 // }

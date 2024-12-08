@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { meetingSchema } from '@/validations/dashboard/subemployer/meetinglink';
 
 const MeetingSchedule = ({ isOpen, onClose }) => {
-    console.log("isOpen",isOpen)
+    //console.log("isOpen",isOpen)
     const userInfo = useUserInfo();
     const queryClient = useQueryClient();
     

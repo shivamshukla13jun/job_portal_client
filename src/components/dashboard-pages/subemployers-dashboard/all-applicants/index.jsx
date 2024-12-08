@@ -41,7 +41,7 @@ const index = () => {
 
   if (isLoading || jobLoader) return <div>Loading...</div>
 let title=Array.isArray(jobNames) && jobNames.length>0 ?jobNames?.find((item=>item?.job._id===job))?.title:""
-console.log("title??",title)
+//console.log("title??",title)
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>

@@ -48,7 +48,7 @@ const index = () => {
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       const errorArray = Object.entries(errors);
-      console.log(errorArray)
+      //console.log(errorArray)
       toast.error(errorArray[0][1].message)
     }
   }, [errors]);

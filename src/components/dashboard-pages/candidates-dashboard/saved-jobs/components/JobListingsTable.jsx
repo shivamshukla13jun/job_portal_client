@@ -3,11 +3,13 @@ import { API_EMPLOYER_PATH } from "@/lib/config.js";
 import { paths } from "@/services/paths.js";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter.js";
 import { datePost } from "@/utils/datePost";
+import { addToWishlist } from "@/store/reducers/Whishlist";
+import { useDispatch } from "react-redux";
 
 const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
   const navigate = useNavigate();
+  const dispatch=useDispatch()
   const now = new Date();
-
   return (
     <div className="tabs-box">
       <div className="widget-title">
@@ -79,11 +81,11 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
                                 <span className="la la-eye"></span>
                               </button>
                             </li>
-                            {/* <li>
-                            <button data-text="Delete Aplication">
+                            <li>
+                            <button  onClick={()=> dispatch(addToWishlist({ id:item?._id, operation:"remove" }))} data-text="Delete Aplication">
                               <span className="la la-trash"></span>
                             </button>
-                          </li> */}
+                          </li>
                           </ul>
                         </div>
                       </td>
