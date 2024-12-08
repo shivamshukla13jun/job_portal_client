@@ -94,7 +94,6 @@ const SubEmployerList = () => {
           <div className="ls-widget">
             <div className="tabs-box">
               <div className="widget-title">
-                <h4>Sub Employers</h4>
                 <div className="chosen-outer">
                   <button
                     onClick={() => setCreateModalOpen(true)}

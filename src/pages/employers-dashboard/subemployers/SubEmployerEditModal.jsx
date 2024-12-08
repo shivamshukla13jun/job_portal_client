@@ -45,7 +45,7 @@ const SubEmployerEditModal = ({ subEmployer, isOpen, onClose }) => {
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                <SubEMployerForm control={control} register={register} errors={errors}/>
+                <SubEMployerForm control={control} register={register} errors={errors} isEdit={true}/>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={onClose}>
                             Cancel

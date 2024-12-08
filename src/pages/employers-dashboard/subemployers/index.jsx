@@ -29,7 +29,7 @@ const SubEmployer = () => {
     {/* <!-- Dashboard --> */}
     <section className="user-dashboard">
       <div className="dashboard-outer">
-        <Breadcrumb title="Manage jobs!" />
+        <Breadcrumb title="Sub Employers!" />
         {/* breadCrumb */}
 
         <MenuToggler />

@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useForm, Controller } from 'react-hook-form';
 import { SubemployerdashboardResources, AccessLevel } from '@/data/SubEmployerdashboardResources';
-const SubEMployerForm = ({control,register,errors}) => {
+const SubEMployerForm = ({control,register,errors,isEdit=false}) => {
   return (
     <>
                     <Form.Group className="mb-3">
@@ -45,10 +45,14 @@ const SubEMployerForm = ({control,register,errors}) => {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control
+                        {isEdit ? <Form.Control
+                            {...register('password',{ required: 'Password is required' })}
+                            isInvalid={!!errors.password}
+                        />: <Form.Control
                             {...register('password',)}
                             isInvalid={!!errors.password}
-                        />
+                        />}
+                       
                         <Form.Control.Feedback type="invalid">
                             {errors.password?.message}
                         </Form.Control.Feedback>
