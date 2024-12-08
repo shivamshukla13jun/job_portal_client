@@ -3,7 +3,7 @@ import { API_DEV, API_PROD } from "@/lib/config";
 import { paths } from "./paths";
 
 const request = axios.create({
-    baseURL: API_PROD,
+    baseURL: API_DEV,
     withCredentials: true,
     // headers: {
     //     Authorization: `Bearer ${sessionStorage.getItem("session")}`

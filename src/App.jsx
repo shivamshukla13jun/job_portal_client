@@ -45,14 +45,6 @@ import Verify from "./pages/others/verify";
 import ForgotPasswordPage from "./pages/others/forgot";
 import ResetPassword from "./pages/others/resetpassword";
 // admin
-import AdminDashboardEmploeeDBPage from "./pages/admin-dashboard/dashboard";
-import Companies from "./pages/admin-dashboard/company-profile";
-import SubEmployers from "./pages/admin-dashboard/subemployers";
-import ManageJobs from "./pages/admin-dashboard/manage-jobs";
-import AllApplicants from "./pages/admin-dashboard/all-applicants";
-import Packages from "./pages/admin-dashboard/packages";
-import ChangePassword from "./pages/admin-dashboard/change-password";
-import { SubEmployerList, EmployerList, CandidateList } from "./components/dashboard-pages/admin-dashboard/UsersList";
 
 // eemployers
 import DashboardEmploeeDBPage from "./pages/employers-dashboard/dashboard";
@@ -159,20 +151,7 @@ function App() {
                   <Route path="resume-alerts" element={<ResumeAlertsEmploeeDBPage />} />
                   <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
                 </Route>
-                <Route path="admin-dashboard" element={
-                  <ProtectedRoute requiredRole="admin">
-                    <Outlet />
-                  </ProtectedRoute>
-                }>  
-                  <Route path="sub-employers" element={<SubEmployerList />} />
-                  <Route path="employers" element={<EmployerList />} />
-                  <Route path="candidates" element={<CandidateList />} />
-                  <Route path="dashboard" element={<AdminDashboardEmploeeDBPage />} />
-                  <Route path="manage-jobs" element={<ManageJobs />} />
-                  <Route path="all-applicants" element={<AllApplicants />} />
-                  <Route path="packages" element={<Packages />} />
-                  <Route path="change-password" element={<ChangePassword />} />
-                </Route>
+              
                 <Route 
                 path="subemployers-dashboard" 
                 element={

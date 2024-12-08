@@ -13,6 +13,7 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { get, getById } from "@/services/api";
+import CandidateListPage1 from "@/pages/candidates-list/candidates-list-v1";
 
 const Index = () => {
   const userInfo = useUserInfo();
@@ -85,20 +86,31 @@ const Index = () => {
             {/* End .col */}
 
             <div className="col-lg-12">
-              {/* <!-- applicants Widget --> */}
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
                   <h4>Recent Applicants</h4>
                 </div>
                 <div className="widget-content">
                   <div className="row">
-                    {/* <!-- Candidate block three --> */}
+
+                    <CandidateListPage1 />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* <div className="col-lg-12">
+              <div className="applicants-widget ls-widget">
+                <div className="widget-title">
+                  <h4>Recent Applicants</h4>
+                </div>
+                <div className="widget-content">
+                  <div className="row">
 
                     <Applicants />
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* End .col */}
           </div>
           {/* End .row profile and notificatins */}
