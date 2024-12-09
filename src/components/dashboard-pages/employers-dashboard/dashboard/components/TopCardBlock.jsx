@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const TopCardBlock = ({data}) => {
 
   const cardContent = [
@@ -5,8 +7,10 @@ const TopCardBlock = ({data}) => {
       id: 1,
       icon: "flaticon-briefcase",
       countNumber: data?.jobs?.total,
+    
       metaName: "Posted Jobs",
       uiClass: "ui-blue",
+      to:"/employers-dashboard/post-jobs",
     },
     {
       id: 2,
@@ -14,28 +18,26 @@ const TopCardBlock = ({data}) => {
       countNumber:  data?.Applicationdata?.Application,
       metaName: "Application",
       uiClass: "ui-red",
+      to:"/employers-dashboard/all-applicants",
     },
-    {
-      id: 3,
-      icon: "la-comment-o",
-      countNumber: "0",
-      metaName: "Messages",
-      uiClass: "ui-yellow",
-    },
+   
     {
       id: 4,
       icon: "la-bookmark-o",
       countNumber:  data?.Applicationdata?.Shortlist,
       metaName: "Shortlist",
+      to:"/employers-dashboard/shortlisted-resumes",
       uiClass: "ui-green",
     },
   ];
-//console.log("data?????",data)
+  const navigate=useNavigate()
   return (
     <>
       {cardContent.map((item) => (
         <div
-          className="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12"
+         role="button"
+          onClick={()=>navigate(item.to)}
+          className="ui-block col-xl-4 col-lg-6 col-md-6 col-sm-12"
           key={item.id}
         >
           <div className={`ui-item ${item.uiClass}`}>

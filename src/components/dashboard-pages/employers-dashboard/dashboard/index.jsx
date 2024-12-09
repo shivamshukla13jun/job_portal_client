@@ -88,7 +88,7 @@ const Index = () => {
             <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
-                  <h4>Recent Applicants</h4>
+                  <h4>Candidates</h4>
                 </div>
                 <div className="widget-content">
                   <div className="row">
@@ -98,7 +98,7 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="col-lg-12">
+            <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
                   <h4>Recent Applicants</h4>
@@ -110,7 +110,7 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
             {/* End .col */}
           </div>
           {/* End .row profile and notificatins */}
