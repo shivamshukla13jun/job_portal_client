@@ -13,7 +13,7 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { get, getById } from "@/services/api";
-import CandidateListPage1 from "@/pages/candidates-list/candidates-list-v1";
+import CandidateList from "./components/CandidateList";
 
 const Index = () => {
   const userInfo = useUserInfo();
@@ -93,7 +93,7 @@ const Index = () => {
                 <div className="widget-content">
                   <div className="row">
 
-                    <CandidateListPage1 />
+                   {userInfo?.userTypeValue?._id && <CandidateList id={userInfo?.userTypeValue?._id}/>} 
                   </div>
                 </div>
               </div>

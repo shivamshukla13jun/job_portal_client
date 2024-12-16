@@ -59,12 +59,6 @@ const BusinessDetail = ({ watch, register, setValue, error }) => {
                     <label>Business name <span className='required-form'>*</span></label>
                     <input type="text" className={`${error?.business_name?.message ? 'error' : ''}`} {...register("business_name")} placeholder="creativelayers" required />
                 </div>
-
-                <div className="form-group col-lg-12 col-md-12">
-                    <label>Business GST No. <span className='required-form'>*</span></label>
-                    <input type="text" className={`${error?.business_gst?.message ? 'error' : ''}`} {...register("business_gst")} placeholder="C2DF24F2DWEFW" required />
-                </div>
-
                 <div className="form-group col-lg-12 col-md-12">
                 <label>
                     Job Sector <span className="required-form">*</span>
@@ -82,6 +76,12 @@ const BusinessDetail = ({ watch, register, setValue, error }) => {
                     <input type="text" className={`${error?.categories?.message ? 'error' : ''}`} {...register("categories")} placeholder="0 123 456 7890" required />
                  */}
                 </div>
+                <div className="form-group col-lg-12 col-md-12">
+                    <label>Business GST No. <span className='required-form'>*</span></label>
+                    <input type="text" className={`${error?.business_gst?.message ? 'error' : ''}`} {...register("business_gst")} placeholder="C2DF24F2DWEFW" required />
+                </div>
+
+              
                    
 
                 <label style={{ fontWeight: "500", marginBottom: "10px", lineHeight: "20px" }}>Contact Name <span className='required-form'>*</span></label>

@@ -19,11 +19,12 @@ const footerContent = [
     menuList: [
       {
         name: "Browse Candidates",
-        route: "/candidates-list-v1",
+        // route: "/candidates-list-v1",
+        route: window.location.pathname,
       },
       { name: "Employer Dashboard", route: "/employers-dashboard/dashboard" },
       { name: "Add Job", route: "/employers-dashboard/post-jobs" },
-      { name: "Job Packages", route: "/employers-dashboard/packages" },
+      // { name: "Job Packages", route: "/employers-dashboard/packages" },
     ],
   },
   {
@@ -31,8 +32,8 @@ const footerContent = [
     title: "About Us",
     menuList: [
       { name: "About Us", route: "/about" },
-      { name: "Job Page Invoice", route: "/invoice" },
-      { name: "Terms Page", route: "/terms" },
+      // { name: "Job Page Invoice", route: "/invoice" },
+      { name: "Terms and Conditions", route: "/terms" },
       { name: "Blog", route: "/blog-list-v1" },
       { name: "Contact", route: "/contact" },
     ],
@@ -41,11 +42,11 @@ const footerContent = [
     id: 4,
     title: "Helpful Resources",
     menuList: [
-      { name: "Site Map", route: "/" },
+      { name: "Site Map", route: window.location.pathname},
       { name: "Terms of Use", route: "/terms" },
-      { name: "Privacy Center", route: "/" },
-      { name: "Security Center", route: "/" },
-      { name: "Accessibility Center", route: "/" },
+      { name: "Privacy Center", route: window.location.pathname },
+      // { name: "Security Center", route: "/" },
+      // { name: "Accessibility Center", route: "/" },
     ],
   },
 ];

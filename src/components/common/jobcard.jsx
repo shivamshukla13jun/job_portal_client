@@ -31,7 +31,6 @@ export const JobCard = ({item}) => {
     }
   };
   return (
-    <div className="job-block" key={item._id}>
       <div className="inner-box">
         <div className="content">
           <span className="company-logo">
@@ -89,6 +88,6 @@ export const JobCard = ({item}) => {
           )}
         </div>
       </div>
-    </div>
+ 
   );
 };

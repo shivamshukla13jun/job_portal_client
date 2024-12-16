@@ -6,10 +6,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { paths } from "@/services/paths";
 import { useNavigate } from "react-router-dom";
+import {  useDeleteApplication, useDeleteForwardcv } from "@/utils/hooks/useApplication";
 
 const Applicants = ({ data ,search}) => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const navigate=useNavigate()
+    const handleDelete = useDeleteForwardcv()
   const handleAccept = (id,subemployerid)=>{
     setCreateModalOpen(id)
   }
@@ -94,16 +96,11 @@ const Applicants = ({ data ,search}) => {
                     <span className="la la-plus"></span>
                   </button>
                 </li>
-                {/* <li>
-                  <button data-text="Reject Application" onClick={() => handleAccept(_id,"rejected")}>
-                    <span className="la la-times-circle"></span>
-                  </button>
-                </li> */}
-                {/* <li>
+                <li>
                   <button data-text="Delete Application" onClick={() => handleDelete(_id,job._id)}>
                     <span className="la la-trash"></span>
                   </button>
-                </li> */}
+                </li>
               </ul>
             </div>
           </div>

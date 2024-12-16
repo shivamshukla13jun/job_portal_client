@@ -17,7 +17,7 @@ import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmploye
 const Index = () => {
   const userInfo = useUserInfo();
   const [statrtdate, setStartdate] = useState("")
-//console.log("userInfo dshboad",userInfo)
+console.log("userInfo dshboad",userInfo)
 
   const { data, isLoading } = useQuery({
     queryKey: [`dashboard/employer`, statrtdate],

@@ -1,6 +1,9 @@
+import useUserInfo from "@/utils/hooks/useUserInfo";
+import { Link } from "react-router-dom";
 
 
 const CallToAction = () => {
+  const userInfo=useUserInfo()
   return (
     <section className="call-to-action">
       <div className="auto-container">
@@ -13,9 +16,9 @@ const CallToAction = () => {
                 million
                 <br /> CVs in our database.
               </div>
-              <a href="#" className="theme-btn btn-style-one bg-blue">
+              <Link to={userInfo && userInfo?.userType?.name?.toLowerCase() === 'employer' ?"/employers-dashboard/dashboard":"/register?state=Employer"} className="theme-btn btn-style-one bg-blue">
                 <span className="btn-title">Start Recruiting Now</span>
-              </a>
+              </Link>
             </div>
           </div>
           {/* End .content-column */}

@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const TopCardBlock = ({data}) => {
   const cardContent = [
     {
@@ -7,27 +9,18 @@ const TopCardBlock = ({data}) => {
       ,
       metaName: "Applied Jobs",
       uiClass: "ui-blue",
+      to:"/candidates-dashboard/applied-jobs",
+
     },
-    // {
-    //   id: 2,
-    //   icon: "la-file-invoice",
-    //   countNumber: "9382",
-    //   metaName: "Job Alerts",
-    //   uiClass: "ui-red",
-    // },
-    // {
-    //   id: 3,
-    //   icon: "la-comment-o",
-    //   countNumber: "74",
-    //   metaName: "Messages",
-    //   uiClass: "ui-yellow",
-    // },
     {
       id: 2,
       icon: "la-bookmark-o",
       countNumber:  data?.Applicationdata?.rejectedlist,
       metaName: "Rejected",
       uiClass: "ui-red",
+      status:"rejected",
+      to:"/candidates-dashboard/short-listed-jobs?status=rejected",
+
     },
     {
       id: 3,
@@ -35,6 +28,7 @@ const TopCardBlock = ({data}) => {
       countNumber:  data?.Applicationdata?.pendinglist,
       metaName: "Pending",
       uiClass: "ui-yellow",
+      to:"/candidates-dashboard/short-listed-jobs?status=pending",
     },
     {
       id: 4,
@@ -42,13 +36,16 @@ const TopCardBlock = ({data}) => {
       countNumber:  data?.Applicationdata?.Shortlist,
       metaName: "Shortlist",
       uiClass: "ui-green",
+      to:"/candidates-dashboard/short-listed-jobs",
     },
   ];
-
+     const navigate=useNavigate()
   return (
     <>
       {cardContent.map((item) => (
         <div
+        role="button"
+        onClick={()=>navigate(item.to)}
           className="ui-block col-xl-3 col-lg-34 col-md-3 col-sm-12"
           key={item.id}
         >

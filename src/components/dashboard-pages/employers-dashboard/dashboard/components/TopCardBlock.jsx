@@ -7,7 +7,6 @@ const TopCardBlock = ({data}) => {
       id: 1,
       icon: "flaticon-briefcase",
       countNumber: data?.jobs?.total,
-    
       metaName: "Posted Jobs",
       uiClass: "ui-blue",
       to:"/employers-dashboard/post-jobs",
@@ -28,6 +27,7 @@ const TopCardBlock = ({data}) => {
       metaName: "Shortlist",
       to:"/employers-dashboard/shortlisted-resumes",
       uiClass: "ui-green",
+      status:"shortlisted"
     },
   ];
   const navigate=useNavigate()

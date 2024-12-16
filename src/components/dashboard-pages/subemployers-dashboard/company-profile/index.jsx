@@ -24,12 +24,12 @@ const index = () => {
     const userInfo = useUserInfo();
 const [previewData,setPreviewData]=useState(null)
     const { data, isLoading } = useQuery({
-        queryKey: [`employer${userInfo._id}`],
+        queryKey: [`employer${userInfo.createdBy}`],
         queryFn: async () => {
-            const res = await getById('/employer', userInfo._id);
+            const res = await getById('/employer', userInfo.createdBy);
             return res.data.data;
         },
-        enabled: !!userInfo._id
+        enabled: !!userInfo.createdBy
     });
 
     const { register, handleSubmit, watch, formState: { errors }, setValue, reset } = useForm({
@@ -65,7 +65,7 @@ const [previewData,setPreviewData]=useState(null)
     });
 
     const mutation = useMutation({
-        mutationFn: (data) => put(`/employer`, userInfo._id, data),
+        mutationFn: (data) => put(`/employer`, userInfo.createdBy, data),
         onSuccess: (res) => {
             //console.log(res);
             toast.success(res.data.message)
@@ -101,7 +101,10 @@ const [previewData,setPreviewData]=useState(null)
             keywords: data.keywords,
             product_services: data.product_services,
             url: data.url,
-            year_established: data.year_established
+            year_established: data.year_established,
+            logo:data.logo ,
+            videos:data.videos ,
+            pictures:data.pictures 
         };
     
         // Handle single file uploads

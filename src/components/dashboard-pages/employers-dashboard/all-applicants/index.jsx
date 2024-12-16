@@ -21,22 +21,17 @@ const index = () => {
     queryKey: ['jobNames'],
     queryFn: async () => {
       let res = (await get("application/jobs/employer/name")).data.data;
-      if (!searchParams.get("id")) {
-        setJob(res[0]["job"]._id);
-      }
       return res;
     }
   });
 
-  const [job, setJob] = useState(searchParams.get("id") || null);
-
+const [job, setJob] = useState(searchParams.get("id") || "")
   const { data: currentJob, isLoading: jobLoader } = useQuery({
-    queryKey: [`job${job}`, job],
+    queryKey: [`application/tracking`, job],
     queryFn: async () => {
-      let res = (await getById(`application/job`,job)).data;
+      let res = (await get(`application/tracking?jobid=${job}`,)).data;
       return res;
     },
-    enabled: !!job
   });
 
   if (isLoading || jobLoader) return <div>Loading...</div>

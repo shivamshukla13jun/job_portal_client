@@ -88,7 +88,9 @@ const FilterJobsBox = ({ jobs, search, queryParams, setSearch, data }) => {
       {jobs?.data?.length > 0 &&
         jobs.data.map((item, index) => {
           return (
-           <JobCard item={item}/>
+            <div className="job-block" key={item._id}>
+              <JobCard item={item}/>
+              </div>
             // End all jobs
           );
         })}

@@ -36,7 +36,7 @@ const TopCardBlock = ({data}) => {
       {cardContent.map((item) => (
         <div
          role="button"
-          onClick={()=>navigate(item.to)}
+          // onClick={()=>navigate(item.to)}
           className="ui-block col-xl-4 col-lg-6 col-md-6 col-sm-12"
           key={item.id}
         >

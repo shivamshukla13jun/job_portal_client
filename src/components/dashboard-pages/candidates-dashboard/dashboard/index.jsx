@@ -66,9 +66,6 @@ const uniqueCategories = [
 
 // Join unique categories as a comma-separated string
 const categoriesString = uniqueCategories.join(", ");
-
-// &keyword=${userInfo?.userTypeValue?.designation}
-console.log(categoriesString);
             let res = await get(`job?page=${search.page}&categories=${categoriesString}
               &location=${userInfo?.userTypeValue?.contact?.current_address?.city}`);
            return {

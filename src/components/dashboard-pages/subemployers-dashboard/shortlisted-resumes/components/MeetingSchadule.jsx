@@ -23,7 +23,8 @@ const MeetingSchedule = ({ isOpen, onClose }) => {
             email:isOpen?.email,
             phone: "",
             message: "",
-            meetingLink: ""
+            meetingLink: "",
+            address:""
         }
     });
 
@@ -156,6 +157,18 @@ const MeetingSchedule = ({ isOpen, onClose }) => {
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.meetingLink?.message}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control
+                            type="url"
+                            placeholder="Complete Adddress"
+                            {...register('address')}
+                            isInvalid={!!errors.address}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.address?.message}
                         </Form.Control.Feedback>
                     </Form.Group>
 

@@ -50,4 +50,30 @@ export const useDeleteApplication = (searchParams) => {
 
   return handleDelete;
 };
+export const useDeleteForwardcv = (searchParams) => {
+  const queryClient = useQueryClient();
+
+  const deleteApplication = useMutation({
+    mutationFn: ({ _id }) => 
+      get(`/sub-employers/shortlistcvs?id=${_id}`),
+    onSuccess: (res) => {
+      if (res.data.success) {
+        toast.success(res.data.message);
+        
+        // Invalidate specific queries to refetch updated data
+        queryClient.invalidateQueries([`application/tracking`, searchParams]);
+        queryClient.invalidateQueries([`job${jobid}`]);
+      }
+    },
+    onError: (err) => {
+      toast.error(err.response.data.error);
+    },
+  });
+
+  const handleDelete = (_id, jobid) => {
+    deleteApplication.mutate({ _id, jobid });
+  };
+
+  return handleDelete;
+};
 

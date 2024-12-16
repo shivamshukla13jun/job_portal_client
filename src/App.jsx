@@ -79,6 +79,8 @@ import ShortListedResumeSubemployeeEmploeeDBPage from "./pages/subemployers-dash
 // authotrizations
 import UnauthorizedPage from "./pages/others/UnauthorizedPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import MeetingList from "./pages/subemployers-dashboard/Meetings";
+import CandidateListPage2 from "./pages/candidates-list/candidates-list-v2";
 function App() {
 
   const query = new QueryClient({
@@ -115,7 +117,7 @@ function App() {
                 <Route path="job/:id" element={<JobSingleDynamicV1 />} />
                 <Route path="employers-list-v1" element={<EmployerListPage1 />} />
                 <Route path="employer/:id" element={<EmployersSingleV1 />} />
-                <Route path="candidates-list-v1" element={<CandidateListPage1 />} />
+                <Route path="candidates-list-v1" element={<CandidateListPage2 />} />
                 <Route path="candidate/:id" element={<CandidateSingleDynamicV1 />} />
                 <Route path="blog-list-v1" element={<BlogListpage1 />} />
                 <Route path="blog-details/:id" element={<BlogDetailsDynamic />} />
@@ -162,6 +164,7 @@ function App() {
               >
                   <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
                   <Route path="company-profile" element={<CompanyProfileSubEmploeeDBPage />} />
+                  <Route path="meetinglinks" element={<MeetingList />} />
                   <Route path="shortlisted-resumes" element={<ShortListedResumeSubemployeeEmploeeDBPage />} />
                   <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
                 </Route>

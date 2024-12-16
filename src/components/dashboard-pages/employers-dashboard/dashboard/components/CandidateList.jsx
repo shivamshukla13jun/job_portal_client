@@ -8,22 +8,16 @@ import { Alert, Container } from 'react-bootstrap';
 import useUserInfo from '@/utils/hooks/useUserInfo';
 import { useQuery } from '@tanstack/react-query';
 
-
-
-const FilterTopBox= () => {
+const CandidateList= ({id}) => {
   const userInfo = useUserInfo();
-
   const { data=[], isLoading } = useQuery({
     queryKey: [`dashboard/employer`],
     queryFn: async () => {
-      let res = (await getById(`employer/candidates`,userInfo?.userTypeValue?._id)).data.data
+      let res = (await getById(`employer/candidates`,id)).data.data
       return res;
     },
-    enabled: !!userInfo?.userTypeValue?._id
+    enabled: !!id
   });
-
- 
- 
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -93,4 +87,4 @@ const FilterTopBox= () => {
   );
 };
 
-export default FilterTopBox;
+export default CandidateList;

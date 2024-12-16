@@ -48,13 +48,13 @@ const employerMenu = [
     routePath: "/employers-dashboard/subemployer",
     active: "",
   },
-  {
-    id: 7,
-    name: "Packages",
-    icon: "la-box",
-    routePath: "/employers-dashboard/packages",
-    active: "",
-  },
+  // {
+  //   id: 7,
+  //   name: "Packages",
+  //   icon: "la-box",
+  //   routePath: "/employers-dashboard/packages",
+  //   active: "",
+  // },
   {
     id: 10,
     name: "Change Password",
