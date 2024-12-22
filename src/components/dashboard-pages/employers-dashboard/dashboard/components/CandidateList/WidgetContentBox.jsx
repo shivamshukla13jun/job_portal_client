@@ -90,10 +90,10 @@ const WidgetContentBox = () => {
                       <span className="icon flaticon-map-locator"></span>{" "}
                       {candidate?.contact?.current_address?.city || "N/A"}
                     </li>
-                    {/* <li>
+                    <li>
                       <span className="icon flaticon-money"></span> Match Score:
-                      {candidate.matchScore || "N/A"}
-                    </li> */}
+                      {candidate.matchScore || 0}
+                    </li>
                   
                   </ul>
 
@@ -106,40 +106,16 @@ const WidgetContentBox = () => {
                       ))
                     )}
                   </ul>
-                  <ul  className="post-tags">
-                  <li>
+                  <ul >
+                  {/* <li>
                     <div style={{ width: 80, height: 80, margin: "0 auto" }}>
 
                   <CircularProgressbar
-                     
                     value={candidate.matchScore || 0}
                     text={`${candidate.matchScore || 0}%`}
-
-                    styles={buildStyles({
-                      // Rotation of path and trail, in number of turns (0-1)
-                      rotation: 0.25,
-                  
-                      // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-                      strokeLinecap: 'butt',
-                  
-                      // Text size
-                      textSize: '16px',
-                  
-                      // How long animation takes to go from one candidate.matchScore || 0 to another, in seconds
-                      pathTransitionDuration: 0.5,
-                  
-                      // Can specify path transition in more detail, or remove it entirely
-                      // pathTransition: 'none',
-                  
-                      // Colors
-                      pathColor: `rgba(62, 152, 199, ${candidate.matchScore || 0 / 100})`,
-                      textColor: '#f88',
-                      trailColor: '#d6d6d6',
-                      backgroundColor: '#3e98c7',
-                    })}
                   />
                   </div>
-                    </li>
+                    </li> */}
                   </ul>
                  
                 </div>
