@@ -265,3 +265,16 @@ span.avtr figure {background-color: #ccc;background-position: center;background-
     white-space: nowrap;
   }
   
+// pssword toggle
+.password-wrapper {
+    position: relative;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+ 

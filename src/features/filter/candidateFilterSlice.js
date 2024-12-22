@@ -11,8 +11,13 @@ const initialState = {
     candidateGender: "",
     datePost: "",
     experiences: [],
+    experience_to:"",
+    experience_from:"",
     qualifications: [],
+    qualification:"",
     sort: "",
+    limit:3,
+    page:1,
     perPage: {
         start: 0,
         end: 0,
@@ -43,14 +48,12 @@ export const candidateFilterSlice = createSlice({
             state.datePost = payload;
         },
         addExperience: (state, { payload }) => {
-            const isExist = state.experiences.includes(payload);
-            if (!isExist) {
-                state.experiences.push(payload);
-            } else {
-                state.experiences = state.experiences.filter(
-                    (item) => item !== payload
-                );
-            }
+             if(payload.experience_to){
+                state.experience_to=payload.experience_to
+             }
+             if(payload.experience_to){
+                state.experience_from=payload.experience_from
+             }
         },
         clearExperienceF: (state) => {
             state.experiences = [];
@@ -65,6 +68,10 @@ export const candidateFilterSlice = createSlice({
                 );
             }
         },
+        addEdcucation: (state, { payload }) => {
+            state.qualification=payload
+          
+        },
         clearQualificationF: (state) => {
             state.qualifications = [];
         },
@@ -73,6 +80,13 @@ export const candidateFilterSlice = createSlice({
         },
         addPerPage: (state, { payload }) => {
             state.perPage = payload;
+        },
+        addLimit: (state, { payload }) => {
+            state.limit = payload;
+        },
+        addPage: (state, { payload }) => {
+            console.log("payload",payload)
+            state.page = payload;
         },
     },
 });
@@ -89,6 +103,6 @@ export const {
     addQualification,
     clearQualificationF,
     addSort,
-    addPerPage,
+    addPerPage,addEdcucation,addLimit,addPage
 } = candidateFilterSlice.actions;
 export default candidateFilterSlice.reducer;

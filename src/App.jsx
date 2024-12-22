@@ -17,7 +17,6 @@ if (typeof window !== "undefined") {
 }
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Home from "./pages";
-import HomePage1 from "./pages/home/home-1";
 import JobListPage1 from "./pages/job-list/job-list-v1";
 import JobSingleDynamicV1 from "./pages/job-single/job-single-v1";
 import ScrollTopBehaviour from "./components/common/ScrollTopBehaviour";
@@ -36,11 +35,6 @@ import ContactPage from "./pages/others/contact";
 import NotFoundPage from "./pages/others/404";
 import LoginPage from "./pages/others/login";
 import RegisterPage from "./pages/others/register";
-import ShopListPage from "./pages/shop/shop-list";
-import ShopSingleDyanmic from "./pages/shop/shop-single";
-import CartPage from "./pages/shop/cart";
-import CheckoutPage from "./pages/shop/checkout";
-import OrderCompletedPage from "./pages/shop/order-completed";
 import Verify from "./pages/others/verify";
 import ForgotPasswordPage from "./pages/others/forgot";
 import ResetPassword from "./pages/others/resetpassword";
@@ -63,9 +57,6 @@ import SubEmployer from "./pages/employers-dashboard/subemployers";
 import DashboardPage from "./pages/candidates-dashboard/dashboard";
 import AppliedJobsPage from "./pages/candidates-dashboard/applied-jobs";
 import ChangePasswordPage from "./pages/candidates-dashboard/change-password";
-import CVMannagerPage from "./pages/candidates-dashboard/cv-manager";
-import JobAlertPage from "./pages/candidates-dashboard/job-alerts";
-import MessageesPage from "./pages/candidates-dashboard/messages";
 import MyProfilePage from "./pages/candidates-dashboard/my-profile";
 import MyResumePage from "./pages/candidates-dashboard/my-resume";
 import PackagePage from "./pages/candidates-dashboard/packages";
@@ -73,7 +64,6 @@ import ShortListedJobsPage from "./pages/candidates-dashboard/short-listed-jobs"
 import SavedJobsPage from "./pages/candidates-dashboard/saved-jobs";
 
 // subemployers 
-import CompanyProfileSubEmploeeDBPage  from "./pages/subemployers-dashboard/company-profile";
 import DashboardSubemplyerDBPage from "./pages/subemployers-dashboard/dashboard";
 import ShortListedResumeSubemployeeEmploeeDBPage from "./pages/subemployers-dashboard/shortlisted-resumes";
 // authotrizations
@@ -112,7 +102,6 @@ function App() {
             <Routes>
               <Route path="/">
                 <Route index element={<Home />} />
-                <Route path="home-1" element={<HomePage1 />} />
                 <Route path="job-list-v1" element={<JobListPage1 />} />
                 <Route path="job/:id" element={<JobSingleDynamicV1 />} />
                 <Route path="employers-list-v1" element={<EmployerListPage1 />} />
@@ -163,7 +152,6 @@ function App() {
                 }
               >
                   <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
-                  <Route path="company-profile" element={<CompanyProfileSubEmploeeDBPage />} />
                   <Route path="meetinglinks" element={<MeetingList />} />
                   <Route path="shortlisted-resumes" element={<ShortListedResumeSubemployeeEmploeeDBPage />} />
                   <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
@@ -180,20 +168,10 @@ function App() {
                   <Route path="applied-jobs" element={<AppliedJobsPage />} />
                   <Route path="saved-jobs" element={<SavedJobsPage />} />
                   <Route path="change-password" element={<ChangePasswordPage />} />
-                  <Route path="cv-manager" element={<CVMannagerPage />} />
-                  <Route path="job-alerts" element={<JobAlertPage />} />
-                  <Route path="messages" element={<MessageesPage />} />
                   <Route path="my-profile" element={<MyProfilePage />} />
                   <Route path="my-resume" element={<MyResumePage />} />
                   <Route path="packages" element={<PackagePage />} />
                   <Route path="short-listed-jobs" element={<ShortListedJobsPage />} />
-                </Route>
-                <Route path="shop" >
-                  <Route path="shop-list" element={<ShopListPage />} />
-                  <Route path="shop-single/:id" element={<ShopSingleDyanmic />} />
-                  <Route path="cart" element={<CartPage />} />
-                  <Route path="checkout" element={<CheckoutPage />} />
-                  <Route path="order-completed" element={<OrderCompletedPage />} />
                 </Route>
               </Route>
             </Routes>

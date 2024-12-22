@@ -6,14 +6,14 @@ const SubemployerMenu = [
     routePath: "/subemployers-dashboard/dashboard",
     active: "active",
   },
-  {
-    id: 2,
-    name: "Company Profile",
-    icon: "la-user-tie",
-    routePath: "/subemployers-dashboard/company-profile",
-    active: "",
-    userAcitive:""
-  },
+  // {
+  //   id: 2,
+  //   name: "Company Profile",
+  //   icon: "la-user-tie",
+  //   routePath: "/subemployers-dashboard/company-profile",
+  //   active: "",
+  //   userAcitive:""
+  // },
   {
     id: 2,
     name: "Meeting links",

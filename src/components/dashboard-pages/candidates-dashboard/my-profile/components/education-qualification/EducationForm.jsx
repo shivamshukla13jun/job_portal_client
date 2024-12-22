@@ -1,5 +1,6 @@
 import LogoUpload from '@/components/dashboard-pages/candidates-dashboard/my-profile/components/my-profile/LogoUpload'
 import DatePicker from '@/components/common/date-picker/DatePicker';
+import { degreeSpecialisationValues } from '@/data/jobForm';
 
 const EducationForm = ({ watch, register, setValue, error }) => {
     const index = watch("education").length - 1;
@@ -15,7 +16,10 @@ const EducationForm = ({ watch, register, setValue, error }) => {
 
                 <div className="form-group col-lg-6 col-md-12">
                     <label>Qualification</label>
-                    <input type="text" {...register(`education.${index}.qualification`)} placeholder="B.COM / B.Tech" required />
+                    <select  {...register(`education.${index}.qualification`)} required>
+                        <option value={""}>Select Qualification</option>
+                        {degreeSpecialisationValues.map((item)=><option value={item.label}>{item.label}</option>)}
+                    </select>
                 </div>
 
                 {/* <div className="form-group col-lg-6 col-md-12">

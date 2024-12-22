@@ -89,7 +89,7 @@ const Register = () => {
           sessionStorage.setItem("userInfo", enData);
           dispatch(login(enData));
 
-          window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : paths.employer_profile;
+          window.location.href = user.userType.name === 'Candidate' ? paths.candidate : paths.employer;
         }
       } catch (error) {
         console.error("Failed to send code:", error);

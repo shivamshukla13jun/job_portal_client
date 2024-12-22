@@ -86,17 +86,7 @@ const Index = () => {
             {/* End .col */}
 
             <div className="col-lg-12">
-              <div className="applicants-widget ls-widget">
-                <div className="widget-title">
-                  <h4>Candidates</h4>
-                </div>
-                <div className="widget-content">
-                  <div className="row">
-
-                   {userInfo?.userTypeValue?._id && <CandidateList id={userInfo?.userTypeValue?._id}/>} 
-                  </div>
-                </div>
-              </div>
+                   <CandidateList />
             </div>
             <div className="col-lg-12">
               <div className="applicants-widget ls-widget">

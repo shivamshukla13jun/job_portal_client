@@ -101,7 +101,7 @@ const Verify = () => {
             sessionStorage.setItem("userInfo", enData);
             dispatch(login(enData));
             console.log("End Data",user)
-            window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : user.userType.name==="Subemployer"?paths.sub_employer_profile:paths.employer_profile;  
+            window.location.href = user.userType.name === 'Candidate' ? paths.candidate : user.userType.name==="Subemployer"?paths.sub_employer_profile:paths.employer;  
         },
         onError: (err) => {
             //console.log(err)

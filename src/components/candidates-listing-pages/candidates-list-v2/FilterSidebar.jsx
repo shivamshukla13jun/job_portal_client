@@ -27,7 +27,7 @@ const FilterSidebar = () => {
                 </div>
                 {/* <!-- Filter Block --> */}
 
-                <div className="filter-block">
+                {/* <div className="filter-block">
                     <h4>Location</h4>
                     <div className="form-group">
                         <LocationBox />
@@ -35,7 +35,7 @@ const FilterSidebar = () => {
 
                     <p>Radius around selected destination</p>
                     <DestinationRangeSlider />
-                </div>
+                </div> */}
                 {/* <!-- Filter Block --> */}
 
                 <div className="filter-block">
@@ -46,18 +46,18 @@ const FilterSidebar = () => {
                 </div>
                 {/* <!-- Filter Block --> */}
 
-                <div className="filter-block">
+                {/* <div className="filter-block">
                     <h4>Candidate Gender</h4>
                     <div className="form-group">
                         <CandidatesGender />
                     </div>
-                </div>
+                </div> */}
                 {/* <!-- Filter Block --> */}
 
-                <div className="checkbox-outer">
+                {/* <div className="checkbox-outer">
                     <h4>Date Posted</h4>
                     <DatePosted />
-                </div>
+                </div> */}
                 {/* <!-- Filter Block --> */}
 
                 <div className="checkbox-outer">

@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addKeyword } from "../../../features/filter/candidateFilterSlice";
+import { addKeyword } from "@/features/filter/candidateFilterSlice";
 
 const SearchBox = () => {
     const { keyword } = useSelector((state) => state.candidateFilter);
@@ -26,7 +26,7 @@ const SearchBox = () => {
             <input
                 type="text"
                 name="listing-search"
-                placeholder="Job title, keywords, or company"
+                placeholder="Job title"
                 onChange={keywordHandler}
                 value={keyword}
             />
