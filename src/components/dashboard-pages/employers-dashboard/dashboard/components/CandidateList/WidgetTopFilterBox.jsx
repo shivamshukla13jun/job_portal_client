@@ -3,7 +3,7 @@ import Experience from "./Experience";
 import Qualification from "./Qualification";
 import SearchBox from "./SearchBox";
 
-const WidgetTopFilterBox = ({ data, job, setJob }) => {
+const WidgetTopFilterBox = () => {
 
   //console.log({data})
 

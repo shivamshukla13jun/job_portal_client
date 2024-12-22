@@ -11,9 +11,10 @@ const SubEmployerEditModal = ({ subEmployer, isOpen, onClose }) => {
     const queryClient = useQueryClient();
     const { control, handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
-            name: subEmployer.name,
-            email: subEmployer.email,
-            phone: subEmployer.phone,
+            name: subEmployer.name | "",
+            email: subEmployer.email | "",
+            phone: subEmployer.phone | "",
+            department:subEmployer?.department || ""
             // dashboardPermissions: subEmployer.dashboardPermissions.map(p => p.resource)
         }
     });

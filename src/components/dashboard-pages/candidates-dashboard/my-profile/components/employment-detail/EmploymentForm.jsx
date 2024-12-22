@@ -1,5 +1,6 @@
 import DatePicker from '@/components/common/date-picker/DatePicker'
 import { categories } from '@/data/category';
+import { departments } from '@/data/department';
 import React, { useState } from 'react'
 import Select from "react-select";
 const EmploymentForm = ({ watch, register, setValue, error }) => {
@@ -33,13 +34,21 @@ const EmploymentForm = ({ watch, register, setValue, error }) => {
 
                 <div className="form-group col-lg-12 col-md-12">
                     <label>Department</label>
-                    <input
+
+                    <select
                         type="text"
                         {...register(`employment.${index}.department`)}
                         onChange={(e) => setValue(`employment.${index}.department`, e.target.value)}
                         placeholder="Engineer"
                         required
-                    />
+                    >
+                    <option value={""}>Select Department</option>
+                    {departments.map((item)=>(
+                        <option value={item.label}>{item.label}</option>
+                    ))}
+                    </select>
+
+                    
                 </div>
                 <div className="form-group col-lg-12 col-md-12">
                 <label>

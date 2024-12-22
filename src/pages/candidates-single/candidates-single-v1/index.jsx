@@ -80,7 +80,7 @@ const CandidateSingleDynamicV1 = () => {
     }
 }
   const handleDownload = async () => {
-    const fileUrl = API_CANDIDATE_PATH + data?.candidateId?.cv?.filename;
+    const fileUrl = API_CANDIDATE_PATH + data?.cv?.filename;
   
     try {
       // Fetch the file data
@@ -90,7 +90,7 @@ const CandidateSingleDynamicV1 = () => {
       // Create a temporary link element
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob); // Create an object URL for the Blob
-      link.download = data?.candidateId?.cv?.filename; // Set the filename for download
+      link.download = data?.cv?.filename; // Set the filename for download
   
       // Append the link to the body, trigger the click, then remove the link
       document.body.appendChild(link);
@@ -126,15 +126,15 @@ const CandidateSingleDynamicV1 = () => {
               <div className="inner-box">
                 <div className="content">
                   <figure className="image">
-                    <img src={API_CANDIDATE_PATH + data?.candidateId?.profile?.filename} alt="avatar" />
+                    <img src={API_CANDIDATE_PATH + data?.profile?.filename} alt="avatar" />
                   </figure>
-                  <h4 className="name">{data?.candidateId?.name}</h4>
+                  <h4 className="name">{data?.name}</h4>
 
                   <ul className="candidate-info">
-                    <li className="designation">{data?.candidateId?.designation || ''}</li>
+                    <li className="designation">{data?.designation || ''}</li>
                     <li>
                       <span className="icon flaticon-map-locator"></span>
-                      {`${data?.candidateId?.contact?.permanent_address?.state}, ${data?.candidateId?.contact?.permanent_address?.country}`}
+                      {`${data?.contact?.permanent_address?.state}, ${data?.contact?.permanent_address?.country}`}
                     </li>
                     <li>
                       <span className="icon flaticon-money"></span>
@@ -142,7 +142,7 @@ const CandidateSingleDynamicV1 = () => {
                     </li>
                     <li>
                       <span className="icon flaticon-clock"></span>
-                      Member {new Date(data?.candidateId?.createdAt).toDateString()}
+                      Member {new Date(data?.createdAt).toDateString()}
                     </li>
                   </ul>
 
@@ -295,13 +295,13 @@ const CandidateSingleDynamicV1 = () => {
                         <li>
                           <i className="icon icon-calendar"></i>
                           <h5>Experience:</h5>
-                          <span>{data?.candidateId?.employment ?calculateTotalExperience(data?.candidateId?.employment):""}</span>
+                          <span>{data?.employment ?calculateTotalExperience(data?.employment):""}</span>
                         </li>
 
                         <li>
                           <i className="icon icon-expiry"></i>
                           <h5>Age:</h5>
-                          <span>{new Date().getFullYear() - new Date(data?.candidateId?.dob).getFullYear()} Year</span>
+                          <span>{new Date().getFullYear() - new Date(data?.dob).getFullYear()} Year</span>
                         </li>
 
                         <li>
@@ -319,7 +319,7 @@ const CandidateSingleDynamicV1 = () => {
                         <li>
                           <i className="icon icon-user-2"></i>
                           <h5>Gender:</h5>
-                          <span>{data?.candidateId?.gender}</span>
+                          <span>{data?.gender}</span>
                         </li>
 
                         <li>
@@ -332,7 +332,7 @@ const CandidateSingleDynamicV1 = () => {
                           <i className="icon icon-degree"></i>
                           <h5>Education Level:</h5>
                           <span>
-                             {data?.candidateId?.education?.map((val, i,arr) => (
+                             {data?.education?.map((val, i,arr) => (
                             
                                 <a>{val.qualification}</a>
                             
@@ -388,7 +388,7 @@ const CandidateSingleDynamicV1 = () => {
         isOpen={isForwardModalOpen}
         onClose={() => setIsForwardModalOpen(false)}
         subEmployers={SubEmployers}
-        candidateId={data?.candidateId?._id}
+        candidateId={data?._id}
         onForward={handleForwardCV}
         SubEmployersLoading={SubEmployersLoading}
       />

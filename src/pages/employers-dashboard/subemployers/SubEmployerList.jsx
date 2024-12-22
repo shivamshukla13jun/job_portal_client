@@ -134,7 +134,7 @@ const SubEmployerList = () => {
                     <Button 
                       variant="outline-primary" 
                       size="sm" 
-                      className="mr-2"
+                      className="me-2"
                       onClick={() => handleEdit(subEmployer)}
                     >
                       <Pencil size={16} />
@@ -143,7 +143,7 @@ const SubEmployerList = () => {
                     <Button 
                       variant="outline-danger" 
                       size="sm" 
-                      className="mr-2"
+                      className="me-2"
                       onClick={() => handleDelete(subEmployer?._id)}
                     >
                       <Trash2 size={16} />
@@ -160,12 +160,12 @@ const SubEmployerList = () => {
                       {subEmployer?.userId?.isActive ? (
                         <>
                           <ToggleLeft size={16} className="mr-1" />
-                          Deactivate
+                          
                         </>
                       ) : (
                         <>
                           <ToggleRight size={16} className="mr-1" />
-                          Activate
+                       
                         </>
                       )}
                     </Button>

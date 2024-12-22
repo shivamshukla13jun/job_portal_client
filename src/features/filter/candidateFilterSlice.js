@@ -7,6 +7,7 @@ const initialState = {
         min: 0,
         max: 100,
     },
+    createdAt:"",
     category: "",
     candidateGender: "",
     datePost: "",

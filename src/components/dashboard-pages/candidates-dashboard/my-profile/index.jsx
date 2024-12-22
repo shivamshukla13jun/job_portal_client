@@ -29,8 +29,9 @@ import PreviewOriginalDataModal from "./components/PreviewOrginalData";
 
 const index = () => {
   const userInfo = useUserInfo();
+  
   const [previewData, setPreviewData] = useState(null);
-
+  const [Submitting, setSubmitting] = useState(false);
   const { data, isLoading } = useQuery({
     queryKey: [`candidate${userInfo._id}`],
     queryFn: async () => {
@@ -118,16 +119,21 @@ const index = () => {
   const mutation = useMutation({
     mutationFn: (data) => put(`/candidate`, userInfo._id, data),
     onSuccess: async (res) => {
+     
+
       if (res.data.success) {
         toast.success(res.data.message);
         // sessionStorage.setItem("session", res.data.token)
         let user = (await getById(`/user`, res.data.data.userId)).data.data;
         let enData = encrypt(user);
         sessionStorage.setItem("userInfo", enData);
+        setSubmitting(false)
         window.location.reload()
       }
+      setSubmitting(false)
     },
     onError: (err) => {
+      setSubmitting(false)
       toast.error(err.response.data.error)
     }
   });
@@ -135,7 +141,6 @@ const index = () => {
   const handleRegisterSubmit = async (data) => {
 
     const formData = new FormData();
-
     const name = `${data.myProfile.candidate_name.title} ${data.myProfile.candidate_name.first} ${data.myProfile.candidate_name.middle} ${data.myProfile.candidate_name.last}`;
     const formattedData = {
       name,coverletter:data.coverletter,
@@ -158,6 +163,7 @@ const index = () => {
 
     formData.append("upload_cv", watch("myProfile.upload_cv"));
     formData.append("profile", watch("myProfile.profile"));
+    setSubmitting(true)
     mutation.mutate(formData);
   };
 
@@ -343,10 +349,11 @@ const index = () => {
                 Preview
               </button>
               <button
+               disabled={Submitting}
                 onClick={handleSubmit(handleRegisterSubmit)}
                 className="theme-btn btn-style-one"
               >
-                Submit
+                {Submitting?"Submitting":"Submit"}
               </button>
             </div>
           </div>

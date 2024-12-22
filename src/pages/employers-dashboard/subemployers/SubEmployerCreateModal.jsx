@@ -17,6 +17,7 @@ const SubEmployerCreateModal = ({ isOpen, onClose }) => {
             email: "",
             phone: "",
             password:"",
+            department:"",
             dashboardPermissions: SubemployerdashboardResources.reduce((acc, resource) => {
                 acc[resource.resource] = Object.values(AccessLevel).reduce((permAcc, perm) => {
                     permAcc[perm] = false; // Default all permissions to false
