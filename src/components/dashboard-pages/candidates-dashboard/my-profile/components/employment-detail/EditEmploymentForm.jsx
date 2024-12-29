@@ -21,7 +21,7 @@ const EditEmploymentForm = ({
       <h4>Employment Form</h4>
       <div className="row form-group mt-4">
         <div className="form-group col-lg-6 col-md-12">
-          <label>Employer Name</label>
+          <label>Employer Name <span className="required-form">*</span></label>
           <input
             type="text"
             {...register(`employment.${index}.name`)}
@@ -31,7 +31,7 @@ const EditEmploymentForm = ({
         </div>
 
         <div className="form-group col-lg-6 col-md-12">
-          <label>Position</label>
+          <label>Position <span className="required-form">*</span></label>
           <input
             type="text"
             {...register(`employment.${index}.position`)}
@@ -41,7 +41,7 @@ const EditEmploymentForm = ({
         </div>
 
         <div className="form-group col-lg-12 col-md-12">
-          <label>Department</label>
+          <label>Department <span className="required-form">*</span></label>
           <select
             type="text"
             {...register(`employment.${index}.department`)}
@@ -59,8 +59,7 @@ const EditEmploymentForm = ({
         </div>
         <div className="form-group col-lg-12 col-md-12">
           <label>
-            Job Sector <span className="required-form">*</span>
-          </label>
+            Job Sector <span className="required-form">*</span></label>
           <Controller
             name={`employment.${index}.categories`}
             control={control}
@@ -81,7 +80,7 @@ const EditEmploymentForm = ({
         </div>
 
         <div className="form-group col-lg-12 col-md-12">
-          <label>Scope of Work</label>
+          <label>Scope of Work <span className="required-form">*</span></label>
           <input
             type="text"
             className="form-control"
@@ -93,7 +92,7 @@ const EditEmploymentForm = ({
           )}
         </div>
         <div className="form-group col-lg-6 col-md-12">
-          <label>From Date</label>
+          <label>From Date <span className="required-form">*</span></label>
           <div>
             <DatePicker
               id="employmentFromDate"
@@ -104,7 +103,7 @@ const EditEmploymentForm = ({
         </div>
 
         <div className="form-group col-lg-6 col-md-12">
-          <label>Till Date</label>
+          <label>Till Date <span className="required-form">*</span></label>
           <div>
             <DatePicker
               id="employmentTillDate"

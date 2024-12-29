@@ -11,7 +11,7 @@ const EditReferenceList = ({ watch, register, setValue, error, index }) => {
             <h4>Reference Form</h4>
             <div className='row form-group mt-4'>
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Employer Name</label>
+                    <label>Employer Name <span className="required-form">*</span></label>
                     <input
                         type="text"
                         placeholder="XYZ"
@@ -21,7 +21,7 @@ const EditReferenceList = ({ watch, register, setValue, error, index }) => {
                 </div>
 
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Phone</label>
+                    <label>Phone <span className="required-form">*</span></label>
                     <input
                         type="text"
                         placeholder="0 123 456 7890"
@@ -31,7 +31,7 @@ const EditReferenceList = ({ watch, register, setValue, error, index }) => {
                 </div>
 
                 <div className="form-group col-lg-12 col-md-12">
-                    <label>Email address</label>
+                    <label>Email address <span className="required-form">*</span></label>
                     <input
                         type="email"
                         placeholder="creativelayers"
@@ -41,7 +41,7 @@ const EditReferenceList = ({ watch, register, setValue, error, index }) => {
                 </div>
 
                 <div className="form-group col-lg-12 col-md-12">
-                    <label>Notes</label>
+                    <label>Notes <span className="required-form">*</span></label>
                     <textarea
                         placeholder="Please write some notes"
                         {...register(`references.${index}.note`)}

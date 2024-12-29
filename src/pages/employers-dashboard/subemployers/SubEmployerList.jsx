@@ -1,20 +1,20 @@
 import React, { useState, Suspense } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { subEmployerService } from "@/services/subemployerservice";
 import SubEmployerCreateModal from "./SubEmployerCreateModal";
 import SubEmployerEditModal from "./SubEmployerEditModal";
 import useUserInfo from "@/utils/hooks/useUserInfo";
-import { del, get, put, request } from "@/services/api";
+import { del, get, put } from "@/services/api";
 import { Table, Button, Badge } from 'react-bootstrap';
-import { Pencil, Trash2, ToggleLeft, ToggleRight } from 'lucide-react';
+import { Pencil, Trash2, ToggleLeft, ToggleRight, Link2 } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
+
 const SubEmployerList = () => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editSubEmployer, setEditSubEmployer] = useState(null);
 
   const queryClient = useQueryClient();
-
-  // Get user info from context or local storage
+  const navigate = useNavigate();
   const userInfo = useUserInfo();
 
   // Fetch sub-employers
@@ -30,53 +30,42 @@ const SubEmployerList = () => {
         }
       }
     },
-    enabled: Boolean(userInfo?._id), // Check if userInfo and ID exist
+    enabled: Boolean(userInfo?._id),
   });
 
   // Deactivate sub-employer mutation
   const UpdateMutation = useMutation({
-    mutationFn: ({ id, isActive }) => {
-      //console.log("isActive???",isActive)
-    let data=  put("sub-employers/activate", id, { isActive: isActive })
-    return data
-    },
+    mutationFn: ({ id, isActive }) => put("sub-employers/activate", id, { isActive }),
     onSuccess: (data) => {
-      console.log(data)
-      toast.success(
-        data?.message
-      );
+      toast.success(data?.message);
       queryClient.invalidateQueries(["subemployer"]);
     },
     onError: (error) => {
       toast.error(error?.response?.data?.error || "An error occurred");
-      console.error(error);
-    },
-  });
-  const DeleteMutation = useMutation({
-    mutationFn: (id) => {
-      //console.log("isActive???",isActive)
-      del("sub-employers", id);
-    },
-    onSuccess: (data) => {
-      //console.log(data)
-      toast.success(`Sub-employer Deleted  successfully'`);
-      queryClient.invalidateQueries(["subemployer"]);
-    },
-    onError: (error) => {
-      toast.error(error?.response?.data?.error || "An error occurred");
-      console.error(error);
     },
   });
 
+  // Delete sub-employer mutation
+  const DeleteMutation = useMutation({
+    mutationFn: (id) => del("sub-employers", id),
+    onSuccess: () => {
+      toast.success(`Sub-employer Deleted successfully`);
+      queryClient.invalidateQueries(["subemployer"]);
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.error || "An error occurred");
+    },
+  });
+
+  // Handlers
   const handleUpdate = ({ id, isActive }) => {
-    if (
-      window.confirm("Are you sure you want to deactivate this sub-employer?")
-    ) {
+    if (window.confirm("Are you sure you want to change this sub-employer's status?")) {
       UpdateMutation.mutate({ id, isActive });
     }
   };
+
   const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to Delete this sub-employer?")) {
+    if (window.confirm("Are you sure you want to delete this sub-employer?")) {
       DeleteMutation.mutate(id);
     }
   };
@@ -105,78 +94,85 @@ const SubEmployerList = () => {
               </div>
 
               <div className="widget-content">
-      <div className="table-responsive">
-        <Table striped hover bordered className="manage-job-table">
-          <thead className="thead-light">
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {subEmployers?.map((subEmployer) => (
-              <tr key={subEmployer._id}>
-                <td>{subEmployer.name}</td>
-                <td>{subEmployer.email}</td>
-                <td>{subEmployer.phone}</td>
-                <td>
-                  <Badge 
-                    variant={subEmployer?.userId?.isActive ? "success" : "danger"}
-                  >
-                    {subEmployer?.userId?.isActive?"Active" : "Inactive"}
-                  </Badge>
-                </td>
-                <td>
-                  <div className="d-flex justify-content-center align-items-center">
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      className="me-2"
-                      onClick={() => handleEdit(subEmployer)}
-                    >
-                      <Pencil size={16} />
-                    </Button>
-                    
-                    <Button 
-                      variant="outline-danger" 
-                      size="sm" 
-                      className="me-2"
-                      onClick={() => handleDelete(subEmployer?._id)}
-                    >
-                      <Trash2 size={16} />
-                    </Button>
-                    
-                    <Button 
-                      variant={subEmployer?.userId?.isActive ? "outline-danger" : "outline-success"}
-                      size="sm"
-                      onClick={() => handleUpdate({
-                        id: subEmployer?._id,
-                        isActive: !subEmployer?.userId?.isActive
-                      })}
-                    >
-                      {subEmployer?.userId?.isActive ? (
-                        <>
-                          <ToggleLeft size={16} className="mr-1" />
-                          
-                        </>
-                      ) : (
-                        <>
-                          <ToggleRight size={16} className="mr-1" />
-                       
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
-    </div>
+                <div className="table-responsive">
+                  <Table striped hover bordered className="manage-job-table">
+                    <thead className="thead-light">
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {subEmployers?.map((subEmployer) => (
+                        <tr key={subEmployer._id}>
+                          <td>{subEmployer.name}</td>
+                          <td>{subEmployer.email}</td>
+                          <td>{subEmployer.phone}</td>
+                          <td>
+                            <Badge 
+                              variant={subEmployer?.userId?.isActive ? "success" : "danger"}
+                            >
+                              {subEmployer?.userId?.isActive ? "Active" : "Inactive"}
+                            </Badge>
+                          </td>
+                          <td>
+                            <div className="d-flex justify-content-center align-items-center">
+                              {/* Meeting Links Button */}
+                              <Button 
+                                variant="outline-primary" 
+                                size="sm" 
+                                className="me-2"
+                                onClick={() => navigate(`/employers-dashboard/meetinglinks/${subEmployer.userId?._id}`)}
+                              >
+                                <Link2 size={16} />
+                              </Button>
+                              
+                              {/* Edit Button */}
+                              <Button 
+                                variant="outline-primary" 
+                                size="sm" 
+                                className="me-2"
+                                onClick={() => handleEdit(subEmployer)}
+                              >
+                                <Pencil size={16} />
+                              </Button>
+                              
+                              {/* Delete Button */}
+                              <Button 
+                                variant="outline-danger" 
+                                size="sm" 
+                                className="me-2"
+                                onClick={() => handleDelete(subEmployer?._id)}
+                              >
+                                <Trash2 size={16} />
+                              </Button>
+                              
+                              {/* Activate/Deactivate Button */}
+                              <Button 
+                                variant={subEmployer?.userId?.isActive ? "outline-danger" : "outline-success"}
+                                size="sm"
+                                onClick={() => handleUpdate({
+                                  id: subEmployer?._id,
+                                  isActive: !subEmployer?.userId?.isActive
+                                })}
+                              >
+                                {subEmployer?.userId?.isActive ? (
+                                  <ToggleLeft size={16} />
+                                ) : (
+                                  <ToggleRight size={16} />
+                                )}
+                              </Button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
+              </div>
             </div>
           </div>
         </div>

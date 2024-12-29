@@ -40,7 +40,7 @@ const Profile = ({ watch, register, setValue, error }) => {
         {/* <!-- Input --> */}
 
         <div className="form-group col-lg-12 col-md-12 d-flex flex-column">
-          <label>Candidate Name</label>
+          <label>Candidate Name  <span className="required-form">*</span></label>
           <div className="d-flex flex-row gap-4" style={{ width: 'inherit' }}>
             <select {...register("myProfile.candidate_name.title")} className={error?.myProfile?.candidate_name?.title?.message ? 'error' : ''} required>
               <option value={""} hidden>Title</option>
@@ -53,11 +53,34 @@ const Profile = ({ watch, register, setValue, error }) => {
           </div>
         </div>
         <div className="form-group col-lg-6 col-md-6">
-          <label>Current Designation</label>
+          <label>Current Designation  <span className="required-form">*</span></label>
           <input type="text" className={error?.myProfile?.designation?.message ? 'error' : ''} {...register("myProfile.designation")} placeholder="Engineer" required />
         </div>
         <div className="form-group col-lg-6 col-md-6">
-          <label>Gender</label>
+                    <label>
+                        Total Experience 
+                        <span className="required-form">*</span>
+                    </label>
+                    <div className="d-flex gap-4">
+                        {/* error error-border */}
+                        <select
+                {...register("myProfile.experience")}
+                className={`${error?.myProfile?.experience?.message ? "error error-border" : ""}`}
+            >
+                {/* Options for Minimum Experience */}
+                <option hidden value={""}>Select</option>
+                {[...Array(10).keys()].map((year) => (
+                    <option key={year} value={year}>
+                        {year} to {year + 1} years
+                    </option>
+                ))}
+            </select>
+                        
+                    </div>
+                </div>
+
+        <div className="form-group col-lg-6 col-md-6">
+          <label>Gender  <span className="required-form">*</span></label>
           <div className="d-flex justify-content-between ms-2" style={{ width: "60%" }}>
             <div className="d-flex align-items-center">
               <label className={error?.myProfile?.gender?.message ? 'error' : ''}>
@@ -84,7 +107,7 @@ const Profile = ({ watch, register, setValue, error }) => {
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Date of Birth</label>
+          <label>Date of Birth  <span className="required-form">*</span></label>
           <div className={error?.myProfile?.dob?.message ? 'error error-border' : ''}>
             <DatePicker
               id={'profileDoB'}
@@ -96,7 +119,7 @@ const Profile = ({ watch, register, setValue, error }) => {
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Marital Status</label>
+          <label>Marital Status  <span className="required-form">*</span></label>
           <select className={`${error?.myProfile?.gender?.message ? 'error' : ''} chosen-single form-select`} {...register("myProfile.marital_status")} required>
             <option value={""} hidden>Status</option>
             <option value={"Married"}>Married</option>
@@ -107,7 +130,7 @@ const Profile = ({ watch, register, setValue, error }) => {
 
         <div className="form-group">
           <label>
-            Upload latest CV
+            Upload latest CV  <span className="required-form">*</span>
           </label>
           <div className="uploading-outer" ref={uploadRef} style={{ border: "none", padding: 0, margin: 0 }}>
             <div className="uploadButton">
@@ -137,7 +160,7 @@ const Profile = ({ watch, register, setValue, error }) => {
 
         <div className="form-group">
           <label>
-            Upload your picture
+            Upload your picture  <span className="required-form">*</span>
           </label>
           <div className="uploading-outer" ref={profileRef} style={{ border: "none", padding: 0, margin: 0 }}>
             <div className="uploadButton">

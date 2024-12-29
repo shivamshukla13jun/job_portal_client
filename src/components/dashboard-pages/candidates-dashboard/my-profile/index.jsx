@@ -25,6 +25,7 @@ import { decrypt, encrypt } from "@/lib/encrypt";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import Achievements from "./components/Achievements";
 import PreviewOriginalDataModal from "./components/PreviewOrginalData";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 
 const index = () => {
@@ -47,7 +48,7 @@ const index = () => {
     enabled: !!userInfo._id,
   });
 
-  const { register,control, handleSubmit, watch,getValues, formState: { errors }, setValue, reset } = useForm({
+  const { register,control, handleSubmit, watch, formState: { errors }, setValue, reset } = useForm({
     resolver: yupResolver(candidateSchema),
     defaultValues: {
       myProfile: {
@@ -58,6 +59,7 @@ const index = () => {
           last: '',
         },
         designation:"",
+        experience:"",
         gender: '',
         dob: new Date(),
         marital_status: '',
@@ -155,6 +157,7 @@ const index = () => {
       references: data.references,
       hear_about_us: watch("hear_about_us").split(","),
       cv: data.myProfile.upload_cv,
+      experience: data.myProfile.experience,
       profile: data.myProfile.profile,
       "achievement": data.achievement,
     }
@@ -178,6 +181,7 @@ const index = () => {
             last: data.name.split(" ")[3],
           },
           designation:data.designation,
+          experience:data.experience,
           gender: data.gender,
           dob: new Date(data.dob),
           marital_status: data.marital_status,
@@ -225,17 +229,7 @@ const index = () => {
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardCandidatesHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardCandidatesSidebar />
+     <DashboardSidebar/>
       {/* <!-- End Candidates Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

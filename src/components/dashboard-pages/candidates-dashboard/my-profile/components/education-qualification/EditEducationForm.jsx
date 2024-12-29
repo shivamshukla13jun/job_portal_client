@@ -13,12 +13,12 @@ const EditEducationForm = ({ watch, register, setValue, error, index }) => {
             <h4>Education Form</h4>
             <div className='row form-group mt-4'>
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Name of Institution</label>
+                    <label>Name of Institution  <span className="required-form">*</span></label>
                     <input type="text" {...register(`education.${index}.name`)} placeholder="Mumbai University" required />
                 </div>
 
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Qualification</label>
+                    <label>Qualification  <span className="required-form">*</span></label>
                     <select  {...register(`education.${index}.qualification`)} required>
                         <option value={""}>Select Qualification</option>
                         {degreeSpecialisationValues.map((item)=><option value={item.label}>{item.label}</option>)}
@@ -26,7 +26,7 @@ const EditEducationForm = ({ watch, register, setValue, error, index }) => {
                          </div>
 
                 {/* <div className="form-group col-lg-6 col-md-12">
-                    <label>Start Date</label>
+                    <label>Start Date  <span className="required-form">*</span></label>
                     <div>
                         <DatePicker
                             id='educationFromDate'
@@ -37,7 +37,7 @@ const EditEducationForm = ({ watch, register, setValue, error, index }) => {
                 </div> */}
 
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Passing Year</label>
+                    <label>Passing Year  <span className="required-form">*</span></label>
                     <div>
                         <DatePicker
                             id='educationToDate'
@@ -48,7 +48,7 @@ const EditEducationForm = ({ watch, register, setValue, error, index }) => {
                 </div>
 
                 {/* <div className="form-group col-lg-12 col-md-12">
-                    <label>Certificate</label>
+                    <label>Certificate  <span className="required-form">*</span></label>
                     <div className="uploading-outer" style={{ border: "none", padding: 0, margin: 0 }}>
                         <div className="uploadButton">
                             <input
@@ -70,7 +70,7 @@ const EditEducationForm = ({ watch, register, setValue, error, index }) => {
                                 htmlFor={`upload-${index}`}
                             >
                                 {(watch?.certificate?.name || watch?.certificate?.originalname) || "Upload File"}
-                            </label>
+                              <span className="required-form">*</span></label>
                         </div>
                     </div>
                 </div> */}

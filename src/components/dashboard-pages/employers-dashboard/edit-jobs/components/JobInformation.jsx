@@ -57,6 +57,7 @@ const JobInformation = ({ watch, register, setValue, error }) => {
             ))}
           </select>
         </div>
+      
       </div>
     </div >
   );

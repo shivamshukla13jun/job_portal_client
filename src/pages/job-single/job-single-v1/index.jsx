@@ -121,7 +121,7 @@ const JobSingleDynamicV1 = () => {
                   <ul className="job-info">
                     <li>
                       <span className="icon flaticon-briefcase"></span>
-                      {data?.company?.name}
+                      {data?.employerId?.business_name}
                     </li>
                     {/* compnay info */}
                     <li>

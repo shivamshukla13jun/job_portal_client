@@ -14,17 +14,25 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { get, getById } from "@/services/api";
 import CandidateList from "./components/CandidateList";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const Index = () => {
   const userInfo = useUserInfo();
-  const [statrtdate, setStartdate] = useState("")
-  //console.log("userInfo dshboad",userInfo)
+  console.log("userInfo??",userInfo)
 
 
   const { data, isLoading } = useQuery({
-    queryKey: [`dashboard/employer`, statrtdate],
+    queryKey: [`dashboard/employer`, userInfo],
     queryFn: async () => {
       let res = (await getById(`dashboard/employer`,userInfo?.userTypeValue?._id)).data.data
+      return res;
+    },
+    enabled: !!userInfo?.userTypeValue?._id
+  });
+  const { data:GraphData, isLoading:IsGraphLoading } = useQuery({
+    queryKey: [`dashboard/graph/employer`, userInfo],
+    queryFn: async () => {
+      let res = (await getById(`dashboard/graph/employer`,userInfo?.userTypeValue?._id)).data.data
       return res;
     },
     enabled: !!userInfo?.userTypeValue?._id
@@ -35,17 +43,7 @@ const Index = () => {
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-
-      {/* <LoginPopup /> */}
-      {/* End Login Popup Modal */}
-
-      <DashboardHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardEmployerSidebar />
+<DashboardSidebar/>
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { get, getById } from "@/services/api";
 import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const Index = () => {
   const userInfo = useUserInfo();
@@ -34,16 +35,7 @@ console.log("userInfo dshboad",userInfo)
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
 
-      {/* <LoginPopup /> */}
-      {/* End Login Popup Modal */}
-
-      <DashboardHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardSubEmployerSidebar />
+      <DashboardSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

@@ -1,24 +1,19 @@
-import MobileMenu from "../../../header/MobileMenu";
-import DashboardHeader from "../../../header/DashboardHeader";
-import LoginPopup from "../../../common/form/login/LoginPopup";
-import BreadCrumb from "../../BreadCrumb";
-import CopyrightFooter from "../../CopyrightFooter";
+
 import Form from "./components/Form";
-import MenuToggler from "../../MenuToggler";
 import { useMutation } from "@tanstack/react-query";
 import { put } from "@/services/api";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { resetAuthenticatedSchema } from "@/validations/login";
 import { toast } from "react-toastify";
-import { decrypt } from "@/lib/encrypt";
 import useUserInfo from "@/utils/hooks/useUserInfo";
-import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
-import DashboardEmployerSidebar from "@/components/header/DashboardEmployerSidebar";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
+import MenuToggler from "@/components/dashboard-pages/MenuToggler";
+import CopyrightFooter from "@/components/dashboard-pages/CopyrightFooter";
+import BreadCrumb from "@/components/dashboard-pages/BreadCrumb";
 
-const index = () => {
+const ChangePassword = () => {
 
   const userInfo = useUserInfo();
 
@@ -58,16 +53,7 @@ const index = () => {
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
 
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardEmployerSidebar />
+      <DashboardSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
@@ -101,4 +87,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default ChangePassword;

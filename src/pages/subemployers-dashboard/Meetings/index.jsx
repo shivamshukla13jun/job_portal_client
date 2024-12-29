@@ -6,6 +6,7 @@ import MobileMenu from "@/components/header/MobileMenu";
 import LoginPopup from "@/components/common/form/forgot/LoginPopup";
 import DashboardHeader from "@/components/header/DashboardHeader";
 import CopyrightFooter from "@/components/dashboard-pages/CopyrightFooter";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
 
@@ -13,17 +14,7 @@ const index = () => {
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardSubEmployerSidebar />
+      <DashboardSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

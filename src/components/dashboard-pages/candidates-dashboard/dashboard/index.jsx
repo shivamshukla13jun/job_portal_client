@@ -14,6 +14,7 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import { get } from "@/services/api";
 import useDebounce from "@/utils/hooks/useDebounce";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const Index = () => {
   const userInfo = useUserInfo();
@@ -85,18 +86,8 @@ console.log({Matchjobs})
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
-      {/* <!-- Header Span for hight --> */}
 
-      {/* <LoginPopup /> */}
-      {/* End Login Popup Modal */}
-
-      <DashboardCandidatesHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardCandidatesSidebar />
+      <DashboardSidebar />
       {/* <!-- End Candidates Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

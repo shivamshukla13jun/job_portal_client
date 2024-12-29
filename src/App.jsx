@@ -22,7 +22,6 @@ import JobSingleDynamicV1 from "./pages/job-single/job-single-v1";
 import ScrollTopBehaviour from "./components/common/ScrollTopBehaviour";
 import EmployerListPage1 from "./pages/employers-list/employers-list-v1";
 import EmployersSingleV1 from "./pages/employers-single/employers-single-v1";
-import CandidateListPage1 from "./pages/candidates-list/candidates-list-v1";
 import CandidateSingleDynamicV1 from "./pages/candidates-single/candidates-single-v1";
 import BlogListpage1 from "./pages/blog/blog-list-v1";
 import BlogDetailsDynamic from "./pages/blog/blog-details";
@@ -38,6 +37,7 @@ import RegisterPage from "./pages/others/register";
 import Verify from "./pages/others/verify";
 import ForgotPasswordPage from "./pages/others/forgot";
 import ResetPassword from "./pages/others/resetpassword";
+
 // admin
 
 // eemployers
@@ -46,17 +46,14 @@ import CompanyProfileEmploeeDBPage from "./pages/employers-dashboard/company-pro
 import PostJobsEmploeeDBPage from "./pages/employers-dashboard/post-jobs";
 import ManageJobsEmploeeDBPage from "./pages/employers-dashboard/manage-jobs";
 import AllApplicantsEmploeesPage from "./pages/employers-dashboard/all-applicants";
-import ShortListedResumeEmploeeDBPage from "./pages/employers-dashboard/shortlisted-resumes";
 import PackageEmploeeDBPage from "./pages/employers-dashboard/packages";
 import MessageEmploeeDBPage from "./pages/employers-dashboard/messages";
-import ResumeAlertsEmploeeDBPage from "./pages/employers-dashboard/resume-alerts";
-import ChangePasswordEmploeeDBPage from "./pages/employers-dashboard/change-password";
+import ResumeAlertsEmploeeDBPage from "./pages/employers-dashboard/resume-alerts"
 import EditJob from "./components/dashboard-pages/employers-dashboard/edit-jobs";
 import SubEmployer from "./pages/employers-dashboard/subemployers";
 // candidates
 import DashboardPage from "./pages/candidates-dashboard/dashboard";
 import AppliedJobsPage from "./pages/candidates-dashboard/applied-jobs";
-import ChangePasswordPage from "./pages/candidates-dashboard/change-password";
 import MyProfilePage from "./pages/candidates-dashboard/my-profile";
 import MyResumePage from "./pages/candidates-dashboard/my-resume";
 import PackagePage from "./pages/candidates-dashboard/packages";
@@ -65,12 +62,13 @@ import SavedJobsPage from "./pages/candidates-dashboard/saved-jobs";
 
 // subemployers 
 import DashboardSubemplyerDBPage from "./pages/subemployers-dashboard/dashboard";
-import ShortListedResumeSubemployeeEmploeeDBPage from "./pages/subemployers-dashboard/shortlisted-resumes";
+import ShortListedResumes from "./pages/shortlisted-resumes";
 // authotrizations
 import UnauthorizedPage from "./pages/others/UnauthorizedPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MeetingList from "./pages/subemployers-dashboard/Meetings";
 import CandidateListPage2 from "./pages/candidates-list/candidates-list-v2";
+import ChangePassword from "./pages/change-password/ChangePassword";
 function App() {
 
   const query = new QueryClient({
@@ -108,6 +106,7 @@ function App() {
                 <Route path="employer/:id" element={<EmployersSingleV1 />} />
                 <Route path="candidates-list-v1" element={<CandidateListPage2 />} />
                 <Route path="candidate/:id" element={<CandidateSingleDynamicV1 />} />
+                <Route path="applicant/:id" element={<CandidateSingleDynamicV1 />} />
                 <Route path="blog-list-v1" element={<BlogListpage1 />} />
                 <Route path="blog-details/:id" element={<BlogDetailsDynamic />} />
                 <Route path="about" element={<AboutPage />} />
@@ -136,11 +135,13 @@ function App() {
                   <Route path="edit-job/:id" element={<EditJob />} />
                   <Route path="manage-jobs" element={<ManageJobsEmploeeDBPage />} />
                   <Route path="all-applicants" element={<AllApplicantsEmploeesPage />} />
-                  <Route path="shortlisted-resumes" element={<ShortListedResumeEmploeeDBPage />} />
+                  <Route path="shortlisted-resumes/:EmployerId" element={<ShortListedResumes />} />
+                  <Route path="meetinglinks/:createdBy" element={<MeetingList />} />
+
                   <Route path="packages" element={<PackageEmploeeDBPage />} />
                   <Route path="messages" element={<MessageEmploeeDBPage />} />
                   <Route path="resume-alerts" element={<ResumeAlertsEmploeeDBPage />} />
-                  <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
+                  <Route path="change-password" element={<ChangePassword />} />
                 </Route>
               
                 <Route 
@@ -152,9 +153,9 @@ function App() {
                 }
               >
                   <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
-                  <Route path="meetinglinks" element={<MeetingList />} />
-                  <Route path="shortlisted-resumes" element={<ShortListedResumeSubemployeeEmploeeDBPage />} />
-                  <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
+                  <Route path="meetinglinks/:createdBy" element={<MeetingList />} />
+                  <Route path="shortlisted-resumes/:SubEmployerId" element={<ShortListedResumes />} />
+                  <Route path="change-password" element={<ChangePassword />} />
                 </Route>
                 <Route 
                 path="candidates-dashboard" 
@@ -167,7 +168,7 @@ function App() {
                   <Route path="dashboard" element={<DashboardPage />} />
                   <Route path="applied-jobs" element={<AppliedJobsPage />} />
                   <Route path="saved-jobs" element={<SavedJobsPage />} />
-                  <Route path="change-password" element={<ChangePasswordPage />} />
+                  <Route path="change-password" element={<ChangePassword />} />
                   <Route path="my-profile" element={<MyProfilePage />} />
                   <Route path="my-resume" element={<MyResumePage />} />
                   <Route path="packages" element={<PackagePage />} />

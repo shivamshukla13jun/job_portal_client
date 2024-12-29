@@ -1,13 +1,13 @@
-import ChangePassword from "@/components/dashboard-pages/candidates-dashboard/change-password";
 
 import MetaComponent from "@/components/common/MetaComponent";
+import ChangePassword from "./ChangePassword";
 
 const metadata = {
   title: "Change Password || Chem Pharma - Job Borad ReactJs Template",
   description: "Chem Pharma - Job Borad ReactJs Template",
 };
 
-const ChangePasswordPage = () => {
+const ChangePasswordEmploeeDBPage = () => {
   return (
     <>
       <MetaComponent meta={metadata} />
@@ -16,4 +16,4 @@ const ChangePasswordPage = () => {
   );
 };
 
-export default ChangePasswordPage;
+export default ChangePasswordEmploeeDBPage;

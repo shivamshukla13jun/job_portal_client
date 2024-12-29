@@ -9,6 +9,7 @@ import MenuToggler from "../../MenuToggler";
 import { useQuery } from "@tanstack/react-query";
 import { get } from "@/services/api";
 import { useState } from "react";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
    const urlSearch=new URLSearchParams(window.location.search)
@@ -18,7 +19,7 @@ const index = () => {
     status:urlSearch.get("status") || "shortlisted",
     createdAt: '',
     sort: 'new'
-});
+   });
   const { data, isLoading } = useQuery({
     queryKey: ['appliedJobs',search.createdAt,search.status],
     queryFn: async () => {
@@ -26,7 +27,6 @@ const index = () => {
       return res;
     }
   });
-  //console.log("data???",data)
    const title=search.status==="rejected"?"Rejected Jobs":search.status==="pending"?"Pending Jobs":"Shortlisted Jobs"
   if (isLoading) return <div>Loading...</div>
 
@@ -34,18 +34,7 @@ const index = () => {
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardCandidatesHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardCandidatesSidebar />
-      {/* <!-- End Candidates Sidebar Menu --> */}
+      <DashboardSidebar/>
 
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">

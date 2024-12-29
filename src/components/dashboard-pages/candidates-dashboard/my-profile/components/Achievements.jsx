@@ -15,7 +15,7 @@ const Achievements = ({ watch, register, setValue, error, control }) => {
                 <div className="row mb-3" key={index}>
                     <div className="col-md-6">
                         <label>
-                            Year of Achievement <span className="labelerrorssss">*</span>
+                            Year of Achievement (What are the achieements in your job career )  <span className="required-form">*</span>
                         </label>
                         <Controller
                             name={`achievement.${index}.year`}
@@ -36,7 +36,7 @@ const Achievements = ({ watch, register, setValue, error, control }) => {
                         )}
 
                         <label>
-                            Description <span className="labelerrorssss">*</span>
+                            Description  <span className="required-form">*</span>
                         </label>
                         <textarea
                             {...register(`achievement.${index}.description`)}

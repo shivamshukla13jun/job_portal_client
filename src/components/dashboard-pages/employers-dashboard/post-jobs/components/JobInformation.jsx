@@ -3,7 +3,7 @@ import { cities } from "@/data/cities";
 import { skillValues } from "@/data/jobForm";
 import { jobTypeList } from "@/utils/jobTypeList";
 import Select from "react-select";
-
+import InterviewDetails from "./InterviewDetails";
 const JobInformation = ({ watch, register, setValue, error }) => {
 
   return (
@@ -58,6 +58,7 @@ const JobInformation = ({ watch, register, setValue, error }) => {
             ))}
           </select>
         </div>
+      
       </div>
     </div >
   );

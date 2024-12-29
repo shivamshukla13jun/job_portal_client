@@ -9,6 +9,7 @@ import MenuToggler from "../../MenuToggler";
 import { useQuery } from "@tanstack/react-query";
 import { get } from "@/services/api";
 import { useState } from "react";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
 
@@ -40,16 +41,7 @@ const handleSerch=(name,value)=>{
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
 
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardCandidatesHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardCandidatesSidebar />
+      <DashboardSidebar />
       {/* <!-- End Candidates Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

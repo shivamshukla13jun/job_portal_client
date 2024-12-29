@@ -6,27 +6,29 @@ import { Trash2 } from "lucide-react";
 import MeetingLinkView from "./MeetingLinkView";
 import { del, get } from "@/services/api";
 import useUserInfo from "@/utils/hooks/useUserInfo";
+import { useParams } from "react-router-dom";
 
 const MeetingList = () => {
   const [open, setOpen] = useState(false);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
+  const {createdBy="",}=useParams()
 
   const queryClient = useQueryClient();
   const userInfo = useUserInfo();
 
   // Fetch meeting links
   const { data: meetings, isLoading } = useQuery({
-    queryKey: ["meetinglinks", userInfo?._id],
+    queryKey: ["meetinglinks",createdBy, userInfo?._id],
     queryFn: async () => {
       try {
-        const res = await get(`sub-employers/meetings?createdBy=${userInfo?._id}`);
+        const res = await get(`sub-employers/meetings?createdBy=${createdBy}`);
         return res.data.data;
       } catch (error) {
         toast.error("Failed to fetch meetings.");
         throw error;
       }
     },
-    enabled: Boolean(userInfo?._id),
+    enabled: Boolean(createdBy),
   });
 
   // Delete meeting mutation

@@ -12,6 +12,7 @@ import { get, getById, put } from "@/services/api";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
   const queryClient = useQueryClient();
@@ -41,17 +42,7 @@ let title=Array.isArray(jobNames) && jobNames.length>0 ?jobNames?.find((item=>it
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardEmployerSidebar />
+      <DashboardSidebar/>
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

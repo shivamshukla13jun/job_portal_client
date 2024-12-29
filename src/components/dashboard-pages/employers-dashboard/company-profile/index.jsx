@@ -20,6 +20,7 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import BusinessPreviewModal from "./components/BusinessPreviewModal";
 import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
 import DashboardEmployerSidebar from "@/components/header/DashboardEmployerSidebar";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
   const userInfo = useUserInfo();
@@ -191,10 +192,7 @@ const index = () => {
 
   return (
     <div className="page-wrapper dashboard">
-      <LoginPopup />
-      <DashboardHeader />
-      <MobileMenu />
-      <DashboardEmployerSidebar />
+    <DashboardSidebar/>
       <section className="user-dashboard">
         <div className="dashboard-outer">
           <form className="dashboard-outer">

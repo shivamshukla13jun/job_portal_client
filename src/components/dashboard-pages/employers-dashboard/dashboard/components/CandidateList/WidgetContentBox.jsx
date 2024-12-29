@@ -91,6 +91,11 @@ const WidgetContentBox = () => {
                       {candidate?.contact?.current_address?.city || "N/A"}
                     </li>
                     <li>
+                 
+                      <span className="icon flaticon-money"></span> Experience:
+                      {candidate.experience} to {candidate.experience + 1} years 
+                    </li>
+                    <li>
                       <span className="icon flaticon-money"></span> Match Score:
                       {candidate.matchScore || 0}
                     </li>
@@ -100,22 +105,13 @@ const WidgetContentBox = () => {
                   <ul className="post-tags">
                     {candidate.employment?.flatMap((emp) =>
                       emp.categories?.map((cat, i) => (
-                        <li key={i}>
+                        <li  key={i}>
                           <a href="#">{cat.value}</a>
                         </li>
                       ))
                     )}
                   </ul>
                   <ul >
-                  {/* <li>
-                    <div style={{ width: 80, height: 80, margin: "0 auto" }}>
-
-                  <CircularProgressbar
-                    value={candidate.matchScore || 0}
-                    text={`${candidate.matchScore || 0}%`}
-                  />
-                  </div>
-                    </li> */}
                   </ul>
                  
                 </div>

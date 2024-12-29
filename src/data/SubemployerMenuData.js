@@ -5,21 +5,15 @@ const SubemployerMenu = [
     icon: "la-home",
     routePath: "/subemployers-dashboard/dashboard",
     active: "active",
+    paramtype:"",
   },
-  // {
-  //   id: 2,
-  //   name: "Company Profile",
-  //   icon: "la-user-tie",
-  //   routePath: "/subemployers-dashboard/company-profile",
-  //   active: "",
-  //   userAcitive:""
-  // },
   {
     id: 2,
     name: "Meeting links",
     icon: "la-user-tie",
     routePath: "/subemployers-dashboard/meetinglinks",
     active: "",
+    paramtype:"createdBy",
     userAcitive:""
   },
  
@@ -29,6 +23,7 @@ const SubemployerMenu = [
     icon: "la-bookmark-o",
     routePath: "/subemployers-dashboard/shortlisted-resumes",
     active: "",
+     paramtype:"SubEmployerId",
   },
   {
     id: 11,
@@ -36,6 +31,7 @@ const SubemployerMenu = [
     icon: "la-sign-out",
     routePath: "/login",
     active: "",
+     paramtype:"",
   },
 
 ];

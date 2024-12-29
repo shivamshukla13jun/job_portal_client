@@ -7,6 +7,7 @@ import { SubemployerdashboardResources, AccessLevel } from '@/data/SubEmployerda
 import useUserInfo from '@/utils/hooks/useUserInfo';
 import { post } from '@/services/api';
 import SubEMployerForm from './SubEMployerForm';
+import { useState } from 'react';
 
 const SubEmployerCreateModal = ({ isOpen, onClose }) => {
     const userInfo = useUserInfo();
@@ -18,13 +19,13 @@ const SubEmployerCreateModal = ({ isOpen, onClose }) => {
             phone: "",
             password:"",
             department:"",
-            dashboardPermissions: SubemployerdashboardResources.reduce((acc, resource) => {
-                acc[resource.resource] = Object.values(AccessLevel).reduce((permAcc, perm) => {
-                    permAcc[perm] = false; // Default all permissions to false
-                    return permAcc;
-                }, {});
-                return acc;
-            }, {})
+            // dashboardPermissions: SubemployerdashboardResources.reduce((acc, resource) => {
+            //     acc[resource.resource] = Object.values(AccessLevel).reduce((permAcc, perm) => {
+            //         permAcc[perm] = false; // Default all permissions to false
+            //         return permAcc;
+            //     }, {});
+            //     return acc;
+            // }, {})
         }
     });
 
@@ -35,7 +36,7 @@ const SubEmployerCreateModal = ({ isOpen, onClose }) => {
         },
         onSuccess: () => {
             toast.success('Sub-employer created successfully');
-            queryClient.invalidateQueries(['subEmployers']);
+            queryClient.invalidateQueries(['subEmployers','employer/getSubEmployers']);
             onClose();
         },
         onError: (error) => {
@@ -54,10 +55,6 @@ const SubEmployerCreateModal = ({ isOpen, onClose }) => {
         });
     };
 
-    // Dynamically watch `dashboardPermissions`
-    const permissionsWatch = watch("dashboardPermissions");
-    //console.log("Live Dashboard Permissions:", permissionsWatch);
-
     return (
         <Modal show={isOpen} onHide={onClose}>
             <Modal.Header closeButton>
@@ -68,15 +65,15 @@ const SubEmployerCreateModal = ({ isOpen, onClose }) => {
                   <SubEMployerForm control={control} register={register} errors={errors}/>
 
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={onClose}>
+                        <Button variant="secondary"disabled={createMutation.isPending} onClick={onClose}>
                             Cancel
                         </Button>
                         <Button
                             variant="primary"
                             type="submit"
-                            disabled={createMutation.isLoading}
+                            disabled={createMutation.isPending}
                         >
-                            {createMutation.isLoading ? 'Creating...' : 'Create'}
+                            {createMutation.isPending ? 'Creating...' : 'Create'}
                         </Button>
                     </Modal.Footer>
                 </Form>

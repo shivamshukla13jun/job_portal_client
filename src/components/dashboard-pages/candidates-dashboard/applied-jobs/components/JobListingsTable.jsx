@@ -58,10 +58,10 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
                                 <Link to={`${paths.job}/${item?.job?._id}`}>{capitalizeFirstLetter(item?.job?.title)}</Link>
                               </h4>
                               <ul className="job-info">
-                                <li>
-                                  <span className="icon flaticon-briefcase"></span>
-                                  {item?.job?.company?.name}
-                                </li>
+                              <li>
+              <span className="icon flaticon-briefcase"></span>
+              {item?.job?.employerId?.business_name}
+            </li>
                                 <li>
                                   <span className="icon flaticon-map-locator"></span>
                                   {item?.job?.location}

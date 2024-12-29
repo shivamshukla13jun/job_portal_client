@@ -19,6 +19,8 @@ import { post } from "@/services/api";
 import { jobSchema } from "@/validations/dashboard/employer/job";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import PreviewModal from "./components/PreviewModal";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
+import InterviewDetails from "./components/InterviewDetails";
 
 const Index = () => {
   const userInfo = useUserInfo();
@@ -32,7 +34,13 @@ const Index = () => {
       title: '',
       location: '',
       place: '',
-      categories: [],
+      interview_details: {
+        date:new Date(),
+        time:"10:00",
+        location: "",
+        type: "",
+        notes: ""
+      },
       opening: 1,
       jobtype: "",
       candidate_requirement: {
@@ -85,10 +93,7 @@ const Index = () => {
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
-      <LoginPopup />
-      <DashboardHeader />
-      <MobileMenu />
-      <DashboardEmployerSidebar />
+    <DashboardSidebar/>
 
       <section className="user-dashboard">
         <form className="dashboard-outer">
@@ -105,6 +110,18 @@ const Index = () => {
                     </div>
                     <div className="widget-content">
                       <JobInformation watch={watch} register={register} setValue={setValue} error={errors} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-12">
+                <div className="ls-widget">
+                  <div className="tabs-box">
+                    <div className="widget-title">
+                      <h4>Interview Details</h4>
+                    </div>
+                    <div className="widget-content">
+                      <InterviewDetails watch={watch} register={register} setValue={setValue} error={errors} />
                     </div>
                   </div>
                 </div>

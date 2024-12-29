@@ -1,6 +1,3 @@
-import MobileMenu from "../../../header/MobileMenu";
-import DashboardHeader from "../../../header/DashboardHeader";
-import LoginPopup from "../../../common/form/login/LoginPopup";
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import WidgetToFilterBox from "./components/WidgetToFilterBox";
@@ -12,9 +9,11 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import useDebounce from "@/utils/hooks/useDebounce";
 import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
   const userInfo = useUserInfo();
+
   const [search, setSearch] = useState({
     page: 1,
     limit: 10,
@@ -44,17 +43,7 @@ const handleSerch=(name,value)=>{
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardSubEmployerSidebar />
+      <DashboardSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

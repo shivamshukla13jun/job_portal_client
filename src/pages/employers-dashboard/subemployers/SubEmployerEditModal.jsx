@@ -6,19 +6,31 @@ import { toast } from 'react-toastify';
 import { subEmployerService } from '@/services/subemployerservice';
 import SubEMployerForm from './SubEMployerForm';
 import { put } from '@/services/api';
+import { useEffect } from 'react';
 
 const SubEmployerEditModal = ({ subEmployer, isOpen, onClose }) => {
+    console.log("subemployer",subEmployer)
     const queryClient = useQueryClient();
-    const { control, handleSubmit, register, formState: { errors } } = useForm({
+    const { control, handleSubmit, register,reset, formState: { errors } } = useForm({
         defaultValues: {
-            name: subEmployer.name | "",
-            email: subEmployer.email | "",
-            phone: subEmployer.phone | "",
+            name: subEmployer?.name | "",
+            email: subEmployer?.email | "",
+            phone: subEmployer?.phone | "",
             department:subEmployer?.department || ""
             // dashboardPermissions: subEmployer.dashboardPermissions.map(p => p.resource)
         }
     });
-
+     // Update form values when subEmployer changes
+     React.useEffect(() => {
+        if (subEmployer) {
+            reset({
+                name: subEmployer.name || "",
+                email: subEmployer.email || "",
+                phone: subEmployer.phone || "",
+                department: subEmployer.department || ""
+            });
+        }
+    }, [subEmployer, reset]);
     // Update sub-employer mutation
     const updateMutation = useMutation({
         mutationFn: (data) => put("sub-employers",subEmployer._id, data),
@@ -48,11 +60,13 @@ const SubEmployerEditModal = ({ subEmployer, isOpen, onClose }) => {
                 <Form onSubmit={handleSubmit(onSubmit)}>
                 <SubEMployerForm control={control} register={register} errors={errors} isEdit={true}/>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={onClose}>
+                        <Button variant="secondary"  disabled={updateMutation.isPending} onClick={onClose}>
                             Cancel
                         </Button>
-                        <Button variant="primary" type="submit">
-                            Update
+                        <Button
+                         disabled={updateMutation.isPending}
+                        variant="primary" type="submit">
+                     {updateMutation.isPending ? 'Updaing...' : 'Update'}
                         </Button>
                     </Modal.Footer>
                 </Form>
