@@ -95,7 +95,7 @@ const EmploymentDetail = ({ watch, register, setValue, error ,control}) => {
                                         <thead>
                                             <tr>
                                                 <th scope="col">No.</th>
-                                                <th scope="col">Employer Name</th>
+                                                <th scope="col">Company Name</th>
                                                 <th scope="col">Position</th>
                                                 <th scope="col">Department</th>
                                                 <th scope="col">Job Sector</th>

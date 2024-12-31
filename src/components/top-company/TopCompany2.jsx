@@ -58,7 +58,7 @@ const TopCompany2 = () => {
                 alt="top company"
               />
             </figure>
-            <h4 className="name">.employerId?.business_name}</h4>
+            <h4 className="name">{company.name}</h4>
           </div>
         </Link>
       ))}

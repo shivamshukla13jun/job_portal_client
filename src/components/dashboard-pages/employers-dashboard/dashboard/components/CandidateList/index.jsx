@@ -7,7 +7,7 @@ const Index = () => {
       <div className="ls-widget">
         <div className="tabs-box">
           <div className="widget-title">
-            <h4>Candidates</h4>
+            <h4>Matching Candidates</h4>
             <WidgetTopFilterBox  />
           </div>
           {/* End top widget filter bar */}

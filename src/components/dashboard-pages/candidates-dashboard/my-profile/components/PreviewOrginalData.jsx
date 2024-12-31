@@ -115,7 +115,7 @@ const PreviewOriginalDataModal = ({ previewData, setPreviewData }) => {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th scope="col">Employer Name</th>
+                  <th scope="col">Company Name</th>
                   <th scope="col">Position</th>
                   <th scope="col">Department</th>
                   <th scope="col">Job Sector</th>

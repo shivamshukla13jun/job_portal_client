@@ -61,7 +61,7 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
                               <ul className="job-info">
                                 <li>
                                   <span className="icon flaticon-briefcase"></span>
-                                  {item?.company?.name}
+                                  {item?.employerId?.business_name}
                                 </li>
                                 <li>
                                   <span className="icon flaticon-map-locator"></span>

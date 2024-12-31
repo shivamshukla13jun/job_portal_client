@@ -11,7 +11,7 @@ const EditReferenceList = ({ watch, register, setValue, error, index }) => {
             <h4>Reference Form</h4>
             <div className='row form-group mt-4'>
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Employer Name <span className="required-form">*</span></label>
+                    <label>Company Name <span className="required-form">*</span></label>
                     <input
                         type="text"
                         placeholder="XYZ"

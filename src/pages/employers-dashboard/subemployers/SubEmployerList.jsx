@@ -94,8 +94,8 @@ const SubEmployerList = () => {
               </div>
 
               <div className="widget-content">
-                <div className="table-responsive">
-                  <Table striped hover bordered className="manage-job-table">
+                <div className="table-outer">
+                  <Table sclassName=" default-table manage-job-table">
                     <thead className="thead-light">
                       <tr>
                         <th>Name</th>
