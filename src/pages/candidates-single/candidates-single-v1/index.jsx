@@ -100,9 +100,7 @@ const CandidateSingleDynamicV1 = () => {
       toast.info('Download failed');
     }
   };
-  const handleSelectCV=()=>{
-    toast.info("Cv Selected")
-  }
+
  //console.log("SubEmployers",SubEmployers)
   if (isLoading) return <div>Loading...</div>
 
