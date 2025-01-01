@@ -12,7 +12,7 @@ import { Badge } from "react-bootstrap";
 const Applicants = ({ data ,search}) => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const navigate=useNavigate()
-    const handleDelete = useDeleteForwardcv()
+    const handleDelete = useDeleteForwardcv(search)
   const handleAccept = (id,subemployerid)=>{
     setCreateModalOpen(id)
   }
@@ -39,31 +39,31 @@ const Applicants = ({ data ,search}) => {
   return (
     <>
     <div className="row">
-      {data?.map(({_id,resume, candidateId,job,department }) => (
+      {data?.map(({_id,resume, candidateDetails,job,department }) => (
         <div
           className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
-          key={candidateId?._id}
+          key={candidateDetails?._id}
         >
           <div className="inner-box">
             <div className="content">
               <figure className="image">
                 <img
-                  src={API_CANDIDATE_PATH + candidateId?.profile?.filename}
+                  src={API_CANDIDATE_PATH + candidateDetails?.profile?.filename}
                   alt="candidates"
                 />
               </figure>
               <h4 className="name">
-                <Link to={`${paths.publiccandidate}/${candidateId?._id}`}>
-                  {candidateId?.name}
+                <Link to={`${paths.publiccandidate}/${candidateDetails?._id}`}>
+                  {candidateDetails?.name}
                 </Link>
               </h4>
               <ul className="candidate-info">
                 <li className="designation">
-                  {candidateId?.designation || "Designation"}
+                  {candidateDetails?.designation || "Designation"}
                 </li>
                 <li>
                   <span className="icon flaticon-map-locator"></span>{" "}
-                  {candidateId?.contact?.current_address?.country}
+                  {candidateDetails?.contact?.current_address?.country}
                 </li>
                 <li>
                   <span className="icon flaticon-money"></span>
@@ -72,7 +72,7 @@ const Applicants = ({ data ,search}) => {
               </ul>
 
               <ul className="post-tags">
-                {candidateId?.education?.map((val, i) => (
+                {candidateDetails?.education?.map((val, i) => (
                   <li key={i}>
                     <a>{val.qualification}</a>
                   </li>
@@ -83,28 +83,25 @@ const Applicants = ({ data ,search}) => {
             <div className="option-box">
               <ul className="option-list">
               <li>
-                  <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${candidateId._id}`)}>
+                  <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${candidateDetails._id}`)}>
                     <span className="la la-eye"></span>
                   </button>
                 </li>
                 <li>
-                  <button data-text="Download Cv" onClick={() => handleDownload(API_CANDIDATE_PATH + candidateId?.cv?.filename,candidateId?.cv?.originalname)}>
+                  <button data-text="Download Cv" onClick={() => handleDownload(API_CANDIDATE_PATH + candidateDetails?.cv?.filename,candidateDetails?.cv?.originalname)}>
                     <span className="la la-download"></span>
                   </button>
                 </li>
+              
                 <li>
-                  <button data-text="Create Meeting" onClick={() => handleAccept(candidateId,'shortlisted')}>
-                    <span className="la la-plus"></span>
-                  </button>
-                </li>
-                <li>
-                  <button data-text="Delete Application" onClick={() => handleDelete(_id,job._id)}>
+                  <button data-text="Delete Application" onClick={() => handleDelete(_id)}>
                     <span className="la la-trash"></span>
                   </button>
                 </li>
               </ul>
 
             </div>
+            <br/>
               <Badge bg="success">By {department}</Badge>
           </div>
         </div>
