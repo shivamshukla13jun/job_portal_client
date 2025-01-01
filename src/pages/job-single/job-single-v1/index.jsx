@@ -129,10 +129,10 @@ const JobSingleDynamicV1 = () => {
                       {data?.location}
                     </li>
                     {/* location info */}
-                    <li>
+                    {/* <li>
                       <span className="icon flaticon-clock-3"></span>{" "}
                       {data?.timing?.job}
-                    </li>
+                    </li> */}
                     {/* time info */}
                     <li>
                       <span className="icon flaticon-money"></span>{" "}

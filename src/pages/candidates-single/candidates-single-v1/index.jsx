@@ -136,10 +136,10 @@ const CandidateSingleDynamicV1 = () => {
                       <span className="icon flaticon-map-locator"></span>
                       {`${data?.contact?.permanent_address?.state}, ${data?.contact?.permanent_address?.country}`}
                     </li>
-                    <li>
+                    {/* <li>
                       <span className="icon flaticon-money"></span>
                       ₹ {data?.expected_salary} / month
-                    </li>
+                    </li> */}
                     <li>
                       <span className="icon flaticon-clock"></span>
                       Member {new Date(data?.createdAt).toDateString()}
@@ -161,12 +161,12 @@ const CandidateSingleDynamicV1 = () => {
                     Download CV
                   </a>
 
-                  <a
+                  {/* <a
                     className="theme-btn btn-style-one me-2"
                     onClick={handleSelectCV}
                   >
                     Select CV
-                  </a>
+                  </a> */}
                   {
                     userInfo && userInfo?.userType?.name?.toLowerCase() === 'employer' && 
                     <a
@@ -216,20 +216,20 @@ const CandidateSingleDynamicV1 = () => {
                       <h4>{'Education'}</h4>
                     </div>
 
-                    {data?.educations?.length > 0 && data.educations.map((education) => (
-                      <div className="resume-block" key={education._id}>
+                    {data?.education?.length > 0 && data.education.map((item) => (
+                      <div className="resume-block" key={item._id}>
                         <div className="inner">
-                          <span className="name">{education.degree[0]?.toUpperCase()}</span>
+                          {/* <span className="name">{item.qualification?.toUpperCase()}</span> */}
                           <div className="title-box">
                             <div className="info-box">
-                              <h3>{education.degree}</h3>
-                              <span>{education.university}</span>
+                              <h3>{item.qualification}</h3>
+                              <span>{item.name}</span>
                             </div>
                             <div className="edit-box">
-                              <span className="year">{`${new Date(education.start_date).getFullYear()} - ${new Date(education.end_date).getFullYear()}`}</span>
+                              <span className="year">{`${new Date(item.to).getFullYear()}`}</span>
                             </div>
                           </div>
-                          <div className="text">{education.description}</div>
+                          {/* <div className="text">{item.description}</div> */}
                         </div>
                       </div>
                     ))}
@@ -240,48 +240,25 @@ const CandidateSingleDynamicV1 = () => {
                       <h4>{'Work & Experience'}</h4>
                     </div>
 
-                    {data?.work_experiences?.length > 0 ? data.work_experiences.map((workExp) => (
+                    {data?.employment?.length > 0 ? data.employment.map((workExp) => (
                       <div className="resume-block" key={workExp._id}>
                         <div className="inner">
-                          <span className="name">{workExp.position[0]?.toUpperCase()}</span>
+                          {/* <span className="name">{workExp.position?.toUpperCase()}</span> */}
                           <div className="title-box">
                             <div className="info-box">
                               <h3>{workExp.position}</h3>
-                              <span>{workExp.company_name}</span>
+                              <span>{workExp.name}</span>
                             </div>
                             <div className="edit-box">
-                              <span className="year">{`${new Date(workExp.start_date).getFullYear()} - ${new Date(workExp.end_date).getFullYear()}`}</span>
+                              <span className="year">{`${new Date(workExp.from).getFullYear()} - ${new Date(workExp.to).getFullYear()}`}</span>
                             </div>
                           </div>
-                          <div className="text">{workExp.description}</div>
+                          <div className="text">{workExp?.description}</div>
                         </div>
                       </div>
                     )):<></>}
                   </div>
-                  
-                  <div className={`resume-outer theme-yellow`}>
-                    <div className="upper-title">
-                      <h4>{'Awards'}</h4>
-                    </div>
-
-                    {data?.awards?.length > 0 && data.awards.map((award) => (
-                      <div className="resume-block" key={award._id}>
-                        <div className="inner">
-                          <span className="name">{award.award_name[0]?.toUpperCase()}</span>
-                          <div className="title-box">
-                            <div className="info-box">
-                              <h3>{award.award_name}</h3>
-                              <span>{ }</span>
-                            </div>
-                            <div className="edit-box">
-                              <span className="year">{`${new Date(award.start_date).getFullYear()} - ${new Date(award.end_date).getFullYear()}`}</span>
-                            </div>
-                          </div>
-                          <div className="text">{award.description}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                
                   {/* <!-- Candidate Resume End --> */}
                 </div>
               </div>

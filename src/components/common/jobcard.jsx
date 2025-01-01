@@ -54,10 +54,10 @@ export const JobCard = ({item}) => {
               <span className="icon flaticon-map-locator"></span>
               {item?.location}
             </li>
-            <li>
+            {/* <li>
               <span className="icon flaticon-clock-3"></span>
               {item?.timing?.job}
-            </li>
+            </li> */}
             <li>
               <span className="icon flaticon-money"></span>₹
               {item?.candidate_requirement?.salary_from} - ₹

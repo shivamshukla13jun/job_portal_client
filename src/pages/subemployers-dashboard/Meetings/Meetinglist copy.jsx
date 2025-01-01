@@ -11,14 +11,14 @@ import { useParams } from "react-router-dom";
 const MeetingList = () => {
   const [open, setOpen] = useState(false);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
-  const { createdBy = "" } = useParams();
+  const {createdBy="",}=useParams()
 
   const queryClient = useQueryClient();
   const userInfo = useUserInfo();
 
   // Fetch meeting links
   const { data: meetings, isLoading } = useQuery({
-    queryKey: ["meetinglinks", createdBy, userInfo?._id],
+    queryKey: ["meetinglinks",createdBy, userInfo?._id],
     queryFn: async () => {
       try {
         const res = await get(`sub-employers/meetings?createdBy=${createdBy}`);
@@ -61,10 +61,9 @@ const MeetingList = () => {
       <div className="row">
         <div className="col-lg-12">
           <div className="ls-widget">
-            {/* Start table widget content */}
             <div className="widget-content">
-              <div className="table-outer">
-                <table className="default-table manage-job-table">
+              <div className="table-responsive">
+                <Table striped hover bordered className="manage-job-table">
                   <thead>
                     <tr>
                       <th>Date</th>
@@ -75,53 +74,39 @@ const MeetingList = () => {
                       <th>Actions</th>
                     </tr>
                   </thead>
-
                   <tbody>
-                    {meetings?.length > 0 &&
-                      meetings.map((meeting, index) => (
-                        <tr key={meeting._id}>
-                          <td>
-                            {new Intl.DateTimeFormat("en-US", {
-                              month: "long",
-                              day: "numeric",
-                              year: "numeric",
-                            }).format(new Date(meeting.date))}{" "}
-                            <br />
-                          </td>
-                          <td>{meeting.time}</td>
-                          <td>{meeting.email}</td>
-                          <td>{meeting.phone}</td>
-                          <td>{meeting.message}</td>
-                          <td>
-                            <div className="option-box">
-                              <ul className="option-list">
-                                <li>
-                                  <button
-                                    data-text="View"
-                                    onClick={() => handleView(meeting)}
-                                  >
-                                    <span className="la la-eye"></span>
-                                  </button>
-                                </li>
-
-                                <li>
-                                  <button
-                                    data-text="Delete "
-                                    onClick={() => handleDelete(meeting._id)}
-                                  >
-                                    <span className="la la-trash"></span>
-                                  </button>
-                                </li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
+                    {meetings?.map((meeting) => (
+                      <tr key={meeting._id}>
+                        <td>{new Date(meeting.date).toLocaleDateString()}</td>
+                        <td>{meeting.time}</td>
+                        <td>{meeting.email}</td>
+                        <td>{meeting.phone}</td>
+                        <td>{meeting.message}</td>
+                        <td>
+                          <div className="d-flex justify-content-center align-items-center">
+                            <Button
+                              variant="outline-primary"
+                              size="sm"
+                              className="mr-2"
+                              onClick={() => handleView(meeting)}
+                            >
+                              View
+                            </Button>
+                            <Button
+                              variant="outline-danger"
+                              size="sm"
+                              onClick={() => handleDelete(meeting._id)}
+                            >
+                              <Trash2 size={16} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
-                </table>
+                </Table>
               </div>
             </div>
-            {/* End table widget content */}
           </div>
         </div>
       </div>
