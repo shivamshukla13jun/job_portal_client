@@ -24,13 +24,14 @@ const SearchBox = () => {
     return (
         <>
             <input
-                type="text"
+                type="search"
                 name="listing-search"
                 placeholder="Job title"
                 onChange={keywordHandler}
                 value={keyword}
+                className="form-control"
             />
-            <span className="icon flaticon-search-3"></span>
+            {/* <span className="icon flaticon-search-3"></span> */}
         </>
     );
 };

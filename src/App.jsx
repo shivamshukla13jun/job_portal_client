@@ -69,6 +69,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import MeetingList from "./pages/subemployers-dashboard/Meetings";
 import CandidateListPage2 from "./pages/candidates-list/candidates-list-v2";
 import ChangePassword from "./pages/change-password/ChangePassword";
+import CandidateListPage1 from "./pages/candidates-list/candidates-list-v1";
+import CandidateListPage3 from "./pages/candidates-list/candidates-list-v3";
+import CandidateListPage4 from "./pages/candidates-list/candidates-list-v4";
 function App() {
 
   const query = new QueryClient({
@@ -104,7 +107,7 @@ function App() {
                 <Route path="job/:id" element={<JobSingleDynamicV1 />} />
                 <Route path="employers-list-v1" element={<EmployerListPage1 />} />
                 <Route path="employer/:id" element={<EmployersSingleV1 />} />
-                <Route path="candidates-list-v1" element={<CandidateListPage2 />} />
+                <Route path="candidates-list-v1" element={<CandidateListPage4 />} />
                 <Route path="candidate/:id" element={<CandidateSingleDynamicV1 />} />
                 <Route path="applicant/:id" element={<CandidateSingleDynamicV1 />} />
                 <Route path="blog-list-v1" element={<BlogListpage1 />} />

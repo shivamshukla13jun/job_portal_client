@@ -18,6 +18,7 @@ export const paths = {
     employer_all_applicants: '/employers-dashboard/all-applicants',
     manage_jobs: '/employers-dashboard/manage-jobs',
     edit_job: '/employers-dashboard/edit-job',
+    shotlistesumes: '/employers-dashboard/shortlisted-resumes/',
     job_list: '/job-list-v1',
     job: '/job',
     blog: '/blog-list-v1',

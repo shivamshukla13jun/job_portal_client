@@ -66,16 +66,17 @@ const WidgetContentBox = () => {
       {data?.data?.length > 0 ? (
         <>
           {data?.data?.map((candidate) => (
-            <div className="col-lg-6 candidate-block-three" key={candidate._id}>
+            <div className="col-lg-12 candidate-block-three" key={candidate._id}>
               <div className="inner-box">
                 <div className="content">
                   <figure className="image">
                     <img
                       src={
-                        API_CANDIDATE_PATH + candidate?.profile?.filename ||
-                        "/images/resource/candidate.png"
+                        API_CANDIDATE_PATH + candidate?.profile?.filename 
                       }
                       alt={candidate.name}
+                      onError={(e) => e.target.src = "/images/resource/candidate.png"}
+
                     />
                   </figure>
                   <h4 className="name">

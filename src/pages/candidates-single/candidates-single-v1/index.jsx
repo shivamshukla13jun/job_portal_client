@@ -124,7 +124,8 @@ const CandidateSingleDynamicV1 = () => {
               <div className="inner-box">
                 <div className="content">
                   <figure className="image">
-                    <img src={API_CANDIDATE_PATH + data?.profile?.filename} alt="avatar" />
+                    <img src={API_CANDIDATE_PATH + data?.profile?.filename} alt="avatar"                       onError={(e) => e.target.src = "/images/resource/candidate.png"}
+ />
                   </figure>
                   <h4 className="name">{data?.name}</h4>
 
@@ -134,10 +135,10 @@ const CandidateSingleDynamicV1 = () => {
                       <span className="icon flaticon-map-locator"></span>
                       {`${data?.contact?.permanent_address?.state}, ${data?.contact?.permanent_address?.country}`}
                     </li>
-                    {/* <li>
+                    <li>
                       <span className="icon flaticon-money"></span>
-                      ₹ {data?.expected_salary} / month
-                    </li> */}
+                      ₹ {data?.expectedsalary} / LPA
+                    </li>
                     <li>
                       <span className="icon flaticon-clock"></span>
                       Member {new Date(data?.createdAt).toDateString()}
@@ -209,7 +210,7 @@ const CandidateSingleDynamicV1 = () => {
                   </div> */}
 
                   {/* <!-- Candidate Resume Start --> */}
-                  <div className={`resume-outer`}>
+                  <div className={`resume-outer container`}>
                     <div className="upper-title">
                       <h4>{'Education'}</h4>
                     </div>
@@ -233,7 +234,7 @@ const CandidateSingleDynamicV1 = () => {
                     ))}
                   </div>
 
-                  <div className={`resume-outer theme-blue`}>
+                  <div className={`resume-outer theme-blue container`}>
                     <div className="upper-title">
                       <h4>{'Work & Experience'}</h4>
                     </div>
@@ -282,13 +283,13 @@ const CandidateSingleDynamicV1 = () => {
                         <li>
                           <i className="icon icon-rate"></i>
                           <h5>Current Salary:</h5>
-                          <span>₹ {data?.current_salary} LPA</span>
+                          <span>₹ {data?.currentsalary} LPA</span>
                         </li>
 
                         <li>
                           <i className="icon icon-salary"></i>
                           <h5>Expected Salary:</h5>
-                          <span>₹ {data?.expected_salary} LPA</span>
+                          <span>₹ {data?.expectedsalary} LPA</span>
                         </li>
 
                         <li>
@@ -297,11 +298,11 @@ const CandidateSingleDynamicV1 = () => {
                           <span>{data?.gender}</span>
                         </li>
 
-                        <li>
+                        {/* <li>
                           <i className="icon icon-language"></i>
                           <h5>Language:</h5>
                           <span>{data?.languages?.map(item => item.value).join(", ")}</span>
-                        </li>
+                        </li> */}
 
                         <li>
                           <i className="icon icon-degree"></i>
@@ -319,24 +320,24 @@ const CandidateSingleDynamicV1 = () => {
                   </div>
                   {/* End .sidebar-widget conadidate overview */}
 
-                  <div className="sidebar-widget social-media-widget">
+                  {/* <div className="sidebar-widget social-media-widget">
                     <h4 className="widget-title">Social media</h4>
                     <div className="widget-content">
                       <div className="social-links">
                         <Social data={data} />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   {/* End .sidebar-widget social-media-widget */}
 
-                  <div className="sidebar-widget">
+                  {/* <div className="sidebar-widget">
                     <h4 className="widget-title">Professional Skills</h4>
                     <div className="widget-content">
                       <ul className="job-skills">
                         <JobSkills data={data} />
                       </ul>
                     </div>
-                  </div>
+                  </div> */}
                   {/* End .sidebar-widget skill widget */}
 
                   {/* <div className="sidebar-widget contact-widget">

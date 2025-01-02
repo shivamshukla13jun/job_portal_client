@@ -3,10 +3,11 @@ import { toast } from 'react-toastify';
 import { post } from '@/services/api';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '@/services/paths';
+import useUserInfo from './useUserInfo';
 const useForwardCV = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-
+  const userInfo=useUserInfo()
   const handleForwardCV = async (candidateId, subEmployerIds, notes = '') => {
     // Validate inputs
     if (!candidateId) {
@@ -28,8 +29,13 @@ const useForwardCV = () => {
         subEmployerIds,
         notes
       };
+      const userId = userInfo?.userTypeValue?._id;
+
 
       // Make API call to forward CV
+      if(!userId){
+        toast.info("Please Login First")
+      }
       const response = await post('/employer/forwardcv', payload);
 
       // Check API response
@@ -37,7 +43,7 @@ const useForwardCV = () => {
         toast.success(response.data.message || 'CV forwarded successfully');
         
         // Optional: Navigate to manage jobs page or any other appropriate page
-        navigate(paths.employer_all_applicants);
+        navigate(paths.shotlistesumes+userId);
 
         return true;
       } else {

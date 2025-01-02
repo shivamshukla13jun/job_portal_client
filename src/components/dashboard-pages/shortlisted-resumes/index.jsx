@@ -11,6 +11,7 @@ import BreadCrumb from "../BreadCrumb";
 import CopyrightFooter from "../CopyrightFooter";
 import MenuToggler from "../MenuToggler";
 import { useParams } from "react-router-dom";
+import Pagination from "@/utils/hooks/usePagination";
 
 const index = () => {
   const userInfo = useUserInfo();
@@ -30,7 +31,7 @@ const handleSerch=(name,value)=>{
   const debouncedSearch = useDebounce(search.search, 500);
 
   const { data, isLoading } = useQuery({
-    queryKey: [`sub-employers/shortlistcvs`,SubEmployerId,EmployerId, debouncedSearch,search.createdAt],
+    queryKey: [`sub-employers/shortlistcvs`,SubEmployerId,EmployerId,search.page, debouncedSearch,search.createdAt],
     queryFn: async () => {
       let res = (await get(`sub-employers/shortlistcvs?EmployerId=${EmployerId}&SubEmployerId=${SubEmployerId}&createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}&name=${debouncedSearch}`)).data;
       return res;
@@ -65,6 +66,14 @@ const handleSerch=(name,value)=>{
                 </div>
                 {/* End widget top filter box */}
                 <WidgetContentBox data={data} search={search}/>
+                {data?.pagination?.totalPages && (
+            <Pagination
+              Page={search.page}
+              limit={search.limit}
+              totalPages={data?.pagination?.totalPages || 0}
+              handlePageChange={(page) => handleSerch("page",page)}
+            />
+          )}
               </div>
               {/* <!-- applicants Widget --> */}
             </div>

@@ -50,6 +50,7 @@ const Applicants = ({ data ,search}) => {
                 <img
                   src={API_CANDIDATE_PATH + candidateDetails?.profile?.filename}
                   alt="candidates"
+                  onError={(e) => e.target.src = "/images/resource/candidate.png"}
                 />
               </figure>
               <h4 className="name">
@@ -90,6 +91,11 @@ const Applicants = ({ data ,search}) => {
                 <li>
                   <button data-text="Download Cv" onClick={() => handleDownload(API_CANDIDATE_PATH + candidateDetails?.cv?.filename,candidateDetails?.cv?.originalname)}>
                     <span className="la la-download"></span>
+                  </button>
+                </li>
+                <li>
+                  <button data-text="Download Cv" onClick={() => handleAccept(_id)}>
+                    <span className="la la-plus"></span>
                   </button>
                 </li>
               

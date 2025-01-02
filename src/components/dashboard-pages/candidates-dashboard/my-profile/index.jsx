@@ -60,9 +60,12 @@ const index = () => {
         },
         designation:"",
         experience:"",
+
         gender: '',
         dob: new Date(),
         marital_status: '',
+        currentsalary:0,
+        expectedsalary:0,
         upload_cv: {},
         profile: {}
       },
@@ -86,6 +89,7 @@ const index = () => {
           country: ''
         },
       },
+     
       education: [
         {
           name: '',
@@ -147,6 +151,8 @@ const index = () => {
     const formattedData = {
       name,coverletter:data.coverletter,
       gender: data.myProfile.gender,
+      expectedsalary: data.myProfile.expectedsalary,
+      currentsalary: data.myProfile.currentsalary,
       designation:data.myProfile.designation,
       email: data.contact.email,
       dob: data.myProfile.dob,
@@ -185,6 +191,8 @@ const index = () => {
           gender: data.gender,
           dob: new Date(data.dob),
           marital_status: data.marital_status,
+          currentsalary: data.currentsalary || 0,
+          expectedsalary: data.expectedsalary || 0,
           upload_cv: data.cv,
           profile: data.profile,
         },
@@ -205,6 +213,7 @@ const index = () => {
           to: new Date(emp.to),
         })),
         references: data.references,
+       
         hear_about_us: data.hear_about_us.join(","),
       });
     }
@@ -217,7 +226,7 @@ const index = () => {
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
-      //console.log({errors})
+      console.log({errors})
       const errorArray = Object.entries(errors);
       toast.error(errorArray[0][0].toUpperCase() + ' section needs to be filled!')
     }
@@ -345,7 +354,7 @@ const index = () => {
               <button
                disabled={Submitting}
                 onClick={handleSubmit(handleRegisterSubmit)}
-                className="theme-btn btn-style-one"
+                className="theme-btn btn-style-one me-2"
               >
                 {Submitting?"Submitting":"Submit"}
               </button>

@@ -48,6 +48,8 @@ console.log({data:data?.stats})
                             <img
                               src={API_CANDIDATE_PATH + candidate?.profile?.filename}
                               alt="candidates"
+                              onError={(e) => e.target.src = "/images/resource/candidate.png"}
+
                             />
                           </figure>
                           <h4 className="name">

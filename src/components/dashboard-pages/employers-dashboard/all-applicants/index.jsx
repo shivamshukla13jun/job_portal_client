@@ -13,10 +13,13 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
+import Pagination from "@/utils/hooks/usePagination";
 
 const index = () => {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [page,setPage]=useState(1)
+  const [limit,setLimit]=useState(10)
 
   const { data: jobNames, isLoading } = useQuery({
     queryKey: ['jobNames'],
@@ -28,9 +31,9 @@ const index = () => {
 
 const [job, setJob] = useState(searchParams.get("id") || "")
   const { data: currentJob, isLoading: jobLoader } = useQuery({
-    queryKey: [`application/tracking`, job],
+    queryKey: [`application/tracking`, job,page],
     queryFn: async () => {
-      let res = (await get(`application/tracking?jobid=${job}`,)).data;
+      let res = (await get(`application/tracking?jobid=${job}&page=${page}&limit=${limit}`,)).data;
       return res;
     },
   });
@@ -68,6 +71,14 @@ let title=Array.isArray(jobNames) && jobNames.length>0 ?jobNames?.find((item=>it
                   <WidgetContentBox  data={currentJob}  title={title} />
                   {/* End widget-content */}
                 </div>
+                {currentJob?.totalPages && (
+            <Pagination
+              Page={page}
+              limit={limit}
+              totalPages={currentJob?.totalPages || 0}
+              handlePageChange={(page) => setPage(page)}
+            />
+          )}
               </div>
             </div>
           </div>

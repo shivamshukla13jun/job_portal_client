@@ -18,32 +18,35 @@ import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const Index = () => {
   const userInfo = useUserInfo();
-  console.log("userInfo??",userInfo)
-
+  console.log("userInfo??", userInfo);
 
   const { data, isLoading } = useQuery({
     queryKey: [`dashboard/employer`, userInfo],
     queryFn: async () => {
-      let res = (await getById(`dashboard/employer`,userInfo?.userTypeValue?._id)).data.data
+      let res = (
+        await getById(`dashboard/employer`, userInfo?.userTypeValue?._id)
+      ).data.data;
       return res;
     },
-    enabled: !!userInfo?.userTypeValue?._id
+    enabled: !!userInfo?.userTypeValue?._id,
   });
-  const { data:GraphData, isLoading:IsGraphLoading } = useQuery({
+  const { data: GraphData, isLoading: IsGraphLoading } = useQuery({
     queryKey: [`dashboard/graph/employer`, userInfo],
     queryFn: async () => {
-      let res = (await getById(`dashboard/graph/employer`,userInfo?.userTypeValue?._id)).data.data
+      let res = (
+        await getById(`dashboard/graph/employer`, userInfo?.userTypeValue?._id)
+      ).data.data;
       return res;
     },
-    enabled: !!userInfo?.userTypeValue?._id
+    enabled: !!userInfo?.userTypeValue?._id,
   });
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <div>Loading...</div>;
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-<DashboardSidebar/>
+      <DashboardSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
@@ -84,7 +87,17 @@ const Index = () => {
             {/* End .col */}
 
             <div className="col-lg-12">
-                   <CandidateList />
+              <div className="applicants-widget ls-widget">
+                <div className="widget-title">
+                <h4>Matching Candidates</h4>
+                </div>
+                <div className="widget-content">
+                  <div className="row">
+                    <CandidateList />
+                  </div>
+                </div>
+              </div>
+          
             </div>
             <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
@@ -93,7 +106,6 @@ const Index = () => {
                 </div>
                 <div className="widget-content">
                   <div className="row">
-
                     <Applicants />
                   </div>
                 </div>

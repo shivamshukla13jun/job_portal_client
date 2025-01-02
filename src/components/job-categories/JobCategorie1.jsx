@@ -4,27 +4,28 @@ import { paths } from "@/services/paths";
 import { categories } from "@/data/category";
 
 // Icon mapping for categories
+// Icon mapping for categories using Flaticon
 const categoryIcons = {
-  'Basic Chemicals': 'fas fa-flask',
-  'Specialty Chemicals': 'fas fa-flask',
-  'Agrochemicals': 'fas fa-leaf',
-  'Petrochemicals': 'fas fa-oil-can',
-  'Polymers': 'fas fa-atom',
-  'Fine Chemicals': 'fas fa-microscope',
-  'Biochemicals': 'fas fa-vial',
-  'Industrial Gases': 'fas fa-wind',
-  'Chemical Engineering': 'fas fa-cogs',
-  'Dyes and Pigments': 'fas fa-palette',
-  'Surfactants': 'fas fa-spray-can',
-  'Adhesives and Sealants': 'fas fa-sticky-note',
-  'Catalysts': 'fas fa-star',
-  'Lubricants and Greases': 'fas fa-oil',
-  'Explosives': 'fas fa-bolt',
-  'Water Treatment Chemicals': 'fas fa-water',
-  'Flavors and Fragrances': 'fas fa-flower',
-  'Nutraceuticals': 'fas fa-pills',
-  'Cosmetic Chemicals': 'fas fa-makeup-brush',
-  'Other': 'fas fa-question'
+  'Basic Chemicals': 'flaticon-chemistry',
+  'Specialty Chemicals': 'flaticon-laboratory',
+  'Agrochemicals': 'flaticon-plant',
+  'Petrochemicals': 'flaticon-fuel',
+  'Polymers': 'flaticon-molecule',
+  'Fine Chemicals': 'flaticon-microscope',
+  'Biochemicals': 'flaticon-biohazard',
+  'Industrial Gases': 'flaticon-gas-cylinder',
+  'Chemical Engineering': 'flaticon-cogs',
+  'Dyes and Pigments': 'flaticon-paint-palette',
+  'Surfactants': 'flaticon-spray',
+  'Adhesives and Sealants': 'flaticon-adhesive',
+  'Catalysts': 'flaticon-catalyst',
+  'Lubricants and Greases': 'flaticon-oil',
+  'Explosives': 'flaticon-explosion',
+  'Water Treatment Chemicals': 'flaticon-water',
+  'Flavors and Fragrances': 'flaticon-flower',
+  'Nutraceuticals': 'flaticon-capsule',
+  'Cosmetic Chemicals': 'flaticon-cosmetics',
+  'Other': 'flaticon-question'
 };
 
 const JobCategorie1 = () => {
@@ -32,7 +33,7 @@ const JobCategorie1 = () => {
     <>
       {categories.slice(0, 9).map((item, index) => {
         // Get the icon, default to a generic icon if not found
-        const iconClass = categoryIcons[item.label] || 'fas fa-flask';
+        const iconClass = categoryIcons[item.label]  ||'flaticon-chemistry'
         
         return (
           <div

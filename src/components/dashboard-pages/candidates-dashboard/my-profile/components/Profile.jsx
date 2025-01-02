@@ -118,7 +118,7 @@ const Profile = ({ watch, register, setValue, error }) => {
         </div>
 
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        <div className="form-group col-lg-4 col-md-12">
           <label>Marital Status  <span className="required-form">*</span></label>
           <select className={`${error?.myProfile?.gender?.message ? 'error' : ''} chosen-single form-select`} {...register("myProfile.marital_status")} required>
             <option value={""} hidden>Status</option>
@@ -126,7 +126,27 @@ const Profile = ({ watch, register, setValue, error }) => {
             <option value={"Unmarried"}>Unmarried</option>
           </select>
         </div>
+        <div className="form-group col-lg-4 col-md-12">
+          <label>Current Salary (LPA) <span className="required-form">*</span> </label>
+          <input
+            type="number"
+            className={error?.myProfile?.currentsalary?.message ? 'error' : ''}
+            {...register("myProfile.currentsalary")}
+            placeholder="0"
+            required
+          />
+        </div>
 
+        <div className="form-group col-lg-4 col-md-12">
+          <label>Expected Salary (LPA) <span className="required-form">*</span> </label>
+          <input
+            type="number"
+            className={error?.myProfile?.expectedsalary?.message ? 'error' : ''}
+            {...register("myProfile.expectedsalary")}
+            placeholder="0"
+            required
+          />
+        </div>
 
         <div className="form-group">
           <label>
