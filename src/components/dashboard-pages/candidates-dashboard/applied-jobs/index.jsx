@@ -10,12 +10,13 @@ import { useQuery } from "@tanstack/react-query";
 import { get } from "@/services/api";
 import { useState } from "react";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
+import Pagination from "@/utils/hooks/usePagination";
 
 const index = () => {
 
   const [search, setSearch] = useState({
     page: 1,
-    limit: 10,
+    limit: 1,
     createdAt: '',
     sort: 'new'
 });
@@ -26,16 +27,16 @@ const handleSerch=(name,value)=>{
   }))
 }
   const { data, isLoading } = useQuery({
-    queryKey: ['appliedJobs',search.createdAt],
+    queryKey: ['appliedJobs',search.createdAt,search.page],
     queryFn: async () => {
-      let res = (await get(`/application/applied?createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}`)).data.data;
+      let res = (await get(`/application/applied?createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}`)).data;
       return res;
     }
   });
   //console.log("data???",data)
   // const pagination=usePaginationhook()
   if (isLoading) return <div>Loading...</div>
-  
+  console.log("totalpges",data?.totalPages)
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
@@ -57,8 +58,16 @@ const handleSerch=(name,value)=>{
             <div className="col-lg-12">
               {/* <!-- Ls widget --> */}
               <div className="ls-widget">
-                <JobListingsTable data={data} search={search} setSearch={ setSearch} handleSerch={handleSerch}/>
+                <JobListingsTable data={data?.data || []} search={search} setSearch={ setSearch} handleSerch={handleSerch}/>
               </div>
+              {data?.totalPages && (
+            <Pagination
+            totalPages={data?.totalPages || 0}
+              Page={search.page}
+              handlePageChange={(page) => handleSerch("page",page)}
+              limit={search.limit}
+            />
+          )}
             </div>
           </div>
           {/* End .row */}

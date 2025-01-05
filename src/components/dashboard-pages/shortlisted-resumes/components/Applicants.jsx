@@ -68,7 +68,7 @@ const Applicants = ({ data ,search}) => {
                 </li>
                 <li>
                   <span className="icon flaticon-money"></span>
-                  ₹{resume?.current_salary || '17000'} LPA
+                  ₹{resume?.current_salary ||' '} LPA
                 </li>
               </ul>
 
@@ -94,7 +94,7 @@ const Applicants = ({ data ,search}) => {
                   </button>
                 </li>
                 <li>
-                  <button data-text="Download Cv" onClick={() => handleAccept(_id)}>
+                  <button data-text="Create Meeting " onClick={() => handleAccept(_id)}>
                     <span className="la la-plus"></span>
                   </button>
                 </li>

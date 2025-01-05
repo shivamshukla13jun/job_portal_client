@@ -32,6 +32,7 @@ const HeaderNavContent = (props) => {
   return (
     <>
       <nav className="nav main-menu">
+        
         {userInfo && (
           <ul className="navigation" id="navbar">
             <li className={`${isActiveParent(homeItems, pathname) ? "current" : ""}`}>

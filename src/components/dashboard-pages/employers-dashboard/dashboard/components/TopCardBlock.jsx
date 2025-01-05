@@ -1,6 +1,9 @@
+import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useNavigate } from "react-router-dom";
 
 const TopCardBlock = ({data}) => {
+  const userInfo=useUserInfo()
+  const userTypeById = userInfo?.userTypeValue?._id;
 
   const cardContent = [
     {
@@ -25,7 +28,7 @@ const TopCardBlock = ({data}) => {
       icon: "la-bookmark-o",
       countNumber:  data?.Applicationdata?.Shortlist,
       metaName: "Shortlist",
-      to:"/employers-dashboard/shortlisted-resumes",
+      to:"/employers-dashboard/shortlisted-resumes/"+userTypeById,
       uiClass: "ui-green",
       status:"shortlisted"
     },

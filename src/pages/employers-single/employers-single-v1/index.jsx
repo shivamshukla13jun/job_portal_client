@@ -223,12 +223,12 @@ const EmployersSingleV1 = () => {
 
                   <div className="sidebar-widget">
                     {/* <!-- Map Widget --> */}
-                    <h4 className="widget-title">Job Location</h4>
+                    {/* <h4 className="widget-title">Job Location</h4>
                     <div className="widget-content">
                       <div style={{ height: "300px", width: "100%" }}>
                         <MapJobFinder />
                       </div>
-                    </div>
+                    </div> */}
                     {/* <!--  Map Widget --> */}
                   </div>
                   {/* End sidebar-widget */}

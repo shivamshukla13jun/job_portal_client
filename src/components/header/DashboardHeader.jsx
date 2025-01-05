@@ -94,7 +94,7 @@ const DashboardHeader = () => {
       <div className="container-fluid">
         <div className="main-box">
           <div className="nav-outer">
-            <div className="logo-box">
+            <div className="logo-box px-3">
               <Link to="/">
                 <img alt="brand" src="/images/logo.png" style={{ height: "50px" }} />
               </Link>

@@ -1,48 +1,48 @@
-const Notification = () => {
+const Notification = ({ data }) => {
+  console.log({ data });
   return (
     <ul className="notification-list">
-      <li>
-        <span className="icon flaticon-briefcase"></span>
-        <strong>Henry Wilson</strong> applied for a job
-        <span className="colored"> Product Designer</span>
-      </li>
-      {/* End li */}
-
-      <li className="success">
-        <span className="icon flaticon-briefcase"></span>
-        <strong>Raul Costa</strong> applied for a job
-        <span className="colored"> Product Manager, Risk</span>
-      </li>
-      {/* End li */}
-
-      <li>
-        <span className="icon flaticon-briefcase"></span>
-        <strong>Jack Milk</strong> applied for a job
-        <span className="colored"> Technical Architect</span>
-      </li>
-      {/* End li */}
-
-      <li className="success">
-        <span className="icon flaticon-briefcase"></span>
-        <strong>Michel Arian</strong>
-        applied for a job
-        <span className="colored"> Software Engineer</span>
-      </li>
-      {/* End li */}
-
-      <li>
-        <span className="icon flaticon-briefcase"></span>
-        <strong>Wade Warren</strong> applied for a job
-        <span className="colored"> Web Developer</span>
-      </li>
-      {/* End li */}
-
-      <li className="success">
-        <span className="icon flaticon-briefcase"></span>
-        <strong>Michel Arian</strong>
-        applied for a job
-        <span className="colored"> Software Engineer</span>
-      </li>
+      {data?.data?.map(({ candidate, job, intrviewConfirmation }, index) => (
+        <li key={index}>
+          <span className="icon flaticon-briefcase"></span>
+          <strong>{candidate?.name}</strong> applied for a job
+          <span className="colored"> {job?.title}</span>
+          {job?.interview_details?.intrviewConfirmation?.confirm  && (
+            <div className="interview-details">
+              <p>
+                <strong>Interview:</strong> {job.interview_details.type} on{" "}
+                <span className="colored">
+                  {new Date(job.interview_details.date).toLocaleDateString()}{" "}
+                  at {job.interview_details.time}
+                </span>
+              </p>
+              {job.interview_details.type === "in_person" && (
+                <p>
+                  <strong>Location:</strong>{" "}
+                  <span className="colored">
+                    {job.interview_details.location}
+                  </span>
+                </p>
+              )}
+            </div>
+          )}
+          <p>
+            <strong>Interview Confirmation:</strong>{" "}
+            <span
+              className={`${
+                intrviewConfirmation?.confirm ? "confirmed" : "pending"
+              }`}
+            >
+              {intrviewConfirmation?.confirm ? "Confirmed" : "Pending"}
+            </span>
+          </p>
+          {intrviewConfirmation?.message && (
+            <p>
+              <strong>Message:</strong> {intrviewConfirmation.message}
+            </p>
+          )}
+        </li>
+      ))}
       {/* End li */}
     </ul>
   );

@@ -14,7 +14,14 @@ import { selectWishlist } from "@/store/reducers/Whishlist";
 import { useQuery } from "@tanstack/react-query";
 import { getById } from "@/services/api";
 
-const DropdownMenu = ({ menuData, imgSrc, name, path ,userTypeById,userId}) => (
+const DropdownMenu = ({
+  menuData,
+  imgSrc,
+  name,
+  path,
+  userTypeById,
+  userId,
+}) => (
   <div className="dropdown dashboard-option">
     <a
       className="dropdown-toggle"
@@ -22,28 +29,36 @@ const DropdownMenu = ({ menuData, imgSrc, name, path ,userTypeById,userId}) => (
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-      <img alt="avatar" className="thumb" src={imgSrc}  onError={(e) => e.target.src = "/images/resource/candidate.png"} />
+      <img
+        alt="avatar"
+        className="thumb"
+        src={imgSrc}
+        onError={(e) => (e.target.src = "/images/resource/candidate.png")}
+      />
       <span className="name">{name}</span>
     </a>
     <ul className="dropdown-menu">
-      {Array.isArray(menuData) && menuData.map((item) => (
-                  <li
-                    className={`${isActiveLink(item.routePath, path) ? "active" : ""} mb-1`}
-                    key={item.id}
-                    onClick={() => menuToggleHandler(item)}
-                  >
-                    <Link    to={`${
-                          item.routePath +
-                          (item.paramtype === 'EmployerId' || item.paramtype === 'SubEmployerId'
-                            ? '/' + userTypeById
-                            : '') +
-                          (item.paramtype === 'createdBy' && userId ? '/' + userId : '')
-                        }`}>
-                      <i className={`la ${item.icon}`}></i>{" "}
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
+      {Array.isArray(menuData) &&
+        menuData.map((item) => (
+          <li
+            className={`${isActiveLink(item.routePath, path) ? "active" : ""} mb-1`}
+            key={item.id}
+            onClick={() => menuToggleHandler(item)}
+          >
+            <Link
+              to={`${
+                item.routePath +
+                (item.paramtype === "EmployerId" ||
+                item.paramtype === "SubEmployerId"
+                  ? "/" + userTypeById
+                  : "") +
+                (item.paramtype === "createdBy" && userId ? "/" + userId : "")
+              }`}
+            >
+              <i className={`la ${item.icon}`}></i> {item.name}
+            </Link>
+          </li>
+        ))}
     </ul>
   </div>
 );
@@ -69,32 +84,48 @@ const DefaulHeader2 = () => {
     const userTypeById = userInfo?.userTypeValue?._id;
 
     const userType = userInfo?.userType?.name?.toLowerCase();
-    const userName = userInfo?.userTypeValue?.name || userInfo?.userTypeValue?.business_name || "My account";
-    const capitalizedUserName = capitalizeFirstLetter(userName?.split(" ")[0] || "");
-      // Fetch menu items from the backend
-  const { data: menuItems = [], isLoading } = useQuery({
-    queryKey: ["user/menu", userId],
-    queryFn: async () => {
-      try {
-        const res = await getById("user/menu", userId);
-        return res.data.data;
-      } catch (error) {
-        console.error("Error fetching menu:", error);
-      }
-    },
-    enabled: Boolean(userId),
-  });
+    const userName =
+      userInfo?.userTypeValue?.name ||
+      userInfo?.userTypeValue?.business_name ||
+      "My account";
+    const capitalizedUserName = capitalizeFirstLetter(
+      userName?.split(" ")[0] || ""
+    );
+    // Fetch menu items from the backend
+    const { data: menuItems = [], isLoading } = useQuery({
+      queryKey: ["user/menu", userId],
+      queryFn: async () => {
+        try {
+          const res = await getById("user/menu", userId);
+          return res.data.data;
+        } catch (error) {
+          console.error("Error fetching menu:", error);
+        }
+      },
+      enabled: Boolean(userId),
+    });
     switch (userType) {
       case "candidate":
         return (
-          <DropdownMenu
-            menuData={menuItems}
-            imgSrc={`${API_CANDIDATE_PATH}${userInfo?.userTypeValue?.profile?.filename}`}
-            name={capitalizedUserName}
-            path={pathname}
-            userTypeById={userTypeById}
-            userId={userId}
-          />
+          <>
+            <button
+              onClick={() => navigate("/candidates-dashboard/saved-jobs")}
+              className="menu-btn"
+            >
+              <Link to={"/candidates-dashboard/saved-jobs"} className="count">
+                {SavedJobs?.length}
+              </Link>
+              <span className="icon la la-heart-o"></span>
+            </button>
+            <DropdownMenu
+              menuData={menuItems}
+              imgSrc={`${API_CANDIDATE_PATH}${userInfo?.userTypeValue?.profile?.filename}`}
+              name={capitalizedUserName}
+              path={pathname}
+              userTypeById={userTypeById}
+              userId={userId}
+            />
+          </>
         );
       case "employer":
       case "subemployer":
@@ -108,7 +139,7 @@ const DefaulHeader2 = () => {
             userId={userId}
           />
         );
-    
+
       default:
         return null;
     }
@@ -120,9 +151,13 @@ const DefaulHeader2 = () => {
     >
       <div className="main-box">
         <div className="nav-outer">
-          <div className="logo-box">
+          <div className="logo-box  px-3">
             <Link to="/">
-              <img src="/images/logo.png" style={{ height: "50px" }} alt="brand" />
+              <img
+                src="/images/logo.png"
+                style={{ height: "50px" }}
+                alt="brand"
+              />
             </Link>
           </div>
           {userInfo && <HeaderNavContent userInfo={userInfo} />}

@@ -51,7 +51,7 @@ const handleSerch=(name,value)=>{
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Shortlisted Resumes!" />
+          <BreadCrumb title="Shortlisted Candidates!" />
           {/* breadCrumb */}
 
           <MenuToggler />
@@ -61,7 +61,7 @@ const handleSerch=(name,value)=>{
             <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
-                  <h4>Shorlist Resumes</h4>
+                  <h4>Shorlist Candidates</h4>
                   <WidgetToFilterBox search={search} handleSerch={handleSerch} />
                 </div>
                 {/* End widget top filter box */}

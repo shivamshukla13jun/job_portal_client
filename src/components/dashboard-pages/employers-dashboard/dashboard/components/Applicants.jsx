@@ -12,8 +12,7 @@ import Pagination from "@/utils/hooks/usePagination";
 import { useDispatch, useSelector } from "react-redux";
 
 
-const Applicants = () => {
-  const userInfo=useUserInfo()
+const Applicants = ({data,isLoading}) => {
   const handleAccept = useAcceptApplication()
   const handleDelete = useDeleteApplication()
   const dispatch=useDispatch()
@@ -26,14 +25,7 @@ const Applicants = () => {
       experience_from,
       experience_to,
     } = useSelector((state) => state.candidateFilter) || {};
-  const { data, isLoading } = useQuery({
-    queryKey: [`application/tracking`,page],
-    queryFn: async () => {
-      let res = (await get(`application/tracking?page=${page}&limit=${limit}`)).data;
-      return res;
-    },
-    enabled: !!userInfo._id
-  });
+ 
 
   const navigate = useNavigate();
  
