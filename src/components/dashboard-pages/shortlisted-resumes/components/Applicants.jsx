@@ -94,7 +94,7 @@ const Applicants = ({ data ,search}) => {
                   </button>
                 </li>
                 <li>
-                  <button data-text="Create Meeting " onClick={() => handleAccept(_id)}>
+                  <button data-text="Create Meeting " onClick={() => handleAccept(candidateDetails)}>
                     <span className="la la-plus"></span>
                   </button>
                 </li>
