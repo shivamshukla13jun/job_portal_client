@@ -2,11 +2,14 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { addCategory } from "../../../features/filter/candidateFilterSlice";
+import { get, getById } from "@/services/api";
+import { useQuery } from "@tanstack/react-query";
+import { categories } from "@/data/category";
+import useUserInfo from "@/utils/hooks/useUserInfo";
 
 const Categories = () => {
-    const { category } = useSelector((state) => state.candidate) || {};
-    const { category: getCategory } =
-        useSelector((state) => state.candidateFilter) || {};
+    const userInfo=useUserInfo()
+    const { category: getCategory } = useSelector((state) => state.candidateFilter) || {};
 
     const dispatch = useDispatch();
 
@@ -14,6 +17,15 @@ const Categories = () => {
     const categoryHandler = (e) => {
         dispatch(addCategory(e.target.value));
     };
+    const { data=[], isLoading } = useQuery({
+        queryKey: [`dashboard/options`],
+        queryFn: async () => {
+          let res = (await get(`utilities/options/${userInfo?.userTypeValue?._id}/categories.label`)).data.data
+          return res;
+        },
+        enabled:!!userInfo?.userTypeValue?._id
+      });
+      if (isLoading) return <div>Loading...</div>;
 
     return (
         <>
@@ -23,9 +35,9 @@ const Categories = () => {
                 className="form-select"
             >
                 <option value="">Choose a category</option>
-                {category?.map((item) => (
-                    <option key={item.id} value={item.value}>
-                        {item.name}
+                {data?.map((item) => (
+                    <option key={item.value} value={item.value}>
+                        {item.value}
                     </option>
                 ))}
             </select>

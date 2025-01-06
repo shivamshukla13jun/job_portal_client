@@ -102,21 +102,19 @@ const index = () => {
       </section>
       {/* <!-- End Clients Section--> */}
 
-      <section className="about-section">
+      {/* <section className="about-section">
         <div className="auto-container">
           <div className="row">
             <About />
           </div>
 
-          {/* <!-- Fun Fact Section --> */}
           <div className="fun-fact-section">
             <div className="row">
               <Funfact />
             </div>
           </div>
-          {/* <!-- Fun Fact Section --> */}
         </div>
-      </section>
+      </section> */}
       {/* <!-- End About Section --> */}
 
       <section className="news-section">

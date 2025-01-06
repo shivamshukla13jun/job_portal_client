@@ -6,13 +6,13 @@ import { API_CANDIDATE_PATH } from "@/lib/config";
 import { useAcceptApplication, useDeleteApplication } from "@/utils/hooks/useApplication";
 
 const WidgetContentBox = ({ data, title }) => {
-  console.log("data????", data);
+  //console.log("data????", data);
 
   const navigate = useNavigate();
 
   const handleAccept = useAcceptApplication()
   const handleDelete = useDeleteApplication()
-
+console.log({data:data?.stats})
   
 
   // Check if data exists and has candidates, otherwise return loading or error
@@ -26,9 +26,9 @@ const WidgetContentBox = ({ data, title }) => {
           <div className="aplicants-upper-bar">
             <h6>{title}</h6>
             <TabList className="aplicantion-status tab-buttons clearfix">
-              <Tab className="tab-btn totals">Total(s): {data?.stats?.totals?.total || 0}</Tab>
-              <Tab className="tab-btn approved">Approved: {data?.stats?.approved?.total || 0}</Tab>
-              <Tab className="tab-btn rejected">Rejected(s): {data?.stats?.rejected?.total || 0}</Tab>
+              <Tab className="tab-btn totals">Total(s): {data?.stats?.totals || 0}</Tab>
+              <Tab className="tab-btn approved">Approved: {data?.stats?.approved || 0}</Tab>
+              <Tab className="tab-btn rejected">Rejected(s): {data?.stats?.rejected || 0}</Tab>
             </TabList>
           </div>
         
@@ -48,6 +48,8 @@ const WidgetContentBox = ({ data, title }) => {
                             <img
                               src={API_CANDIDATE_PATH + candidate?.profile?.filename}
                               alt="candidates"
+                              onError={(e) => e.target.src = "/images/resource/candidate.png"}
+
                             />
                           </figure>
                           <h4 className="name">
@@ -65,7 +67,7 @@ const WidgetContentBox = ({ data, title }) => {
                             </li>
                             <li>
                               <span className="icon flaticon-money"></span>
-                              ₹{resume?.current_salary || '17000'} LPA
+                              ₹{resume?.current_salary ||' '} LPA
                             </li>
                           </ul>
   
@@ -96,7 +98,7 @@ const WidgetContentBox = ({ data, title }) => {
                               </button>
                             </li>
                             <li>
-                            <button data-text="Delete Application" onClick={() => handleDelete(_id,job)}>
+                            <button data-text="Delete Application" onClick={() => handleDelete(_id,job?._id)}>
                               <span className="la la-trash"></span>
                             </button>
                           </li>

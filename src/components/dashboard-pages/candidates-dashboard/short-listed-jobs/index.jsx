@@ -9,53 +9,37 @@ import MenuToggler from "../../MenuToggler";
 import { useQuery } from "@tanstack/react-query";
 import { get } from "@/services/api";
 import { useState } from "react";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
-
+   const urlSearch=new URLSearchParams(window.location.search)
   const [search, setSearch] = useState({
     page: 1,
     limit: 10,
+    status:urlSearch.get("status") || "shortlisted",
     createdAt: '',
     sort: 'new'
-});
-const handleSerch=(name,value)=>{
-  setSearch((prev)=>({
-    ...prev,
-    [name]:value
-  }))
-}
+   });
   const { data, isLoading } = useQuery({
-    queryKey: ['appliedJobs',search.createdAt],
+    queryKey: ['appliedJobs',search.createdAt,search.status],
     queryFn: async () => {
-      let res = (await get(`/application/applied?status=shortlisted&createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}`)).data.data;
+      let res = (await get(`/application/applied?status=${search.status}&createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}`)).data.data;
       return res;
     }
   });
-  console.log("data???",data)
-
+   const title=search.status==="rejected"?"Rejected Jobs":search.status==="pending"?"Pending Jobs":"Shortlisted Jobs"
   if (isLoading) return <div>Loading...</div>
 
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardCandidatesHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardCandidatesSidebar />
-      {/* <!-- End Candidates Sidebar Menu --> */}
+      <DashboardSidebar/>
 
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Shortlisted jobs!" />
+          <BreadCrumb title={title} />
           {/* breadCrumb */}
 
           <MenuToggler />

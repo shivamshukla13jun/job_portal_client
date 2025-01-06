@@ -8,20 +8,24 @@ import { put,get,getById } from "@/services/api";
 import { toast } from "react-toastify";
 import { paths } from "@/services/paths";
 import { useAcceptApplication, useDeleteApplication } from "@/utils/hooks/useApplication";
+import Pagination from "@/utils/hooks/usePagination";
+import { useDispatch, useSelector } from "react-redux";
 
 
-const Applicants = () => {
-  const userInfo=useUserInfo()
+const Applicants = ({data,isLoading}) => {
   const handleAccept = useAcceptApplication()
   const handleDelete = useDeleteApplication()
-  const { data, isLoading } = useQuery({
-    queryKey: [`application/tracking`,],
-    queryFn: async () => {
-      let res = (await get(`application/tracking`)).data;
-      return res;
-    },
-    enabled: !!userInfo._id
-  });
+  const dispatch=useDispatch()
+   const {
+      qualification,
+      keyword,
+      limit,
+      page,
+      category,
+      experience_from,
+      experience_to,
+    } = useSelector((state) => state.candidateFilter) || {};
+ 
 
   const navigate = useNavigate();
  
@@ -40,6 +44,8 @@ const Applicants = () => {
                           <img
                             src={API_CANDIDATE_PATH + candidate?.profile?.filename}
                             alt="candidates"
+                            onError={(e) => e.target.src = "/images/resource/candidate.png"}
+
                           />
                         </figure>
                         <h4 className="name">
@@ -57,7 +63,7 @@ const Applicants = () => {
                           </li>
                           <li>
                             <span className="icon flaticon-money"></span>
-                            ₹{resume?.current_salary || '17000'} LPA
+                            ₹{candidate?.currentsalary } LPA
                           </li>
                         </ul>
 
@@ -97,6 +103,14 @@ const Applicants = () => {
                     </div>
                   </div>
                 ))}
+                 {data?.totalPages && (
+            <Pagination
+              Page={page}
+              limit={limit}
+              totalPages={data?.totalPages || 0}
+              handlePageChange={(page) => dispatch(addPage(page))}
+            />
+          )}
     </>
   );
 };

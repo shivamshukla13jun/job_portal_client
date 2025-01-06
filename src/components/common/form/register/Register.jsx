@@ -18,9 +18,9 @@ import { get, getById, post } from "@/services/api";
 import Spinner from "@/utils/hooks/Spinner";
 
 const Register = () => {
-  const [type, setType] = useState('Candidate');
-  const [isSendingCode, setIsSendingCode] = useState(false);
   const [params, setSP] = useSearchParams();
+  const [type, setType] = useState(params.get("state") || 'Candidate');
+  const [isSendingCode, setIsSendingCode] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,7 +63,6 @@ const Register = () => {
       }
     },
     onError: (err) => {
-      console.log(err);
       toast.error(err.response.data.error);
     }
   });
@@ -76,7 +75,6 @@ const Register = () => {
       params.get("state")? url.append("state", params.get("state")):url.append("state",type)
       
       params.get("code") && url.append("code", params.get("code"));
-      
 
       try {
         let res = await get(`/user/google/callback?${url.toString()}`);
@@ -91,7 +89,7 @@ const Register = () => {
           sessionStorage.setItem("userInfo", enData);
           dispatch(login(enData));
 
-          window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : paths.employer_profile;
+          window.location.href = user.userType.name === 'Candidate' ? paths.candidate : paths.employer;
         }
       } catch (error) {
         console.error("Failed to send code:", error);
@@ -106,7 +104,6 @@ const Register = () => {
     }
   }, [params, dispatch]);
 
-  // Show loading if either isLoading or isSendingCode is true
   if (isLoading || isSendingCode) {
     return <Spinner/>;
   }
@@ -115,17 +112,23 @@ const Register = () => {
     <div className="form-inner">
       <h3>Create a Free Chem Pharma Account</h3>
 
-      <Tabs>
+      <Tabs defaultIndex={type === 'Employer' ? 1 : 0}>
         <div className="form-group register-dual">
           <TabList className="btn-box row">
             <Tab className="col-lg-6 col-md-12">
-              <button className="theme-btn btn-style-four" onClick={() => handleType('Candidate')}>
+              <button 
+                className={`theme-btn btn-style-four ${type === 'Candidate' ? 'active' : ''}`} 
+                onClick={() => handleType('Candidate')}
+              >
                 <i className="la la-user"></i> Candidate
               </button>
             </Tab>
 
             <Tab className="col-lg-6 col-md-12">
-              <button className="theme-btn btn-style-four" onClick={() => handleType('Employer')}>
+              <button 
+                className={`theme-btn btn-style-four ${type === 'Employer' ? 'active' : ''}`} 
+                onClick={() => handleType('Employer')}
+              >
                 <i className="la la-briefcase"></i> Employer
               </button>
             </Tab>
@@ -138,7 +141,7 @@ const Register = () => {
             register={register} 
             mutation={mutation} 
             errors={errors} 
-            disabled={!type}  // Disable if type is not selected
+            disabled={!type}
           />
         </TabPanel>
 
@@ -148,7 +151,7 @@ const Register = () => {
             register={register} 
             mutation={mutation} 
             errors={errors} 
-            disabled={!type} // Disable if type is not selected
+            disabled={!type}
           />
         </TabPanel>
       </Tabs>
@@ -169,7 +172,7 @@ const Register = () => {
         <div className="divider">
           <span>or</span>
         </div>
-        <LoginWithSocial type={type} disabled={!type} /> {/* Disable if type is not selected */}
+        <LoginWithSocial type={type} disabled={!type} />
       </div>
     </div>
   );

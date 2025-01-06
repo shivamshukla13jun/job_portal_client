@@ -20,7 +20,7 @@ const SearchBox = () => {
     useEffect(() => {
         dispatch(addKeyword(getKeyword));
     }, [dispatch, addKeyword, getKeyword]);
-
+   
     return (
         <>
             <input

@@ -32,6 +32,7 @@ const HeaderNavContent = (props) => {
   return (
     <>
       <nav className="nav main-menu">
+        
         {userInfo && (
           <ul className="navigation" id="navbar">
             <li className={`${isActiveParent(homeItems, pathname) ? "current" : ""}`}>
@@ -42,21 +43,6 @@ const HeaderNavContent = (props) => {
             <li className={`${isActiveParent(findJobItems, pathname) ? "current" : ""}`}>
               <Link to={paths.job_list}>Find Jobs</Link>
             </li>
-            {/* End findjobs menu items */}
-
-            {/* {userInfo?.userType?.name?.toLowerCase() === 'employer' ? (
-              <li className={`${isActiveParent(employerItems, pathname) ? "current" : ""}`} >
-                <Link to={paths.employer}>Employers</Link>
-              </li>
-            ) : <></>} */}
-            {/* End Employers menu items */}
-
-            {/* {userInfo?.userType?.name?.toLowerCase() === 'candidate' ? (
-              <li className={`${isActiveParent(candidateItems, pathname) ? "current" : ""}`} >
-                <Link to={paths.candidate}>Candidates</Link>
-              </li>
-            ) : <></>} */}
-            {/* End Candidates menu items */}
 
             <li className={`${isActiveParentChaild(blogItems, pathname) ? "current" : ""}`} >
               <Link to={paths.blog}>Blog</Link>
@@ -70,9 +56,6 @@ const HeaderNavContent = (props) => {
             <li className={`${pathname === paths.contact ? "current" : ""}`}>
               <Link to={paths.contact}>Contact Us</Link>
             </li>
-         
-
-         
           </ul>
         )}
       </nav>

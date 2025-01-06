@@ -1,5 +1,6 @@
 
 import Aos from "aos";
+import { QueryClientProvider, QueryClient, keepPreviousData } from "@tanstack/react-query";
 import "aos/dist/aos.css";
 import "./styles/index.scss";
 import { useEffect } from "react";
@@ -16,13 +17,11 @@ if (typeof window !== "undefined") {
 }
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Home from "./pages";
-import HomePage1 from "./pages/home/home-1";
 import JobListPage1 from "./pages/job-list/job-list-v1";
 import JobSingleDynamicV1 from "./pages/job-single/job-single-v1";
 import ScrollTopBehaviour from "./components/common/ScrollTopBehaviour";
 import EmployerListPage1 from "./pages/employers-list/employers-list-v1";
 import EmployersSingleV1 from "./pages/employers-single/employers-single-v1";
-import CandidateListPage1 from "./pages/candidates-list/candidates-list-v1";
 import CandidateSingleDynamicV1 from "./pages/candidates-single/candidates-single-v1";
 import BlogListpage1 from "./pages/blog/blog-list-v1";
 import BlogDetailsDynamic from "./pages/blog/blog-details";
@@ -33,45 +32,47 @@ import TermsPage from "./pages/others/terms";
 import InvoicePage from "./pages/others/invoice";
 import ContactPage from "./pages/others/contact";
 import NotFoundPage from "./pages/others/404";
+import LoginPage from "./pages/others/login";
+import RegisterPage from "./pages/others/register";
+import Verify from "./pages/others/verify";
+import ForgotPasswordPage from "./pages/others/forgot";
+import ResetPassword from "./pages/others/resetpassword";
+
+// admin
+
+// eemployers
 import DashboardEmploeeDBPage from "./pages/employers-dashboard/dashboard";
 import CompanyProfileEmploeeDBPage from "./pages/employers-dashboard/company-profile";
 import PostJobsEmploeeDBPage from "./pages/employers-dashboard/post-jobs";
 import ManageJobsEmploeeDBPage from "./pages/employers-dashboard/manage-jobs";
 import AllApplicantsEmploeesPage from "./pages/employers-dashboard/all-applicants";
-import ShortListedResumeEmploeeDBPage from "./pages/employers-dashboard/shortlisted-resumes";
 import PackageEmploeeDBPage from "./pages/employers-dashboard/packages";
 import MessageEmploeeDBPage from "./pages/employers-dashboard/messages";
-import ResumeAlertsEmploeeDBPage from "./pages/employers-dashboard/resume-alerts";
-import ChangePasswordEmploeeDBPage from "./pages/employers-dashboard/change-password";
+import ResumeAlertsEmploeeDBPage from "./pages/employers-dashboard/resume-alerts"
+import EditJob from "./components/dashboard-pages/employers-dashboard/edit-jobs";
+import SubEmployer from "./pages/employers-dashboard/subemployers";
+// candidates
 import DashboardPage from "./pages/candidates-dashboard/dashboard";
 import AppliedJobsPage from "./pages/candidates-dashboard/applied-jobs";
-import ChangePasswordPage from "./pages/candidates-dashboard/change-password";
-import CVMannagerPage from "./pages/candidates-dashboard/cv-manager";
-import JobAlertPage from "./pages/candidates-dashboard/job-alerts";
-import MessageesPage from "./pages/candidates-dashboard/messages";
 import MyProfilePage from "./pages/candidates-dashboard/my-profile";
 import MyResumePage from "./pages/candidates-dashboard/my-resume";
 import PackagePage from "./pages/candidates-dashboard/packages";
 import ShortListedJobsPage from "./pages/candidates-dashboard/short-listed-jobs";
-import LoginPage from "./pages/others/login";
-import RegisterPage from "./pages/others/register";
-import ShopListPage from "./pages/shop/shop-list";
-import ShopSingleDyanmic from "./pages/shop/shop-single";
-import CartPage from "./pages/shop/cart";
-import CheckoutPage from "./pages/shop/checkout";
-import OrderCompletedPage from "./pages/shop/order-completed";
-import { QueryClientProvider, QueryClient, keepPreviousData } from "@tanstack/react-query";
-import Verify from "./pages/others/verify";
-import EditJob from "./components/dashboard-pages/employers-dashboard/edit-jobs";
-import { decrypt } from "./lib/encrypt";
-import { paths } from "./services/paths";
-import ForgotPasswordPage from "./pages/others/forgot";
-import ResetPassword from "./pages/others/resetpassword";
 import SavedJobsPage from "./pages/candidates-dashboard/saved-jobs";
 
+// subemployers 
+import DashboardSubemplyerDBPage from "./pages/subemployers-dashboard/dashboard";
+import ShortListedResumes from "./pages/shortlisted-resumes";
+// authotrizations
+import UnauthorizedPage from "./pages/others/UnauthorizedPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import MeetingList from "./pages/subemployers-dashboard/Meetings";
+import CandidateListPage2 from "./pages/candidates-list/candidates-list-v2";
+import ChangePassword from "./pages/change-password/ChangePassword";
+import CandidateListPage1 from "./pages/candidates-list/candidates-list-v1";
+import CandidateListPage3 from "./pages/candidates-list/candidates-list-v3";
+import CandidateListPage4 from "./pages/candidates-list/candidates-list-v4";
 function App() {
-
-  const userInfo = sessionStorage.getItem("userInfo") ? JSON.parse(decrypt(sessionStorage.getItem("userInfo")))?.userType?.name?.toLowerCase() : null;
 
   const query = new QueryClient({
     defaultOptions: {
@@ -102,22 +103,15 @@ function App() {
             <Routes>
               <Route path="/">
                 <Route index element={<Home />} />
-                <Route path="home-1" element={<HomePage1 />} />
-
                 <Route path="job-list-v1" element={<JobListPage1 />} />
                 <Route path="job/:id" element={<JobSingleDynamicV1 />} />
-
                 <Route path="employers-list-v1" element={<EmployerListPage1 />} />
-
                 <Route path="employer/:id" element={<EmployersSingleV1 />} />
-
-                <Route path="candidates-list-v1" element={<CandidateListPage1 />} />
-
+                <Route path="candidates-list-v1" element={<CandidateListPage4 />} />
                 <Route path="candidate/:id" element={<CandidateSingleDynamicV1 />} />
-
+                <Route path="applicant/:id" element={<CandidateSingleDynamicV1 />} />
                 <Route path="blog-list-v1" element={<BlogListpage1 />} />
                 <Route path="blog-details/:id" element={<BlogDetailsDynamic />} />
-
                 <Route path="about" element={<AboutPage />} />
                 <Route path="pricing" element={<PricingPage />} />
                 <Route path="faq" element={<FaqPage />} />
@@ -129,52 +123,64 @@ function App() {
                 <Route path="resetpassword" element={<ResetPassword/>} />
                 <Route path="forgot" element={<ForgotPasswordPage />} />
                 <Route path="verify" element={<Verify />} />
+                <Route path="/unauthorized" element={<UnauthorizedPage />} />
                 <Route path="*" element={<NotFoundPage />} />
-
-                <Route path="employers-dashboard" element={userInfo === 'employer' ? <Outlet /> : <Navigate to={paths.home} />}  >
+                <Route path="employers-dashboard" element={
+                  <ProtectedRoute  requiredRole="employer">
+                    <Outlet />
+                  </ProtectedRoute>
+                }
+              >  
                   <Route path="dashboard" element={<DashboardEmploeeDBPage />} />
                   <Route path="company-profile" element={<CompanyProfileEmploeeDBPage />} />
+                  <Route path="subemployer" element={<SubEmployer />} />
                   <Route path="post-jobs" element={<PostJobsEmploeeDBPage />} />
                   <Route path="edit-job/:id" element={<EditJob />} />
                   <Route path="manage-jobs" element={<ManageJobsEmploeeDBPage />} />
                   <Route path="all-applicants" element={<AllApplicantsEmploeesPage />} />
-                  <Route path="shortlisted-resumes" element={<ShortListedResumeEmploeeDBPage />} />
+                  <Route path="shortlisted-resumes/:EmployerId" element={<ShortListedResumes />} />
+                  <Route path="meetinglinks/:createdBy" element={<MeetingList />} />
+
                   <Route path="packages" element={<PackageEmploeeDBPage />} />
                   <Route path="messages" element={<MessageEmploeeDBPage />} />
                   <Route path="resume-alerts" element={<ResumeAlertsEmploeeDBPage />} />
-                  <Route path="change-password" element={<ChangePasswordEmploeeDBPage />} />
+                  <Route path="change-password" element={<ChangePassword />} />
                 </Route>
-
-                <Route path="candidates-dashboard" element={userInfo === 'candidate' ? <Outlet /> : <Navigate to={paths.home} />}  >
+              
+                <Route 
+                path="subemployers-dashboard" 
+                element={
+                  <ProtectedRoute requiredRole="subemployer">
+                    <Outlet />
+                  </ProtectedRoute>
+                }
+              >
+                  <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
+                  <Route path="meetinglinks/:createdBy" element={<MeetingList />} />
+                  <Route path="shortlisted-resumes/:SubEmployerId" element={<ShortListedResumes />} />
+                  <Route path="change-password" element={<ChangePassword />} />
+                </Route>
+                <Route 
+                path="candidates-dashboard" 
+                element={
+                  <ProtectedRoute requiredRole="candidate">
+                    <Outlet />
+                  </ProtectedRoute>
+                }
+              >
                   <Route path="dashboard" element={<DashboardPage />} />
                   <Route path="applied-jobs" element={<AppliedJobsPage />} />
                   <Route path="saved-jobs" element={<SavedJobsPage />} />
-                  <Route path="change-password" element={<ChangePasswordPage />} />
-                  <Route path="cv-manager" element={<CVMannagerPage />} />
-                  <Route path="job-alerts" element={<JobAlertPage />} />
-                  <Route path="messages" element={<MessageesPage />} />
+                  <Route path="change-password" element={<ChangePassword />} />
                   <Route path="my-profile" element={<MyProfilePage />} />
                   <Route path="my-resume" element={<MyResumePage />} />
                   <Route path="packages" element={<PackagePage />} />
                   <Route path="short-listed-jobs" element={<ShortListedJobsPage />} />
                 </Route>
-
-                <Route path="shop" >
-
-                  <Route path="shop-list" element={<ShopListPage />} />
-                  <Route path="shop-single/:id" element={<ShopSingleDyanmic />} />
-                  <Route path="cart" element={<CartPage />} />
-                  <Route path="checkout" element={<CheckoutPage />} />
-                  <Route path="order-completed" element={<OrderCompletedPage />} />
-                </Route>
-
               </Route>
             </Routes>
             <ScrollTopBehaviour />
           </BrowserRouter>
-
-
-
           {/* Toastify */}
           <ToastContainer
             position="bottom-right"
@@ -195,5 +201,4 @@ function App() {
     </QueryClientProvider>
   )
 }
-
 export default App

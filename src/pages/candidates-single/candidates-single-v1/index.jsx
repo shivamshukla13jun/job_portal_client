@@ -1,22 +1,19 @@
-import candidates from "@/data/candidates";
-import candidateResume from "@/data/candidateResume";
-import LoginPopup from "@/components/common/form/login/LoginPopup";
+
 import FooterDefault from "@/components/footer/common-footer";
-import DefaulHeader from "@/components/header/DefaulHeader";
 import MobileMenu from "@/components/header/MobileMenu";
-import Contact from "@/components/candidates-single-pages/shared-components/Contact";
-import GalleryBox from "@/components/candidates-single-pages/shared-components/GalleryBox";
 import Social from "@/components/candidates-single-pages/social/Social";
 import JobSkills from "@/components/candidates-single-pages/shared-components/JobSkills";
-import AboutVideo from "@/components/candidates-single-pages/shared-components/AboutVideo";
 import { useParams } from "react-router-dom";
-
 import MetaComponent from "@/components/common/MetaComponent";
 import { useQuery } from "@tanstack/react-query";
-import { getById } from "@/services/api";
+import {  getById } from "@/services/api";
 import DefaulHeader2 from "@/components/header/DefaulHeader2";
 import { API_CANDIDATE_PATH } from "@/lib/config";
 import { toast } from "react-toastify";
+import useForwardCV from "@/utils/hooks/useForwardCV";
+import useUserInfo from "@/utils/hooks/useUserInfo";
+import ForwardCVModal from "./ForwardCVModal";
+import { useState } from "react";
 
 const metadata = {
   title:
@@ -26,7 +23,12 @@ const metadata = {
 
 const CandidateSingleDynamicV1 = () => {
   let params = useParams();
+  const userInfo=useUserInfo()
+  const [isForwardModalOpen, setIsForwardModalOpen] = useState(false);
+
+  //console.log("userInfo???????????",userInfo?.userTypeValue?._id)
   const id = params.id;
+  const { handleForwardCV, isLoading: isForwarding } = useForwardCV();
 
   const { data, isLoading } = useQuery({
     queryKey: [`resume${id}`],
@@ -34,6 +36,15 @@ const CandidateSingleDynamicV1 = () => {
       let res = (await getById('resume', id)).data.data;
       return res;
     }
+  });
+
+  const { data: SubEmployers = [], isLoading: SubEmployersLoading } = useQuery({
+    queryKey: [`employer/getSubEmployers`, id],
+    queryFn: async () => {
+      let res = (await getById('employer/getSubEmployers', userInfo?.userTypeValue?._id)).data.data;
+      return res;
+    },
+    enabled: Boolean(userInfo?.userTypeValue?._id)
   });
   function calculateTotalExperience(employmentArray=[]) {
     let totalExperienceMonths = 0;
@@ -69,7 +80,7 @@ const CandidateSingleDynamicV1 = () => {
     }
 }
   const handleDownload = async () => {
-    const fileUrl = API_CANDIDATE_PATH + data?.candidateId?.cv?.filename;
+    const fileUrl = API_CANDIDATE_PATH + data?.cv?.filename;
   
     try {
       // Fetch the file data
@@ -79,7 +90,7 @@ const CandidateSingleDynamicV1 = () => {
       // Create a temporary link element
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob); // Create an object URL for the Blob
-      link.download = data?.candidateId?.cv?.filename; // Set the filename for download
+      link.download = data?.cv?.filename; // Set the filename for download
   
       // Append the link to the body, trigger the click, then remove the link
       document.body.appendChild(link);
@@ -89,7 +100,8 @@ const CandidateSingleDynamicV1 = () => {
       toast.info('Download failed');
     }
   };
-  
+
+ //console.log("SubEmployers",SubEmployers)
   if (isLoading) return <div>Loading...</div>
 
   return (
@@ -112,23 +124,24 @@ const CandidateSingleDynamicV1 = () => {
               <div className="inner-box">
                 <div className="content">
                   <figure className="image">
-                    <img src={API_CANDIDATE_PATH + data?.candidateId?.profile?.filename} alt="avatar" />
+                    <img src={API_CANDIDATE_PATH + data?.profile?.filename} alt="avatar"                       onError={(e) => e.target.src = "/images/resource/candidate.png"}
+ />
                   </figure>
-                  <h4 className="name">{data?.candidateId?.name}</h4>
+                  <h4 className="name">{data?.name}</h4>
 
                   <ul className="candidate-info">
-                    <li className="designation">{data?.candidateId?.designation || ''}</li>
+                    <li className="designation">{data?.designation || ''}</li>
                     <li>
                       <span className="icon flaticon-map-locator"></span>
-                      {`${data?.candidateId?.contact?.permanent_address?.state}, ${data?.candidateId?.contact?.permanent_address?.country}`}
+                      {`${data?.contact?.permanent_address?.state}, ${data?.contact?.permanent_address?.country}`}
                     </li>
                     <li>
                       <span className="icon flaticon-money"></span>
-                      ₹ {data?.expected_salary} / month
+                      ₹ {data?.expectedsalary} / LPA
                     </li>
                     <li>
                       <span className="icon flaticon-clock"></span>
-                      Member {new Date(data?.candidateId?.createdAt).toDateString()}
+                      Member {new Date(data?.createdAt).toDateString()}
                     </li>
                   </ul>
 
@@ -139,18 +152,35 @@ const CandidateSingleDynamicV1 = () => {
                   </ul>
                 </div>
 
-                <div className="btn-box">
+                <div className="d-flex">
                   <a
-                    className="theme-btn btn-style-one"
+                    className="theme-btn btn-style-one me-2"
                     onClick={handleDownload}
-
                   >
                     Download CV
                   </a>
-                  {/* <button className="bookmark-btn">
-                    <i className="flaticon-bookmark"></i>
-                  </button> */}
+
+                  {/* <a
+                    className="theme-btn btn-style-one me-2"
+                    onClick={handleSelectCV}
+                  >
+                    Select CV
+                  </a> */}
+                  {
+                    userInfo && userInfo?.userType?.name?.toLowerCase() === 'employer' && 
+                    <a
+                    className="theme-btn btn-style-one"
+                    disabled={isForwarding}
+                    onClick={() => setIsForwardModalOpen(true)}
+                  >
+                  {isForwarding ? 'Forwarding...' : 'Forward CV'}
+
+                  </a>
+                  }
+                 
                 </div>
+
+
               </div>
             </div>
             {/*  <!-- Candidate block Five --> */}
@@ -180,77 +210,54 @@ const CandidateSingleDynamicV1 = () => {
                   </div> */}
 
                   {/* <!-- Candidate Resume Start --> */}
-                  <div className={`resume-outer`}>
+                  <div className={`resume-outer container`}>
                     <div className="upper-title">
                       <h4>{'Education'}</h4>
                     </div>
 
-                    {data?.educations?.length > 0 && data.educations.map((education) => (
-                      <div className="resume-block" key={education._id}>
+                    {data?.education?.length > 0 && data.education.map((item) => (
+                      <div className="resume-block" key={item._id}>
                         <div className="inner">
-                          <span className="name">{education.degree[0]?.toUpperCase()}</span>
+                          {/* <span className="name">{item.qualification?.toUpperCase()}</span> */}
                           <div className="title-box">
                             <div className="info-box">
-                              <h3>{education.degree}</h3>
-                              <span>{education.university}</span>
+                              <h3>{item.qualification}</h3>
+                              <span>{item.name}</span>
                             </div>
                             <div className="edit-box">
-                              <span className="year">{`${new Date(education.start_date).getFullYear()} - ${new Date(education.end_date).getFullYear()}`}</span>
+                              <span className="year">{`${new Date(item.to).getFullYear()}`}</span>
                             </div>
                           </div>
-                          <div className="text">{education.description}</div>
+                          {/* <div className="text">{item.description}</div> */}
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  <div className={`resume-outer theme-blue`}>
+                  <div className={`resume-outer theme-blue container`}>
                     <div className="upper-title">
                       <h4>{'Work & Experience'}</h4>
                     </div>
 
-                    {data?.work_experiences?.length > 0 ? data.work_experiences.map((workExp) => (
+                    {data?.employment?.length > 0 ? data.employment.map((workExp) => (
                       <div className="resume-block" key={workExp._id}>
                         <div className="inner">
-                          <span className="name">{workExp.position[0]?.toUpperCase()}</span>
+                          {/* <span className="name">{workExp.position?.toUpperCase()}</span> */}
                           <div className="title-box">
                             <div className="info-box">
                               <h3>{workExp.position}</h3>
-                              <span>{workExp.company_name}</span>
+                              <span>{workExp.name}</span>
                             </div>
                             <div className="edit-box">
-                              <span className="year">{`${new Date(workExp.start_date).getFullYear()} - ${new Date(workExp.end_date).getFullYear()}`}</span>
+                              <span className="year">{`${new Date(workExp.from).getFullYear()} - ${new Date(workExp.to).getFullYear()}`}</span>
                             </div>
                           </div>
-                          <div className="text">{workExp.description}</div>
+                          <div className="text">{workExp?.description}</div>
                         </div>
                       </div>
                     )):<></>}
                   </div>
-                  
-                  <div className={`resume-outer theme-yellow`}>
-                    <div className="upper-title">
-                      <h4>{'Awards'}</h4>
-                    </div>
-
-                    {data?.awards?.length > 0 && data.awards.map((award) => (
-                      <div className="resume-block" key={award._id}>
-                        <div className="inner">
-                          <span className="name">{award.award_name[0]?.toUpperCase()}</span>
-                          <div className="title-box">
-                            <div className="info-box">
-                              <h3>{award.award_name}</h3>
-                              <span>{ }</span>
-                            </div>
-                            <div className="edit-box">
-                              <span className="year">{`${new Date(award.start_date).getFullYear()} - ${new Date(award.end_date).getFullYear()}`}</span>
-                            </div>
-                          </div>
-                          <div className="text">{award.description}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                
                   {/* <!-- Candidate Resume End --> */}
                 </div>
               </div>
@@ -264,44 +271,44 @@ const CandidateSingleDynamicV1 = () => {
                         <li>
                           <i className="icon icon-calendar"></i>
                           <h5>Experience:</h5>
-                          <span>{data?.candidateId?.employment ?calculateTotalExperience(data?.candidateId?.employment):""}</span>
+                          <span>{data?.employment ?calculateTotalExperience(data?.employment):""}</span>
                         </li>
 
                         <li>
                           <i className="icon icon-expiry"></i>
                           <h5>Age:</h5>
-                          <span>{new Date().getFullYear() - new Date(data?.candidateId?.dob).getFullYear()} Year</span>
+                          <span>{new Date().getFullYear() - new Date(data?.dob).getFullYear()} Year</span>
                         </li>
 
                         <li>
                           <i className="icon icon-rate"></i>
                           <h5>Current Salary:</h5>
-                          <span>₹ {data?.current_salary} LPA</span>
+                          <span>₹ {data?.currentsalary} LPA</span>
                         </li>
 
                         <li>
                           <i className="icon icon-salary"></i>
                           <h5>Expected Salary:</h5>
-                          <span>₹ {data?.expected_salary} LPA</span>
+                          <span>₹ {data?.expectedsalary} LPA</span>
                         </li>
 
                         <li>
                           <i className="icon icon-user-2"></i>
                           <h5>Gender:</h5>
-                          <span>{data?.candidateId?.gender}</span>
+                          <span>{data?.gender}</span>
                         </li>
 
-                        <li>
+                        {/* <li>
                           <i className="icon icon-language"></i>
                           <h5>Language:</h5>
                           <span>{data?.languages?.map(item => item.value).join(", ")}</span>
-                        </li>
+                        </li> */}
 
                         <li>
                           <i className="icon icon-degree"></i>
                           <h5>Education Level:</h5>
                           <span>
-                             {data?.candidateId?.education?.map((val, i,arr) => (
+                             {data?.education?.map((val, i,arr) => (
                             
                                 <a>{val.qualification}</a>
                             
@@ -313,24 +320,24 @@ const CandidateSingleDynamicV1 = () => {
                   </div>
                   {/* End .sidebar-widget conadidate overview */}
 
-                  <div className="sidebar-widget social-media-widget">
+                  {/* <div className="sidebar-widget social-media-widget">
                     <h4 className="widget-title">Social media</h4>
                     <div className="widget-content">
                       <div className="social-links">
                         <Social data={data} />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   {/* End .sidebar-widget social-media-widget */}
 
-                  <div className="sidebar-widget">
+                  {/* <div className="sidebar-widget">
                     <h4 className="widget-title">Professional Skills</h4>
                     <div className="widget-content">
                       <ul className="job-skills">
                         <JobSkills data={data} />
                       </ul>
                     </div>
-                  </div>
+                  </div> */}
                   {/* End .sidebar-widget skill widget */}
 
                   {/* <div className="sidebar-widget contact-widget">
@@ -352,6 +359,15 @@ const CandidateSingleDynamicV1 = () => {
         {/* <!-- job-detail-outer--> */}
       </section>
       {/* <!-- End Job Detail Section --> */}
+ {/* Forward CV Modal */}
+      <ForwardCVModal
+        isOpen={isForwardModalOpen}
+        onClose={() => setIsForwardModalOpen(false)}
+        subEmployers={SubEmployers}
+        candidateId={data?._id}
+        onForward={handleForwardCV}
+        SubEmployersLoading={SubEmployersLoading}
+      />
 
       <FooterDefault footerStyle="alternate5" />
       {/* <!-- End Main Footer --> */}

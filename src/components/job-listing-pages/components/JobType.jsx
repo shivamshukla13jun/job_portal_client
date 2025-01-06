@@ -3,7 +3,7 @@ import { jobTypeList } from "@/utils/jobTypeList";
 
 const JobType = ({ search, setSearch }) => {
   
-console.log(jobTypeList.map(item=>item.value))
+//console.log(jobTypeList.map(item=>item.value))
     const isChecked = (value) => {
         return search.job_type.length > 0 ? search?.job_type?.split(",")?.includes(value) : false;
     };

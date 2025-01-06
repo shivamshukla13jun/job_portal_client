@@ -13,6 +13,8 @@ import { useQuery } from "@tanstack/react-query";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import { get } from "@/services/api";
+import useDebounce from "@/utils/hooks/useDebounce";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const Index = () => {
   const userInfo = useUserInfo();
@@ -26,29 +28,66 @@ const Index = () => {
       let res = (await get(`dashboard/candidate`)).data.data
       return res;
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
     },
   
     enabled: !!userInfo._id
   });
-  console.log("data??",data)
+  console.log("userInfo",userInfo)
+  const [search, setSearch] = useState({
+    page: 1,
+    limit: 10,
+    clear:false,
+    keyword: userInfo?.userTypeValue?.designation || "",
+    location: '',
+    categories: '',
+    job_type: '',
+    date_posted: '',
+    experience_from: 0,
+    experience_to: 10,
+    salary_from: 0,
+    salary_to: 10000,
+    tags: [],
+    sort: 'new'
+});
+
+
+const { data:Matchjobs, isLoading:MatchjobLoading } = useQuery({
+    queryKey: ['jobs', userInfo],
+    queryFn: async () => {
+        try {
+          // Extract unique category values
+const uniqueCategories = [
+  ...new Set(
+    userInfo?.userTypeValue?.employment
+      ?.flatMap((job) => job.categories.map((category) => category.value))
+  ),
+];
+
+// Join unique categories as a comma-separated string
+const categoriesString = uniqueCategories.join(", ");
+            let res = await get(`job?page=${search.page}&categories=${categoriesString}
+              &location=${userInfo?.userTypeValue?.contact?.current_address?.city}`);
+           return {
+                data: res.data.data,
+                count: res.data.count
+            }
+        } catch (error) {
+          console.log(error)
+            toast.error(error.response.data.error);
+            return { data: [], count: 0 };
+        }
+    },
+    enabled:!!userInfo?.userTypeValue && Object.keys(userInfo?.userTypeValue).length>0
+});
+console.log({Matchjobs})
   if (isLoading) return <div>Loading...</div>
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
-      {/* <!-- Header Span for hight --> */}
 
-      {/* <LoginPopup /> */}
-      {/* End Login Popup Modal */}
-
-      <DashboardCandidatesHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardCandidatesSidebar />
+      <DashboardSidebar />
       {/* <!-- End Candidates Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
@@ -87,20 +126,19 @@ const Index = () => {
               </div>
             </div> */}
             {/* End .col */}
-
-            {/* <div className="col-lg-12">
+           {!MatchjobLoading &&   <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
-                  <h4>Jobs Applied Recently</h4>
+                  <h4>Matching Jobs</h4>
                 </div>
                 <div className="widget-content">
                   <div className="row">
-
-                    <JobApplied />
+                    <JobApplied data={Matchjobs?.data || []}/>
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div> }
+          
             {/* End .col */}
           </div>
           {/* End .row profile and notificatins */}

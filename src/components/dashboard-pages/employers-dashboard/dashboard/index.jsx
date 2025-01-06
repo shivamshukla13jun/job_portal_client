@@ -12,88 +12,100 @@ import MenuToggler from "../../MenuToggler";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { get } from "@/services/api";
+import { get, getById } from "@/services/api";
+import CandidateList from "./components/CandidateList";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
+import { useSelector } from "react-redux";
 
 const Index = () => {
   const userInfo = useUserInfo();
-  const [statrtdate, setStartdate] = useState("")
-
-
-  const { data, isLoading } = useQuery({
-    queryKey: [`dashboard/employer`, statrtdate],
+  const { limit, page, } = useSelector((state) => state.candidateFilter) || {};
+  // dashboard data
+  const { data:dashboard, isdashboardLoading } = useQuery({
+    queryKey: [`dashboard/employer`, userInfo],
     queryFn: async () => {
-      let res = (await get(`dashboard/employer`)).data.data
+      let res = (
+        await getById(`dashboard/employer`, userInfo?.userTypeValue?._id)
+      ).data.data;
       return res;
     },
-    enabled: !!userInfo._id
+    enabled: !!userInfo?.userTypeValue?._id,
   });
-
-  if (isLoading) return <div>Loading...</div>
+  //  recent Application
+    const { data:applications, isapplicationLoading } = useQuery({
+      queryKey: [`application/tracking`,page],
+      queryFn: async () => {
+        let res = (await get(`application/tracking?page=${page}&limit=${limit}`)).data;
+        return res;
+      },
+      enabled: !!userInfo._id
+    });
+  if (isdashboardLoading || isapplicationLoading) return <div>Loading...</div>;
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-
-      {/* <LoginPopup /> */}
-      {/* End Login Popup Modal */}
-
-      <DashboardHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardEmployerSidebar />
+      <DashboardSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title={data?.business_name} />
+          <BreadCrumb title={dashboard?.business_name} />
           {/* breadCrumb */}
 
           <MenuToggler />
           {/* Collapsible sidebar button */}
 
           <div className="row">
-            <TopCardBlock data={data} />
+            <TopCardBlock data={dashboard} />
           </div>
           {/* End .row top card block */}
 
           <div className="row">
             <div className="col-xl-7 col-lg-12">
               {/* <!-- Graph widget --> */}
-              {/* <div className="graph-widget ls-widget">
-                <ProfileChart   data={data}/>
-              </div> */}
+              <div className="graph-widget ls-widget">
+                <ProfileChart   data={dashboard}/>
+              </div>
               {/* End profile chart */}
             </div>
             {/* End .col */}
 
             <div className="col-xl-5 col-lg-12">
               {/* <!-- Notification Widget --> */}
-              {/* <div className="notification-widget ls-widget">
+              <div className="notification-widget ls-widget">
                 <div className="widget-title">
                   <h4>Notifications</h4>
                 </div>
                 <div className="widget-content">
-                  <Notification />
+                  <Notification data={applications} />
                 </div>
-              </div> */}
+              </div>
             </div>
             {/* End .col */}
 
             <div className="col-lg-12">
-              {/* <!-- applicants Widget --> */}
+              <div className="applicants-widget ls-widget">
+                <div className="widget-title">
+                <h4>Matching Candidates</h4>
+                </div>
+                <div className="widget-content">
+                  <div className="row">
+                    <CandidateList />
+                  </div>
+                </div>
+              </div>
+          
+            </div>
+            <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
                   <h4>Recent Applicants</h4>
                 </div>
                 <div className="widget-content">
                   <div className="row">
-                    {/* <!-- Candidate block three --> */}
-
-                    <Applicants />
+                    <Applicants data={applications} isLoading={isdashboardLoading} />
                   </div>
                 </div>
               </div>

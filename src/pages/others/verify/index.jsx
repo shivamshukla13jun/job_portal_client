@@ -69,19 +69,19 @@ const Verify = () => {
 
     const handlePaste = (e) => {
         e.preventDefault();
-        console.log("Paste event triggered");
+        //console.log("Paste event triggered");
         const pastedData = e.clipboardData.getData("text");
-        console.log("Pasted data:", pastedData);
+        //console.log("Pasted data:", pastedData);
 
         const pastedCode = pastedData.slice(0, 4).split('');
-        console.log("Processed pasted code:", pastedCode);
+        //console.log("Processed pasted code:", pastedCode);
 
         if (pastedCode.length === 4 && pastedCode.every(char => /^\d$/.test(char))) {
-            console.log("Valid OTP, updating state");
+            //console.log("Valid OTP, updating state");
             setOtp(pastedCode);
             inputRefs.current[3].focus();
         } else {
-            console.log("Invalid OTP, not updating state");
+            //console.log("Invalid OTP, not updating state");
         }
     };
 
@@ -100,10 +100,11 @@ const Verify = () => {
 
             sessionStorage.setItem("userInfo", enData);
             dispatch(login(enData));
-            window.location.href = user.userType.name === 'Candidate' ? paths.candidate_profile : paths.employer_profile;
+            console.log("End Data",user)
+            window.location.href = user.userType.name === 'Candidate' ? paths.candidate : user.userType.name==="Subemployer"?paths.sub_employer_profile:paths.employer;  
         },
         onError: (err) => {
-            console.log(err)
+            //console.log(err)
             toast.error(err.response.data.error)
         }
     });
@@ -122,7 +123,7 @@ const Verify = () => {
             toast.success('User otp resend!');
         },
         onError: (err) => {
-            console.log(err)
+            //console.log(err)
             toast.error(err.response.data.error)
         }
     });

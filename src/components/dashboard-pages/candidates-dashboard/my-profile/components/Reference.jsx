@@ -182,8 +182,8 @@ const Reference = ({ watch, register, setValue, error }) => {
 
             <div className='form-group col-lg-12 col-md-12' style={{ marginBottom: '0px' }}>
                 {error?.references?.slice(0, 1).map(item =>
-                    <span className="error error-border" key={item.email.message}>
-                        {item.name.message + ', ' + item.email.message + ', ' + item.phone.message + ', ' + item.note.message + "!"}
+                    <span className="error error-border" key={item?.email?.message}>
+                        {item?.name?.message + ', ' + item?.email?.message + ', ' + item?.phone?.message + ', ' + item?.note?.message + "!"}
                     </span>
                 )}
             </div>

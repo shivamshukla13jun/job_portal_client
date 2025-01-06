@@ -1,5 +1,6 @@
 import LogoUpload from '@/components/dashboard-pages/candidates-dashboard/my-profile/components/my-profile/LogoUpload'
 import DatePicker from '@/components/common/date-picker/DatePicker';
+import { degreeSpecialisationValues } from '@/data/jobForm';
 
 const EducationForm = ({ watch, register, setValue, error }) => {
     const index = watch("education").length - 1;
@@ -9,18 +10,20 @@ const EducationForm = ({ watch, register, setValue, error }) => {
             <h4>Education Form</h4>
             <div className='row form-group mt-4'>
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Name of Institution</label>
+                    <label>Name of Institution  <span className="required-form">*</span></label>
                     <input type="text" {...register(`education.${index}.name`)} placeholder="Mumbai University" required />
                 </div>
 
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Qualification</label>
-                    <input type="text" {...register(`education.${index}.qualification`)} placeholder="B.COM / B.Tech" required />
+                    <label>Qualification  <span className="required-form">*</span></label>
+                    <select  {...register(`education.${index}.qualification`)} required>
+                        <option value={""}>Select Qualification</option>
+                        {degreeSpecialisationValues.map((item)=><option value={item.label}>{item.label}</option>)}
+                    </select>
                 </div>
 
-                <div className="form-group col-lg-6 col-md-12">
-                    <label>Start Date</label>
-                    {/* <input type="text" placeholder="" required /> */}
+                {/* <div className="form-group col-lg-6 col-md-12">
+                    <label>Start Date  <span className="required-form">*</span></label>
                     <div>
                         <DatePicker
                             id='educationFromDate'
@@ -28,10 +31,10 @@ const EducationForm = ({ watch, register, setValue, error }) => {
                             onChange={(date) => setValue(`education.${index}.from`, date)}
                         />
                     </div>
-                </div>
+                </div> */}
 
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>End Date</label>
+                    <label>Passing Year  <span className="required-form">*</span></label>
                     <div>
                         <DatePicker
                             id='educationToDate'
@@ -41,8 +44,8 @@ const EducationForm = ({ watch, register, setValue, error }) => {
                     </div>
                 </div>
 
-                <div className="form-group col-lg-12 col-md-12">
-                    <label>Certificate</label>
+                {/* <div className="form-group col-lg-12 col-md-12">
+                    <label>Certificate  <span className="required-form">*</span></label>
                     <div className="uploading-outer" style={{ border: "none", padding: 0, margin: 0 }}>
                         <div className="uploadButton">
                             <input
@@ -64,10 +67,10 @@ const EducationForm = ({ watch, register, setValue, error }) => {
                                 htmlFor={`upload-${index}`}
                             >
                                 {(watch(`education.${index}.certificate`)?.name || watch(`education.${index}.certificate`)?.originalname) || "Upload File"}
-                            </label>
+                              <span className="required-form">*</span></label>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="form-group col-lg-12 col-md-12" style={{ marginBottom: 0 }}>
                     <div role='button' data-bs-dismiss="modal" className="theme-btn btn-style-one">

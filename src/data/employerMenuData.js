@@ -5,6 +5,7 @@ const employerMenu = [
     icon: "la-home",
     routePath: "/employers-dashboard/dashboard",
     active: "active",
+    paramtype:"",
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ const employerMenu = [
     icon: "la-user-tie",
     routePath: "/employers-dashboard/company-profile",
     active: "",
+    paramtype:"",
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ const employerMenu = [
     icon: "la-paper-plane",
     routePath: "/employers-dashboard/post-jobs",
     active: "",
+    paramtype:"",
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ const employerMenu = [
     icon: "la-briefcase",
     routePath: "/employers-dashboard/manage-jobs",
     active: "",
+    paramtype:"",
   },
   {
     id: 5,
@@ -33,6 +37,7 @@ const employerMenu = [
     icon: "la-file-invoice",
     routePath: "/employers-dashboard/all-applicants",
     active: "",
+    paramtype:"",
   },
   {
     id: 6,
@@ -40,27 +45,32 @@ const employerMenu = [
     icon: "la-bookmark-o",
     routePath: "/employers-dashboard/shortlisted-resumes",
     active: "",
+    paramtype:"EmployerId",
   },
   {
-    id: 7,
-    name: "Packages",
-    icon: "la-box",
-    routePath: "/employers-dashboard/packages",
+    id: 6,
+    name: "Sub Employer List",
+    icon: "la-bookmark-o",
+    routePath: "/employers-dashboard/subemployer",
     active: "",
+    paramtype:"",
+  },
+  {
+    id: 2,
+    name: "Meeting links",
+    icon: "la-user-tie",
+    routePath: "/subemployers-dashboard/meetinglinks",
+    active: "",
+    paramtype:"createdBy",
+    userAcitive:""
   },
   // {
-  //   id: 8,
-  //   name: "Messages",
-  //   icon: "la-comment-o",
-  //   routePath: "/employers-dashboard/messages",
+  //   id: 7,
+  //   name: "Packages",
+  //   icon: "la-box",
+  //   routePath: "/employers-dashboard/packages",
   //   active: "",
-  // },
-  // {
-  //   id: 9,
-  //   name: "Resume Alerts",
-  //   icon: "la-bell",
-  //   routePath: "/employers-dashboard/resume-alerts",
-  //   active: "",
+  // paramtype:"",
   // },
   {
     id: 10,
@@ -68,6 +78,7 @@ const employerMenu = [
     icon: "la-lock",
     routePath: "/employers-dashboard/change-password",
     active: "",
+    paramtype:"",
   },
   {
     id: 11,
@@ -75,6 +86,7 @@ const employerMenu = [
     icon: "la-sign-out",
     routePath: "/login",
     active: "",
+    paramtype:"",
   },
   {
     id: 12,
@@ -82,6 +94,7 @@ const employerMenu = [
     icon: "la-trash",
     routePath: "/",
     active: "",
+    paramtype:"",
   },
 ];
 export default  employerMenu

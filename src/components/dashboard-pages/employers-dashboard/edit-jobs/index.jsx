@@ -22,6 +22,8 @@ import Timing from "./components/Timing";
 import { paths } from "@/services/paths";
 import { get, getById, post, put } from "@/services/api";
 import { jobSchema } from "@/validations/dashboard/employer/job";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
+import InterviewDetails from "./components/InterviewDetails";
 
 const EditJob = () => {
   const params = useParams();
@@ -42,14 +44,22 @@ const EditJob = () => {
     defaultValues: {
       title: '',
       location: '',
+      interview_details:"",
       place: '',
       categories: [],
-      age: 18,
+      interview_details: {
+        date:new Date(),
+        time:"10:00",
+        location: "",
+        type: "",
+        notes: ""
+      },
+      // age: 18,
       opening: 1,
       candidate_requirement: {
         experience: '',
-        salary_from: 10000,
-        salary_to: 12000,
+        salary_from: null,
+        salary_to: null,
         bonus: false,
         job_info: '',
         skills: [],
@@ -60,20 +70,20 @@ const EditJob = () => {
           assets: []
         }
       ],
-      timing: {
-        job: '',
-        interview: ''
-      },
-      company: {
-        name: '',
-        contact_person: '',
-        phone: '',
-        email: '',
-        contact_person_profile: '',
-        size_of_org: 20,
-        job_address: '',
-        vacancy: '',
-      }
+      // timing: {
+      //   job: '',
+      //   interview: ''
+      // },
+      // company: {
+      //   name: '',
+      //   contact_person: '',
+      //   phone: '',
+      //   email: '',
+      //   contact_person_profile: '',
+      //   size_of_org: 20,
+      //   job_address: '',
+      //   vacancy: '',
+      // }
     }
   });
 
@@ -87,7 +97,7 @@ const EditJob = () => {
       }
     },
     onError: (err) => {
-      console.log(err)
+      //console.log(err)
       toast.error(err.response.data.error)
     }
   });
@@ -101,34 +111,41 @@ const EditJob = () => {
       reset({
         title: data.title || '',
         location: data.location || '',
+        interview_details: data.interview_details || '',
         place: data.place || '',
         categories: data.categories || [],
         jobtype: data.jobtype || [],
         opening: data.opening || 1,
-        age: data.age || 18,
+        // age: data.age || 18,
         candidate_requirement: {
           experience: data.candidate_requirement.experience || '',
-          salary_from: data.candidate_requirement.salary_from || 10000,
-          salary_to: data.candidate_requirement.salary_to || 12000,
+          salary_from: data.candidate_requirement.salary_from || null,
+          salary_to: data.candidate_requirement.salary_to || null,
           bonus: data.candidate_requirement.bonus || false,
           job_info: data.candidate_requirement.job_info || '',
           skills: data.candidate_requirement.skills || [],
         },
         personal_info: data.personal_info || [{ info: '', assets: [] }],
-        timing: {
-          job: data.timing.job || '',
-          interview: data.timing.interview || ''
-        },
-        company: {
-          name: data.company.name || '',
-          contact_person: data.company.contact_person || '',
-          phone: data.company.phone || '',
-          email: data.company.email || '',
-          contact_person_profile: data.company.contact_person_profile || '',
-          size_of_org: data.company.size_of_org || 20,
-          job_address: data.company.job_address || '',
-          vacancy: data.company.vacancy || '',
+        interview_details:{
+          "type": data?.interview_details?.type || "",
+          "location": data?.interview_details?.location || "",
+          "time":data?.interview_details?.time || "10:00",
+          "date": data?.interview_details?.date || new Date()
         }
+        // timing: {
+        //   job: data.timing.job || '',
+        //   interview: data.timing.interview || ''
+        // },
+        // company: {
+        //   name: data.company.name || '',
+        //   contact_person: data.company.contact_person || '',
+        //   phone: data.company.phone || '',
+        //   email: data.company.email || '',
+        //   contact_person_profile: data.company.contact_person_profile || '',
+        //   size_of_org: data.company.size_of_org || 20,
+        //   job_address: data.company.job_address || '',
+        //   vacancy: data.company.vacancy || '',
+        // }
       });
     }
 
@@ -150,18 +167,7 @@ const EditJob = () => {
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
-      {/* <!-- Header Span for hight --> */}
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardEmployerSidebar />
+      <DashboardSidebar/>
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
@@ -189,7 +195,18 @@ const EditJob = () => {
                   </div>
                 </div>
               </div>
-
+              <div className="col-lg-12">
+                <div className="ls-widget">
+                  <div className="tabs-box">
+                    <div className="widget-title">
+                      <h4>Edit Interview Details</h4>
+                    </div>
+                    <div className="widget-content">
+                      <InterviewDetails watch={watch} register={register} setValue={setValue} error={errors} />
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="col-lg-12">
                 {/* <!-- Ls widget --> */}
                 <div className="ls-widget">
@@ -220,8 +237,7 @@ const EditJob = () => {
                 </div>
               </div>
 
-              <div className="col-lg-12">
-                {/* <!-- Ls widget --> */}
+              {/* <div className="col-lg-12">
                 <div className="ls-widget">
                   <div className="tabs-box">
                     <div className="widget-title">
@@ -236,7 +252,6 @@ const EditJob = () => {
               </div>
 
               <div className="col-lg-12">
-                {/* <!-- Ls widget --> */}
                 <div className="ls-widget">
                   <div className="tabs-box">
                     <div className="widget-title">
@@ -248,7 +263,7 @@ const EditJob = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="d-flex justify-content-end">
                 <button

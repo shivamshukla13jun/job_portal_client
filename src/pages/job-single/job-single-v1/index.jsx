@@ -37,7 +37,7 @@ const JobSingleDynamicV1 = () => {
   const dispatch=useDispatch()
   const SavedJobs = useSelector(selectWishlist);
   const id = params.id;
-  console.log({userInfo})
+  //console.log({userInfo})
   const { data, isLoading } = useQuery({
     queryKey: ['job', id],
     queryFn: async () => {
@@ -121,7 +121,7 @@ const JobSingleDynamicV1 = () => {
                   <ul className="job-info">
                     <li>
                       <span className="icon flaticon-briefcase"></span>
-                      {data?.company?.name}
+                      {data?.employerId?.business_name}
                     </li>
                     {/* compnay info */}
                     <li>
@@ -129,10 +129,10 @@ const JobSingleDynamicV1 = () => {
                       {data?.location}
                     </li>
                     {/* location info */}
-                    <li>
+                    {/* <li>
                       <span className="icon flaticon-clock-3"></span>{" "}
                       {data?.timing?.job}
-                    </li>
+                    </li> */}
                     {/* time info */}
                     <li>
                       <span className="icon flaticon-money"></span>{" "}
@@ -235,10 +235,10 @@ const JobSingleDynamicV1 = () => {
                   <div className="sidebar-widget company-widget">
                     <div className="widget-content">
                       <div className="company-title">
-                        {/* <div className="company-logo">
-                          <img src={data?.logo} alt="resource" />
-                        </div> */}
-                        <h5 className="company-name">{data?.company?.name}</h5>
+                        <div className="company-logo">
+                        <img src={API_EMPLOYER_PATH + data?.employerId?.logo?.filename} alt="logo" />
+                        </div>
+                        <h5 className="company-name">{data?.employerId?.business_name}</h5>
                         <Link to={`${paths.publicemployer}/${data?.employerId?._id}`} state={{company:data?.company}} className="profile-link">
                           View company profile
                         </Link>

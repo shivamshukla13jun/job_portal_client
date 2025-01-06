@@ -89,12 +89,6 @@ const DashboardCandidatesHeader = () => {
                 <Link to={"/candidates-dashboard/saved-jobs"} className="count">{SavedJobs?.length}</Link>
                 <span className="icon la la-heart-o"></span>
               </button>
-            {/* wishlisted menu */}
-
-            {/* <button className="menu-btn">
-              <span className="icon la la-bell"></span>
-            </button> */}
-            {/* End notification-icon */}
 
             {/* <!-- Dashboard Option --> */}
             {userInfo && userInfo?.userType?.name?.toLowerCase() === 'candidate' && (

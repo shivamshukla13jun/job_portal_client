@@ -14,7 +14,7 @@ const EducationalQualification = ({ watch, register, setValue, error }) => {
     // Keep the initial empty object if it exists
     const cleanedEducation = currentEducation.filter(isEducationEntryFilled).length > 0
       ? currentEducation.filter(isEducationEntryFilled)
-      : [{ name: '', from: new Date(), to: new Date(), qualification: '', certificate: '' }];
+      : [{ name: '',  to: new Date(), qualification: '', }];
     setValue("education", cleanedEducation);
   }, []);
 
@@ -42,10 +42,8 @@ const EducationalQualification = ({ watch, register, setValue, error }) => {
     if (currentEducation.length === 0 || isEducationEntryFilled(currentEducation[currentEducation.length - 1])) {
       const newEducationEntry = {
         name: '',
-        from: new Date(),
         to: new Date(),
         qualification: '',
-        certificate: ''
       };
 
       setValue("education", [...currentEducation, newEducationEntry]);
@@ -54,7 +52,7 @@ const EducationalQualification = ({ watch, register, setValue, error }) => {
   }
 
   const isEducationEntryFilled = (entry) => {
-    return entry.name !== '' && entry.qualification !== '' && entry.from && entry.to;
+    return entry.name !== '' && entry.qualification !== '' && entry.to;
   }
 
   const handleDeleteModal = (index) => {

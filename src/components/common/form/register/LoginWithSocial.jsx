@@ -3,12 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 
 const LoginWithSocial = ({ type }) => {
   const url = new URLSearchParams();
-console.log({type})
+//console.log({type})
   if (type) {
     url.set("state", type.toLowerCase());
   }
   
-  console.log(url.toString());
+  //console.log(url.toString());
   
   const mutation = useMutation({
     mutationFn: () => get(`/user/google?${url.toString()}`),

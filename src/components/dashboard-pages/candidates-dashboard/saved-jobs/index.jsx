@@ -9,6 +9,8 @@ import MenuToggler from "../../MenuToggler";
 import { useQuery } from "@tanstack/react-query";
 import { get } from "@/services/api";
 import { useState } from "react";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
+import Pagination from "@/utils/hooks/usePagination";
 
 const index = () => {
 
@@ -25,13 +27,13 @@ const handleSerch=(name,value)=>{
   }))
 }
   const { data, isLoading } = useQuery({
-    queryKey: ['whishlist/all',search.createdAt],
+    queryKey: ['whishlist/all','whishlist',search.createdAt,search.page],
     queryFn: async () => {
-      let res = (await get(`/whishlist/all?createdAt=${search.createdAt}`)).data.data;
+      let res = (await get(`/whishlist/all?createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}`)).data;
       return res;
     }
   });
-console.log({data})
+//console.log({data})
   if (isLoading) return <div>Loading...</div>
 
   return (
@@ -39,16 +41,7 @@ console.log({data})
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
 
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardCandidatesHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardCandidatesSidebar />
+      <DashboardSidebar />
       {/* <!-- End Candidates Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
@@ -64,8 +57,14 @@ console.log({data})
             <div className="col-lg-12">
               {/* <!-- Ls widget --> */}
               <div className="ls-widget">
-                <JobListingsTable data={data} search={search} setSearch={ setSearch} handleSerch={handleSerch}/>
+                <JobListingsTable data={data?.data || []} search={search} setSearch={ setSearch} handleSerch={handleSerch}/>
               </div>
+              <Pagination
+              totalPages={data?.totalPages || 0}
+              Page={search.page}
+              handlePageChange={(page) => handleSerch("page",page)}
+              limit={search.limit}
+            />
             </div>
           </div>
           {/* End .row */}
