@@ -5,15 +5,15 @@ export const jobSchema = Yup.object().shape({
     jobtype: Yup.string().required('Job Type is required'),
     location: Yup.string().required('Location is required'),
     place: Yup.string().required('Place is required'),
-    interview_details: Yup.object().shape({
-        date: Yup.date().required('Interview date is required'),
-        time: Yup.string().required('Interview time is required'),
-        location: Yup.string().required('Interview location is required'),
-        type: Yup.string()
-            .oneOf(['in_person', 'online', 'phone'], 'Invalid interview type')
-            .required('Interview type is required'),
-        notes: Yup.string()
-    }),
+    // interview_details: Yup.object().shape({
+    //     date: Yup.date().required('Interview date is required'),
+    //     time: Yup.string().required('Interview time is required'),
+    //     location: Yup.string().required('Interview location is required'),
+    //     type: Yup.string()
+    //         .oneOf(['in_person', 'online', 'phone'], 'Invalid interview type')
+    //         .required('Interview type is required'),
+    //     notes: Yup.string()
+    // }),
     category: Yup.array().of(
         Yup.object().shape({
             value: Yup.string().required('Job Sector value is required'),

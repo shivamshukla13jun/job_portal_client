@@ -78,19 +78,34 @@ const DefaulHeader2 = () => {
     window.addEventListener("scroll", changeBackground);
     return () => window.removeEventListener("scroll", changeBackground);
   }, []);
-
+  const getDisplayName = () => {
+    const userType = userInfo?.userType?.name?.toLowerCase();
+    if (!userInfo?.userTypeValue) return "My account";
+  
+    switch (userType) {
+      case "employer":
+        return userInfo.userTypeValue.business_name
+          ? capitalizeFirstLetter(userInfo.userTypeValue.business_name)
+          : "My account";
+      case "candidate":
+        return userInfo.userTypeValue.name
+          ? capitalizeFirstLetter(userInfo.userTypeValue.name.split(" ")[1])
+          : "My account";
+      case "subemployer":
+        return userInfo.userTypeValue.name
+          ? capitalizeFirstLetter(userInfo.userTypeValue.name.split(" ")[1])
+          : "My account";
+      default:
+        return "My account";
+    }
+  };
   const renderDropdown = () => {
     const userId = userInfo?._id;
     const userTypeById = userInfo?.userTypeValue?._id;
 
     const userType = userInfo?.userType?.name?.toLowerCase();
-    const userName =
-      userInfo?.userTypeValue?.name ||
-      userInfo?.userTypeValue?.business_name ||
-      "My account";
-    const capitalizedUserName = capitalizeFirstLetter(
-      userName?.split(" ")[0] || ""
-    );
+    const userName =getDisplayName()
+
     // Fetch menu items from the backend
     const { data: menuItems = [], isLoading } = useQuery({
       queryKey: ["user/menu", userId],
@@ -120,7 +135,7 @@ const DefaulHeader2 = () => {
             <DropdownMenu
               menuData={menuItems}
               imgSrc={`${API_CANDIDATE_PATH}${userInfo?.userTypeValue?.profile?.filename}`}
-              name={capitalizedUserName}
+              name={userName}
               path={pathname}
               userTypeById={userTypeById}
               userId={userId}
@@ -128,12 +143,22 @@ const DefaulHeader2 = () => {
           </>
         );
       case "employer":
-      case "subemployer":
         return (
           <DropdownMenu
             menuData={menuItems}
             imgSrc={`${API_EMPLOYER_PATH}${userInfo?.userTypeValue?.logo?.filename}`}
-            name={capitalizedUserName}
+            name={userName}
+            path={pathname}
+            userTypeById={userTypeById}
+            userId={userId}
+          />
+        );
+      case "subemployer":
+        return (
+          <DropdownMenu
+            menuData={menuItems}
+            imgSrc={"/images/resource/candidate.png"}
+            name={userName}
             path={pathname}
             userTypeById={userTypeById}
             userId={userId}

@@ -21,7 +21,7 @@ const SubemployerMenu = [
     id: 6,
     name: "Shortlisted Resumes",
     icon: "la-bookmark-o",
-    routePath: "/subemployers-dashboard/shortlisted-resumes",
+    routePath: "/subemployers-dashboard/forward-resumes",
     active: "",
      paramtype:"SubEmployerId",
   },

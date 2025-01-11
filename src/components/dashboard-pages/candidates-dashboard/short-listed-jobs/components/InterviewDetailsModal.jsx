@@ -14,8 +14,8 @@ export const InterviewDetails = ({ item }) => {
   const { register, handleSubmit, watch, formState: { errors }, setValue, reset } = useForm({
     defaultValues: {
       intrviewConfirmation: {
-        message:item?.intrviewConfirmation?.message || "",
-        confirm: Boolean(item?.intrviewConfirmation?.confirm) || false
+        message:item?.meeting?.intrviewConfirmation?.message || "",
+        confirm: Boolean(item?.meeting?.intrviewConfirmation?.confirm) || false
       }
     }
   });
@@ -67,23 +67,28 @@ export const InterviewDetails = ({ item }) => {
       <Row className="mb-3">
         <Col className="d-flex align-items-center">
           <CalendarClock className="me-2" size={16} />
-          <span>Date: {new Date(item?.job?.interview_details?.date).toLocaleString()}</span>
+          <span>Date: {new Date(item?.meeting?.date).toLocaleString()}</span>
         </Col>
       </Row>
       <Row className="mb-3">
         <Col className="d-flex align-items-center">
           <MapPin className="me-2" size={16} />
-          <span>Location: {item?.job?.interview_details?.location}</span>
+          <span>Time: {item?.meeting?.time}</span>
         </Col>
       </Row>
-      {item?.job?.interview_details?.notes && (
+      <Row className="mb-3">
+        <Col className="d-flex align-items-center">
+          <MapPin className="me-2" size={16} />
+          <span>Duration: {item?.meeting?.timeDuration}</span>
+        </Col>
+      </Row>
         <Row className="mt-3">
           <Col>
             <h6>Additional Notes:</h6>
-            <p className="text-muted">{item?.job?.interview_details?.notes}</p>
+            <p className="text-muted">{item?.meeting?.message}</p>
           </Col>
         </Row>
-      )}
+    
 
       {/* Confirmation and Message Form */}
       <Form onSubmit={handleSubmit(handleRegisterSubmit)} className="mt-4">

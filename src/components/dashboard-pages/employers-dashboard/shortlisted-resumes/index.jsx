@@ -14,9 +14,11 @@ import { useState } from "react";
 import useDebounce from "@/utils/hooks/useDebounce";
 import DashboardEmployerSidebar from "@/components/header/DashboardEmployerSidebar";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const index = () => {
   const userInfo = useUserInfo();
+  const {status}=useParams()
    const dispatch = useDispatch();
     const {
       qualification,
@@ -32,9 +34,9 @@ const index = () => {
   const debouncedSearch = useDebounce(keyword, 500);
 
   const { data, isLoading } = useQuery({
-    queryKey: [`application/tracking`, debouncedSearch,createdAt,category,experience_from,experience_to,qualification],
+    queryKey: [`application/tracking`,status, debouncedSearch,createdAt,category,experience_from,experience_to,qualification],
     queryFn: async () => {
-      let res = (await get(`application/tracking?createdAt=${createdAt}&category=${category}&experience_from=${experience_from}&experience_to=${experience_to}&qualification=${qualification}&page=${page}&limit=${limit}&name=${debouncedSearch}&status=shortlisted`)).data;
+      let res = (await get(`application/tracking?createdAt=${createdAt}&category=${category}&experience_from=${experience_from}&experience_to=${experience_to}&qualification=${qualification}&page=${page}&limit=${limit}&name=${debouncedSearch}&status=${status}`)).data;
       return res;
     },
     enabled: !!userInfo._id
@@ -46,23 +48,13 @@ const index = () => {
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
       <DashboardEmployerSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Shortlisted Candidates!" />
+          <BreadCrumb title="Forwrad Applications!" />
           {/* breadCrumb */}
 
           <MenuToggler />
@@ -72,7 +64,7 @@ const index = () => {
             <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
-                  <h4>Shorlist Candidates</h4>
+                  <h4>Forwrad Applications</h4>
                   <WidgetToFilterBox  />
                 </div>
                 {/* End widget top filter box */}

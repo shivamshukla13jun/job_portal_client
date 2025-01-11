@@ -1,9 +1,9 @@
 import axios from "axios";
 import { API_DEV, API_PROD } from "@/lib/config";
 import { paths } from "./paths";
-
+const MODE=import.meta.env.MODE
 const request = axios.create({
-    baseURL: API_DEV,
+    baseURL: MODE=="development"? API_DEV : API_PROD,
     withCredentials: true,
     // headers: {
     //     Authorization: `Bearer ${sessionStorage.getItem("session")}`

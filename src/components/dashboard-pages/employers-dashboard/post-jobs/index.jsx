@@ -34,13 +34,7 @@ const Index = () => {
       title: '',
       location: '',
       place: '',
-      interview_details: {
-        date:new Date(),
-        time:"10:00",
-        location: "",
-        type: "",
-        notes: ""
-      },
+   
       opening: 1,
       jobtype: "",
       candidate_requirement: {
@@ -114,7 +108,7 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-12">
+              {/* <div className="col-lg-12">
                 <div className="ls-widget">
                   <div className="tabs-box">
                     <div className="widget-title">
@@ -125,7 +119,7 @@ const Index = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="col-lg-12">
                 <div className="ls-widget">

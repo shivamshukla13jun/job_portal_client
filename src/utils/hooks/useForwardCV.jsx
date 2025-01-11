@@ -25,7 +25,7 @@ const useForwardCV = () => {
 
       // Prepare payload for forwarding CV
       const payload = {
-        candidateId,
+        applicationid:candidateId,
         subEmployerIds,
         notes
       };

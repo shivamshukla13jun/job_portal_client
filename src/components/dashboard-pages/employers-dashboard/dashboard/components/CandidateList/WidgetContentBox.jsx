@@ -65,7 +65,7 @@ const WidgetContentBox = () => {
     <div className="row">
       {data?.data?.length > 0 ? (
         <>
-          {data?.data?.map((candidate) => (
+          {data?.data?.map(({candidate,jobDetails:job,matchScore=0,_id}) => (
             <div className="col-lg-12 candidate-block-three" key={candidate._id}>
               <div className="inner-box">
                 <div className="content">
@@ -80,11 +80,16 @@ const WidgetContentBox = () => {
                     />
                   </figure>
                   <h4 className="name">
-                    <Link to={`${paths.publiccandidate}/${candidate._id}`}>
+                    <Link to={`${paths.publiccandidate}/${_id}`}>
                       {candidate.name}
                     </Link>
                   </h4>
-
+                  <div className="designation mr-5">
+                <Link to={`${paths.job}/${job?._id}`}>
+                <span className="la la-briefcase"></span>
+                  {job?.title}
+                </Link>
+              </div>
                   <ul className="candidate-info">
                     <li className="designation">{candidate.designation}</li>
                     <li>
@@ -98,7 +103,7 @@ const WidgetContentBox = () => {
                     </li>
                     <li>
                       <span className="icon flaticon-money"></span> Match Score:
-                      {candidate.matchScore || 0}
+                      {matchScore }
                     </li>
                   
                   </ul>

@@ -2,9 +2,23 @@ import { Link } from "react-router-dom";
 import recentJobApplied from "../../../../../data/job-featured";
 import { paths } from "@/services/paths";
 import { API_EMPLOYER_PATH } from "@/lib/config";
-
+import useUserInfo from "@/utils/hooks/useUserInfo";
+import { selectWishlist, selectWishlistLoading } from "@/store/reducers/Whishlist";
+import { useSelector } from "react-redux";
 
 const JobApplied = ({data}) => {
+   const SavedJobs = useSelector(selectWishlist);
+    const isLoading = useSelector(selectWishlistLoading);
+    const userInfo=useUserInfo()
+    const handleWishist = async (id, operation) => {
+      if (!userInfo._id) {
+        toast.info("Please login as Candidate to Save Job.");
+        return;
+      }
+      if (id && operation) {
+        dispatch(addToWishlist({ id, operation }));
+      }
+    };
   return (
     <>
       {Array.isArray(data) &&data?.map((item) => (
@@ -34,7 +48,7 @@ const JobApplied = ({data}) => {
                 </li>
                 {/* location info */}
                 <li>
-                  <span className="icon flaticon-clock-3"></span> {item?.createdAt}
+                  <span className="icon flaticon-clock-3"></span> {new Date(item?.createdAt).toDateString()}
                 </li>
                 {/* time info */}
                 <li>

@@ -4,31 +4,30 @@ import { toast } from "react-toastify";
 import { Table, Button, Badge } from "react-bootstrap";
 import { Trash2 } from "lucide-react";
 import MeetingLinkView from "./MeetingLinkView";
-import { del, get } from "@/services/api";
+import { del, get, getById } from "@/services/api";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useParams } from "react-router-dom";
 
 const MeetingList = () => {
   const [open, setOpen] = useState(false);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
-  const { createdBy = "" } = useParams();
 
   const queryClient = useQueryClient();
   const userInfo = useUserInfo();
 
   // Fetch meeting links
   const { data: meetings, isLoading } = useQuery({
-    queryKey: ["meetinglinks", createdBy, userInfo?._id],
+    queryKey: ["meetinglinks", userInfo],
     queryFn: async () => {
       try {
-        const res = await get(`sub-employers/meetings?createdBy=${createdBy}`);
+        const res = await getById(`employer/meetings`,userInfo?.userTypeValue?._id);
         return res.data.data;
       } catch (error) {
         toast.error("Failed to fetch meetings.");
         throw error;
       }
     },
-    enabled: Boolean(createdBy),
+    enabled: Boolean(userInfo?.userTypeValue?._id),
   });
 
   // Delete meeting mutation
@@ -74,6 +73,7 @@ const MeetingList = () => {
                       <th>Message</th>
                       <th>Candidate Attendance</th>
                       <th>Candidate Reply</th>
+                      <th>Scheduled By</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -96,6 +96,7 @@ const MeetingList = () => {
                           <td>{item?.meeting?.message}</td>
                           <td>{item?.meeting?.intrviewConfirmation?.confirm ?"Yes":"No"}</td>
                           <td>{item?.meeting?.intrviewConfirmation?.message}</td>
+                          <td>{item?.scheduledBy}</td>
                           <td>
                             <div className="option-box">
                               <ul className="option-list">

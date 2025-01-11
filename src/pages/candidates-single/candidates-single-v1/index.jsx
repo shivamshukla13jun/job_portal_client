@@ -14,6 +14,7 @@ import useForwardCV from "@/utils/hooks/useForwardCV";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import ForwardCVModal from "./ForwardCVModal";
 import { useState } from "react";
+import { useAcceptApplication } from "@/utils/hooks/useApplication";
 
 const metadata = {
   title:
@@ -25,11 +26,10 @@ const CandidateSingleDynamicV1 = () => {
   let params = useParams();
   const userInfo=useUserInfo()
   const [isForwardModalOpen, setIsForwardModalOpen] = useState(false);
-
-  //console.log("userInfo???????????",userInfo?.userTypeValue?._id)
+  const handleAccept=useAcceptApplication()
   const id = params.id;
   const { handleForwardCV, isLoading: isForwarding } = useForwardCV();
-
+  
   const { data, isLoading } = useQuery({
     queryKey: [`resume${id}`],
     queryFn: async () => {
@@ -160,12 +160,17 @@ const CandidateSingleDynamicV1 = () => {
                     Download CV
                   </a>
 
-                  {/* <a
+                  <a
                     className="theme-btn btn-style-one me-2"
-                    onClick={handleSelectCV}
+                    onClick={()=>{
+                      data?.status!=="shortlisted" && handleAccept(id, "shortlisted")
+
+                    }}
+                    disabled={data?.status=="shortlisted"}
+
                   >
-                    Select CV
-                  </a> */}
+                    {`Select${data?.status=="shortlisted" ?"ed":""}`} CV
+                  </a>
                   {
                     userInfo && userInfo?.userType?.name?.toLowerCase() === 'employer' && 
                     <a
@@ -364,7 +369,7 @@ const CandidateSingleDynamicV1 = () => {
         isOpen={isForwardModalOpen}
         onClose={() => setIsForwardModalOpen(false)}
         subEmployers={SubEmployers}
-        candidateId={data?._id}
+        applicationid={id}
         onForward={handleForwardCV}
         SubEmployersLoading={SubEmployersLoading}
       />

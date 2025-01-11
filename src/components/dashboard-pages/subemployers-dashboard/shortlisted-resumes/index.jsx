@@ -8,7 +8,6 @@ import { get, getById } from "@/services/api";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import useDebounce from "@/utils/hooks/useDebounce";
-import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
@@ -49,7 +48,7 @@ const handleSerch=(name,value)=>{
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Shortlisted Candidates!" />
+          <BreadCrumb title="Forwrad Applications!" />
           {/* breadCrumb */}
 
           <MenuToggler />
@@ -59,7 +58,7 @@ const handleSerch=(name,value)=>{
             <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
-                  <h4>Shorlist Candidates</h4>
+                  <h4>Forwrad Applications</h4>
                   <WidgetToFilterBox search={search} handleSerch={handleSerch} />
                 </div>
                 {/* End widget top filter box */}

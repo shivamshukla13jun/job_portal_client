@@ -14,6 +14,7 @@ import LoginPopup from '../common/form/login/LoginPopup';
 import MobileMenu from './MobileMenu';
 import DashboardHeader from './DashboardHeader';
 import { useQuery } from '@tanstack/react-query';
+import { API_CANDIDATE_PATH } from '@/lib/config';
 
 const DashboardSidebar = () => {
   const { pathname } = useLocation();
@@ -31,6 +32,7 @@ const DashboardSidebar = () => {
     if (!userInfo?.userTypeValue) return 'My account';
     switch (userType) {
       case 'employer':
+       return capitalizeFirstLetter(userInfo.userTypeValue.name.split(" ")[1]) 
       case 'subemployer':
         return userInfo.userTypeValue.business_name 
           ? capitalizeFirstLetter(userInfo.userTypeValue.business_name.split(" ")[0]) 
@@ -104,31 +106,26 @@ const DashboardSidebar = () => {
 
         {isMobile && userInfo && (
           <div className="dropdown dashboard-option d-flex" style={{ padding: "10px 25px" }}>
-            <img alt="avatar" className="thumb" src="/api/placeholder/48/48" style={{ objectFit: "contain" }} />
+            <img alt="avatar" className="thumb" src={`${API_CANDIDATE_PATH}${userInfo?.userTypeValue?.profile?.filename}`} style={{ objectFit: "contain" }} />
             <span className="name">{getDisplayName()}</span>
           </div>
         )}
 
         <div className="sidebar-inner">
           <ul className="navigation">
-            {Array.isArray(menuItems) && menuItems.map((item) => (
-              <li
-                className={`${isActiveLink(item.routePath, pathname) ? "active" : ""} mb-1`}
+            {Array.isArray(menuItems) && menuItems.map((item) => {
+                      let routePath = item.paramtype === 'EmployerId' || item.paramtype === 'SubEmployerId' ? item.routePath+'/' + userTypeById : item.paramtype === 'createdBy' && userId ? item.routePath+'/' + userId : item.routePath;
+                      return  <li
+                className={`${isActiveLink(routePath, pathname) ? "active" : ""} mb-1`}
                 key={item.id}
                 onClick={() => menuToggleHandler(item)}
               >
-                <Link    to={`${
-                      item.routePath +
-                      (item.paramtype === 'EmployerId' || item.paramtype === 'SubEmployerId'
-                        ? '/' + userTypeById
-                        : '') +
-                      (item.paramtype === 'createdBy' && userId ? '/' + userId : '')
-                    }`}>
+                <Link    to={routePath}>
                   <i className={`la ${item.icon}`}></i>{" "}
                   {item.name}
                 </Link>
               </li>
-            ))}
+})}
           </ul>
         </div>
       </div>

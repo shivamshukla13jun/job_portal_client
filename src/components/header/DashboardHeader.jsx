@@ -10,6 +10,7 @@ import { isActiveLink } from "@/utils/linkActiveChecker";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useQuery } from "@tanstack/react-query";
 import HeaderNavContent from "./HeaderNavContent";
+import { API_CANDIDATE_PATH } from "@/lib/config";
 // Helper to get user display name
 const getDisplayName = () => {
   const userInfo = useUserInfo();
@@ -18,11 +19,14 @@ const getDisplayName = () => {
 
   switch (userType) {
     case "employer":
-    case "subemployer":
       return userInfo.userTypeValue.business_name
-        ? capitalizeFirstLetter(userInfo.userTypeValue.business_name.split(" ")[0])
+        ? capitalizeFirstLetter(userInfo.userTypeValue.business_name)
         : "My account";
     case "candidate":
+      return userInfo.userTypeValue.name
+        ? capitalizeFirstLetter(userInfo.userTypeValue.name.split(" ")[1])
+        : "My account";
+    case "subemployer":
       return userInfo.userTypeValue.name
         ? capitalizeFirstLetter(userInfo.userTypeValue.name.split(" ")[1])
         : "My account";
@@ -46,7 +50,7 @@ const DashboardHeader = () => {
       if (confirm("Are You Sure")) {
         dispatch(logout());
         sessionStorage.clear();
-        window.location.href = paths.login;
+        window.location.href = "/"
       }
     }
     if (item.name === "Delete Profile") {
@@ -109,36 +113,29 @@ const DashboardHeader = () => {
                   <img
                     alt="avatar"
                     className="thumb"
-                    src={
-                      userInfo?.userTypeValue?.profile?.filename
-                        ? `/api/path/${userInfo.userTypeValue.profile.filename}`
-                        : "/images/resource/company-6.png"
-                    }
+                    src={`${API_CANDIDATE_PATH}${userInfo?.userTypeValue?.profile?.filename}`}
+                    
                     style={{ objectFit: "contain" }}
                   />
                   <span className="name">{getDisplayName()}</span>
                 </a>
                 <ul className="dropdown-menu">
                   {Array.isArray(menuItems) &&
-                    menuItems.map((item) => (
-                      <li
+                    menuItems.map((item) => {
+                      let routePath = item.paramtype === 'EmployerId' || item.paramtype === 'SubEmployerId' ? item.routePath+'/' + userTypeById : item.paramtype === 'createdBy' && userId ? item.routePath+'/' + userId : item.routePath;
+            
+                      return <li
                         key={item.id}
-                        className={`${isActiveLink(item.routePath, pathname) ? "active" : ""} mb-1`}
+                        className={`${isActiveLink(routePath, pathname) ? "active" : ""} mb-1`}
                         onClick={() => menuToggleHandler(item)}
                       >
                         <Link
-                          to={`${
-                            item.routePath +
-                            (item.paramtype === "EmployerId" || item.paramtype === "SubEmployerId"
-                              ? "/" + userTypeById
-                              : "") +
-                            (item.paramtype === "createdBy" && userId ? "/" + userId : "")
-                          }`}
+                          to={routePath}
                         >
                           <i className={`la ${item.icon}`}></i> {item.name}
                         </Link>
                       </li>
-                    ))}
+})}
                 </ul>
               </div>
             )}

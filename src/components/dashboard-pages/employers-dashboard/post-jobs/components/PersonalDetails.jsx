@@ -26,8 +26,8 @@ const PersonalDetails = ({ watch, register, setValue, error }) => {
                         <label>{item.label}<span className='required-form'>*</span> </label>
                         <Select
                             isMulti
-                            name="colors"
-                            className={`basic-multi-select ${error?.candidate_requirement?.[index]?.message ? 'error-border' : ''}`}
+                            name="personal_info"
+                            className={`basic-multi-select ${error?.personal_info?.[index]?.message ? 'error-border' : ''}`}
                             classNamePrefix="select"
                             options={item.value}
                             defaultValue={watch(`personal_info.${index}.assets`) ? watch(`personal_info.${index}.assets`) : []}

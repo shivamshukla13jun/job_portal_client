@@ -14,7 +14,7 @@ import ApplyJobModalContent from "@/components/job-single-pages/shared-component
 import { Link, useParams } from "react-router-dom";
 
 import MetaComponent from "@/components/common/MetaComponent";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { get, getById, put } from "@/services/api";
 import { API_EMPLOYER_PATH, API_PROD } from "@/lib/config";
 import DefaulHeader2 from "@/components/header/DefaulHeader2";
@@ -34,6 +34,7 @@ const metadata = {
 const JobSingleDynamicV1 = () => {
   const userInfo = useUserInfo();
   const params = useParams();
+  const queryClient = useQueryClient();
   const dispatch=useDispatch()
   const SavedJobs = useSelector(selectWishlist);
   const id = params.id;
@@ -57,15 +58,11 @@ const JobSingleDynamicV1 = () => {
   const mutation = useMutation({
     mutationFn: (data) => put('application/apply', id),
     onSuccess: async (res) => {
+      queryClient.invalidateQueries(["jobs"])
       if (res.data.success) {
 
         toast.success(res.data.message);
-        // sessionStorage.setItem("session", res.data.token)
-        // let user = (await getById(`/user`, res.data.data._id)).data.data;
-        // let enData = encrypt(user);
-        // sessionStorage.setItem("userInfo", enData);
-
-        window.location.reload()
+      
       }
     },
     onError: (err) => {
@@ -155,7 +152,7 @@ const JobSingleDynamicV1 = () => {
 
                 <div className="btn-box">
                   <button
-                    disabled={data?.isApplied} // Check if jobId exists in jobs array
+                    disabled={data?.isApplied ||   mutation.isPending                    } // Check if jobId exists in jobs array
                     className={`theme-btn btn-style-one ${data?.isApplied ? 'disabled' : ''}`}
                     onClick={handleJobApplySubmit}
                   >

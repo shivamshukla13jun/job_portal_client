@@ -12,44 +12,22 @@ const PersonalDetails = ({ watch, register, setValue, error }) => {
         // { value: certificationValues, label: "Certification" },
         { value: preferredIndustryValues, label: "Preferred Industry" }
     ];
+    console.log(watch("personal_info"))
 
     return (
         <div className="default-form">
             <div className='row'>
-
-                {/* <div className="form-group col-lg-6 col-md-12">
-                    <label>Age<span className='required-form'>*</span> </label>
-                    <input type='number' {...register("age")} placeholder='Age' min={10} max={100} />
-                </div> */}
-
-                {/* <div className="form-group col-lg-6 col-md-12" >
-                    <label>{info[0].label}<span className='required-form'>*</span> </label>
-                    <Select
-                        isMulti
-                        name={`colors1`}
-                        className={`basic-multi-select ${error?.candidate_requirement?.[index]?.message ? 'error-border' : ''}`}
-                        classNamePrefix="select"
-                        options={info[0].value}
-                        value={watch(`personal_info.0.assets`) ? watch(`personal_info.0.assets`) : []}
-                        onChange={(data) => {
-                            setValue(`personal_info.0`, { info: info[0].label, assets: data })
-                        }}
-                    />
-                </div> */}
-
                 {info.map((item, index) => (
                     <div className="form-group col-lg-6 col-md-12" key={item.label + index}>
                         <label>{item.label}<span className='required-form'>*</span> </label>
                         <Select
-                            isMulti
-                            name={`colors${index}`}
-                            className={`basic-multi-select ${error?.candidate_requirement?.[index]?.message ? 'error-border' : ''}`}
-                            classNamePrefix="select"
-                            options={item.value}
-                            value={watch(`personal_info.${index}.assets`) ? watch(`personal_info.${index}.assets`) : []}
-                            onChange={(data) => {
-                                setValue(`personal_info.${index}`, { info: item.label, assets: data })
-                            }}
+                               isMulti
+                               name="colors"
+                               className={`basic-multi-select ${error?.personal_info?.[index]?.message ? 'error-border' : ''}`}
+                               classNamePrefix="select"
+                               options={item.value}
+                               value={watch(`personal_info.${index}.assets`) ? watch(`personal_info.${index}.assets`) : []}
+                               onChange={(data) => setValue(`personal_info.${index}`, { info: item.label, assets: data })}
                         />
                     </div>
                 ))}

@@ -49,6 +49,8 @@ const Applicants = ({ data}) => {
                 <img
                   src={API_CANDIDATE_PATH + candidate?.profile?.filename}
                   alt="candidates"
+                  onError={(e) => e.target.src = "/images/resource/candidate.png"}
+
                 />
               </figure>
               <h4 className="name">
@@ -56,6 +58,12 @@ const Applicants = ({ data}) => {
                   {candidate?.name}
                 </Link>
               </h4>
+              <div className="designation mr-5">
+                <Link to={`${paths.job}/${job?._id}`}>
+                <span className="la la-briefcase"></span>
+                  {job?.title}
+                </Link>
+              </div>
               <ul className="candidate-info">
                 <li className="designation">
                   {candidate?.designation || "Designation"}
