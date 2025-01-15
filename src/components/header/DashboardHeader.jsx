@@ -1,154 +1,152 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "@/store/reducers/user";
-import { del, getById } from "@/services/api";
-import { toast } from "react-toastify";
-import { paths } from "@/services/paths";
-import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
-import { isActiveLink } from "@/utils/linkActiveChecker";
-import useUserInfo from "@/utils/hooks/useUserInfo";
-import { useQuery } from "@tanstack/react-query";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import HeaderNavContent from "./HeaderNavContent";
-// Helper to get user display name
-const getDisplayName = () => {
-  const userInfo = useUserInfo();
-  const userType = userInfo?.userType?.name?.toLowerCase();
-  if (!userInfo?.userTypeValue) return "My account";
+import useUserInfo from "@/utils/hooks/useUserInfo";
+import { API_CANDIDATE_PATH, API_EMPLOYER_PATH } from "@/lib/config"
+import { useSelector } from "react-redux";
+import { selectWishlist } from "@/store/reducers/Whishlist";
+import { useQuery } from "@tanstack/react-query";
+import { getById } from "@/services/api";
+import { getDisplayName } from "@/utils/getDisplayName";
+import { authverify, paths } from "@/services/paths";
+import MobileMenu from "./MobileMenu";
+import LoginPopup from "../common/form/login/LoginPopup";
+import { DropdownMenu } from "./DropdownMenu";
 
-  switch (userType) {
-    case "employer":
-    case "subemployer":
-      return userInfo.userTypeValue.business_name
-        ? capitalizeFirstLetter(userInfo.userTypeValue.business_name.split(" ")[0])
-        : "My account";
-    case "candidate":
-      return userInfo.userTypeValue.name
-        ? capitalizeFirstLetter(userInfo.userTypeValue.name.split(" ")[1])
-        : "My account";
-    default:
-      return "My account";
-  }
-};
+
 const DashboardHeader = () => {
   const userInfo = useUserInfo();
-  const dispatch = useDispatch();
+  
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const SavedJobs = useSelector(selectWishlist);
+
   const [navbar, setNavbar] = useState(false);
-
-  const userType = userInfo?.userType?.name?.toLowerCase();
-  const userId = userInfo?._id;
-  const userTypeById = userInfo?.userTypeValue?._id;
-
-  // Handle menu toggle actions
-  const menuToggleHandler = async (item) => {
-    if (item.name === "Logout") {
-      if (confirm("Are You Sure")) {
-        dispatch(logout());
-        sessionStorage.clear();
-        window.location.href = paths.login;
-      }
-    }
-    if (item.name === "Delete Profile") {
-      try {
-        if (confirm("Are You Sure")) {
-          const res = await del("/user", userInfo._id);
-          if (res.data.success) {
-            toast.success(res.data.message);
-            sessionStorage.clear();
-            window.location.href = "/";
-          }
-        }
-      } catch (err) {
-        toast.error(err.response.data.error);
-      }
-    }
-  };
-
-  // Fetch menu items from the backend
-  const { data: menuItems = [], isLoading } = useQuery({
-    queryKey: ["user/menu", userId],
-    queryFn: async () => {
-      try {
-        const res = await getById("user/menu", userId);
-        return res.data.data;
-      } catch (error) {
-        console.error("Error fetching menu:", error);
-      }
-    },
-    enabled: Boolean(userId),
-  });
 
   useEffect(() => {
     const changeBackground = () => {
-      setNavbar(window.scrollY >= 0);
+      setNavbar(window.scrollY >= 10);
     };
     window.addEventListener("scroll", changeBackground);
     return () => window.removeEventListener("scroll", changeBackground);
   }, []);
+  const renderDropdown = () => {
+    const userId = userInfo?._id;
+    const userTypeById = userInfo?.userTypeValue?._id;
 
-  if (isLoading) return <div>Loading...</div>;
+    const userType = userInfo?.userType?.name?.toLowerCase();
+    const userName =getDisplayName(userInfo)
+    // Fetch menu items from the backend
+    const { data: menuItems = [], isLoading } = useQuery({
+      queryKey: ["user/menu", userId],
+      queryFn: async () => {
+        try {
+          const res = await getById("user/menu", userId);
+          return res.data.data;
+        } catch (error) {
+          console.error("Error fetching menu:", error);
+        }
+      },
+      enabled: Boolean(userId),
+    });
+    switch (userType) {
+      case "candidate":
+        return (
+          <>
+            <button
+              onClick={() => navigate("/candidates-dashboard/saved-jobs")}
+              className="menu-btn"
+            >
+              <Link to={"/candidates-dashboard/saved-jobs"} className="count">
+                {SavedJobs?.length}
+              </Link>
+              <span className="icon la la-heart-o"></span>
+            </button>
+            <DropdownMenu
+              menuData={menuItems}
+              imgSrc={`${API_CANDIDATE_PATH}${userInfo?.userTypeValue?.profile?.filename}`}
+              name={userName}
+              path={pathname}
+              userTypeById={userTypeById}
+              userId={userId}
+            />
+          </>
+        );
+      case "employer":
+        return (
+          <DropdownMenu
+            menuData={menuItems}
+            imgSrc={`${API_EMPLOYER_PATH}${userInfo?.userTypeValue?.logo?.filename}`}
+            name={userName}
+            path={pathname}
+            userTypeById={userTypeById}
+            userId={userId}
+          />
+        );
+      case "subemployer":
+        return (
+          <DropdownMenu
+            menuData={menuItems}
+            imgSrc={"/images/resource/candidate.png"}
+            name={userName}
+            path={pathname}
+            userTypeById={userTypeById}
+            userId={userId}
+          />
+        );
+
+      default:
+        return <div className="btn-box">
+      {(Object.keys(userInfo).length === 0 && !authverify.includes(pathname)) && (
+        <a
+          className="theme-btn btn-style-three call-modal"
+          data-bs-toggle="modal"
+          data-bs-target="#loginPopupModal"
+        >
+          Login / Register
+        </a>
+      )}
+      
+       {
+        (authverify.includes(pathname) &&
+        <Link
+        to={!userInfo?.userType?.name?paths.login:paths.employer_post_jobs}
+        className="theme-btn btn-style-one"
+      >
+        Job Post
+      </Link>)
+       }
+      </div>;
+    }
+  };
 
   return (
-    <header className={`main-header header-shaddow ${navbar ? "fixed-header" : ""}`}>
-      <div className="container-fluid">
-        <div className="main-box">
-          <div className="nav-outer">
-            <div className="logo-box px-3">
-              <Link to="/">
-                <img alt="brand" src="/images/logo.png" style={{ height: "50px" }} />
-              </Link>
-            </div>
-            <HeaderNavContent />
+    <>
+      <LoginPopup />
+      <MobileMenu />
+    <header
+      className={`main-header ${navbar ? "fixed-header animated slideInDown" : ""}`}
+    >
+      <div className="main-box">
+        <div className="nav-outer">
+          <div className="logo-box  px-3">
+            <Link to="/">
+              <img
+                src="/images/logo.png"
+                style={{ height: "50px" }}
+                alt="brand"
+              />
+            </Link>
           </div>
-
-          <div className="outer-box">
-            {userInfo && (
-              <div className="dropdown dashboard-option">
-                <a className="dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                  <img
-                    alt="avatar"
-                    className="thumb"
-                    src={
-                      userInfo?.userTypeValue?.profile?.filename
-                        ? `/api/path/${userInfo.userTypeValue.profile.filename}`
-                        : "/images/resource/company-6.png"
-                    }
-                    style={{ objectFit: "contain" }}
-                  />
-                  <span className="name">{getDisplayName()}</span>
-                </a>
-                <ul className="dropdown-menu">
-                  {Array.isArray(menuItems) &&
-                    menuItems.map((item) => (
-                      <li
-                        key={item.id}
-                        className={`${isActiveLink(item.routePath, pathname) ? "active" : ""} mb-1`}
-                        onClick={() => menuToggleHandler(item)}
-                      >
-                        <Link
-                          to={`${
-                            item.routePath +
-                            (item.paramtype === "EmployerId" || item.paramtype === "SubEmployerId"
-                              ? "/" + userTypeById
-                              : "") +
-                            (item.paramtype === "createdBy" && userId ? "/" + userId : "")
-                          }`}
-                        >
-                          <i className={`la ${item.icon}`}></i> {item.name}
-                        </Link>
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            )}
-          </div>
+          {userInfo && !authverify.includes(pathname) && <HeaderNavContent userInfo={userInfo} />}
+        </div>
+        <div className="outer-box">
+          {renderDropdown()}
         </div>
       </div>
     </header>
+    </>
   );
 };
-
-
 
 export default DashboardHeader;

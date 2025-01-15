@@ -1,25 +1,16 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
-import MobileMenu from "../../../header/MobileMenu";
-import DashboardHeader from "../../../header/DashboardHeader";
-import LoginPopup from "../../../common/form/login/LoginPopup";
-
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
 import BusinessDetail from "./components/BusinessDetail";
-
 import { getById, put } from "@/services/api";
 import { employerSchema } from "@/validations/dashboard/employer";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import BusinessPreviewModal from "./components/BusinessPreviewModal";
-import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
-import DashboardEmployerSidebar from "@/components/header/DashboardEmployerSidebar";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {

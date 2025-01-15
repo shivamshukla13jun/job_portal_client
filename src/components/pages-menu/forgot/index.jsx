@@ -1,14 +1,12 @@
 import FormContent from "@/components/common/form/forgot/FormContent";
 import MobileMenu from "../../header/MobileMenu";
 import Header from "./Header";
+import DashboardHeader from "@/components/header/DashboardHeader";
 
 const index = () => {
   return (
     <>
-      <Header />
-      {/* <!--End Main Header -->  */}
-
-      <MobileMenu />
+    <DashboardHeader/>
       {/* End MobileMenu */}
 
       <div className="login-section">

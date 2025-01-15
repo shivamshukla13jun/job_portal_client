@@ -20,7 +20,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 
-const HeaderNavContent = (props) => {
+const HeaderNavContent = () => {
   const  userInfo  = useUserInfo();
   const { pathname } = useLocation();
   const dispatch=useDispatch()

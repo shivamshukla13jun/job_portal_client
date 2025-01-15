@@ -29,7 +29,7 @@ const TopCardBlock = ({data}) => {
       icon: "la-bookmark-o",
       countNumber:  data?.Applicationdata?.Shortlist,
       metaName: "Shortlist",
-      to:"/subemployers-dashboard/shortlisted-resumes/"+userTypeById,
+      to:"/subemployers-dashboard/shortlisted-candidates/shortlisted",
       uiClass: "ui-green",
     },
   ];

@@ -7,7 +7,7 @@ const ReferenceList = ({ watch, register, setValue, error }) => {
             <h4>Reference Form</h4>
             <div className='row form-group mt-4'>
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Company Name <span className="required-form">*</span></label>
+                    <label>Name <span className="required-form">*</span></label>
                     <input
                         type="text"
                         placeholder="XYZ"

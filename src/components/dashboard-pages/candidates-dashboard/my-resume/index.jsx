@@ -1,9 +1,5 @@
-import MobileMenu from "../../../header/MobileMenu";
-import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
-import CopyrightFooter from "../../CopyrightFooter";
-import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 
+import CopyrightFooter from "../../CopyrightFooter";
 import PersonalPortfolio from "./PortFolioResume";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
 

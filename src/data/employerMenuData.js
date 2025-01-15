@@ -43,7 +43,7 @@ const employerMenu = [
     id: 6,
     name: "Shortlisted Resumes",
     icon: "la-bookmark-o",
-    routePath: "/employers-dashboard/shortlisted-resumes",
+    routePath: "/employers-dashboard/forward-resumes",
     active: "",
     paramtype:"EmployerId",
   },

@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import MobileMenu from "../../../header/MobileMenu";
 import DashboardHeader from "../../../header/DashboardHeader";
 import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardEmployerSidebar from "../../../header/DashboardEmployerSidebar";
+
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
@@ -44,16 +44,15 @@ const EditJob = () => {
     defaultValues: {
       title: '',
       location: '',
-      interview_details:"",
       place: '',
       categories: [],
-      interview_details: {
-        date:new Date(),
-        time:"10:00",
-        location: "",
-        type: "",
-        notes: ""
-      },
+      // interview_details: {
+      //   date:new Date(),
+      //   time:"10:00",
+      //   location: "",
+      //   type: "",
+      //   notes: ""
+      // },
       // age: 18,
       opening: 1,
       candidate_requirement: {
@@ -111,7 +110,6 @@ const EditJob = () => {
       reset({
         title: data.title || '',
         location: data.location || '',
-        interview_details: data.interview_details || '',
         place: data.place || '',
         categories: data.categories || [],
         jobtype: data.jobtype || [],
@@ -126,12 +124,12 @@ const EditJob = () => {
           skills: data.candidate_requirement.skills || [],
         },
         personal_info: data.personal_info || [{ info: '', assets: [] }],
-        interview_details:{
-          "type": data?.interview_details?.type || "",
-          "location": data?.interview_details?.location || "",
-          "time":data?.interview_details?.time || "10:00",
-          "date": data?.interview_details?.date || new Date()
-        }
+        // interview_details:{
+        //   "type": data?.interview_details?.type || "",
+        //   "location": data?.interview_details?.location || "",
+        //   "time":data?.interview_details?.time || "10:00",
+        //   "date": data?.interview_details?.date || new Date()
+        // }
         // timing: {
         //   job: data.timing.job || '',
         //   interview: data.timing.interview || ''
@@ -154,7 +152,7 @@ const EditJob = () => {
     }
 
   }, [data, reset]);
-
+console.log("singlejob",data)
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       const errorArray = Object.entries(errors);
@@ -195,7 +193,7 @@ const EditJob = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-12">
+              {/* <div className="col-lg-12">
                 <div className="ls-widget">
                   <div className="tabs-box">
                     <div className="widget-title">
@@ -206,7 +204,7 @@ const EditJob = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="col-lg-12">
                 {/* <!-- Ls widget --> */}
                 <div className="ls-widget">

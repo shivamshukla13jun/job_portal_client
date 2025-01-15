@@ -1,8 +1,5 @@
 import employersInfo from "@/data/topCompany";
-import LoginPopup from "@/components/common/form/login/LoginPopup";
 import FooterDefault from "@/components/footer/common-footer";
-import DefaulHeader from "@/components/header/DefaulHeader";
-import MobileMenu from "@/components/header/MobileMenu";
 import JobDetailsDescriptions from "@/components/employer-single-pages/shared-components/JobDetailsDescriptions";
 import RelatedJobs from "@/components/job-single-pages/related-jobs/RelatedJobs";
 import MapJobFinder from "@/components/job-listing-pages/components/MapJobFinder";
@@ -14,6 +11,7 @@ import MetaComponent from "@/components/common/MetaComponent";
 import { getById } from "@/services/api";
 import { API_EMPLOYER_PATH } from "@/lib/config";
 import { useLocation } from "react-router-dom";
+import DashboardHeader from "@/components/header/DashboardHeader";
 
 const metadata = {
   title:
@@ -47,14 +45,7 @@ const EmployersSingleV1 = () => {
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
 
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DefaulHeader />
-      {/* <!--End Main Header --> */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
+      <DashboardHeader />
 
       {/* <!-- Job Detail Section --> */}
       <section className="job-detail-section">

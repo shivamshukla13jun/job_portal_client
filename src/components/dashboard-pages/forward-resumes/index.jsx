@@ -12,10 +12,12 @@ import CopyrightFooter from "../CopyrightFooter";
 import MenuToggler from "../MenuToggler";
 import { useParams } from "react-router-dom";
 import Pagination from "@/utils/hooks/usePagination";
+import { useSearchParams } from "react-router-dom";
 
 const index = () => {
   const userInfo = useUserInfo();
   const {EmployerId="",SubEmployerId=""}=useParams()
+  
   const [search, setSearch] = useState({
     page: 1,
     limit: 10,
@@ -51,7 +53,7 @@ const handleSerch=(name,value)=>{
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Shortlisted Candidates!" />
+          <BreadCrumb title="Forwrad Applications!" />
           {/* breadCrumb */}
 
           <MenuToggler />
@@ -61,7 +63,7 @@ const handleSerch=(name,value)=>{
             <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
-                  <h4>Shorlist Candidates</h4>
+                  <h4>Forwrad Applications</h4>
                   <WidgetToFilterBox search={search} handleSerch={handleSerch} />
                 </div>
                 {/* End widget top filter box */}

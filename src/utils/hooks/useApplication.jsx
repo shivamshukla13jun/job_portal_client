@@ -2,7 +2,7 @@ import { del, get, put, request } from '@/services/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
-export const useAcceptApplication = (job) => {
+export const useAcceptApplication = (id="") => {
   const queryClient = useQueryClient();
 
 const acceptApplication=   useMutation({
@@ -11,7 +11,7 @@ const acceptApplication=   useMutation({
     onSuccess: (res) => {
       if (res.data.success) {
         toast.success(res.data.message);
-        queryClient.invalidateQueries([`application/job`]);
+        queryClient.invalidateQueries([`application/job`,`resume/${id}`]);
       }
     },
     onError: (err) => {
@@ -20,6 +20,7 @@ const acceptApplication=   useMutation({
   });
   const handleAccept = (_id, status) => {
     acceptApplication.mutate({ _id, status });
+
   };
   return handleAccept
 };

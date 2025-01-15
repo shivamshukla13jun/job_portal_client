@@ -6,7 +6,7 @@ const ForwardCVModal = ({
   isOpen, 
   onClose, 
   subEmployers = [], 
-  candidateId, 
+  applicationid, 
   onForward ,SubEmployersLoading
 }) => {
     
@@ -27,7 +27,7 @@ const ForwardCVModal = ({
       return;
     }
 
-    onForward(candidateId, selectedEmployers, notes);
+    onForward(applicationid, selectedEmployers, notes);
     onClose();
   };
 

@@ -47,7 +47,12 @@ const FilterTopBox= () => {
               </Link>
 
             </h4>
-
+            <div className="designation mr-5">
+                <Link to={`${paths.job}/${job?._id}`}>
+                <span className="la la-briefcase"></span>
+                  {job?.title}
+                </Link>
+              </div>
             <ul className="candidate-info">
               <li className="designation">{candidate.designation}</li>
               <li>

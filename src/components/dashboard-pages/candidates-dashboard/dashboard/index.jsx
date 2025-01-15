@@ -1,156 +1,133 @@
-import MobileMenu from "../../../header/MobileMenu";
-import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
+
 import BreadCrumb from "../../BreadCrumb";
 import TopCardBlock from "./components/TopCardBlock";
-import ProfileChart from "./components/ProfileChart";
 import Notification from "./components/Notification";
 import CopyrightFooter from "../../CopyrightFooter";
 import JobApplied from "./components/JobApplied";
-import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import MenuToggler from "../../MenuToggler";
 import { useQuery } from "@tanstack/react-query";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import { get } from "@/services/api";
-import useDebounce from "@/utils/hooks/useDebounce";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+
+const handleError = (error) => {
+  console.error(error);
+  const errorMessage =
+    error?.response?.data?.error || "An unexpected error occurred.";
+  toast.error(errorMessage);
+  return errorMessage;
+};
 
 const Index = () => {
   const userInfo = useUserInfo();
-  const [statrtdate, setStartdate] = useState("")
+  const [startDate, setStartDate] = useState("");
 
-
-  const { data, isLoading } = useQuery({
-    queryKey: [`dashboard/candidate`, statrtdate],
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: [`dashboard/candidate`, startDate],
     queryFn: async () => {
-    try {
-      let res = (await get(`dashboard/candidate`)).data.data
-      return res;
-    } catch (error) {
-      //console.log(error)
-    }
+      const res = await get(`dashboard/candidate`);
+      return res.data.data;
     },
-  
-    enabled: !!userInfo._id
+    onError: handleError,
+    enabled: !!userInfo._id,
   });
-  console.log("userInfo",userInfo)
+
   const [search, setSearch] = useState({
     page: 1,
     limit: 10,
-    clear:false,
+    clear: false,
     keyword: userInfo?.userTypeValue?.designation || "",
-    location: '',
-    categories: '',
-    job_type: '',
-    date_posted: '',
+    location: "",
+    categories: "",
+    job_type: "",
+    date_posted: "",
     experience_from: 0,
     experience_to: 10,
     salary_from: 0,
     salary_to: 10000,
     tags: [],
-    sort: 'new'
-});
+    sort: "new",
+  });
 
-
-const { data:Matchjobs, isLoading:MatchjobLoading } = useQuery({
-    queryKey: ['jobs', userInfo],
+  const {
+    data: matchJobs,
+    isLoading: matchJobLoading,
+    isError: matchJobError,
+    error: matchJobErrorDetails,
+  } = useQuery({
+    queryKey: ["jobs", userInfo],
     queryFn: async () => {
-        try {
-          // Extract unique category values
-const uniqueCategories = [
-  ...new Set(
-    userInfo?.userTypeValue?.employment
-      ?.flatMap((job) => job.categories.map((category) => category.value))
-  ),
-];
-
-// Join unique categories as a comma-separated string
-const categoriesString = uniqueCategories.join(", ");
-            let res = await get(`job?page=${search.page}&categories=${categoriesString}
-              &location=${userInfo?.userTypeValue?.contact?.current_address?.city}`);
-           return {
-                data: res.data.data,
-                count: res.data.count
-            }
-        } catch (error) {
-          console.log(error)
-            toast.error(error.response.data.error);
-            return { data: [], count: 0 };
-        }
+      const uniqueCategories = [
+        ...new Set(
+          userInfo?.userTypeValue?.employment?.flatMap((job) =>
+            job.categories.map((category) => category.value)
+          )
+        ),
+      ];
+      const categoriesString = uniqueCategories.join(", ");
+      const res = await get(
+        `job?page=${search.page}&categories=${categoriesString}&location=${userInfo?.userTypeValue?.contact?.current_address?.city}`
+      );
+      return {
+        data: res.data.data,
+        count: res.data.count,
+      };
     },
-    enabled:!!userInfo?.userTypeValue && Object.keys(userInfo?.userTypeValue).length>0
-});
-console.log({Matchjobs})
-  if (isLoading) return <div>Loading...</div>
+    onError: handleError,
+    enabled: !!userInfo?.userTypeValue && Object.keys(userInfo?.userTypeValue).length > 0,
+  });
+
+  if (isLoading || matchJobLoading) return <div>Loading...</div>;
+
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
 
       <DashboardSidebar />
-      {/* <!-- End Candidates Sidebar Menu --> */}
 
-      {/* <!-- Dashboard --> */}
-      <section className="user-dashboard">
-        <div className="dashboard-outer">
-          <BreadCrumb title={data?.user?.name} />
-          {/* breadCrumb */}
+      {isError || matchJobError ? (
+        <div className="text-danger text-center m-auto px-5">
+          <Link to="/candidates-dashboard/my-profile"> Complete Your Profile</Link>
+        </div>
+      ) : (
+        <section className="user-dashboard">
+          <div className="dashboard-outer">
+            <BreadCrumb title={data?.user?.name} />
+            <MenuToggler />
 
-          <MenuToggler />
-          {/* Collapsible sidebar button */}
-
-          <div className="row">
-            <TopCardBlock data={data} />
-          </div>
-          {/* End .row top card block */}
-
-          <div className="row">
-            <div className="col-xl-7 col-lg-12">
-              {/* <!-- Graph widget --> */}
-              <div className="graph-widget ls-widget">
-                {/* <ProfileChart /> */}
-              </div>
-              {/* End profile chart */}
+            <div className="row">
+              <TopCardBlock data={data} />
             </div>
-            {/* End .col */}
 
-              {/* <!-- Notification Widget --> */}
-            {/* <div className="col-xl-5 col-lg-12">
-              <div className="notification-widget ls-widget">
-                <div className="widget-title">
-                  <h4>Notifications</h4>
-                </div>
-                <div className="widget-content">
-                  <Notification />
-                </div>
+            <div className="row">
+              <div className="col-xl-7 col-lg-12">
+                <div className="graph-widget ls-widget"></div>
               </div>
-            </div> */}
-            {/* End .col */}
-           {!MatchjobLoading &&   <div className="col-lg-12">
-              <div className="applicants-widget ls-widget">
-                <div className="widget-title">
-                  <h4>Matching Jobs</h4>
-                </div>
-                <div className="widget-content">
-                  <div className="row">
-                    <JobApplied data={Matchjobs?.data || []}/>
+
+              {!matchJobLoading && (
+                <div className="col-lg-12">
+                  <div className="applicants-widget ls-widget">
+                    <div className="widget-title">
+                      <h4>Matching Jobs</h4>
+                    </div>
+                    <div className="widget-content">
+                      <div className="row">
+                        <JobApplied data={matchJobs?.data || []} />
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div> }
-          
-            {/* End .col */}
+              )}
+            </div>
           </div>
-          {/* End .row profile and notificatins */}
-        </div>
-        {/* End dashboard-outer */}
-      </section>
-      {/* <!-- End Dashboard --> */}
+        </section>
+      )}
 
       <CopyrightFooter />
-      {/* <!-- End Copyright --> */}
     </div>
-    // End page-wrapper
   );
 };
 

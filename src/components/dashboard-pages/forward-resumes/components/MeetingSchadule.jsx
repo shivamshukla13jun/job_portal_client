@@ -24,7 +24,8 @@ const MeetingSchedule = ({ isOpen, onClose }) => {
             phone: "",
             message: "",
             meetingLink: "",
-            address:""
+            address:"",
+            applicationId:isOpen.applicationId
         }
     });
 

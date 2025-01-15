@@ -132,7 +132,7 @@ const SubEmployerList = () => {
                                       data-text="View Meetings"
                                       onClick={() =>
                                         navigate(
-                                          `/employers-dashboard/meetinglinks/${subEmployer.userId?._id}`
+                                          `/employers-dashboard/meetinglinks?createdBy=${subEmployer.userId?._id}`
                                         )
                                       }
                                     >

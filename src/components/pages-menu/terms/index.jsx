@@ -1,7 +1,5 @@
-import LoginPopup from "../../common/form/login/LoginPopup";
+import DashboardHeader from "@/components/header/DashboardHeader";
 import FooterDefault from "../../footer/common-footer";
-import DefaulHeader from "../../header/DefaulHeader";
-import MobileMenu from "../../header/MobileMenu";
 import TermsText from "./TermsText";
 
 const index = () => {
@@ -10,13 +8,7 @@ const index = () => {
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
 
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DefaulHeader />
-      {/* <!--End Main Header --> */}
-
-      <MobileMenu />
+      <DashboardHeader />
       {/* End MobileMenu */}
 
       <section className="tnc-section">

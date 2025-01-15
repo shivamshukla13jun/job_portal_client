@@ -1,6 +1,3 @@
-import MobileMenu from "../../../header/MobileMenu";
-import DashboardHeader from "../../../header/DashboardHeader";
-import LoginPopup from "../../../common/form/login/LoginPopup";
 
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
@@ -10,14 +7,14 @@ import MenuToggler from "../../MenuToggler";
 import { useQuery } from "@tanstack/react-query";
 import { get, getById } from "@/services/api";
 import useUserInfo from "@/utils/hooks/useUserInfo";
-import { useState } from "react";
 import useDebounce from "@/utils/hooks/useDebounce";
-import DashboardEmployerSidebar from "@/components/header/DashboardEmployerSidebar";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
   const userInfo = useUserInfo();
-   const dispatch = useDispatch();
+  const {status=""}=useParams()
     const {
       qualification,
       keyword,
@@ -32,9 +29,9 @@ const index = () => {
   const debouncedSearch = useDebounce(keyword, 500);
 
   const { data, isLoading } = useQuery({
-    queryKey: [`application/tracking`, debouncedSearch,createdAt,category,experience_from,experience_to,qualification],
+    queryKey: [`application/tracking`,status, debouncedSearch,createdAt,category,experience_from,experience_to,qualification],
     queryFn: async () => {
-      let res = (await get(`application/tracking?createdAt=${createdAt}&category=${category}&experience_from=${experience_from}&experience_to=${experience_to}&qualification=${qualification}&page=${page}&limit=${limit}&name=${debouncedSearch}&status=shortlisted`)).data;
+      let res = (await get(`application/tracking?createdAt=${createdAt}&category=${category}&experience_from=${experience_from}&experience_to=${experience_to}&qualification=${qualification}&page=${page}&limit=${limit}&name=${debouncedSearch}&status=${status}`)).data;
       return res;
     },
     enabled: !!userInfo._id
@@ -46,17 +43,7 @@ const index = () => {
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DashboardHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardEmployerSidebar />
+      <DashboardSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
@@ -72,7 +59,7 @@ const index = () => {
             <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
-                  <h4>Shorlist Candidates</h4>
+                  <h4>Shortlisted Candidates</h4>
                   <WidgetToFilterBox  />
                 </div>
                 {/* End widget top filter box */}

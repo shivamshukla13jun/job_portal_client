@@ -1,19 +1,19 @@
 
 import FooterDefault from "@/components/footer/common-footer";
-import MobileMenu from "@/components/header/MobileMenu";
 import Social from "@/components/candidates-single-pages/social/Social";
 import JobSkills from "@/components/candidates-single-pages/shared-components/JobSkills";
 import { useParams } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 import { useQuery } from "@tanstack/react-query";
 import {  getById } from "@/services/api";
-import DefaulHeader2 from "@/components/header/DefaulHeader2";
 import { API_CANDIDATE_PATH } from "@/lib/config";
 import { toast } from "react-toastify";
 import useForwardCV from "@/utils/hooks/useForwardCV";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import ForwardCVModal from "./ForwardCVModal";
 import { useState } from "react";
+import { useAcceptApplication } from "@/utils/hooks/useApplication";
+import DashboardHeader from "@/components/header/DashboardHeader";
 
 const metadata = {
   title:
@@ -25,11 +25,10 @@ const CandidateSingleDynamicV1 = () => {
   let params = useParams();
   const userInfo=useUserInfo()
   const [isForwardModalOpen, setIsForwardModalOpen] = useState(false);
-
-  //console.log("userInfo???????????",userInfo?.userTypeValue?._id)
+  const handleAccept=useAcceptApplication()
   const id = params.id;
   const { handleForwardCV, isLoading: isForwarding } = useForwardCV();
-
+  
   const { data, isLoading } = useQuery({
     queryKey: [`resume${id}`],
     queryFn: async () => {
@@ -46,38 +45,10 @@ const CandidateSingleDynamicV1 = () => {
     },
     enabled: Boolean(userInfo?.userTypeValue?._id)
   });
-  function calculateTotalExperience(employmentArray=[]) {
-    let totalExperienceMonths = 0;
-    if(employmentArray.length===0 ){
-      return ""
-    }
-    employmentArray.forEach(job => {
-        const from = new Date(job.from);
-        const to =new Date( job.to)
-
-        // Calculate the duration in months
-        const months = (to.getFullYear() - from.getFullYear()) * 12 + (to.getMonth() - from.getMonth());
-        totalExperienceMonths += months;
-    });
-
-    // Convert months to years
-    const totalExperienceYears = totalExperienceMonths / 12;
-
-    // Classify into 0-3 years, 3-5 years, etc.
-    if (totalExperienceYears >= 0 && totalExperienceYears < 1) {
-        return "0-1 years";
-    } 
-   else  if (totalExperienceYears >= 0 && totalExperienceYears < 2) {
-        return "0-2 years";
-    } 
-    else if (totalExperienceYears >= 0 && totalExperienceYears < 3) {
-        return "0-3 years";
-    } 
-    else if (totalExperienceYears >= 3 && totalExperienceYears < 5) {
-        return "3-5 years";
-    } else {
-        return "5+ years";
-    }
+  function calculateTotalExperience(experience=0) {
+    console.log("experience",experience)
+     return `${experience} - ${experience+1} years` 
+    
 }
   const handleDownload = async () => {
     const fileUrl = API_CANDIDATE_PATH + data?.cv?.filename;
@@ -100,7 +71,7 @@ const CandidateSingleDynamicV1 = () => {
       toast.info('Download failed');
     }
   };
-
+ const experience=calculateTotalExperience(data?.experience)
  //console.log("SubEmployers",SubEmployers)
   if (isLoading) return <div>Loading...</div>
 
@@ -110,11 +81,7 @@ const CandidateSingleDynamicV1 = () => {
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
 
-      <DefaulHeader2 />
-      {/* <!--End Main Header --> */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
+      <DashboardHeader />
 
       {/* <!-- Job Detail Section --> */}
       <section className="candidate-detail-section">
@@ -160,12 +127,17 @@ const CandidateSingleDynamicV1 = () => {
                     Download CV
                   </a>
 
-                  {/* <a
+                  <a
                     className="theme-btn btn-style-one me-2"
-                    onClick={handleSelectCV}
+                    onClick={()=>{
+                      data?.status!=="shortlisted" && handleAccept(id, "shortlisted")
+
+                    }}
+                    disabled={data?.status=="shortlisted"}
+
                   >
-                    Select CV
-                  </a> */}
+                    {`Select${data?.status=="shortlisted" ?"ed":""}`} CV
+                  </a>
                   {
                     userInfo && userInfo?.userType?.name?.toLowerCase() === 'employer' && 
                     <a
@@ -271,7 +243,7 @@ const CandidateSingleDynamicV1 = () => {
                         <li>
                           <i className="icon icon-calendar"></i>
                           <h5>Experience:</h5>
-                          <span>{data?.employment ?calculateTotalExperience(data?.employment):""}</span>
+                          <span>{experience}</span>
                         </li>
 
                         <li>
@@ -364,7 +336,7 @@ const CandidateSingleDynamicV1 = () => {
         isOpen={isForwardModalOpen}
         onClose={() => setIsForwardModalOpen(false)}
         subEmployers={SubEmployers}
-        candidateId={data?._id}
+        applicationid={id}
         onForward={handleForwardCV}
         SubEmployersLoading={SubEmployersLoading}
       />

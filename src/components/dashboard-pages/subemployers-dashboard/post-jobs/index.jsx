@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import MobileMenu from "../../../header/MobileMenu";
 import DashboardHeader from "../../../header/DashboardHeader";
 import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardEmployerSidebar from "../../../header/DashboardEmployerSidebar";
+
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
@@ -88,7 +88,7 @@ const Index = () => {
       <LoginPopup />
       <DashboardHeader />
       <MobileMenu />
-      <DashboardEmployerSidebar />
+      <DashboardSidebar />
 
       <section className="user-dashboard">
         <form className="dashboard-outer">

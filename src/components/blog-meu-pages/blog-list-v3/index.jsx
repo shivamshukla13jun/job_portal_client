@@ -1,9 +1,7 @@
+import DashboardHeader from "@/components/header/DashboardHeader";
 import Blog8 from "../../blog/Blog8";
 import Breadcrumb from "../../common/Breadcrumb";
-import LoginPopup from "../../common/form/login/LoginPopup";
 import FooterDefault from "../../footer/common-footer";
-import DefaulHeader from "../../header/DefaulHeader";
-import MobileMenu from "../../header/MobileMenu";
 import BlogPagination from "../blog-sidebar/BlogPagination";
 
 const index = () => {
@@ -11,16 +9,7 @@ const index = () => {
     <>
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DefaulHeader />
-      {/* <!--End Main Header --> */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
+     <DashboardHeader/>
       <Breadcrumb title="Blog" meta="Blog" />
       {/* <!--End Page Title--> */}
 

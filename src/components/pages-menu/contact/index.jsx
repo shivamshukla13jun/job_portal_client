@@ -1,8 +1,6 @@
-import DefaulHeader2 from "@/components/header/DefaulHeader2";
+import DashboardHeader from "@/components/header/DashboardHeader";
 import LoginPopup from "../../common/form/login/LoginPopup";
 import FooterDefault from "../../footer/common-footer";
-import DefaulHeader from "../../header/DefaulHeader";
-import MobileMenu from "../../header/MobileMenu";
 import Address from "./Address";
 import ContactForm from "./ContactForm";
 import MapBox from "./MapBox";
@@ -16,10 +14,9 @@ const index = () => {
       <LoginPopup />
       {/* End Login Popup Modal */}
 
-      <DefaulHeader2 />
+      <DashboardHeader />
       {/* <!--End Main Header --> */}
 
-      <MobileMenu />
       {/* End MobileMenu */}
 
       <section className="map-section">

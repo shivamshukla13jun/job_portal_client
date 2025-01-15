@@ -1,31 +1,24 @@
-import jobs from "@/data/job-featured";
-import LoginPopup from "@/components/common/form/login/LoginPopup";
+
 import FooterDefault from "@/components/footer/common-footer";
-import DefaulHeader from "@/components/header/DefaulHeader";
-import MobileMenu from "@/components/header/MobileMenu";
 import RelatedJobs from "@/components/job-single-pages/related-jobs/RelatedJobs";
 import JobOverView from "@/components/job-single-pages/job-overview/JobOverView";
 import JobSkills from "@/components/job-single-pages/shared-components/JobSkills";
 import CompnayInfo from "@/components/job-single-pages/shared-components/CompanyInfo";
-import MapJobFinder from "@/components/job-listing-pages/components/MapJobFinder";
 import SocialTwo from "@/components/job-single-pages/social/SocialTwo";
 import JobDetailsDescriptions from "@/components/job-single-pages/shared-components/JobDetailsDescriptions";
-import ApplyJobModalContent from "@/components/job-single-pages/shared-components/ApplyJobModalContent";
 import { Link, useParams } from "react-router-dom";
 
 import MetaComponent from "@/components/common/MetaComponent";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { get, getById, put } from "@/services/api";
 import { API_EMPLOYER_PATH, API_PROD } from "@/lib/config";
-import DefaulHeader2 from "@/components/header/DefaulHeader2";
 import { paths } from "@/services/paths";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { toast } from "react-toastify";
-import { decrypt, encrypt } from "@/lib/encrypt";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist, selectWishlist } from "@/store/reducers/Whishlist";
-
+import DashboardHeader from "@/components/header/DashboardHeader";
 const metadata = {
   title: "Job Single Dyanmic V1 || Chem Pharma - Job Borad ReactJs Template",
   description: "Chem Pharma - Job Borad ReactJs Template",
@@ -34,6 +27,7 @@ const metadata = {
 const JobSingleDynamicV1 = () => {
   const userInfo = useUserInfo();
   const params = useParams();
+  const queryClient = useQueryClient();
   const dispatch=useDispatch()
   const SavedJobs = useSelector(selectWishlist);
   const id = params.id;
@@ -57,15 +51,11 @@ const JobSingleDynamicV1 = () => {
   const mutation = useMutation({
     mutationFn: (data) => put('application/apply', id),
     onSuccess: async (res) => {
+      queryClient.invalidateQueries(["jobs"])
       if (res.data.success) {
 
         toast.success(res.data.message);
-        // sessionStorage.setItem("session", res.data.token)
-        // let user = (await getById(`/user`, res.data.data._id)).data.data;
-        // let enData = encrypt(user);
-        // sessionStorage.setItem("userInfo", enData);
-
-        window.location.reload()
+      
       }
     },
     onError: (err) => {
@@ -97,14 +87,7 @@ const JobSingleDynamicV1 = () => {
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
 
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DefaulHeader2 />
-      {/* <!--End Main Header --> */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
+      <DashboardHeader />
 
       {/* <!-- Job Detail Section --> */}
       <section className="job-detail-section">
@@ -155,7 +138,7 @@ const JobSingleDynamicV1 = () => {
 
                 <div className="btn-box">
                   <button
-                    disabled={data?.isApplied} // Check if jobId exists in jobs array
+                    disabled={data?.isApplied ||   mutation.isPending                    } // Check if jobId exists in jobs array
                     className={`theme-btn btn-style-one ${data?.isApplied ? 'disabled' : ''}`}
                     onClick={handleJobApplySubmit}
                   >

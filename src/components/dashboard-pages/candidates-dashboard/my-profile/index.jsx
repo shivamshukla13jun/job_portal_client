@@ -1,17 +1,11 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
-import MobileMenu from "@/components/header/MobileMenu";
-import DashboardCandidatesSidebar from "@/components/header/DashboardCandidatesSidebar";
-import DashboardCandidatesHeader from "@/components/header/DashboardCandidatesHeader";
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
-import LoginPopup from "../../../common/form/login/LoginPopup";
 import ContactInformation from "./components/ContactInformation";
 import EducationalQualification from "./components/EducationalQualification";
 import EmploymentDetail from "./components/EmploymentDetail";

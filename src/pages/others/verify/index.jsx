@@ -1,3 +1,4 @@
+import DashboardHeader from '@/components/header/DashboardHeader';
 import MobileMenu from '@/components/header/MobileMenu';
 import Header from '@/components/pages-menu/login/Header';
 import { encrypt } from '@/lib/encrypt';
@@ -151,8 +152,7 @@ const Verify = () => {
 
     return (
         <>
-            <Header />
-
+        <DashboardHeader/>
             <MobileMenu />
             <div className="login-section">
                 <div className="max-w-md mx-auto text-center bg-white px-4 sm:px-8 py-10 rounded-xl">

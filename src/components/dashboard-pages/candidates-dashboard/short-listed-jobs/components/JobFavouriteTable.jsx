@@ -111,7 +111,7 @@ const JobListingsTable = ({ data, search, setSearch, handleSerch }) => {
                                 </button>
                               </li>
                               <li>
-                                {item?.job?.interview_details ? (
+                                {item?.meeting ? (
                                    <button
                                    data-text="Interview details"
                                    onClick={() => handleShowInterview(item)}
@@ -125,7 +125,7 @@ const JobListingsTable = ({ data, search, setSearch, handleSerch }) => {
                                 ) : (
                                   <button
                                   data-text="Interview details"
-                                  onClick={() => handleShowInterview(item)}
+                                  onClick={() =>toast.info("Meetings Or Interview Not Schaduled yet")}
                                 >
                                   <span
                                   className="la la fa-calendar"     

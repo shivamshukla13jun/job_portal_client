@@ -5,19 +5,13 @@ import { paths } from "@/services/paths";
 import { API_CANDIDATE_PATH } from "@/lib/config";
 import { useAcceptApplication, useDeleteApplication } from "@/utils/hooks/useApplication";
 
-const WidgetContentBox = ({ data, title }) => {
-  //console.log("data????", data);
-
+const WidgetContentBox = ({ data, title,setStatus }) => {
   const navigate = useNavigate();
-
   const handleAccept = useAcceptApplication()
   const handleDelete = useDeleteApplication()
-console.log({data:data?.stats})
-  
-
-  // Check if data exists and has candidates, otherwise return loading or error
- 
-
+  const handleChangestatus = (status) => {
+    setStatus(status)
+  }
   return (
     <div className="widget-content">
       <div className="tabs-box">
@@ -37,7 +31,7 @@ console.log({data:data?.stats})
               {
                 !data ||!data.data || data.data.length === 0?(<p>No candidates found.</p>):(
                   <div className="row">
-                  {data?.data.map(({_id, candidate,resume,job }) => (
+                  {data?.data.map(({_id, candidate,job }) => (
                     <div
                       className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
                       key={candidate?._id}
@@ -53,10 +47,16 @@ console.log({data:data?.stats})
                             />
                           </figure>
                           <h4 className="name">
-                            <Link to={`${paths.publiccandidate}/${candidate?._id}`}>
+                            <Link to={`${paths.publiccandidate}/${_id}`}>
                               {candidate?.name}
                             </Link>
                           </h4>
+                          <div className="designation mr-5">
+                <Link to={`${paths.job}/${job?._id}`}>
+                <span className="la la-briefcase"></span>
+                  {job?.title}
+                </Link>
+              </div>
                           <ul className="candidate-info">
                             <li className="designation">
                               {candidate?.designation || "Designation"}
@@ -67,7 +67,7 @@ console.log({data:data?.stats})
                             </li>
                             <li>
                               <span className="icon flaticon-money"></span>
-                              ₹{resume?.current_salary ||' '} LPA
+                              ₹{candidate?.currentsalary ||' '} LPA
                             </li>
                           </ul>
   
@@ -83,7 +83,7 @@ console.log({data:data?.stats})
                         <div className="option-box">
                           <ul className="option-list">
                             <li>
-                              <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${candidate._id}`)}>
+                              <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${_id}`)}>
                                 <span className="la la-eye"></span>
                               </button>
                             </li>

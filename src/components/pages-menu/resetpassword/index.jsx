@@ -1,16 +1,12 @@
 import FormContent from "@/components/common/form/resetpassword/FormContent";
 import MobileMenu from "../../header/MobileMenu";
 import Header from "./Header";
+import DashboardHeader from "@/components/header/DashboardHeader";
 
 const index = () => {
   return (
     <>
-      <Header />
-      {/* <!--End Main Header -->  */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
+    <DashboardHeader/>
       <div className="login-section">
         <div
           className="image-layer"

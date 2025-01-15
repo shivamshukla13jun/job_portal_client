@@ -72,33 +72,37 @@ const MeetingList = () => {
                       <th>Email</th>
                       <th>Phone</th>
                       <th>Message</th>
+                      <th>Candidate Attendance</th>
+                      <th>Candidate Reply</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     {meetings?.length > 0 &&
-                      meetings.map((meeting, index) => (
-                        <tr key={meeting._id}>
+                      meetings.map((item, index) => (
+                        <tr key={index}>
                           <td>
-                            {new Intl.DateTimeFormat("en-US", {
+                            {item?.meeting?.date ?new Intl.DateTimeFormat("en-US", {
                               month: "long",
                               day: "numeric",
                               year: "numeric",
-                            }).format(new Date(meeting.date))}{" "}
+                            }).format(new Date(item?.meeting?.date)):"N/A"}{" "}
                             <br />
                           </td>
-                          <td>{meeting.time}</td>
-                          <td>{meeting.email}</td>
-                          <td>{meeting.phone}</td>
-                          <td>{meeting.message}</td>
+                          <td>{item?.meeting?.time || "N/A"}</td>
+                          <td>{item?.meeting?.email || "N/A"}</td>
+                          <td>{item?.meeting?.phone || "N/A"}</td>
+                          <td>{item?.meeting?.message || "N/A"}</td>
+                          <td>{item?.meeting?.intrviewConfirmation?.confirm ?"Yes":"No"}</td>
+                          <td>{item?.meeting?.intrviewConfirmation?.message || "N/A"}</td>
                           <td>
                             <div className="option-box">
                               <ul className="option-list">
                                 <li>
                                   <button
                                     data-text="View"
-                                    onClick={() => handleView(meeting)}
+                                    onClick={() => handleView(item.meeting)}
                                   >
                                     <span className="la la-eye"></span>
                                   </button>
@@ -107,7 +111,7 @@ const MeetingList = () => {
                                 <li>
                                   <button
                                     data-text="Delete "
-                                    onClick={() => handleDelete(meeting._id)}
+                                    onClick={() => handleDelete(item?._id)}
                                   >
                                     <span className="la la-trash"></span>
                                   </button>
@@ -121,6 +125,7 @@ const MeetingList = () => {
                 </table>
               </div>
             </div>
+            
             {/* End table widget content */}
           </div>
         </div>

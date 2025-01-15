@@ -49,10 +49,16 @@ const Applicants = ({data,isLoading}) => {
                           />
                         </figure>
                         <h4 className="name">
-                          <Link to={`${paths.publiccandidate}/${candidate?._id}`}>
+                          <Link to={`${paths.publiccandidate}/${_id}`}>
                             {candidate?.name}
                           </Link>
                         </h4>
+                        <div className="designation mr-5">
+                <Link to={`${paths.job}/${job?._id}`}>
+                <span className="la la-briefcase"></span>
+                  {job?.title}
+                </Link>
+              </div>
                         <ul className="candidate-info">
                           <li className="designation">
                             {candidate?.designation || "Designation"}
@@ -79,7 +85,7 @@ const Applicants = ({data,isLoading}) => {
                       <div className="option-box">
                         <ul className="option-list">
                           <li>
-                            <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${candidate._id}`)}>
+                            <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${_id}`)}>
                               <span className="la la-eye"></span>
                             </button>
                           </li>

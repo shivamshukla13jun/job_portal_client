@@ -6,9 +6,12 @@ import { get, getById } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { addCategory, addPage } from "@/features/filter/candidateFilterSlice";
+import { useParams } from "react-router-dom";
 
 const Categories = () => {
     const userInfo=useUserInfo()
+      const {status=""}=useParams()
+    
     const { category } = useSelector((state) => state.candidateFilter) || {};
 console.log("category",category)
     const dispatch = useDispatch();
@@ -20,9 +23,9 @@ console.log("category",category)
 
     };
     const { data=[], isLoading } = useQuery({
-        queryKey: [`dashboard/options/categories`],
+        queryKey: [`dashboard/options/categories`,status],
         queryFn: async () => {
-          let res = (await get(`utilities/options/${userInfo?.userTypeValue?._id}/categories.label`)).data.data
+          let res = (await get(`utilities/options/${userInfo?.userTypeValue?._id}/categories.label?status=${status}`)).data.data
           return res;
         },
         enabled:!!userInfo?.userTypeValue?._id

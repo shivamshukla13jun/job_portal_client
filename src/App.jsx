@@ -15,7 +15,7 @@ import "react-dates/lib/css/_datepicker.css";
 if (typeof window !== "undefined") {
   import("bootstrap");
 }
-import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet, } from "react-router-dom";
 import Home from "./pages";
 import JobListPage1 from "./pages/job-list/job-list-v1";
 import JobSingleDynamicV1 from "./pages/job-single/job-single-v1";
@@ -51,6 +51,8 @@ import MessageEmploeeDBPage from "./pages/employers-dashboard/messages";
 import ResumeAlertsEmploeeDBPage from "./pages/employers-dashboard/resume-alerts"
 import EditJob from "./components/dashboard-pages/employers-dashboard/edit-jobs";
 import SubEmployer from "./pages/employers-dashboard/subemployers";
+import ForwaredCandidates from "./pages/forward-resumes";
+import ShortListedCandidates from "./pages/employers-dashboard/shotlisted-candidates";
 // candidates
 import DashboardPage from "./pages/candidates-dashboard/dashboard";
 import AppliedJobsPage from "./pages/candidates-dashboard/applied-jobs";
@@ -62,16 +64,15 @@ import SavedJobsPage from "./pages/candidates-dashboard/saved-jobs";
 
 // subemployers 
 import DashboardSubemplyerDBPage from "./pages/subemployers-dashboard/dashboard";
-import ShortListedResumes from "./pages/shortlisted-resumes";
+
 // authotrizations
 import UnauthorizedPage from "./pages/others/UnauthorizedPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MeetingList from "./pages/subemployers-dashboard/Meetings";
-import CandidateListPage2 from "./pages/candidates-list/candidates-list-v2";
+import EmployerMeetingList from "./pages/employers-dashboard/Meetings";
 import ChangePassword from "./pages/change-password/ChangePassword";
-import CandidateListPage1 from "./pages/candidates-list/candidates-list-v1";
-import CandidateListPage3 from "./pages/candidates-list/candidates-list-v3";
 import CandidateListPage4 from "./pages/candidates-list/candidates-list-v4";
+import ErrorBoundary from "./utils/ErrorBoundary";
 function App() {
 
   const query = new QueryClient({
@@ -100,7 +101,10 @@ function App() {
       <Provider store={store}>
         <div className="page-wrapper">
           <BrowserRouter>
+              <ErrorBoundary>
             <Routes>
+
+             
               <Route path="/">
                 <Route index element={<Home />} />
                 <Route path="job-list-v1" element={<JobListPage1 />} />
@@ -138,8 +142,9 @@ function App() {
                   <Route path="edit-job/:id" element={<EditJob />} />
                   <Route path="manage-jobs" element={<ManageJobsEmploeeDBPage />} />
                   <Route path="all-applicants" element={<AllApplicantsEmploeesPage />} />
-                  <Route path="shortlisted-resumes/:EmployerId" element={<ShortListedResumes />} />
-                  <Route path="meetinglinks/:createdBy" element={<MeetingList />} />
+                  <Route path="forward-resumes/:EmployerId" element={<ForwaredCandidates />} />
+                  <Route path="shortlisted-candidates/:status" element={<ShortListedCandidates />} />
+                  <Route path="meetinglinks" element={<EmployerMeetingList />} />
 
                   <Route path="packages" element={<PackageEmploeeDBPage />} />
                   <Route path="messages" element={<MessageEmploeeDBPage />} />
@@ -157,7 +162,7 @@ function App() {
               >
                   <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
                   <Route path="meetinglinks/:createdBy" element={<MeetingList />} />
-                  <Route path="shortlisted-resumes/:SubEmployerId" element={<ShortListedResumes />} />
+                  <Route path="forward-resumes/:SubEmployerId" element={<ForwaredCandidates />} />
                   <Route path="change-password" element={<ChangePassword />} />
                 </Route>
                 <Route 
@@ -175,10 +180,11 @@ function App() {
                   <Route path="my-profile" element={<MyProfilePage />} />
                   <Route path="my-resume" element={<MyResumePage />} />
                   <Route path="packages" element={<PackagePage />} />
-                  <Route path="short-listed-jobs" element={<ShortListedJobsPage />} />
+                  <Route path="short-listed-jobs" element={<ShortListedJobsPage/>} />
                 </Route>
               </Route>
             </Routes>
+            </ErrorBoundary>
             <ScrollTopBehaviour />
           </BrowserRouter>
           {/* Toastify */}

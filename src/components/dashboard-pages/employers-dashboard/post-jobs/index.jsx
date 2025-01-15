@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import MobileMenu from "../../../header/MobileMenu";
 import DashboardHeader from "../../../header/DashboardHeader";
 import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardEmployerSidebar from "../../../header/DashboardEmployerSidebar";
+
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
@@ -34,13 +34,7 @@ const Index = () => {
       title: '',
       location: '',
       place: '',
-      interview_details: {
-        date:new Date(),
-        time:"10:00",
-        location: "",
-        type: "",
-        notes: ""
-      },
+   
       opening: 1,
       jobtype: "",
       candidate_requirement: {
@@ -114,7 +108,7 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-12">
+              {/* <div className="col-lg-12">
                 <div className="ls-widget">
                   <div className="tabs-box">
                     <div className="widget-title">
@@ -125,7 +119,7 @@ const Index = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="col-lg-12">
                 <div className="ls-widget">
