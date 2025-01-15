@@ -7,7 +7,8 @@ import { useParams } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 import { useQuery } from "@tanstack/react-query";
 import {  getById } from "@/services/api";
-import DefaulHeader2 from "@/components/header/DefaulHeader2";
+import DashboardHeader from "@/components/header/DashboardHeader";
+
 import { API_CANDIDATE_PATH } from "@/lib/config";
 import { toast } from "react-toastify";
 import useForwardCV from "@/utils/hooks/useForwardCV";
@@ -112,7 +113,7 @@ const CandidateSingleDynamicV1 = () => {
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
 
-      <DefaulHeader2 />
+      <DashboardHeader />
       {/* <!--End Main Header --> */}
 
       <MobileMenu />
@@ -138,7 +139,7 @@ const CandidateSingleDynamicV1 = () => {
                     </li>
                     <li>
                       <span className="icon flaticon-money"></span>
-                      ₹ {data?.expected_salary} / month
+                      ₹ {data?.expectedsalary} / month
                     </li>
                     <li>
                       <span className="icon flaticon-clock"></span>
@@ -307,13 +308,13 @@ const CandidateSingleDynamicV1 = () => {
                         <li>
                           <i className="icon icon-rate"></i>
                           <h5>Current Salary:</h5>
-                          <span>₹ {data?.current_salary} LPA</span>
+                          <span>₹ {data?.currentsalary} LPA</span>
                         </li>
 
                         <li>
                           <i className="icon icon-salary"></i>
                           <h5>Expected Salary:</h5>
-                          <span>₹ {data?.expected_salary} LPA</span>
+                          <span>₹ {data?.expectedsalary} LPA</span>
                         </li>
 
                         <li>

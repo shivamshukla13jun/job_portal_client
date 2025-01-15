@@ -1,3 +1,4 @@
+import DashboardHeader from "@/components/header/DashboardHeader";
 import Register from "../../common/form/register/Register";
 import MobileMenu from "../../header/MobileMenu";
 import Header from "./Header";
@@ -5,11 +6,7 @@ import Header from "./Header";
 const index = () => {
   return (
     <>
-      <Header />
-      {/* <!--End Main Header -->  */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
+    <DashboardHeader/>
 
       <div className="login-section">
         <div

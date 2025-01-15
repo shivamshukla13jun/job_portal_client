@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { paths } from "@/services/paths";
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
@@ -44,10 +45,9 @@ const Header = () => {
           {/* End nav-outer */}
 
           <div className="outer-box">
-            {/* <!-- Login/Register --> */}
             <div className="btn-box">
               <Link
-                to="/employers-dashboard/post-jobs"
+                to={paths.employer_post_jobs}
                 className="theme-btn btn-style-one"
               >
                 <span className="btn-title">Job Post</span>

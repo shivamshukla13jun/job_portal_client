@@ -12,10 +12,12 @@ import CopyrightFooter from "../CopyrightFooter";
 import MenuToggler from "../MenuToggler";
 import { useParams } from "react-router-dom";
 import Pagination from "@/utils/hooks/usePagination";
+import { useSearchParams } from "react-router-dom";
 
 const index = () => {
   const userInfo = useUserInfo();
   const {EmployerId="",SubEmployerId=""}=useParams()
+  
   const [search, setSearch] = useState({
     page: 1,
     limit: 10,

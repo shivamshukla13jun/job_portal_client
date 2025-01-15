@@ -1,15 +1,12 @@
 import Blog6 from "../../blog/Blog6";
-import LoginPopup from "../../common/form/login/LoginPopup";
 import FooterDefault from "../../footer/common-footer";
-import DefaulHeader from "../../header/DefaulHeader";
-import MobileMenu from "../../header/MobileMenu";
 import BlogPagination from "../blog-sidebar/BlogPagination";
 import BlogSidebar from "../blog-sidebar";
 import Breadcrumb from "../../common/Breadcrumb";
-import DefaulHeader2 from "@/components/header/DefaulHeader2";
 import blogContent from "../../../data/blogs";
 import { useState } from "react";
 import { useEffect } from "react";
+import DashboardHeader from "@/components/header/DashboardHeader";
 const ITEMS_PER_PAGE = 6;
 
 const index = () => {
@@ -52,15 +49,7 @@ const index = () => {
     <>
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DefaulHeader2 />
-      {/* <!--End Main Header --> */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
+      <DashboardHeader/>
 
       <Breadcrumb title="Blog" meta="Blog" />
       {/* <!--End Page Title--> */}

@@ -5,19 +5,13 @@ import { paths } from "@/services/paths";
 import { API_CANDIDATE_PATH } from "@/lib/config";
 import { useAcceptApplication, useDeleteApplication } from "@/utils/hooks/useApplication";
 
-const WidgetContentBox = ({ data, title }) => {
-  //console.log("data????", data);
-
+const WidgetContentBox = ({ data, title,setStatus }) => {
   const navigate = useNavigate();
-
   const handleAccept = useAcceptApplication()
   const handleDelete = useDeleteApplication()
-console.log({data:data?.stats})
-  
-
-  // Check if data exists and has candidates, otherwise return loading or error
- 
-
+  const handleChangestatus = (status) => {
+    setStatus(status)
+  }
   return (
     <div className="widget-content">
       <div className="tabs-box">
@@ -73,7 +67,7 @@ console.log({data:data?.stats})
                             </li>
                             <li>
                               <span className="icon flaticon-money"></span>
-                              ₹{candidate?.current_salary ||' '} LPA
+                              ₹{candidate?.currentsalary ||' '} LPA
                             </li>
                           </ul>
   

@@ -72,8 +72,8 @@ const Applicants = ({ data ,search}) => {
                 </li>
                 <li>
                   <span className="icon flaticon-money"></span>
-                  ₹{resume?.current_salary ||' '} LPA
-                </li>
+                  ₹{candidateId?.currentsalary || " "} LPA
+                  </li>
               </ul>
 
               <ul className="post-tags">

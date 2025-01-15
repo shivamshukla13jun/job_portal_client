@@ -1,16 +1,14 @@
-import MobileMenu from "../../../header/MobileMenu";
-import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
+
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import CvUploader from "./components/CvUploader";
-import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import MenuToggler from "../../MenuToggler";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { getById, put } from "@/services/api";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
   const userInfo = useUserInfo();
@@ -73,16 +71,8 @@ const index = () => {
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
 
-      <LoginPopup />
-      {/* End Login Popup Modal */}
 
-      <DashboardCandidatesHeader />
-      {/* End Header */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <DashboardCandidatesSidebar />
+      <DashboardSidebar />
       {/* <!-- End Candidates Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}

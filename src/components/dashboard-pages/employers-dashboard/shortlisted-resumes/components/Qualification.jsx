@@ -5,20 +5,22 @@ import { addEdcucation, addPage } from "@/features/filter/candidateFilterSlice";
 import { useQuery } from "@tanstack/react-query";
 import { get, getById } from "@/services/api";
 import useUserInfo from "@/utils/hooks/useUserInfo";
+import { useParams } from "react-router-dom";
 
 const Qualification = () => {
     const { qualification } = useSelector((state) => state.candidateFilter) || {};
     const dispatch = useDispatch();
     const userInfo=useUserInfo()
+    const {status=""}=useParams()
     // qualification handler
     const qualificationHandler = (e) => {
         dispatch(addEdcucation(e.target.value));
         dispatch(addPage(1))
     };
     const { data=[], isLoading } = useQuery({
-        queryKey: [`dashboard/options`],
+        queryKey: [`dashboard/options`,status],
         queryFn: async () => {
-          let res = (await get(`utilities/options/${userInfo?.userTypeValue?._id}/personal_info.info.degree`)).data.data
+          let res = (await get(`utilities/options/${userInfo?.userTypeValue?._id}/personal_info.info.degree?status=${status}`)).data.data
           return res;
         },
         enabled:!!userInfo?.userTypeValue?._id

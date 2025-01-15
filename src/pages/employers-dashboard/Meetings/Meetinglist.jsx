@@ -7,20 +7,23 @@ import MeetingLinkView from "./MeetingLinkView";
 import { del, get, getById } from "@/services/api";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const MeetingList = () => {
   const [open, setOpen] = useState(false);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
+  const [searchParams] = useSearchParams();
+  const createdBy = searchParams.get('createdBy') || "" // e.g., ?query=react
 
   const queryClient = useQueryClient();
   const userInfo = useUserInfo();
 
   // Fetch meeting links
   const { data: meetings, isLoading } = useQuery({
-    queryKey: ["meetinglinks", userInfo],
+    queryKey: ["meetinglinks", userInfo, createdBy],
     queryFn: async () => {
       try {
-        const res = await getById(`employer/meetings`,userInfo?.userTypeValue?._id);
+        const res = await get(`employer/meetings/${userInfo?.userTypeValue?._id}?createdBy=${createdBy}`);
         return res.data.data;
       } catch (error) {
         toast.error("Failed to fetch meetings.");
@@ -83,19 +86,19 @@ const MeetingList = () => {
                       meetings.map((item, index) => (
                         <tr key={index}>
                           <td>
-                            {new Intl.DateTimeFormat("en-US", {
+                            {item?.meeting?.date ?new Intl.DateTimeFormat("en-US", {
                               month: "long",
                               day: "numeric",
                               year: "numeric",
-                            }).format(new Date(item?.meeting?.date))}{" "}
+                            }).format(new Date(item?.meeting?.date)):"N/A"}{" "}
                             <br />
                           </td>
-                          <td>{item?.meeting?.time}</td>
-                          <td>{item?.meeting?.email}</td>
-                          <td>{item?.meeting?.phone}</td>
-                          <td>{item?.meeting?.message}</td>
+                          <td>{item?.meeting?.time || "N/A"}</td>
+                          <td>{item?.meeting?.email || "N/A"}</td>
+                          <td>{item?.meeting?.phone || "N/A"}</td>
+                          <td>{item?.meeting?.message || "N/A"}</td>
                           <td>{item?.meeting?.intrviewConfirmation?.confirm ?"Yes":"No"}</td>
-                          <td>{item?.meeting?.intrviewConfirmation?.message}</td>
+                          <td>{item?.meeting?.intrviewConfirmation?.message || "N/A"}</td>
                           <td>{item?.scheduledBy}</td>
                           <td>
                             <div className="option-box">

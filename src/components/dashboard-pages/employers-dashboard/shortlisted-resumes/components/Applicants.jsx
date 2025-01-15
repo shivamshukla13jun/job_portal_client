@@ -8,6 +8,7 @@ import { del, get, put } from "@/services/api";
 import { toast } from "react-toastify";
 import { useAcceptApplication, useDeleteApplication } from "@/utils/hooks/useApplication";
 import { useSelector } from "react-redux";
+import { Badge } from "react-bootstrap";
 
 
 const Applicants = ({ data}) => {
@@ -38,7 +39,7 @@ const Applicants = ({ data}) => {
   return (
     <>
     <div className="row">
-      {data?.map(({_id,resume, candidate,job }) => (
+      {data?.map(({_id,resume,selectedBy, candidate,job }) => (
         <div
           className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
           key={candidate?._id}
@@ -54,7 +55,7 @@ const Applicants = ({ data}) => {
                 />
               </figure>
               <h4 className="name">
-                <Link to={`${paths.publiccandidate}/${candidate?._id}`}>
+                <Link to={`${paths.publiccandidate}/${_id}`}>
                   {candidate?.name}
                 </Link>
               </h4>
@@ -74,7 +75,8 @@ const Applicants = ({ data}) => {
                 </li>
                 <li>
                   <span className="icon flaticon-money"></span>
-                  ₹{resume?.current_salary ||' '} LPA
+                  ₹{candidate?.currentsalary || " "} LPA
+
                 </li>
               </ul>
 
@@ -90,7 +92,7 @@ const Applicants = ({ data}) => {
             <div className="option-box">
               <ul className="option-list">
                 <li>
-                  <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${candidate._id}`)}>
+                  <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${_id}`)}>
                     <span className="la la-eye"></span>
                   </button>
                 </li>
@@ -116,6 +118,8 @@ const Applicants = ({ data}) => {
                 </li>
               </ul>
             </div>
+            <br />
+            {selectedBy?<Badge bg="success">{selectedBy}</Badge>:""}
           </div>
         </div>
       ))}

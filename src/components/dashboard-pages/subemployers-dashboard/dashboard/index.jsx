@@ -1,6 +1,3 @@
-import MobileMenu from "../../../header/MobileMenu";
-import DashboardHeader from "../../../header/DashboardHeader";
-import LoginPopup from "../../../common/form/login/LoginPopup";
 import BreadCrumb from "../../BreadCrumb";
 import TopCardBlock from "./components/TopCardBlock";
 import ProfileChart from "./components/ProfileChart";
@@ -12,7 +9,6 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { get, getById } from "@/services/api";
-import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const Index = () => {

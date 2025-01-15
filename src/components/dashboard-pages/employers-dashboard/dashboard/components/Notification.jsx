@@ -7,7 +7,7 @@ const Notification = ({ data }) => {
           <span className="icon flaticon-briefcase"></span>
           <strong>{candidate?.name}</strong> applied for a job
           <span className="colored"> {job?.title}</span>
-            <div className="interview-details">
+            {/* <div className="interview-details">
               <p>
                 <strong>Interview:</strong> {meeting?.type} on{" "}
                 <span className="colored">
@@ -15,14 +15,6 @@ const Notification = ({ data }) => {
                   at {meeting?.time}
                 </span>
               </p>
-              {/* {job.interview_details.type === "in_person" && (
-                <p>
-                  <strong>Location:</strong>{" "}
-                  <span className="colored">
-                    {job.interview_details.location}
-                  </span>
-                </p>
-              )} */}
             </div>
           
           <p>
@@ -39,7 +31,7 @@ const Notification = ({ data }) => {
             <p>
               <strong>Candidate Reply:</strong> {meeting?.intrviewConfirmation?.message}
             </p>
-          )}
+          )} */}
         </li>
       ))}
       {/* End li */}

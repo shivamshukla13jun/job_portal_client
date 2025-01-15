@@ -5,10 +5,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import MobileMenu from "../../../header/MobileMenu";
-import DashboardHeader from "../../../header/DashboardHeader";
-import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardEmployerSidebar from "../../../header/DashboardEmployerSidebar";
+
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
@@ -18,7 +15,7 @@ import { getById, put } from "@/services/api";
 import { employerSchema } from "@/validations/dashboard/employer";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import BusinessPreviewModal from "./components/BusinessPreviewModal";
-import DashboardSubEmployerSidebar from "@/components/header/DashboardSubEmployerSidebar";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
     const userInfo = useUserInfo();
@@ -173,10 +170,7 @@ const [previewData,setPreviewData]=useState(null)
 
     return (
         <div className="page-wrapper dashboard">
-            <LoginPopup />
-            <DashboardHeader />
-            <MobileMenu />
-            <DashboardSubEmployerSidebar />
+           <DashboardSidebar/>
             <section className="user-dashboard">
                 <form className="dashboard-outer">
                     <BreadCrumb title="Company Profile!" />

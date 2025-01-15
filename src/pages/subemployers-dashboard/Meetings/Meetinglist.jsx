@@ -83,19 +83,19 @@ const MeetingList = () => {
                       meetings.map((item, index) => (
                         <tr key={index}>
                           <td>
-                            {new Intl.DateTimeFormat("en-US", {
+                            {item?.meeting?.date ?new Intl.DateTimeFormat("en-US", {
                               month: "long",
                               day: "numeric",
                               year: "numeric",
-                            }).format(new Date(item?.meeting?.date))}{" "}
+                            }).format(new Date(item?.meeting?.date)):"N/A"}{" "}
                             <br />
                           </td>
-                          <td>{item?.meeting?.time}</td>
-                          <td>{item?.meeting?.email}</td>
-                          <td>{item?.meeting?.phone}</td>
-                          <td>{item?.meeting?.message}</td>
+                          <td>{item?.meeting?.time || "N/A"}</td>
+                          <td>{item?.meeting?.email || "N/A"}</td>
+                          <td>{item?.meeting?.phone || "N/A"}</td>
+                          <td>{item?.meeting?.message || "N/A"}</td>
                           <td>{item?.meeting?.intrviewConfirmation?.confirm ?"Yes":"No"}</td>
-                          <td>{item?.meeting?.intrviewConfirmation?.message}</td>
+                          <td>{item?.meeting?.intrviewConfirmation?.message || "N/A"}</td>
                           <td>
                             <div className="option-box">
                               <ul className="option-list">

@@ -1,11 +1,12 @@
 export const paths = {
+    // Existing paths
     home: '/',
     login: '/login',
-    applicant:"/applicant",
+    applicant: '/applicant',
     register: '/register',
     forgot: '/forgot',
-    pricing:"/pricing",
-    packages:"/employers-dashboard/packages",
+    pricing: '/pricing',
+    packages: '/employers-dashboard/packages',
     verify: '/verify',
     candidate: '/candidates-dashboard/dashboard',
     admin: '/admin-dashboard/employers',
@@ -23,5 +24,48 @@ export const paths = {
     job: '/job',
     blog: '/blog-list-v1',
     about: '/about',
-    contact: '/contact'
-}
+    contact: '/contact',
+
+    // New paths from BrowserRouter
+    faq: '/faq',
+    terms: '/terms',
+    invoice: '/invoice',
+    resetpassword: '/resetpassword',
+    unauthorized: '/unauthorized',
+    
+    // Employer dashboard paths
+    employer_subemployer: '/employers-dashboard/subemployer',
+    employer_post_jobs: '/employers-dashboard/post-jobs',
+    employer_shortlisted: '/employers-dashboard/shortlisted-candidates',
+    employer_meeting_links: '/employers-dashboard/meetinglinks',
+    employer_messages: '/employers-dashboard/messages',
+    employer_resume_alerts: '/employers-dashboard/resume-alerts',
+    employer_change_password: '/employers-dashboard/change-password',
+
+    // Subemployer dashboard paths
+    subemployer_meeting_links: '/subemployers-dashboard/meetinglinks',
+    subemployer_forward_resumes: '/subemployers-dashboard/forward-resumes',
+    subemployer_change_password: '/subemployers-dashboard/change-password',
+
+    // Candidate dashboard paths
+    candidate_applied_jobs: '/candidates-dashboard/applied-jobs',
+    candidate_saved_jobs: '/candidates-dashboard/saved-jobs',
+    candidate_change_password: '/candidates-dashboard/change-password',
+    candidate_resume: '/candidates-dashboard/my-resume',
+    candidate_packages: '/candidates-dashboard/packages',
+    candidate_shortlisted: '/candidates-dashboard/short-listed-jobs',
+
+    // Dynamic paths
+    job_details: '/job/:id',
+    employer_details: '/employer/:id',
+    candidate_details: '/candidate/:id',
+    applicant_details: '/applicant/:id',
+    blog_details: '/blog-details/:id',
+    edit_job_details: '/employers-dashboard/edit-job/:id',
+    employer_forward_resumes: '/employers-dashboard/forward-resumes/:EmployerId',
+    employer_shortlisted_status: '/employers-dashboard/shortlisted-candidates/:status',
+    subemployer_meeting_creator: '/subemployers-dashboard/meetinglinks/:createdBy',
+    subemployer_forward_resumes_id: '/subemployers-dashboard/forward-resumes/:SubEmployerId'
+};
+
+export const  authverify=["/forgot","/login","/register","/resetpassword","/verify"]

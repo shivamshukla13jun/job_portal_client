@@ -1,6 +1,3 @@
-import MobileMenu from "../../../header/MobileMenu";
-import DashboardHeader from "../../../header/DashboardHeader";
-import LoginPopup from "../../../common/form/login/LoginPopup";
 
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
@@ -10,16 +7,14 @@ import MenuToggler from "../../MenuToggler";
 import { useQuery } from "@tanstack/react-query";
 import { get, getById } from "@/services/api";
 import useUserInfo from "@/utils/hooks/useUserInfo";
-import { useState } from "react";
 import useDebounce from "@/utils/hooks/useDebounce";
-import DashboardEmployerSidebar from "@/components/header/DashboardEmployerSidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
   const userInfo = useUserInfo();
-  const {status}=useParams()
-   const dispatch = useDispatch();
+  const {status=""}=useParams()
     const {
       qualification,
       keyword,
@@ -48,13 +43,13 @@ const index = () => {
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
       {/* <!-- Header Span for hight --> */}
-      <DashboardEmployerSidebar />
+      <DashboardSidebar />
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Forwrad Applications!" />
+          <BreadCrumb title="Shortlisted Candidates!" />
           {/* breadCrumb */}
 
           <MenuToggler />
@@ -64,7 +59,7 @@ const index = () => {
             <div className="col-lg-12">
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
-                  <h4>Forwrad Applications</h4>
+                  <h4>Shortlisted Candidates</h4>
                   <WidgetToFilterBox  />
                 </div>
                 {/* End widget top filter box */}

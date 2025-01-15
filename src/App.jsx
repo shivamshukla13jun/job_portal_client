@@ -15,7 +15,7 @@ import "react-dates/lib/css/_datepicker.css";
 if (typeof window !== "undefined") {
   import("bootstrap");
 }
-import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet, } from "react-router-dom";
 import Home from "./pages";
 import JobListPage1 from "./pages/job-list/job-list-v1";
 import JobSingleDynamicV1 from "./pages/job-single/job-single-v1";
@@ -72,6 +72,7 @@ import MeetingList from "./pages/subemployers-dashboard/Meetings";
 import EmployerMeetingList from "./pages/employers-dashboard/Meetings";
 import ChangePassword from "./pages/change-password/ChangePassword";
 import CandidateListPage4 from "./pages/candidates-list/candidates-list-v4";
+import ErrorBoundary from "./utils/ErrorBoundary";
 function App() {
 
   const query = new QueryClient({
@@ -100,7 +101,10 @@ function App() {
       <Provider store={store}>
         <div className="page-wrapper">
           <BrowserRouter>
+              <ErrorBoundary>
             <Routes>
+
+             
               <Route path="/">
                 <Route index element={<Home />} />
                 <Route path="job-list-v1" element={<JobListPage1 />} />
@@ -176,10 +180,11 @@ function App() {
                   <Route path="my-profile" element={<MyProfilePage />} />
                   <Route path="my-resume" element={<MyResumePage />} />
                   <Route path="packages" element={<PackagePage />} />
-                  <Route path="short-listed-jobs" element={<ShortListedJobsPage />} />
+                  <Route path="short-listed-jobs" element={<ShortListedJobsPage/>} />
                 </Route>
               </Route>
             </Routes>
+            </ErrorBoundary>
             <ScrollTopBehaviour />
           </BrowserRouter>
           {/* Toastify */}

@@ -81,7 +81,7 @@ const Resume = ({ watch, register, setValue, error, handleSubmit, handleRegister
                 e.target.value = e.target.value.replace(/^0+/, '');
               }
             }}
-            className={`${error?.expected_salary?.message ? 'error' : ''}`}
+            className={`${error?.expectedsalary?.message ? 'error' : ''}`}
           />
         </div>
 

@@ -66,6 +66,8 @@ export const JobCard = ({ item }) => {
           <img
             src={API_EMPLOYER_PATH + item?.employerId?.logo?.filename}
             alt="item brand"
+            onError={(e) => e.target.src = "/images/pharma.webp"}
+
           />
         </span>
         <h4>

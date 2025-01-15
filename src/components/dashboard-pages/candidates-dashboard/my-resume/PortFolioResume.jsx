@@ -1,181 +1,271 @@
 import React from 'react';
-import './portfolio.css';
 import useUserInfo from '@/utils/hooks/useUserInfo';
 import { useQuery } from '@tanstack/react-query';
 import { getById } from '@/services/api';
 import { toast } from 'react-toastify';
 import { API_CANDIDATE_PATH } from '@/lib/config';
-
+import data from "./resumedata.json"
+import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
 const PersonalPortfolio = () => {
-    const userInfo = useUserInfo();
+  const userInfo = useUserInfo();
 
-    const { data, isLoading } = useQuery({
-        queryKey: [`candidate${userInfo._id}`],
-        queryFn: async () => {
-          try {
-            const res = await getById('/candidate', userInfo._id);
-            return res.data.data;
-          } catch (error) {
-            if (error.response.data.error === 'Failed to find candidate') {
-              toast.info('Please fill the information to get going!')
-            }
-          }
-        },
-        enabled: !!userInfo._id,
-    });
+  const { data, isLoading } = useQuery({
+    queryKey: [`candidate${userInfo._id}`],
+    queryFn: async () => {
+      try {
+        const res = await getById('/candidate', userInfo._id);
+        return res.data.data;
+      } catch (error) {
+        if (error.response.data.error === 'Failed to find candidate') {
+          toast.info('Please fill the information to get going!')
+        }
+      }
+    },
+    enabled: !!userInfo._id,
+  });
 
-    console.log("data", data)
-
-    return (
-        <div className="wrapper">
-            <div className="intro">
-                <div className="profile">
-                    <div className="photo">
-                        <img src={data?.profile?.filename ? API_CANDIDATE_PATH + data.profile.filename : ''} alt="Profile" />
-                    </div>
-                  
-                </div>
-                <div className="intro-section">
-                    <h1 className="title">Contact</h1>
-                    <div className="info-section">
-                        <i className="fas fa-phone"></i>
-                        <span>{data?.contact?.phone || 'Phone Not Available'}</span>
-                    </div>
-                    <div className="info-section">
-                        <i className="fas fa-map-marker-alt"></i>
-                        <span>{data?.contact?.current_address?.city || 'City Not Available'}</span>
-                    </div>
-                    <div className="info-section d-flex">
-                        <i className="fas fa-solid fa-envelope"></i> 
-                        <span>{data?.contact?.email || 'Email Not Available'}</span>
-                    </div>
-                </div>
-                
-                <div className="intro-section">
-                    <h1 className="title">Education</h1>
-                    {data?.education && data.education.map((edu, index) => (
-                        <div key={index} className="info-section">
-                            <span className='education'>{edu.name} </span>
-                            <br/>
-                            <span className='education'>{edu.qualification}</span>
-                            <br/>
-                           <ul>
-                           <li  style={{listStyle:"disc"}}>{new Date(edu.to || new Date()).getFullYear()}</li>
-                           </ul>
-                        </div>
-                    ))}
-                </div>
-            </div>
-            
-            <div className="detail">
-                <div className="detail-section edu">
-                <div className="bio">
-                        <h1 className="name">{data?.name || 'Name Not Available'}</h1>
-                        <p className="profession">{data?.designation || 'Designation Not Available'}</p>
-                        <span className='border-bottom'></span>
-                    </div>
-                    <div className="detail-title">
-                        <div className="title-icon">
-                            <i className="fas fa-user-graduate"></i>
-                        </div>
-                        <strong style={{fontSize:"1.4rem"}}> Work Experience</strong>
-                    </div>
-                    <div className="detail-content">
-                        {data?.employment && data.employment.map((job, index) => (
-                            <div key={index} className="timeline-block">
-                                <time>{new Date(job.from).toLocaleDateString()} - {new Date(job.to).toLocaleDateString()}</time>
-                                <h1>{job.name}</h1>
-                                <p>{job.position}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                
-                {/* <div className="detail-section pg-skill">
-                    <div className="detail-title">
-                        <div className="title-icon">
-                            <i className="fas fa-laptop-code"></i>
-                        </div>
-                        <span>Language Skills</span>
-                    </div>
-                    <div className="detail-content">
-                        {data?.english_language?.test_score && (
-                            <ul className="pg-list">
-                                <li>
-                                    <span>Listening</span>
-                                    <div className="sb-skeleton">
-                                        <div className="skillbar" style={{['--pgbar-length']: `${data.english_language.test_score.listening}%`}}></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span>Reading</span>
-                                    <div className="sb-skeleton">
-                                        <div className="skillbar" style={{['--pgbar-length']: `${data.english_language.test_score.reading}%`}}></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span>Writing</span>
-                                    <div className="sb-skeleton">
-                                        <div className="skillbar" style={{['--pgbar-length']: `${data.english_language.test_score.writing}%`}}></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span>Speaking</span>
-                                    <div className="sb-skeleton">
-                                        <div className="skillbar" style={{['--pgbar-length']: `${data.english_language.test_score.speaking}%`}}></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        )}
-                    </div>
-                </div> */}
-                
-                <div className="detail-section tool-skill">
-                    <div className="detail-title">
-                        <div className="title-icon">
-                            <i className="fas fa-tools"></i>
-                        </div>
-                        <strong  style={{fontSize:"1.4rem"}}> References</strong>
-                    </div>
-                    <div className="detail-content">
-                        <ul className="tool-list">
-                            {data?.references && data.references.map((ref, index) => (
-                                <li key={index}>
-                                    <span className="tl-name">{ref.name}</span>
-                                    <br/>
-                                    <span className="tl-note">{ref.note}</span>
-                                    <br/>
-                                    Email: <span className="tl-email">{ref.email}</span>
-                                    <br/>
-                                    Phone: <span className="tl-phone">{ref.phone}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-                
-                <div className="detail-section interests">
-                    <div className="detail-title">
-                        <div className="title-icon">
-                            <i className="fas fa-heart"></i>
-                        </div>
-                        <span>Achievements</span>
-                    </div>
-                    <div className="detail-content">
-                        <div className="outer-frame">
-                            <ul className="favor-list">
-                                {data?.achievement && data.achievement.map((achieve, index) => (
-                                    <li key={index}>
-                                        <span>{achieve.year} - {achieve.description}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="resume">
+      <div className="resume_left">
+        <div className="resume_profile">
+          <img src={data?.profile?.path} alt="Profile" onError={(e) => e.target.src = "/images/profile.png"} />
         </div>
-    );
+        <div className="resume_content">
+          <div className="resume_item resume_info">
+            <div className="title">
+              <p className="bold">{data?.name}</p>
+              <p className="regular">{data?.designation}</p>
+            </div>
+            <ul>
+              <li>
+                <div className="icon">
+                  <i className="fas fa-map-signs" />
+                </div>
+                <div className="data">
+                  {data?.contact?.current_address?.city}, {data?.contact?.current_address?.state}, {data?.contact?.current_address?.country}
+                </div>
+              </li>
+              <li>
+                <div className="icon">
+                  <i className="fas fa-mobile-alt" />
+                </div>
+                <div className="data">{data?.contact?.phone}</div>
+              </li>
+              <li>
+                <div className="icon">
+                  <i className="fas fa-envelope" />
+                </div>
+                <div className="data">{data?.email}</div>
+              </li>
+            </ul>
+          </div>
+
+          {/* <div className="resume_item resume_skills">
+            <div className="title">
+              <p className="bold">skill's</p>
+            </div>
+            <ul>
+              <li>
+                <div className="skill_name">HTML</div>
+                <div className="skill_progress">
+                  <span style={{ width: "80%" }} />
+                </div>
+                <div className="skill_per">80%</div>
+              </li>
+              <li>
+                <div className="skill_name">CSS</div>
+                <div className="skill_progress">
+                  <span style={{ width: "70%" }} />
+                </div>
+                <div className="skill_per">70%</div>
+              </li>
+              <li>
+                <div className="skill_name">SASS</div>
+                <div className="skill_progress">
+                  <span style={{ width: "90%" }} />
+                </div>
+                <div className="skill_per">90%</div>
+              </li>
+              <li>
+                <div className="skill_name">JS</div>
+                <div className="skill_progress">
+                  <span style={{ width: "60%" }} />
+                </div>
+                <div className="skill_per">60%</div>
+              </li>
+              <li>
+                <div className="skill_name">JQUERY</div>
+                <div className="skill_progress">
+                  <span style={{ width: "88%" }} />
+                </div>
+                <div className="skill_per">88%</div>
+              </li>
+            </ul>
+          </div>
+          <div className="resume_item resume_social">
+            <div className="title">
+              <p className="bold">Social</p>
+            </div>
+            <ul>
+              <li>
+                <div className="icon">
+                  <i className="fab fa-facebook-square" />
+                </div>
+                <div className="data">
+                  <p className="semi-bold">Facebook</p>
+                  <p>Stephen@facebook</p>
+                </div>
+              </li>
+              <li>
+                <div className="icon">
+                  <i className="fab fa-twitter-square" />
+                </div>
+                <div className="data">
+                  <p className="semi-bold">Twitter</p>
+                  <p>Stephen@twitter</p>
+                </div>
+              </li>
+              <li>
+                <div className="icon">
+                  <i className="fab fa-youtube" />
+                </div>
+                <div className="data">
+                  <p className="semi-bold">Youtube</p>
+                  <p>Stephen@youtube</p>
+                </div>
+              </li>
+              <li>
+                <div className="icon">
+                  <i className="fab fa-linkedin" />
+                </div>
+                <div className="data">
+                  <p className="semi-bold">Linkedin</p>
+                  <p>Stephen@linkedin</p>
+                </div>
+              </li>
+            </ul>
+          </div> */}
+        </div>
+      </div>
+
+      <div className="resume_right">
+        {/* About Section */}
+        <div className="resume_item resume_about">
+          <div className="title">
+            <p className="bold">About</p>
+          </div>
+          <ul >
+            <li>
+              Gender: {data?.gender} <br />
+            </li>
+            <li>
+
+              Marital Status: {data?.marital_status}
+            </li>
+            <li>
+              Date of Birth: {new Date(data?.dob).toLocaleDateString()} <br />
+
+            </li>
+          </ul>
+        </div>
+
+        {/* Work Experience */}
+        <div className="resume_item resume_work">
+          <div className="title">
+            <p className="bold">Work Experience</p>
+          </div>
+          <ul>
+            {data?.employment?.map((job, index) => (
+              <li key={index}>
+                <div className="date">
+                  <span className="from">{new Date(job.from).getFullYear()}</span> -{' '}
+                  <span className="to">{new Date(job.to).getFullYear()}</span>
+                </div>
+                <div className="info">
+                  <p className="semi-bold">
+                    {job.position} at {job.name}
+                  </p>
+                  <p>
+                    Worked in the {job.department} department, focusing on sectors like{' '}
+                    {job.categories.map((cat) => cat.label).join(', ')}.
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Education Section */}
+        <div className="resume_item resume_education">
+          <div className="title">
+            <p className="bold">Education</p>
+          </div>
+          <ul>
+            {data?.education?.map((edu, index) => (
+              <li key={index}>
+                <div className="date">
+                  <span className="to">{new Date(edu.to).getFullYear()}</span>
+                </div>
+                <div className="info">
+                  <p className="semi-bold">
+                    {capitalizeFirstLetter(edu.qualification)} from {capitalizeFirstLetter(edu.name)}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Achievements Section */}
+        <div className="resume_item resume_achievements">
+          <div className="title">
+            <p className="bold">Achievements</p>
+          </div>
+          <ul>
+            {data?.achievement?.map((achieve, index) => (
+              <li key={index}>
+                <div className="date">{achieve.year}</div>
+                <div className="info">
+                  <p>{achieve.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* References Section */}
+        <div className="resume_item resume_references">
+          <div className="title">
+            <p className="bold">References</p>
+          </div>
+          <ul>
+            {data?.references?.map((ref, index) => (
+              <li key={index}>
+                <p>
+                  <span className="semi-bold">{ref.name}</span> ({ref.note})<br />
+                  Email: {ref.email}, Phone: {ref.phone}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Compensation Section */}
+        <div className="resume_item resume_compensation">
+          <div className="title">
+            <p className="bold">Compensation</p>
+          </div>
+          <p>
+            Current Salary: {data?.currentsalary} LPA <br />
+            Expected Salary: {data?.expectedsalary} LPA <br />
+            Experience: {data?.experience} years
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+  );
 };
 
 export default PersonalPortfolio;

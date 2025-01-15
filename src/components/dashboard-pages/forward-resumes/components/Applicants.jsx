@@ -5,12 +5,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { paths } from "@/services/paths";
 import { useNavigate } from "react-router-dom";
-import { useDeleteApplication } from "@/utils/hooks/useApplication";
+import { useAcceptApplication, useDeleteApplication } from "@/utils/hooks/useApplication";
 import { Badge } from "react-bootstrap";
 
 const Applicants = ({ data, search }) => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const navigate = useNavigate();
+  const handlStatus=useAcceptApplication(search);
   const handleDelete = useDeleteApplication(search);
   const handleAccept = (id) => {
     setCreateModalOpen(id);
@@ -38,7 +39,7 @@ const Applicants = ({ data, search }) => {
   return (
     <>
       <div className="row">
-        {data?.map(({ _id, resume, candidateDetails, job, department }) => (
+        {data?.map(({ _id, candidateDetails, job, selectedBy="" }) => (
           <div
             className="candidate-block-three col-lg-6 col-md-12 col-sm-12"
             key={candidateDetails?._id}
@@ -79,7 +80,7 @@ const Applicants = ({ data, search }) => {
                   </li>
                   <li>
                     <span className="icon flaticon-money"></span>₹
-                    {resume?.current_salary || " "} LPA
+                    ₹{candidateDetails?.currentsalary || " "} LPA
                   </li>
                 </ul>
 
@@ -107,6 +108,11 @@ const Applicants = ({ data, search }) => {
                     </button>
                   </li>
                   <li>
+                  <button data-text="Approve Application" onClick={() => handlStatus(_id,'shortlisted')}>
+                    <span className="la la-check"></span>
+                  </button>
+                </li>
+                  <li>
                     <button
                       data-text="Download Cv"
                       onClick={() =>
@@ -127,7 +133,11 @@ const Applicants = ({ data, search }) => {
                       <span className="la la-plus"></span>
                     </button>
                   </li>
-
+                  <li>
+                  <button data-text="Reject Application" onClick={() => handlStatus(_id,"rejected")}>
+                    <span className="la la-times-circle"></span>
+                  </button>
+                </li>
                   <li>
                     <button
                       data-text="Delete Application"
@@ -139,7 +149,7 @@ const Applicants = ({ data, search }) => {
                 </ul>
               </div>
               <br />
-              <Badge bg="success">By {department}</Badge>
+               {selectedBy?<Badge bg="success">{selectedBy}</Badge>:""}
             </div>
           </div>
         ))}

@@ -1,7 +1,4 @@
-import MobileMenu from "../../../header/MobileMenu";
-import DashboardHeader from "../../../header/DashboardHeader";
-import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardEmployerSidebar from "../../../header/DashboardEmployerSidebar";
+
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import WidgetContentBox from "./components/WidgetContentBox";
@@ -16,7 +13,7 @@ import DashboardSidebar from "@/components/header/DashboardSideBar";
 import Pagination from "@/utils/hooks/usePagination";
 
 const index = () => {
-  const queryClient = useQueryClient();
+  const [status,setStatus]=useState("")
   const [searchParams, setSearchParams] = useSearchParams();
   const [page,setPage]=useState(1)
   const [limit,setLimit]=useState(10)
@@ -31,9 +28,9 @@ const index = () => {
 
 const [job, setJob] = useState(searchParams.get("id") || "")
   const { data: currentJob, isLoading: jobLoader } = useQuery({
-    queryKey: [`application/tracking`, job,page],
+    queryKey: [`application/tracking`, job,page,status],
     queryFn: async () => {
-      let res = (await get(`application/tracking?jobid=${job}&page=${page}&limit=${limit}`,)).data;
+      let res = (await get(`application/tracking?status=${status}&jobid=${job}&page=${page}&limit=${limit}`,)).data;
       return res;
     },
   });
@@ -68,7 +65,7 @@ let title=Array.isArray(jobNames) && jobNames.length>0 ?jobNames?.find((item=>it
                   </div>
                   {/* End top widget filter bar */}
 
-                  <WidgetContentBox  data={currentJob}  title={title} />
+                  <WidgetContentBox  data={currentJob}  title={title}  setStatus={setStatus}/>
                   {/* End widget-content */}
                 </div>
                 {currentJob?.totalPages && (

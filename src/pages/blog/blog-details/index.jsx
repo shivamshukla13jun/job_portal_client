@@ -1,12 +1,11 @@
 import LoginPopup from "@/components/common/form/login/LoginPopup";
 import FooterDefault from "@/components/footer/common-footer";
-import DefaulHeader from "@/components/header/DefaulHeader";
-import MobileMenu from "@/components/header/MobileMenu";
 import DetailsContent from "@/components/blog-meu-pages/blog-details/details-content";
 import blogs from "@/data/blogs";
 import { useParams } from "react-router-dom";
 
 import MetaComponent from "@/components/common/MetaComponent";
+import DashboardHeader from "@/components/header/DashboardHeader";
 
 const metadata = {
   title: "Blog Details Dyanmic V1 || Chem Pharma - Job Borad ReactJs Template",
@@ -24,16 +23,7 @@ const BlogDetailsDynamic = () => {
       <MetaComponent meta={metadata} />
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
-      <DefaulHeader />
-      {/* <!--End Main Header --> */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
+      <DashboardHeader/>
       {/* <!-- Blog Single --> */}
       <section className="blog-single">
         <div className="auto-container">

@@ -10,13 +10,13 @@ const MeetingLinkView = ({ isOpen, onClose, data }) => {
       <Modal.Body>
         {data ? (
           <div>
-            <p><strong>Date:</strong> {new Date(data.date).toLocaleString()}</p>
-            <p><strong>Time:</strong> {data.time}</p>
-            <p><strong>Email:</strong> {data.email}</p>
-            <p><strong>Phone:</strong> {data.phone}</p>
-            <p><strong>Message:</strong> {data.message}</p>
+            <p><strong>Date:</strong> {data.date ?new Date(data.date).toDateString():"N/A"}</p>
+            <p><strong>Time:</strong> {data.time || "N/A"}</p>
+            <p><strong>Email:</strong> {data.email || "N/A"}</p>
+            <p><strong>Phone:</strong> {data.phone || "N/A"}</p>
+            <p><strong>Message:</strong> {data.message || "N/A"}</p>
             <p><strong>Candidate Attendance</strong>{data?.intrviewConfirmation?.confirm ?"Yes":"No"}</p>
-            <p><strong>Candidate Reply</strong>{data?.intrviewConfirmation?.message}</p>
+            <p><strong>Candidate Reply</strong>{data?.intrviewConfirmation?.message || "N/A"}</p>
             {
               data.meetingLink  &&
             <p>
