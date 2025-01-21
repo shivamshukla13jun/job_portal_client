@@ -27,8 +27,8 @@ const Experience = () => {
     });
 
     const experienceOptions = (() => {
-        const min = data.minExperience 
-        const max = data.maxExperience 
+        const min = data?.minExperience 
+        const max = data?.maxExperience 
         return min!==undefined && max!==undefined ? Array.from({ length: max - min + 1 }, (_, i) => min + i):[]
     })();
 

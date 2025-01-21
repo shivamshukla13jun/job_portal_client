@@ -16,7 +16,7 @@ import { DropdownMenu } from "./DropdownMenu";
 
 const DashboardHeader = () => {
   const userInfo = useUserInfo();
-  
+  const {menuItems}=useSelector((state)=>state.menu)
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const SavedJobs = useSelector(selectWishlist);
@@ -30,25 +30,13 @@ const DashboardHeader = () => {
     window.addEventListener("scroll", changeBackground);
     return () => window.removeEventListener("scroll", changeBackground);
   }, []);
+  console.log("menu items",menuItems)
   const renderDropdown = () => {
     const userId = userInfo?._id;
     const userTypeById = userInfo?.userTypeValue?._id;
 
     const userType = userInfo?.userType?.name?.toLowerCase();
     const userName =getDisplayName(userInfo)
-    // Fetch menu items from the backend
-    const { data: menuItems = [], isLoading } = useQuery({
-      queryKey: ["user/menu", userId],
-      queryFn: async () => {
-        try {
-          const res = await getById("user/menu", userId);
-          return res.data.data;
-        } catch (error) {
-          console.error("Error fetching menu:", error);
-        }
-      },
-      enabled: Boolean(userId),
-    });
     switch (userType) {
       case "candidate":
         return (

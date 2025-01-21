@@ -1,11 +1,10 @@
 
 import Aos from "aos";
-import { QueryClientProvider, QueryClient, keepPreviousData } from "@tanstack/react-query";
 import "aos/dist/aos.css";
 import "./styles/index.scss";
 import { useEffect } from "react";
 import ScrollToTop from "./components/common/ScrollTop";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { store } from "./store/store";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
@@ -73,38 +72,20 @@ import EmployerMeetingList from "./pages/employers-dashboard/Meetings";
 import ChangePassword from "./pages/change-password/ChangePassword";
 import CandidateListPage4 from "./pages/candidates-list/candidates-list-v4";
 import ErrorBoundary from "./utils/ErrorBoundary";
+import useFetchMenu from "./utils/hooks/useFetchMenu";
 function App() {
-
-  const query = new QueryClient({
-    defaultOptions: {
-      queries: {
-        placeholderData: keepPreviousData,
-        // staleTime: 5 * 60 * 1000, // 5 minutes
-        cacheTime: 10 * 60 * 1000, // 10 minutes,
-        refetchOnWindowFocus: false,
-        refetchInterval: false,
-        retry: 1
-      }
-    }
-  })
-
   useEffect(() => {
     Aos.init({
       duration: 1400,
       once: true,
     });
   }, []);
-
-
+  useFetchMenu()
   return (
-    <QueryClientProvider client={query}>
-      <Provider store={store}>
         <div className="page-wrapper">
           <BrowserRouter>
               <ErrorBoundary>
             <Routes>
-
-             
               <Route path="/">
                 <Route index element={<Home />} />
                 <Route path="job-list-v1" element={<JobListPage1 />} />
@@ -129,6 +110,9 @@ function App() {
                 <Route path="verify" element={<Verify />} />
                 <Route path="/unauthorized" element={<UnauthorizedPage />} />
                 <Route path="*" element={<NotFoundPage />} />
+                {/* Password Chnage */}
+                <Route path="change-password" element={<ChangePassword />} />
+
                 <Route path="employers-dashboard" element={
                   <ProtectedRoute  requiredRole="employer">
                     <Outlet />
@@ -145,13 +129,10 @@ function App() {
                   <Route path="forward-resumes/:EmployerId" element={<ForwaredCandidates />} />
                   <Route path="shortlisted-candidates/:status" element={<ShortListedCandidates />} />
                   <Route path="meetinglinks" element={<EmployerMeetingList />} />
-
                   <Route path="packages" element={<PackageEmploeeDBPage />} />
                   <Route path="messages" element={<MessageEmploeeDBPage />} />
                   <Route path="resume-alerts" element={<ResumeAlertsEmploeeDBPage />} />
-                  <Route path="change-password" element={<ChangePassword />} />
                 </Route>
-              
                 <Route 
                 path="subemployers-dashboard" 
                 element={
@@ -163,7 +144,6 @@ function App() {
                   <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
                   <Route path="meetinglinks/:createdBy" element={<MeetingList />} />
                   <Route path="forward-resumes/:SubEmployerId" element={<ForwaredCandidates />} />
-                  <Route path="change-password" element={<ChangePassword />} />
                 </Route>
                 <Route 
                 path="candidates-dashboard" 
@@ -176,7 +156,6 @@ function App() {
                   <Route path="dashboard" element={<DashboardPage />} />
                   <Route path="applied-jobs" element={<AppliedJobsPage />} />
                   <Route path="saved-jobs" element={<SavedJobsPage />} />
-                  <Route path="change-password" element={<ChangePassword />} />
                   <Route path="my-profile" element={<MyProfilePage />} />
                   <Route path="my-resume" element={<MyResumePage />} />
                   <Route path="packages" element={<PackagePage />} />
@@ -203,8 +182,8 @@ function App() {
           {/* <!-- Scroll To Top --> */}
           <ScrollToTop />
         </div>
-      </Provider>
-    </QueryClientProvider>
+      
+    
   )
 }
 export default App

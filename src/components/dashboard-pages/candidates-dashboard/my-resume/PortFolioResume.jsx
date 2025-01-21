@@ -28,7 +28,7 @@ const PersonalPortfolio = () => {
     <div className="resume">
       <div className="resume_left">
         <div className="resume_profile">
-          <img src={data?.profile?.path} alt="Profile" onError={(e) => e.target.src = "/images/profile.png"} />
+          <img src={API_CANDIDATE_PATH+data?.profile?.filename} alt="Profile" onError={(e) => e.target.src = "/images/profile.png"} />
         </div>
         <div className="resume_content">
           <div className="resume_item resume_info">

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { logout } from "@/store/reducers/user";
-import { del, get, getById } from "@/services/api"; // Ensure `get` is from your Axios instance
+import { del } from "@/services/api"; // Ensure `get` is from your Axios instance
 import { toast } from "react-toastify";
 import { paths } from "@/services/paths";
 import useUserInfo from "@/utils/hooks/useUserInfo";
@@ -12,22 +12,19 @@ import { isActiveLink } from '@/utils/linkActiveChecker';
 import LoginPopup from '../common/form/login/LoginPopup';
 import MobileMenu from './MobileMenu';
 import DashboardHeader from './DashboardHeader';
-import { useQuery } from '@tanstack/react-query';
 import { API_CANDIDATE_PATH } from '@/lib/config';
 import { getDisplayName } from '@/utils/getDisplayName';
 
 const DashboardSidebar = () => {
   const { pathname } = useLocation();
   const { menu } = useSelector((state) => state.toggle);
+  const {menuItems}=useSelector((state)=>state.menu)
+
   const userInfo = useUserInfo();
   const dispatch = useDispatch();
   const [isMobile, setMobile] = useState(window.innerWidth <= 1023);
   const userTypeById = userInfo?.userTypeValue?._id;
   const userId = userInfo?._id
-  // Fetch Menu from Backend
-
-
-
   const menuToggleHandler = async (item) => {
     dispatch(menuToggle());
     if (item.name === 'Logout') {
@@ -58,22 +55,6 @@ const DashboardSidebar = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  // Fetch sub-employers
-  const { data: menuItems = [], isLoading } = useQuery({
-    queryKey: ["user/menu", userInfo?._id],
-    queryFn: async () => {
-      try {
-        const res = await getById("user/menu", userInfo?._id);
-        return res.data.data;
-      } catch (error) {
-        console.log("error", error)
-      }
-    },
-    enabled: Boolean(userInfo?._id), // Check if userInfo and ID exist
-  });
-  if (isLoading) return <div>Loading...</div>;
-
   return (
     <>
       <LoginPopup />
@@ -99,13 +80,12 @@ const DashboardSidebar = () => {
           <div className="sidebar-inner">
             <ul className="navigation">
               {Array.isArray(menuItems) && menuItems.map((item) => {
-                let routePath = item.paramtype === 'EmployerId' || item.paramtype === 'SubEmployerId' ? item.routePath + '/' + userTypeById : item.paramtype === 'createdBy' && userId ? item.routePath + '/' + userId : item.routePath;
-                return <li
-                  className={`${isActiveLink(routePath, pathname) ? "active" : ""} mb-1`}
+              return <li
+                  className={`${isActiveLink(item.routePath, pathname) ? "active" : ""} mb-1`}
                   key={item.id}
                   onClick={() => menuToggleHandler(item)}
                 >
-                  <Link to={routePath}>
+                  <Link to={item.routePath}>
                     <i className={`la ${item.icon}`}></i>{" "}
                     {item.name}
                   </Link>

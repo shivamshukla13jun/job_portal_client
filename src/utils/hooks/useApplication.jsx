@@ -56,13 +56,13 @@ export const useDeleteForwardcv = (searchParams) => {
 
   const deleteApplication = useMutation({
     mutationFn: ({ _id }) => 
-      request.delete(`/sub-employers/shortlistcvs?id=${_id}`,""),
+      request.delete(`/sub-employers/forwarded?id=${_id}`,""),
     onSuccess: (res) => {
       if (res.data.success) {
         toast.success(res.data.message);
         
         // Invalidate specific queries to refetch updated data
-        queryClient.invalidateQueries([`application/tracking`,searchParams,'sub-employers/shortlistcvs']);
+        queryClient.invalidateQueries([`application/tracking`,searchParams,'sub-employers/forwarded']);
         queryClient.invalidateQueries([`job${_id}`]);
       }
     },

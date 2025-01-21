@@ -14,8 +14,22 @@ const useFetchMenu = () => {
       dispatch(fetchMenuStart());
       try {
         const res = await getById("user/menu", userId);
-        dispatch(fetchMenuSuccess(res.data.data));
-        return res.data.data;
+        dispatch(fetchMenuSuccess([...res.data.data.menuItems,  {
+          id: 10,
+          name: "Change Password",
+          icon: "la-lock",
+          routePath: "/change-password",
+          active: "",
+         paramtype: "",
+        },
+        {
+          id: 11,
+          icon: "la-sign-out",
+          routePath: "/login",
+          active: "",
+         paramtype: "",
+        },]));
+        return res.data.data.menuItems;
       } catch (error) {
         dispatch(fetchMenuFailure(error.message));
         console.error("Error fetching menu:", error);

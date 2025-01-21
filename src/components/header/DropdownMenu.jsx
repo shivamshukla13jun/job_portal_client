@@ -68,14 +68,7 @@ export const DropdownMenu = ({
               onClick={() => menuToggleHandler(item)}
             >
               <Link
-                to={`${
-                  item.routePath +
-                  (item.paramtype === "EmployerId" ||
-                  item.paramtype === "SubEmployerId"
-                    ? "/" + userTypeById
-                    : "") +
-                  (item.paramtype === "createdBy" && userId ? "/" + userId : "")
-                }`}
+                to={ item.routePath}
               >
                 <i className={`la ${item.icon}`}></i> {item.name}
               </Link>
