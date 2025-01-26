@@ -1,7 +1,7 @@
 import DashboardHeader from "@/components/header/DashboardHeader";
-import Breadcrumb from "../../common/Breadcrumb";
-import FooterDefault from "../../footer/common-footer";
-import FaqChild from "./FaqChild";
+import Breadcrumb from "@/components/common/Breadcrumb";
+import FooterDefault from "@/components/footer/common-footer";
+import PrivacyPolicyAndTerms from "./PrivacyPolicyAndTerms";
 
 const index = () => {
   return (
@@ -12,27 +12,16 @@ const index = () => {
       <DashboardHeader />
       {/* End MobileMenu */}
 
-      <Breadcrumb title="Faq's" meta="Faq's" />
+      <Breadcrumb title="Privacy Policy" meta="Privacy Policy" />
       {/* <!--End Page Title--> */}
 
       <section className="faqs-section">
         <div className="auto-container">
           <div className="sec-title text-center">
-            <h2>Frequently Asked Questions</h2>
-            <div className="text">Home / Faq</div>
+            <h2></h2>
+            <div className="text">Home / Privacy Policy</div>
           </div>
-
-          {/* <h3>Payments</h3> */}
-          {/* <!--Accordian Box--> */}
-          <ul className="accordion-box">
-            <FaqChild />
-          </ul>
-
-          {/* <h3>Suggestions</h3> */}
-          {/* <!--Accordian Box--> */}
-          {/* <ul className="accordion-box mb-0">
-            <FaqChild />
-          </ul> */}
+            <PrivacyPolicyAndTerms/>
         </div>
       </section>
       {/* <!-- End Faqs Section --> */}

@@ -21,14 +21,24 @@ const index = ({ footerStyle = "" }) => {
                 </div>
                 <p className="phone-num">
                   <span>Call us </span>
-                  <a href="thebeehost@support.com">123 456 7890</a>
+                  <a >8928235501 / 9870122286</a>
                 </p>
                 <p className="address">
-                  329 Queensberry Street, North Melbourne VIC
-                  <br /> 3051, Australia. <br />
-                  <a href="mailto:support@chempharma.com" className="email">
-                    support@chempharma.com
-                  </a>
+                  Shubham Avenue
+                  <br /> C wing, Office Number:1008
+                  <br /> Bl dg No.19 ,21
+                  <br /> Shree Gurudatta Mandir Marg
+                  <br /> Sai Baba Nagar, Pant Nagar
+                  <br /> Ghatkopar East, Mumbai
+                  <br /> Maharashtra-400077
+                  <br />
+                  <p>
+                    <a href="mailto:recruit@chempharmajobs.com" className="email">
+                      recruit@chempharmajobs.com                  </a>/
+                    <a href="mailto:info@chempharmajobs.com" className="email">
+                      info@chempharmajobs.com                  </a>
+                  </p>
+
                 </p>
               </div>
             </div>

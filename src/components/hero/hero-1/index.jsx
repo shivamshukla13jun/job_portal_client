@@ -20,7 +20,7 @@ const index = () => {
                   <br /> For you!
                 </h3>
                 <div className="text">
-                  Find Jobs, Employment & Career Opportunities
+                Connecting Chemistry with Talent 
                 </div>
               </div>
 

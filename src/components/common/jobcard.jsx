@@ -118,7 +118,7 @@ export const JobCard = ({ item }) => {
           </button>
         )}
         <button
-          className={`theme-btn btn-style-four ${item?.isApplied ? "disabled" : ""}`}
+          className={`theme-btn apply-btn ${item?.isApplied ? "disabled" : ""}`}
           disabled={item?.isApplied}
           onClick={handleJobApply}
         >

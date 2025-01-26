@@ -12,7 +12,7 @@ import { Badge } from 'react-bootstrap';
 
 const CandidateCard = ({ item, search }) => {
     const { } = useSelector((state) => state.menu)
-    const data = item.candidateDetails ? item.candidateDetails : {}
+    const data = item.candidate ? item.candidate : {}
     const [createModalOpen, setCreateModalOpen] = useState(false);
     const navigate = useNavigate();
     const handlStatus = useAcceptApplication(search);
@@ -49,8 +49,7 @@ const CandidateCard = ({ item, search }) => {
                         <img
                             src={API_CANDIDATE_PATH + item?.candidate?.profile?.filename}
                             alt="candidates"
-                            onError={(e) => e.target.src = "/images/resource/candidate.png"}
-
+                            onError={(e) => (e.target.src = "/images/resource/candidate.png")}
                         />
                     </figure>
                     <h4 className="name">
@@ -59,33 +58,34 @@ const CandidateCard = ({ item, search }) => {
                         </Link>
                     </h4>
                     <div className="designation d-flex align-items-center">
-                    <Link
-                        to={`${paths.job}/${item?.job?._id}`}
-                        className="d-flex align-items-center text-decoration-none"
-                    >
-                        <span
-                        className="la la-briefcase me-2"
-                        style={{ fontSize: "1.2rem", color: "#6c757d" }}
-                        ></span>
-                        <span className="fw-semibold text-dark">{item?.job?.title}</span>
-                    </Link>
+                        <Link
+                            to={`${paths.job}/${item?.job?._id}`}
+                            className="d-flex align-items-center text-decoration-none"
+                        >
+                            <span
+                                className="la la-briefcase me-2"
+                                style={{ fontSize: "1.2rem", color: "#6c757d" }}
+                            ></span>
+                            <span className="fw-semibold text-dark ">
+                                {item?.job?.title}
+                            </span>
+                        </Link>
                     </div>
                     <ul className="candidate-info">
-                        <li className="designation">
+                        <li className="designation ">
                             {item?.candidate?.designation || "Designation"}
                         </li>
                         <li>
                             <span className="icon flaticon-map-locator"></span>{" "}
-                            {item?.candidate?.contact?.current_address?.country}
+                            {item?.candidate?.contact?.current_address?.country || "N/A"}
                         </li>
                         <li>
                             <span className="icon flaticon-money"></span>
-                            ₹{item?.candidate?.currentsalary || ' '} LPA
+                            ₹{item?.candidate?.currentsalary || " "} LPA
                         </li>
                     </ul>
-
                     <ul className="post-tags">
-                        {item?.candidate?.education?.slice(0, 1).map((val, i) => (
+                        {item?.candidate?.education?.slice(-1).map((val, i) => (
                             <li key={i}>
                                 <a>{val.qualification}</a>
                             </li>
@@ -93,25 +93,34 @@ const CandidateCard = ({ item, search }) => {
                     </ul>
                 </div>
 
-                <div className="option-box">
+                <div className="box1">
                     <ul className="option-list">
                         <PermissionWrapper key={"applications"} permission="view">
                             <li>
-                                <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${item?._id}`)}>
+                                <button
+                                    data-text="View Application"
+                                    onClick={() => navigate(`${paths.publiccandidate}/${item?._id}`)}
+                                >
                                     <span className="la la-eye"></span>
                                 </button>
                             </li>
                         </PermissionWrapper>
                         <PermissionWrapper key={"applications"} permission="approve">
                             <li>
-                                <button data-text="Approve Application" onClick={() => handlStatus(item?._id, 'shortlisted')}>
+                                <button
+                                    data-text="Approve Application"
+                                    onClick={() => handlStatus(item?._id, "shortlisted")}
+                                >
                                     <span className="la la-check"></span>
                                 </button>
                             </li>
                         </PermissionWrapper>
                         <PermissionWrapper key={"applications"} permission="reject">
                             <li>
-                                <button data-text="Reject Application" onClick={() => handlStatus(item?._id, "rejected")}>
+                                <button
+                                    data-text="Reject Application"
+                                    onClick={() => handlStatus(item?._id, "rejected")}
+                                >
                                     <span className="la la-times-circle"></span>
                                 </button>
                             </li>
@@ -122,8 +131,8 @@ const CandidateCard = ({ item, search }) => {
                                     data-text="Download Cv"
                                     onClick={() =>
                                         handleDownload(
-                                            API_CANDIDATE_PATH + item?.candidateDetails?.cv?.filename,
-                                            item?.candidateDetails?.cv?.originalname
+                                            API_CANDIDATE_PATH + item?.candidate?.cv?.filename,
+                                            item?.candidate?.cv?.originalname
                                         )
                                     }
                                 >
@@ -143,21 +152,26 @@ const CandidateCard = ({ item, search }) => {
                         </PermissionWrapper>
                         <PermissionWrapper key={"applications"} permission="delete">
                             <li>
-                                <button data-text="Delete Application" onClick={() => handleDelete(item?._id, item?.job?._id || item?.job)}>
+                                <button
+                                    data-text="Delete Application"
+                                    onClick={() => handleDelete(item?._id, item?.job?._id || item?.job)}
+                                >
                                     <span className="la la-trash"></span>
                                 </button>
                             </li>
                         </PermissionWrapper>
                     </ul>
-                    
+                    {item?.selectedBy && (
+                        <div style={{ paddingTop: "26px" }}>
+                            <span className="text-capitalize badge bg-success by">
+                                {item?.selectedBy}
+                            </span>
+                        </div>
+                    )}
                 </div>
-                {item?.selectedBy &&
-                        <>
-                        <br/>
-                         <Badge bg="success" className='text-capitalize'>{item?.selectedBy}</Badge>
-                        </>
-                    }
+                <br />
             </div>
+
 
             {createModalOpen && (
                 <MeetingSchedule

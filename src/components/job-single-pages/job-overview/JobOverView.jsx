@@ -22,6 +22,13 @@ const JobOverView = ({ data }) => {
           <h5>Job Title:</h5>
           <span>{data?.title}</span>
         </li>
+        <li>
+          <i className="icon icon-experience"></i>
+          <h5>Experiece:</h5>
+
+          <span>          {data?.candidate_requirement?.experience} to {data?.candidate_requirement?.experience + 1} years
+          </span>
+        </li>
           {/* <li>
             <i className="icon icon-clock"></i>
             <h5>Hours:</h5>
@@ -35,7 +42,7 @@ const JobOverView = ({ data }) => {
         <li>
           <i className="icon icon-salary"></i>
           <h5>Salary:</h5>
-          <span>₹{data?.candidate_requirement?.salary_from} - ₹{data?.candidate_requirement?.salary_to}</span>
+          {data?.candidate_requirement?.salary_from && data?.candidate_requirement?.salary_to?<span>₹{data?.candidate_requirement?.salary_from} - ₹{data?.candidate_requirement?.salary_to}</span>:<span>Not Disclosed</span>}
         </li>
       </ul>
     </div>

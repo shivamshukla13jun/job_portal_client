@@ -13,7 +13,7 @@ const index = () => {
 
   const [search, setSearch] = useState({
     page: 1,
-    limit: 1,
+    limit: 5,
     createdAt: '',
     sort: 'new'
 });

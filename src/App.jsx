@@ -27,6 +27,7 @@ import BlogDetailsDynamic from "./pages/blog/blog-details";
 import AboutPage from "./pages/others/about";
 import PricingPage from "./pages/others/pricing";
 import FaqPage from "./pages/others/faq";
+import PrivacyPage from "./pages/others/privavy";
 import TermsPage from "./pages/others/terms";
 import InvoicePage from "./pages/others/invoice";
 import ContactPage from "./pages/others/contact";
@@ -100,6 +101,7 @@ function App() {
                 <Route path="about" element={<AboutPage />} />
                 <Route path="pricing" element={<PricingPage />} />
                 <Route path="faq" element={<FaqPage />} />
+                <Route path="privacy" element={<PrivacyPage />} />
                 <Route path="terms" element={<TermsPage />} />
                 <Route path="invoice" element={<InvoicePage />} />
                 <Route path="contact" element={<ContactPage />} />

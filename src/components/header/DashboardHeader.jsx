@@ -30,7 +30,6 @@ const DashboardHeader = () => {
     window.addEventListener("scroll", changeBackground);
     return () => window.removeEventListener("scroll", changeBackground);
   }, []);
-  console.log("menu items",menuItems)
   const renderDropdown = () => {
     const userId = userInfo?._id;
     const userTypeById = userInfo?.userTypeValue?._id;

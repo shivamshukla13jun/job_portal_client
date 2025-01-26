@@ -117,9 +117,6 @@ const WidgetContentBox = () => {
                       ))
                     )}
                   </ul>
-                  <ul >
-                  </ul>
-                 
                 </div>
                  
                 <div className="btn-box"></div>

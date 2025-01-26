@@ -13,17 +13,20 @@ import MenuToggler from "../MenuToggler";
 import { useParams } from "react-router-dom";
 import Pagination from "@/utils/hooks/usePagination";
 import { useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import useParentRoute from "@/utils/useParentRoute";
 
 const index = () => {
   const userInfo = useUserInfo();
+   const parentRoute=useParentRoute()
   const {EmployerId="",SubEmployerId=""}=useParams()
-  
   const [search, setSearch] = useState({
     page: 1,
     limit: 10,
     createdAt: '',
     search:""
 });
+
 const handleSerch=(name,value)=>{
   setSearch((prev)=>({
     ...prev,
@@ -35,10 +38,11 @@ const handleSerch=(name,value)=>{
   const { data, isLoading } = useQuery({
     queryKey: [`sub-employers/forwarded`,SubEmployerId,EmployerId,search.page, debouncedSearch,search.createdAt],
     queryFn: async () => {
+
       let res = (await get(`sub-employers/forwarded?EmployerId=${EmployerId}&SubEmployerId=${SubEmployerId}&createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}&name=${debouncedSearch}`)).data;
       return res;
     },
-    enabled: !!EmployerId || !!SubEmployerId
+    enabled: !!EmployerId || !!SubEmployerId || !!userInfo?.userTypeValue?._id,
   });
 
   if (isLoading) return <div>Loading...</div>

@@ -257,7 +257,7 @@ const PersonalPortfolio = () => {
           </div>
           <p>
             Current Salary: {data?.currentsalary} LPA <br />
-            Expected Salary: {data?.expectedsalary} LPA <br />
+            {/* Expected Salary: {data?.expectedsalary} LPA <br /> */}
             Experience: {data?.experience} years
           </p>
         </div>

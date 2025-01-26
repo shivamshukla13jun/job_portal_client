@@ -119,7 +119,8 @@ const JobSingleDynamicV1 = () => {
                     {/* time info */}
                     <li>
                       <span className="icon flaticon-money"></span>{" "}
-                      {data?.candidate_requirement?.salary_from} - {data?.candidate_requirement?.salary_to}
+                      {data?.candidate_requirement?.salary_from && data?.candidate_requirement?.salary_to?<span>₹{data?.candidate_requirement?.salary_from} - ₹{data?.candidate_requirement?.salary_to}</span>:<span>Not Disclosed</span>}
+                    
                     </li>
                     {/* salary info */}
                   </ul>
@@ -174,18 +175,6 @@ const JobSingleDynamicV1 = () => {
                 </div>
                 {/* <!-- Other Options --> */}
 
-                <div className="related-jobs">
-                  <div className="title-box">
-                    <h3>Related Jobs</h3>
-                    <div className="text">
-                      {/* 2020 jobs live - 293 added today. */}
-                    </div>
-                  </div>
-                  {/* End title box */}
-
-                  <RelatedJobs  data={jobsData ||[]} handleWishist={handleWishist}/>
-                </div>
-                {/* <!-- Related Jobs --> */}
               </div>
               {/* End .content-column */}
 
@@ -248,6 +237,19 @@ const JobSingleDynamicV1 = () => {
                 {/* End .sidebar */}
               </div>
               {/* End .sidebar-column */}
+              
+              <div className="related-jobs">
+                  <div className="title-box">
+                    <h3>Related Jobs</h3>
+                    <div className="text">
+                      {/* 2020 jobs live - 293 added today. */}
+                    </div>
+                  </div>
+                  {/* End title box */}
+
+                  <RelatedJobs  data={jobsData ||[]} handleWishist={handleWishist}/>
+                </div>
+                {/* <!-- Related Jobs --> */}
             </div>
           </div>
         </div>

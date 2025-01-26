@@ -13,7 +13,6 @@ const Categories = () => {
       const {status=""}=useParams()
     
     const { category } = useSelector((state) => state.candidateFilter) || {};
-console.log("category",category)
     const dispatch = useDispatch();
 
     // category handler
@@ -23,9 +22,9 @@ console.log("category",category)
 
     };
     const { data=[], isLoading } = useQuery({
-        queryKey: [`dashboard/options/categories`,status],
+        queryKey: [`dashboard/applicationoptions/categories`,status],
         queryFn: async () => {
-          let res = (await get(`utilities/options/${userInfo?.userTypeValue?._id}/categories.label?status=${status}`)).data.data
+          let res = (await get(`utilities/applicationoptions/${userInfo?.userTypeValue?._id}/categories.label?status=${status}`)).data.data
           return res;
         },
         enabled:!!userInfo?.userTypeValue?._id

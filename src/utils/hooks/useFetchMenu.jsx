@@ -25,6 +25,7 @@ const useFetchMenu = () => {
         {
           id: 11,
           icon: "la-sign-out",
+          name:"Logout",
           routePath: "/login",
           active: "",
          paramtype: "",

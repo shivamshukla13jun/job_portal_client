@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 const Experience = () => {
     const userInfo = useUserInfo();
     const dispatch = useDispatch();
-    const candidateFilter = useSelector((state) => state.candidateFilter);
+    const {experience_from} = useSelector((state) => state.candidateFilter);
 
     const handleOnChange = (value) => {
-        const [min, max] = value.split('-');
-        dispatch(addExperience({ experience_from: min, experience_to: max }));
+        value=+value
+        dispatch(addExperience({ experience_from: value, experience_to: value+1 }));
         dispatch(addPage(1))
 
     };
@@ -35,10 +35,11 @@ const Experience = () => {
         <select
             className="chosen-single form-select chosen-container"
             onChange={(e) => handleOnChange(e.target.value)}
+            value={experience_from}
         >
             <option hidden value={""}>Experience</option>
             {experienceOptions.map((year) => (
-                <option key={year} value={`${year}-${year + 1}`}>
+                <option key={year} value={year}>
                     {year} to {year + 1} years
                 </option>
             ))}

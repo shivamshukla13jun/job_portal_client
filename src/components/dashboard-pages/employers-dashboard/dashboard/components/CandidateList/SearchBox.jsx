@@ -29,7 +29,7 @@ const SearchBox = () => {
                 placeholder="Job title"
                 onChange={keywordHandler}
                 value={keyword}
-                className="form-control"
+                className="form-control chosen-single chosen-container"
             />
             {/* <span className="icon flaticon-search-3"></span> */}
         </>

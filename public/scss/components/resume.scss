@@ -485,7 +485,7 @@
 
 .resume .resume_left {
   /* width: 280px;  */
-  background: var(--primary-hover-bg-color);
+  background: var(--resume-bg-color);
 }
 
 .resume .resume_left .resume_profile {
@@ -538,7 +538,7 @@
   width: 35px;
   height: 35px;
   background: #fff;
-  color: var(--primary-hover-bg-color);
+  color: var(--resume-bg-color);
   border-radius: 50%;
   margin-right: 15px;
   font-size: 16px;
@@ -601,7 +601,7 @@
 }
 
 .resume .resume_right .bold {
-  color: var(--primary-hover-bg-color);
+  color: var(--resume-bg-color);
 }
 
 
@@ -645,7 +645,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  border: 2px solid var(--primary-hover-bg-color);
+  border: 2px solid var(--resume-bg-color);
 }
 
 
@@ -658,7 +658,7 @@
   left: -21px;
   width: 2px;
   height: 115px;
-  background: var(--primary-hover-bg-color);
+  background: var(--resume-bg-color);
 }
 
 /* References Section */
@@ -684,13 +684,13 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  border: 2px solid var(--primary-hover-bg-color);
+  border: 2px solid var(--resume-bg-color);
 }
 
 
 
 .resume .resume_references ul li .semi-bold {
-  color: var(--primary-hover-bg-color);
+  color: var(--resume-bg-color);
   font-weight: 500;
 }
 
@@ -702,7 +702,7 @@
 
 
 .resume .resume_compensation .bold {
-  color: var(--primary-hover-bg-color);
+  color: var(--resume-bg-color);
   font-weight: 700;
 }
 /* resume_about */
@@ -717,7 +717,7 @@
 }
 
 .resume .resume_about .bold {
-  color: var(--primary-hover-bg-color);
+  color: var(--resume-bg-color);
   font-weight: 700;
 } */
 

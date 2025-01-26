@@ -1,18 +1,34 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
-// PermissionWrapper Component
-const PermissionWrapper = ({key, permission, children }) => {
+const PermissionWrapper = ({key="", permission, children }) => {
   const menuItems = useSelector((state) => state.menu.menuItems);
-  const hasPermission = menuItems.some((item) =>
-   item.key==key && item.permissions?.includes(permission)
+  const { pathname } = useLocation();
+
+  // Find the matching menu item for the current route
+  const currentMenuItem = menuItems.find(item => 
+    pathname.startsWith(item.routePath) 
   );
 
+  // Check if the permission exists and is true for the current route
+  const hasPermission = currentMenuItem?.permissions?.[permission] ?? false;
+
+  // For debugging
+  console.log({
+    currentPath: pathname,
+    matchedItem: currentMenuItem,
+    requiredPermission: permission,
+    permissionGranted: hasPermission
+  });
+
+  // Return null if no permission
   if (!hasPermission) {
-    return null; // If no permission, render nothing
+    return null;
   }
 
-  return children; // Render the button if permission exists
+  // Return children if has permission
+  return <>{children}</>;
 };
 
 export default PermissionWrapper;

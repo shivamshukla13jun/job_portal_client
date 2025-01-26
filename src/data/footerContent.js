@@ -44,7 +44,8 @@ const footerContent = [
     menuList: [
       { name: "Site Map", route: window.location.pathname},
       { name: "Terms of Use", route: "/terms" },
-      { name: "Privacy Center", route: window.location.pathname },
+      { name: "Privacy Center", route: "/privacy" },
+      { name: "Faq", route: "/faq" },
       // { name: "Security Center", route: "/" },
       // { name: "Accessibility Center", route: "/" },
     ],

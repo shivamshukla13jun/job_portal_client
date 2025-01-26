@@ -89,9 +89,11 @@ const JobListingsTable = ({ data, handleChange, search }) => {
                             </h4>
                             <ul className="job-info">
                               <li>
-                                <span className="icon flaticon-money"></span>₹
-                                {item?.candidate_requirement?.salary_from} - ₹
-                                {item?.candidate_requirement?.salary_to}
+                                <span className="icon flaticon-money"></span>
+                                {item?.candidate_requirement?.salary_from && item?.candidate_requirement?.salary_to ?   `₹
+                                ${item?.candidate_requirement?.salary_from} - ₹
+                                ${item?.candidate_requirement?.salary_to}`:"Not Disclosed" }
+                             
                               </li>
                               <li>
                                 <span className="icon flaticon-briefcase"></span>
