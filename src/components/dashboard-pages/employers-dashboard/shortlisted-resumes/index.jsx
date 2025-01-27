@@ -29,7 +29,7 @@ const index = () => {
   const debouncedSearch = useDebounce(keyword, 500);
 
   const { data, isLoading } = useQuery({
-    queryKey: [`application/tracking`,status, debouncedSearch,createdAt,category,experience_from,experience_to,qualification],
+    queryKey: [`application/tracking`,status,page, debouncedSearch,createdAt,category,experience_from,experience_to,qualification],
     queryFn: async () => {
       let res = (await get(`application/tracking?createdAt=${createdAt}&category=${category}&experience_from=${experience_from}&experience_to=${experience_to}&qualification=${qualification}&page=${page}&limit=${limit}&name=${debouncedSearch}&status=${status}`)).data;
       return res;

@@ -62,7 +62,7 @@ const CandidateCard = ({item}) => {
                     </ul>
                 </div>
 
-                <div className="box1">
+                {/* <div className="box1">
                     <ul className="option-list">
                         <PermissionWrapper key={"applications"} permission="view">
                             <li>
@@ -137,8 +137,8 @@ const CandidateCard = ({item}) => {
                             </span>
                         </div>
                     )}
-                </div>
-                <br />
+                </div> */}
+                {/* <br /> */}
             </div>
   )
 }

@@ -1,9 +1,10 @@
 const JobSkills = ({ data }) => {
   return (
     <ul className="job-skills">
-      {data?.candidate_requirement?.skills.map((skill, i) => (
+      {data?.map((skill, i,arr) => (
         <li key={i}>
-          <a >{skill.label}</a>
+          <a >{skill.label} </a> 
+          {/* {arr?.length-1!==i?<br/>:<></>} */}
         </li>
       ))}
     </ul>

@@ -127,7 +127,7 @@ const JobSingleDynamicV1 = () => {
                   {/* End .job-info */}
 
                   <ul className="job-other-info">
-                    {data?.candidate_requirement?.skills?.map((val, i) => (
+                    {data?.categories?.map((val, i) => (
                       <li key={i} className={`required`}>
                         {val.label}
                       </li>
@@ -196,9 +196,13 @@ const JobSingleDynamicV1 = () => {
                     </div> */}
                     {/* <!--  Map Widget --> */}
 
+                    <h4 className="widget-title mt-5">Job Sector</h4>
+                    <div className="widget-content">
+                      <JobSkills data={data?.categories || []} />
+                    </div>
                     <h4 className="widget-title mt-5">Job Skills</h4>
                     <div className="widget-content">
-                      <JobSkills data={data} />
+                      <JobSkills data={data?.candidate_requirement?.skills || []} />
                     </div>
                     {/* <!-- Job Skills --> */}
                   </div>

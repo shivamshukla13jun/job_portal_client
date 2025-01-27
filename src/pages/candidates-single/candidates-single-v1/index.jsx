@@ -104,7 +104,7 @@ const CandidateSingleDynamicV1 = () => {
                     </li>
                     <li>
                       <span className="icon flaticon-money"></span>
-                      ₹ {data?.expectedsalary} / LPA
+                      ₹ {data?.currentsalary} / LPA
                     </li>
                     <li>
                       <span className="icon flaticon-clock"></span>
@@ -281,8 +281,10 @@ const CandidateSingleDynamicV1 = () => {
                           <h5>Education Level:</h5>
                           <span>
                              {data?.education?.map((val, i,arr) => (
-                            
-                                <a>{val.qualification}</a>
+                            <>
+                            <a>{val.qualification}</a>
+                            <br/>
+                            </>
                             
                             ))}
                             </span>

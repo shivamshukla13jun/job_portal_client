@@ -25,6 +25,7 @@ const handleSerch=(name,value)=>{
 }
   const { data, isLoading } = useQuery({
     queryKey: ['whishlist/all','whishlist',search.createdAt,search.page],
+    exact: false, // Ensures partial invalidation
     queryFn: async () => {
       let res = (await get(`/whishlist/all?createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}`)).data;
       return res;
