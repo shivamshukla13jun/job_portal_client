@@ -70,7 +70,7 @@ const FilterJobsBox = ({ jobs, search, queryParams, setSearch, data }) => {
           )}
 
           <select
-            className="chosen-single form-select"
+            className="chosen-single"
             defaultValue={search?.sort}
             onChange={(e) =>
               setSearch((prev) => ({ ...prev, sort: e.target.value }))

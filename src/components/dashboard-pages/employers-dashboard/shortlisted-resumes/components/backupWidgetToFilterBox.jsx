@@ -22,7 +22,7 @@ const WidgetToFilterBox = ({ search, handleSerch }) => {
       {/* End searchBox one */}
 
       {/* <!--Tabs Box--> */}
-      <select name="createdAt" value={search?.createdAt}  onChange={(e)=>handleSerch("createdAt",e.target.value)} className="chosen-single form-select chosen-container">
+      <select name="createdAt" value={search?.createdAt}  onChange={(e)=>handleSerch("createdAt",e.target.value)} className="chosen-single chosen-container">
         {
           datePostApplication.map((item,i)=>(
             <option  key={i} value={item.value}>{item.name}</option>

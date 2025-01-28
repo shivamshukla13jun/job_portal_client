@@ -29,13 +29,12 @@ const CandidateCard = ({item}) => {
                     <div className="designation d-flex align-items-center">
                         <Link
                             to={`${paths.job}/${item?.job?._id}`}
-                            className="d-flex align-items-center text-decoration-none"
+                            className="d-flex align-items-center "
                         >
                             <span
-                                className="la la-briefcase me-2"
-                                style={{ fontSize: "1.2rem", color: "#6c757d" }}
+                                className="la la-briefcase me-1"
                             ></span>
-                            <span className="fw-semibold text-dark ">
+                            <span className="fw-semibold  ">
                                 {item?.job?.title}
                             </span>
                         </Link>

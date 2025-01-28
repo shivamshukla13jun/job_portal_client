@@ -6,29 +6,27 @@ import PrivacyPolicyAndTerms from "./PrivacyPolicyAndTerms";
 const index = () => {
   return (
     <>
-      {/* <!-- Header Span --> */}
-      <span className="header-span"></span>
+    {/* <!-- Header Span --> */}
+    <span className="header-span"></span>
 
-      <DashboardHeader />
-      {/* End MobileMenu */}
+    <DashboardHeader />
+    {/* End MobileMenu */}
 
-      <Breadcrumb title="Privacy Policy" meta="Privacy Policy" />
-      {/* <!--End Page Title--> */}
-
-      <section className="faqs-section">
-        <div className="auto-container">
-          <div className="sec-title text-center">
-            <h2></h2>
-            <div className="text">Home / Privacy Policy</div>
-          </div>
-            <PrivacyPolicyAndTerms/>
+    <section className="tnc-section">
+      <div className="auto-container">
+        <div className="sec-title text-center">
+          <h2>Privacy Policy</h2>
+          <div className="text">Home/Privacy Policy</div>
         </div>
-      </section>
-      {/* <!-- End Faqs Section --> */}
+        {/* End sec-title */}
+        <PrivacyPolicyAndTerms />
+      </div>
+    </section>
+    {/* <!-- End TNC Section --> */}
 
-      <FooterDefault footerStyle="alternate5" />
-      {/* <!-- End Main Footer --> */}
-    </>
+    <FooterDefault footerStyle="alternate5" />
+    {/* <!-- End Main Footer --> */}
+  </>
   );
 };
 

@@ -16,7 +16,7 @@ const Categories = ({handleChange,search}) => {
 
     return (
         <select
-        className="chosen-single form-select chosen-container"
+        className="chosen-single chosen-container"
         onChange={(e)=>handleChange("categories",e.target.value)}
         value={search?.categories}
       >

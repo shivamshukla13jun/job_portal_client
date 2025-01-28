@@ -200,7 +200,7 @@ const FilterTopBox = () => {
         <div className="showing-result">
           {/* <div className="top-filters">
                         <div className="form-group">
-                            <select className="chosen-single form-select">
+                            <select className="chosen-single">
                                 <option>Candidate Gender</option>
                                 <option>Male</option>
                                 <option>Female</option>
@@ -209,7 +209,7 @@ const FilterTopBox = () => {
                         </div>
 
                         <div className="form-group">
-                            <select className="chosen-single form-select">
+                            <select className="chosen-single">
                                 <option>Date Posted</option>
                                 <option>New Jobs</option>
                                 <option>Freelance</option>
@@ -221,7 +221,7 @@ const FilterTopBox = () => {
                         </div>
 
                         <div className="form-group">
-                            <select className="chosen-single form-select">
+                            <select className="chosen-single">
                                 <option>Experience Level</option>
                                 <option>New Jobs</option>
                                 <option>Freelance</option>
@@ -233,7 +233,7 @@ const FilterTopBox = () => {
                         </div>
 
                         <div className="form-group">
-                            <select className="chosen-single form-select">
+                            <select className="chosen-single">
                                 <option>Education Level</option>
                                 <option>New Jobs</option>
                                 <option>Freelance</option>
@@ -272,7 +272,7 @@ const FilterTopBox = () => {
 
           <select
             onChange={sortHandler}
-            className="chosen-single form-select"
+            className="chosen-single"
             value={sort}
           >
             <option value="">Sort by (default)</option>
@@ -282,7 +282,7 @@ const FilterTopBox = () => {
           {/* End select */}
 
           <select
-            className="chosen-single form-select ms-3 "
+            className="chosen-single ms-3 "
             onChange={perPageHandler}
             value={JSON.stringify(perPage)}
           >

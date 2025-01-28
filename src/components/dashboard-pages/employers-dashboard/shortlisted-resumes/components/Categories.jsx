@@ -33,7 +33,7 @@ const Categories = () => {
 
     return (
         <select
-        className="chosen-single form-select chosen-container"
+        className="chosen-single chosen-container"
         onChange={categoryHandler}
         value={category}
       >

@@ -1,17 +1,17 @@
 import React, { useState, Suspense } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { Table, Button, Badge } from "react-bootstrap";
-import { Trash2 } from "lucide-react";
 import MeetingLinkView from "./MeetingLinkView";
 import { del, get } from "@/services/api";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useParams } from "react-router-dom";
+import MeetingSchedule from "./MeetingSchadule";
 
 const MeetingList = () => {
   const [open, setOpen] = useState(false);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
   const { createdBy = "" } = useParams();
+      const [createModalOpen, setCreateModalOpen] = useState(false);
 
   const queryClient = useQueryClient();
   const userInfo = useUserInfo();
@@ -107,7 +107,14 @@ const MeetingList = () => {
                                     <span className="la la-eye"></span>
                                   </button>
                                 </li>
-
+                                <li>
+                                  <button
+                                    data-text="Reschdule Meeting"
+                                    onClick={() => setCreateModalOpen({...item.candidate,applicationId:item._id})}
+                                  >
+                                    <span className="la la fa-calendar"></span>
+                                  </button>
+                                </li>
                                 <li>
                                   <button
                                     data-text="Delete "
@@ -137,6 +144,12 @@ const MeetingList = () => {
           data={selectedMeeting}
         />
       )}
+       {createModalOpen && (
+                <MeetingSchedule
+                    isOpen={createModalOpen}
+                    onClose={() => setCreateModalOpen(false)}
+                />
+            )}
     </Suspense>
   );
 };

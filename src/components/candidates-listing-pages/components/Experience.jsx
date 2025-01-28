@@ -17,7 +17,7 @@ const candidateFilter=useSelector((state)=>state.candidateFilter)
     const { data=[], isLoading } = useQuery({
         queryKey: [`dashboard/options`],
         queryFn: async () => {
-          let res = (await get(`utilities/options/${userInfo?.userTypeValue?._id}/education.qualification`)).data.data
+          let res = (await get(`utilities/applicationoptions/${userInfo?.userTypeValue?._id}/education.qualification`)).data.data
           return res;
         },
         enabled:!!userInfo?.userTypeValue?._id

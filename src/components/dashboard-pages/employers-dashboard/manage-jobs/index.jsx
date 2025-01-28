@@ -17,7 +17,7 @@ import DashboardSidebar from "@/components/header/DashboardSideBar";
 
 const index = () => {
   const userInfo = useUserInfo();
-  const [search, setsearch] = useState({
+  const initialState={
     page: 1,
     limit: 10,
     clear:false,
@@ -32,7 +32,8 @@ const index = () => {
     salary_to: "",
     tags: [],
     sort: 'new'
-});
+}
+const [search, setsearch] = useState(initialState);
 const debouncedKeyword = useDebounce(search.keyword, 500);
 const debouncedLocation = useDebounce(search.location, 500);
 const debounceSalarytwo= useDebounce(search.salary_to, 500);
@@ -48,7 +49,7 @@ const debouncedexperienceFrom = useDebounce(search.experience_from, 500);
     },
     enabled: !!userInfo._id
   });
-
+  const handleClear=()=>setsearch(initialState)
  
 
   if (isLoading) return <div>Loading....</div>
@@ -73,7 +74,7 @@ const debouncedexperienceFrom = useDebounce(search.experience_from, 500);
             <div className="col-lg-12">
               {/* <!-- Ls widget --> */}
               <div className="ls-widget">
-                <JobListingsTable data={data?.data || []} handleChange={handleChange} search={search} />
+                <JobListingsTable data={data?.data || []} handleChange={handleChange} search={search} handleClear={handleClear} />
                 {data?.totalpages &&  <Pagination Page={search.page} limit={search.limit} totalPages={data?.totalpages || 0} handlePageChange={(page)=>handleChange("page",page)} /> }
                 
               </div>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import faqData from "./faq.json"
+import faqData from "./faq.js"
 const FaqChild = () => {
  
 
   return (
+    <>
     <div className="accordion" id="accordionExample">
       {faqData.map((faq) => (
         <div key={faq.id} className="accordion-item accordion block active-block">
@@ -34,6 +35,7 @@ const FaqChild = () => {
         </div>
       ))}
     </div>
+    </>
   );
 };
 

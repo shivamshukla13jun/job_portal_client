@@ -17,9 +17,9 @@ const Experience = () => {
     };
 
     const { data = {}, isLoading } = useQuery({
-        queryKey: [`dashboard/options/experience`],
+        queryKey: [`dashboard/applicationoptions/experience`],
         queryFn: async () => {
-            let res = (await get(`utilities/options/${userInfo?.userTypeValue?._id}/experience`)).data.data;
+            let res = (await get(`utilities/applicationoptions/${userInfo?.userTypeValue?._id}/experience`)).data.data;
             return res;
         },
         enabled: !!userInfo?.userTypeValue?._id
@@ -33,7 +33,7 @@ const Experience = () => {
 
     return (
         <select
-            className="chosen-single form-select chosen-container"
+            className="chosen-single chosen-container"
             onChange={(e) => handleOnChange(e.target.value)}
             value={experience_from}
         >

@@ -29,7 +29,7 @@ const Qualification = () => {
       console.log(data)
     return (
             <select
-        className="chosen-single form-select chosen-container"
+        className="chosen-single chosen-container"
         onChange={qualificationHandler}
         value={qualification}
       >

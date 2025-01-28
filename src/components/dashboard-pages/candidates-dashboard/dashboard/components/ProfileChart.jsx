@@ -75,7 +75,7 @@ const ProfileChart = () => {
         <h4>Your Profile Views</h4>
         <div className="chosen-outer">
           {/* <!--Tabs Box--> */}
-          <select className="chosen-single form-select">
+          <select className="chosen-single">
      {
            datePost && datePost.map((item)=>(
               <option value={item.value}>{item.name}</option>

@@ -14,7 +14,7 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
         <h4>My Applied Jobs</h4>
 
         {/* <div className="chosen-outer">
-          <select onChange={(e)=>handleSerch("createdAt",e.target.value)}  className="chosen-single form-select">
+          <select onChange={(e)=>handleSerch("createdAt",e.target.value)}  className="chosen-single">
           {
             datePost.map((item)=>(
               <option value={item.value}>{item.name}</option>

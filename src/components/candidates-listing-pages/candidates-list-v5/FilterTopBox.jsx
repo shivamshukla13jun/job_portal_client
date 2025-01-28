@@ -236,7 +236,7 @@ const FilterTopBox = () => {
 
           <select
             onChange={sortHandler}
-            className="chosen-single form-select"
+            className="chosen-single"
             value={sort}
           >
             <option value="">Sort by (default)</option>
@@ -246,7 +246,7 @@ const FilterTopBox = () => {
           {/* End select */}
 
           <select
-            className="chosen-single form-select ms-3 "
+            className="chosen-single ms-3 "
             onChange={perPageHandler}
             value={JSON.stringify(perPage)}
           >

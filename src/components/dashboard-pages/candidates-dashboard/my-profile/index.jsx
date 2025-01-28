@@ -341,14 +341,14 @@ const index = () => {
               
               <button
                 onClick={()=>setPreviewData(watch())}
-                className="theme-btn btn-style-two"
+                className="theme-btn btn-style-two me-2"
               >
                 Preview
               </button>
               <button
                disabled={Submitting}
                 onClick={handleSubmit(handleRegisterSubmit)}
-                className="theme-btn btn-style-one me-2"
+                className="theme-btn btn-style-one "
               >
                 {Submitting?"Submitting":"Submit"}
               </button>

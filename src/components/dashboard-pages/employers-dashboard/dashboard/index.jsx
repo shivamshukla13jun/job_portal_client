@@ -19,7 +19,8 @@ import { useSelector } from "react-redux";
 
 const Index = () => {
   const userInfo = useUserInfo();
-  const { limit, page, } = useSelector((state) => state.candidateFilter) || {};
+  const [page,setPage ] =useState(1) 
+  const [limit ] =useState(6) 
   // dashboard data
   const { data:dashboard, isdashboardLoading } = useQuery({
     queryKey: [`dashboard/employer`, userInfo],
@@ -105,7 +106,7 @@ const Index = () => {
                 </div>
                 <div className="widget-content">
                   <div className="row">
-                    <Applicants data={applications} isLoading={isdashboardLoading} />
+                    <Applicants data={applications} isLoading={isdashboardLoading} setPage={setPage}page={page} limit={limit} />
                   </div>
                 </div>
               </div>

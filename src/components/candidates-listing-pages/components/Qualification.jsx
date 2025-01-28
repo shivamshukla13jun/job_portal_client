@@ -19,7 +19,7 @@ const Qualification = () => {
     const { data=[], isLoading } = useQuery({
         queryKey: [`dashboard/options`],
         queryFn: async () => {
-          let res = (await get(`utilities/options/${userInfo?.userTypeValue?._id}/personal_info.info.degree`)).data.data
+          let res = (await get(`utilities/applicationoptions/${userInfo?.userTypeValue?._id}/personal_info.info.degree`)).data.data
           return res;
         },
         enabled:!!userInfo?.userTypeValue?._id

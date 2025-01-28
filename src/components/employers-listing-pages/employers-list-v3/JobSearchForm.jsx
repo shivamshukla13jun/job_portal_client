@@ -50,7 +50,7 @@ const JobSearchForm = () => {
             <div className="top-filters">
                 <div className="form-group">
                     <select
-                        className="chosen-single form-select"
+                        className="chosen-single"
                         onChange={foundedHandler}
                         value={JSON.stringify(foundationDate)}
                     >

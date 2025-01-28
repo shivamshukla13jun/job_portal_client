@@ -34,7 +34,7 @@ const Experience = () => {
 
     return (
         <select
-            className="chosen-single form-select chosen-container"
+            className="chosen-single  form-select chosen-container"
             onChange={(e) => handleOnChange(e.target.value)}
         >
             <option hidden value={""}>Experience</option>

@@ -1,4 +1,5 @@
 import CopyrightFooter from "./CopyrightFooter";
+import FooterContact from "./FooterContact";
 import FooterContent from "./FooterContent";
 
 const index = ({ footerStyle = "" }) => {
@@ -9,38 +10,7 @@ const index = ({ footerStyle = "" }) => {
         <div className="widgets-section" data-aos="fade-up">
           <div className="row">
             <div className="big-column col-xl-4 col-lg-3 col-md-12">
-              <div className="footer-column about-widget">
-                <div className="logo">
-                  <a href="#">
-                    <img
-                      src="/images/logo.png"
-                      style={{ height: "50px" }}
-                      alt="brand"
-                    />
-                  </a>
-                </div>
-                <p className="phone-num">
-                  <span>Call us </span>
-                  <a >8928235501 / 9870122286</a>
-                </p>
-                <p className="address">
-                  Shubham Avenue
-                  <br /> C wing, Office Number:1008
-                  <br /> Bl dg No.19 ,21
-                  <br /> Shree Gurudatta Mandir Marg
-                  <br /> Sai Baba Nagar, Pant Nagar
-                  <br /> Ghatkopar East, Mumbai
-                  <br /> Maharashtra-400077
-                  <br />
-                  <p>
-                    <a href="mailto:recruit@chempharmajobs.com" className="email">
-                      recruit@chempharmajobs.com                  </a>/
-                    <a href="mailto:info@chempharmajobs.com" className="email">
-                      info@chempharmajobs.com                  </a>
-                  </p>
-
-                </p>
-              </div>
+           <FooterContact/>
             </div>
             {/* End footer left widget */}
 

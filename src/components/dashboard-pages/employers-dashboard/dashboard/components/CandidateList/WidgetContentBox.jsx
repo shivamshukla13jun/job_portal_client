@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "@/utils/hooks/usePagination";
 import { addPage } from "@/features/filter/candidateFilterSlice";
-import { CircularProgressbar,buildStyles } from "react-circular-progressbar";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 const WidgetContentBox = () => {
   const userInfo = useUserInfo();
@@ -65,14 +65,14 @@ const WidgetContentBox = () => {
     <div className="row">
       {data?.data?.length > 0 ? (
         <>
-          {data?.data?.map(({candidate,jobDetails:job,matchScore=0,_id}) => (
+          {data?.data?.map(({ candidate, jobDetails: job, matchScore = 0, _id }) => (
             <div className="col-lg-12 candidate-block-three" key={candidate._id}>
               <div className="inner-box">
                 <div className="content">
                   <figure className="image">
                     <img
                       src={
-                        API_CANDIDATE_PATH + candidate?.profile?.filename 
+                        API_CANDIDATE_PATH + candidate?.profile?.filename
                       }
                       alt={candidate.name}
                       onError={(e) => e.target.src = "/images/resource/candidate.png"}
@@ -85,11 +85,19 @@ const WidgetContentBox = () => {
                     </Link>
                   </h4>
                   <div className="designation mr-5">
-                <Link to={`${paths.job}/${job?._id}`}>
-                <span className="la la-briefcase"></span>
-                  {job?.title}
-                </Link>
-              </div>
+                    <Link
+                      to={`${paths.job}/${job?._id}`}
+                      className="d-flex align-items-center "
+                    >
+                      <span
+                        className="la la-briefcase me-1"
+                        // style={{ fontSize: "1.2rem", color: "#6c757d" }}
+                      ></span>
+                      <span className="fw-semibold ">
+                        {job?.title}
+                      </span>
+                    </Link>
+                  </div>
                   <ul className="candidate-info">
                     <li className="designation">{candidate.designation}</li>
                     <li>
@@ -97,30 +105,30 @@ const WidgetContentBox = () => {
                       {candidate?.contact?.current_address?.city || "N/A"}
                     </li>
                     <li>
-                 
+
                       <span className="icon flaticon-money"></span> Experience:
-                      {candidate.experience} to {candidate.experience + 1} years 
+                      {candidate.experience} to {candidate.experience + 1} years
                     </li>
                     <li>
                       <span className="icon flaticon-money"></span> Match Score:
-                      {matchScore }
+                      {matchScore}
                     </li>
-                  
+
                   </ul>
 
                   <ul className="post-tags">
                     {candidate.employment?.flatMap((emp) =>
                       emp.categories?.map((cat, i) => (
-                        <li  key={i}>
+                        <li key={i}>
                           <a href="#">{cat.value}</a>
                         </li>
                       ))
                     )}
                   </ul>
                 </div>
-                 
+
                 <div className="btn-box"></div>
-               
+
               </div>
             </div>
           ))}

@@ -23,7 +23,7 @@ const JobOverView = ({ data }) => {
           <span>{data?.title}</span>
         </li>
         <li>
-          <i className="icon icon-experience"></i>
+          <i className="icon icon-level-up"></i>
           <h5>Experiece:</h5>
 
           <span>          {data?.candidate_requirement?.experience} to {data?.candidate_requirement?.experience + 1} years

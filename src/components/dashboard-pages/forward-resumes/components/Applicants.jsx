@@ -1,12 +1,4 @@
-import { API_CANDIDATE_PATH } from "@/lib/config";
-import { toast } from "react-toastify";
-import MeetingSchadule from "./MeetingSchadule";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { paths } from "@/services/paths";
-import { useNavigate } from "react-router-dom";
-import { useAcceptApplication, useDeleteApplication } from "@/utils/hooks/useApplication";
-import { Badge } from "react-bootstrap";
+
 import CandidateCard from "@/components/common/CandidateCard";
 
 const Applicants = ({ data, search }) => {

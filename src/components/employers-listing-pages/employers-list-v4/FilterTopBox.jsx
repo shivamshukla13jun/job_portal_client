@@ -146,7 +146,7 @@ const FilterTopBox = () => {
         <div className="showing-result">
           <div className="top-filters">
             {/* <div className="form-group">
-                            <select className="chosen-single form-select">
+                            <select className="chosen-single">
                                 <option>Company Size</option>
                                 <option>New Jobs</option>
                                 <option>Freelance</option>
@@ -159,7 +159,7 @@ const FilterTopBox = () => {
             {/* End Company size filter */}
             <div className="form-group">
               <select
-                className="chosen-single form-select"
+                className="chosen-single"
                 onChange={foundedHandler}
                 value={JSON.stringify(foundationDate)}
               >
@@ -227,7 +227,7 @@ const FilterTopBox = () => {
 
           <select
             value={sort}
-            className="chosen-single form-select"
+            className="chosen-single"
             onChange={sortHandler}
           >
             <option value="">Sort by (default)</option>
@@ -238,7 +238,7 @@ const FilterTopBox = () => {
 
           <select
             onChange={perPageHandler}
-            className="chosen-single form-select ms-3 "
+            className="chosen-single ms-3 "
             value={JSON.stringify(perPage)}
           >
             <option

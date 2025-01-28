@@ -14,7 +14,7 @@ const dispatch=useDispatch()
       <Experience />
       <Qualification />
       <button
-        className="btn bg-danger chosen-single chosen-container"
+        className="btn bg-danger chosen-single chosen-container text-white"
         onClick={() => dispatch(clearAllFilters())}
       >
         Clear All

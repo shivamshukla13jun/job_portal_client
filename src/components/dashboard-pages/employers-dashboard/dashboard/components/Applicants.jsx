@@ -3,17 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CandidateCard from "./CandidateCard";
 
 
-const Applicants = ({data,isLoading}) => {
-
-  const dispatch=useDispatch()
-   const {
-      limit,
-      page,
-    } = useSelector((state) => state.candidateFilter) || {};
- 
-
- 
-
+const Applicants = ({data,isLoading,setPage,page,limit}) => {
   if (isLoading) return <div>Loading...</div>
   return (
     <>
@@ -30,7 +20,7 @@ const Applicants = ({data,isLoading}) => {
               Page={page}
               limit={limit}
               totalPages={data?.totalPages || 0}
-              handlePageChange={(page) => dispatch(addPage(page))}
+              handlePageChange={(page) => setPage(page)}
             />
           )}
     </>

@@ -5,7 +5,7 @@ const WidgetTopFilterBox = ({ data, job, setJob }) => {
   return (
     <div className="chosen-outer">
       <select
-        className="chosen-single form-select chosen-container"
+        className="chosen-single chosen-container"
         value={job}
         onChange={e => setJob(e.target.value)}
       >
@@ -17,7 +17,7 @@ const WidgetTopFilterBox = ({ data, job, setJob }) => {
       </select>
       {/* <!--Tabs Box--> */}
 
-      {/* <select className="chosen-single form-select chosen-container">
+      {/* <select className="chosen-single chosen-container">
         <option>All Status</option>
         <option>Last 12 Months</option>
         <option>Last 16 Months</option>

@@ -1,4 +1,4 @@
-[
+const data =[
     {
       "id": 1,
       "question": "What industries does the portal serve?",
@@ -127,3 +127,4 @@
     }
   ]
   
+export default data

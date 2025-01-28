@@ -34,7 +34,7 @@ const SearchForm4 = () => {
         <div className="form-group col-lg-3 col-md-12 col-sm-12 category">
           <label>Categories</label>
           <span className="icon flaticon-briefcase"></span>
-          <select className="chosen-single form-select">
+          <select className="chosen-single">
             <option defaultValue="">All Categories</option>
             <option defaultValue="44">Accounting / Finance</option>
             <option defaultValue="106">Automotive Jobs</option>
