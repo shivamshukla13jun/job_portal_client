@@ -217,7 +217,7 @@ const PersonalPortfolio = () => {
         </div>
 
         {/* Achievements Section */}
-        <div className="resume_item resume_achievements">
+        {Array.isArray(data?.achievement)&& data?.achievement?.length> 0 &&   <div className="resume_item resume_achievements">
           <div className="title">
             <p className="bold">Achievements</p>
           </div>
@@ -231,10 +231,11 @@ const PersonalPortfolio = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> }
+      
 
         {/* References Section */}
-        <div className="resume_item resume_references">
+        {/* <div className="resume_item resume_references">
           <div className="title">
             <p className="bold">References</p>
           </div>
@@ -248,19 +249,18 @@ const PersonalPortfolio = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
 
         {/* Compensation Section */}
-        <div className="resume_item resume_compensation">
+        {/* <div className="resume_item resume_compensation">
           <div className="title">
             <p className="bold">Compensation</p>
           </div>
           <p>
             Current Salary: {data?.currentsalary} LPA <br />
-            {/* Expected Salary: {data?.expectedsalary} LPA <br /> */}
             Experience: {data?.experience} years
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
 
