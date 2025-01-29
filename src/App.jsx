@@ -22,6 +22,7 @@ import ScrollTopBehaviour from "./components/common/ScrollTopBehaviour";
 import EmployerListPage1 from "./pages/employers-list/employers-list-v1";
 import EmployersSingleV1 from "./pages/employers-single/employers-single-v1";
 import CandidateSingleDynamicV1 from "./pages/candidates-single/candidates-single-v1";
+import CandidateSingleDynamicV2 from "./pages/candidates-single/candidates-single-v2";
 import BlogListpage1 from "./pages/blog/blog-list-v1";
 import BlogDetailsDynamic from "./pages/blog/blog-details";
 import AboutPage from "./pages/others/about";
@@ -83,109 +84,116 @@ function App() {
   }, []);
   useFetchMenu()
   return (
-        <div className="page-wrapper">
-          <BrowserRouter>
-              <ErrorBoundary>
-            <Routes>
-              <Route path="/">
-                <Route index element={<Home />} />
-                <Route path="job-list-v1" element={<JobListPage1 />} />
-                <Route path="job/:id" element={<JobSingleDynamicV1 />} />
-                <Route path="employers-list-v1" element={<EmployerListPage1 />} />
-                <Route path="employer/:id" element={<EmployersSingleV1 />} />
-                <Route path="candidates-list-v1" element={<CandidateListPage4 />} />
-                <Route path="candidate/:id" element={<CandidateSingleDynamicV1 />} />
-                <Route path="applicant/:id" element={<CandidateSingleDynamicV1 />} />
-                <Route path="blog-list-v1" element={<BlogListpage1 />} />
-                <Route path="blog-details/:id" element={<BlogDetailsDynamic />} />
-                <Route path="about" element={<AboutPage />} />
-                <Route path="pricing" element={<PricingPage />} />
-                <Route path="faq" element={<FaqPage />} />
-                <Route path="privacy" element={<PrivacyPage />} />
-                <Route path="terms" element={<TermsPage />} />
-                <Route path="invoice" element={<InvoicePage />} />
-                <Route path="contact" element={<ContactPage />} />
-                <Route path="login" element={<LoginPage />} />
-                <Route path="register" element={<RegisterPage />} />
-                <Route path="resetpassword" element={<ResetPassword/>} />
-                <Route path="forgot" element={<ForgotPasswordPage />} />
-                <Route path="verify" element={<Verify />} />
-                <Route path="/unauthorized" element={<UnauthorizedPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-                {/* Password Chnage */}
-                <Route path="change-password" element={<ChangePassword />} />
+    <div className="page-wrapper">
+      <BrowserRouter>
+        <ErrorBoundary>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="job-list-v1" element={<JobListPage1 />} />
+              <Route path="job/:id" element={<JobSingleDynamicV1 />} />
+              <Route path="employers-list-v1" element={<EmployerListPage1 />} />
+              <Route path="employer/:id" element={<EmployersSingleV1 />} />
+              <Route path="candidates-list-v1" element={<ProtectedRoute requiredRole="employer">
+                <CandidateListPage4 /></ProtectedRoute>} />
+              <Route path="candidate/:id" element={<ProtectedRoute requiredRole="employer">
+                <CandidateSingleDynamicV1 />
+              </ProtectedRoute>}
+              />
+              <Route path="candidatev2/:id" element={<ProtectedRoute requiredRole="employer">
+                <CandidateSingleDynamicV2 />
+              </ProtectedRoute>}
+              />
+              <Route path="blog-list-v1" element={<BlogListpage1 />} />
+              <Route path="blog-details/:id" element={<BlogDetailsDynamic />} />
+              <Route path="about" element={<AboutPage />} />
+              <Route path="pricing" element={<PricingPage />} />
+              <Route path="faq" element={<FaqPage />} />
+              <Route path="privacy" element={<PrivacyPage />} />
+              <Route path="terms" element={<TermsPage />} />
+              <Route path="invoice" element={<InvoicePage />} />
+              <Route path="contact" element={<ContactPage />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
+              <Route path="resetpassword" element={<ResetPassword />} />
+              <Route path="forgot" element={<ForgotPasswordPage />} />
+              <Route path="verify" element={<Verify />} />
+              <Route path="/unauthorized" element={<UnauthorizedPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+              {/* Password Chnage */}
+              <Route path="change-password" element={<ChangePassword />} />
 
-                <Route path="employers-dashboard" element={
-                  <ProtectedRoute  requiredRole="employer">
-                    <Outlet />
-                  </ProtectedRoute>
-                }
-              >  
-                  <Route path="dashboard" element={<DashboardEmploeeDBPage />} />
-                  <Route path="company-profile" element={<CompanyProfileEmploeeDBPage />} />
-                  <Route path="subemployer" element={<SubEmployer />} />
-                  <Route path="post-jobs" element={<PostJobsEmploeeDBPage />} />
-                  <Route path="edit-job/:id" element={<EditJob />} />
-                  <Route path="manage-jobs" element={<ManageJobsEmploeeDBPage />} />
-                  <Route path="all-applicants" element={<AllApplicantsEmploeesPage />} />
-                  <Route path="forward-resumes/:EmployerId" element={<ForwaredCandidates />} />
-                  <Route path="shortlisted-candidates/:status" element={<ShortListedCandidates />} />
-                  <Route path="meetinglinks" element={<EmployerMeetingList />} />
-                  <Route path="packages" element={<PackageEmploeeDBPage />} />
-                  <Route path="messages" element={<MessageEmploeeDBPage />} />
-                  <Route path="resume-alerts" element={<ResumeAlertsEmploeeDBPage />} />
-                </Route>
-                <Route 
-                path="subemployers-dashboard" 
+              <Route path="employers-dashboard" element={
+                <ProtectedRoute requiredRole="employer">
+                  <Outlet />
+                </ProtectedRoute>
+              }
+              >
+                <Route path="dashboard" element={<DashboardEmploeeDBPage />} />
+                <Route path="company-profile" element={<CompanyProfileEmploeeDBPage />} />
+                <Route path="subemployer" element={<SubEmployer />} />
+                <Route path="post-jobs" element={<PostJobsEmploeeDBPage />} />
+                <Route path="edit-job/:id" element={<EditJob />} />
+                <Route path="manage-jobs" element={<ManageJobsEmploeeDBPage />} />
+                <Route path="all-applicants" element={<AllApplicantsEmploeesPage />} />
+                <Route path="forward-resumes/:EmployerId" element={<ForwaredCandidates />} />
+                <Route path="shortlisted-candidates/:status" element={<ShortListedCandidates />} />
+                <Route path="meetinglinks" element={<EmployerMeetingList />} />
+                <Route path="packages" element={<PackageEmploeeDBPage />} />
+                <Route path="messages" element={<MessageEmploeeDBPage />} />
+                <Route path="resume-alerts" element={<ResumeAlertsEmploeeDBPage />} />
+              </Route>
+              <Route
+                path="subemployers-dashboard"
                 element={
                   <ProtectedRoute requiredRole="subemployer">
                     <Outlet />
                   </ProtectedRoute>
                 }
               >
-                  <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
-                  <Route path="meetinglinks/:createdBy" element={<MeetingList />} />
-                  <Route path="forward-resumes/:SubEmployerId" element={<ForwaredCandidates />} />
-                </Route>
-                <Route 
-                path="candidates-dashboard" 
+                <Route path="dashboard" element={<DashboardSubemplyerDBPage />} />
+                <Route path="meetinglinks/:createdBy" element={<MeetingList />} />
+                <Route path="forward-resumes/:SubEmployerId" element={<ForwaredCandidates />} />
+              </Route>
+              <Route
+                path="candidates-dashboard"
                 element={
                   <ProtectedRoute requiredRole="candidate">
                     <Outlet />
                   </ProtectedRoute>
                 }
               >
-                  <Route path="dashboard" element={<DashboardPage />} />
-                  <Route path="applied-jobs" element={<AppliedJobsPage />} />
-                  <Route path="saved-jobs" element={<SavedJobsPage />} />
-                  <Route path="my-profile" element={<MyProfilePage />} />
-                  <Route path="my-resume" element={<MyResumePage />} />
-                  <Route path="packages" element={<PackagePage />} />
-                  <Route path="short-listed-jobs" element={<ShortListedJobsPage/>} />
-                </Route>
+                <Route path="dashboard" element={<DashboardPage />} />
+                <Route path="applied-jobs" element={<AppliedJobsPage />} />
+                <Route path="saved-jobs" element={<SavedJobsPage />} />
+                <Route path="my-profile" element={<MyProfilePage />} />
+                <Route path="my-resume" element={<MyResumePage />} />
+                <Route path="packages" element={<PackagePage />} />
+                <Route path="short-listed-jobs" element={<ShortListedJobsPage />} />
               </Route>
-            </Routes>
-            </ErrorBoundary>
-            <ScrollTopBehaviour />
-          </BrowserRouter>
-          {/* Toastify */}
-          <ToastContainer
-            position="bottom-right"
-            autoClose={1500}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-          />
-          {/* <!-- Scroll To Top --> */}
-          <ScrollToTop />
-        </div>
-      
-    
+            </Route>
+          </Routes>
+        </ErrorBoundary>
+        <ScrollTopBehaviour />
+      </BrowserRouter>
+      {/* Toastify */}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+      {/* <!-- Scroll To Top --> */}
+      <ScrollToTop />
+    </div>
+
+
   )
 }
 export default App

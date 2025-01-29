@@ -42,7 +42,7 @@ const FilterTopBox= () => {
               />
             </figure>
             <h4 className="name">
-              <Link to={`${paths.publiccandidate}/${candidate._id}`}>
+              <Link to={`${paths.applicationid}/${candidate._id}`}>
                 {candidate.name}
               </Link>
 

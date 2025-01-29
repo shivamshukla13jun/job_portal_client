@@ -13,6 +13,7 @@ import Reference from "./components/Reference";
 import Conclusion from "./components/Conclusion";
 import Profile from "./components/Profile";
 
+
 import { candidateSchema } from "@/validations/dashboard/candidate";
 import { getById, post, put, putMultiForm } from "@/services/api";
 import { decrypt, encrypt } from "@/lib/encrypt";
@@ -20,6 +21,7 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import Achievements from "./components/Achievements";
 import PreviewOriginalDataModal from "./components/PreviewOrginalData";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
+import CurrentCompany from "./components/CurrentCompany";
 
 
 const index = () => {
@@ -112,7 +114,8 @@ const index = () => {
         }
       ],
     
-      hear_about_us: ''
+      hear_about_us: '',
+      current_company:[]
     }
   });
 
@@ -160,6 +163,7 @@ const index = () => {
       experience: data.myProfile.experience,
       profile: data.myProfile.profile,
       "achievement": data.achievement,
+      current_company:data.current_company || []
     }
 
     formData.append("parse", JSON.stringify(formattedData))
@@ -207,7 +211,7 @@ const index = () => {
           to: new Date(emp.to),
         })),
         references: data.references,
-       
+        current_company: data.current_company || [],
         hear_about_us: data.hear_about_us.join(","),
       });
     }
@@ -288,7 +292,7 @@ const index = () => {
               <div className="ls-widget">
                 <div className="tabs-box">
                   <div className="widget-title">
-                    <h4>Acievement </h4>
+                    <h4>Achievement </h4>
                   </div>
                   {/* End widget-title */}
                   <div className="widget-content">
@@ -322,6 +326,19 @@ const index = () => {
                 </div>
               </div>
             
+              {/* <!-- Conclusion --> */}
+              <div className="ls-widget">
+                <div className="tabs-box">
+                  <div className="widget-title">
+                    <h4>Current Company</h4>
+                  </div>
+                  {/* End widget-title */}
+                  <div className="widget-content">
+                    <CurrentCompany watch={watch} register={register} setValue={setValue} error={errors}  control={control} />
+                  </div>
+                </div>
+              </div>
+              {/* <!-- Conclusion --> */}
               {/* <!-- Conclusion --> */}
               <div className="ls-widget">
                 <div className="tabs-box">

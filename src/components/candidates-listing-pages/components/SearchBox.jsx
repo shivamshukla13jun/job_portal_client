@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addKeyword } from "../../../features/filter/candidateFilterSlice";
 
-const SearchBox = () => {
-    const { keyword } = useSelector((state) => state.candidateFilter);
+const SearchBox = ({filters={}, updateFilters,clearFilters}) => {
+    const { keyword } =filters 
     const [getKeyword, setKeyword] = useState(keyword);
 
     const dispatch = useDispatch();
@@ -18,8 +18,8 @@ const SearchBox = () => {
 
     // keyword dispatch
     useEffect(() => {
-        dispatch(addKeyword(getKeyword));
-    }, [dispatch, addKeyword, getKeyword]);
+        updateFilters("keyword",getKeyword);
+    }, [ addKeyword, getKeyword]);
    
     return (
         <>

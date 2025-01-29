@@ -6,13 +6,15 @@ const Address = () => {
       title: "Address",
       text: (
         <>
-          Shubham Avenue<br />
+         Shubham Avenue<br />
+         Maharashtra - 400077
+          {/* Shubham Avenue<br />
           C wing, Office Number: 1008<br />
           Building No. 19, 21<br />
           Shree Gurudatta Mandir Marg<br />
           Sai Baba Nagar, Pant Nagar<br />
           Ghatkopar East, Mumbai<br />
-          Maharashtra - 400077
+          Maharashtra - 400077 */}
         </>
       ),
     },

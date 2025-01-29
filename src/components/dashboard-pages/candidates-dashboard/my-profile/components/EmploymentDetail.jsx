@@ -185,7 +185,7 @@ const EmploymentDetail = ({ watch, register, setValue, error ,control}) => {
                             <div className="modal-body">
                                 <div id="login-modal">
                                     <EditEmploymentForm
-                                        watch={watch("employment")[editIndex]}
+                                        watch={watch}
                                         register={register}
                                         setValue={setValue}
                                         error={error}

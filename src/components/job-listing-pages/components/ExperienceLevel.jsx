@@ -1,6 +1,6 @@
 import InputRange from "react-input-range";
 
-const ExperienceLevel = ({ search, setSearch,data }) => {
+const ExperienceLevel = ({ search, setSearch }) => {
 
     const handleOnChange = (value) => {
         setSearch((prev) => ({
@@ -26,8 +26,8 @@ const ExperienceLevel = ({ search, setSearch,data }) => {
             <div className="input-outer">
                 <div className="amount-outer">
                     <span className="d-inline-flex align-items-center">
-                        <span className="min">{search.experience_from} year</span>
-                        <span className="max ms-2">{search.experience_to} year</span>
+                        <span className="min">{search.experience_from || 0} year</span>
+                        <span className="max ms-2">{search.experience_to || 10} year</span>
                     </span>
                 </div>
             </div>

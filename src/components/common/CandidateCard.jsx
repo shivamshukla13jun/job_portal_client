@@ -53,7 +53,7 @@ const CandidateCard = ({ item, search }) => {
                         />
                     </figure>
                     <h4 className="name">
-                        <Link to={`${paths.publiccandidate}/${item?._id}`}>
+                        <Link to={`${paths.applicationid}/${item?._id}`}>
                             {item?.candidate?.name}
                         </Link>
                     </h4>
@@ -98,7 +98,7 @@ const CandidateCard = ({ item, search }) => {
                             <li>
                                 <button
                                     data-text="View Application"
-                                    onClick={() => navigate(`${paths.publiccandidate}/${item?._id}`)}
+                                    onClick={() => navigate(`${paths.applicationid}/${item?._id}`)}
                                 >
                                     <span className="la la-eye"></span>
                                 </button>

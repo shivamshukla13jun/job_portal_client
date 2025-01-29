@@ -1,29 +1,19 @@
 
 
-import { useDispatch, useSelector } from "react-redux";
-import { addDatePostCheck } from "../../../features/candidate/candidateSlice";
-import { addDatePost } from "../../../features/filter/candidateFilterSlice";
+import { datePost } from "@/utils/datePost";
 
-const DatePosted = () => {
-  const { datePost } = useSelector((state) => state.candidate) || {};
-  const dispath = useDispatch();
-
-  // date post handler
-  const datePostHandler = (e, id) => {
-    dispath(addDatePostCheck(id));
-    dispath(addDatePost(e.target.value));
-  };
-
+const DatePosted = ({filters={}, updateFilters,clearFilters}) => {
+  console.log("filters",filters)
   return (
     <ul className="ui-checkbox">
-      {datePost?.map((item) => (
-        <li key={item.id}>
+      {datePost?.map((item,index) => (
+        <li key={index}>
           <label>
             <input
-              value={item.value}
-              onChange={(e) => datePostHandler(e, item.id)}
+              value={filters.createdAt}
+              onChange={() => updateFilters("createdAt", item.value)}
               type="radio"
-              checked={item.isChecked}
+              checked={filters.createdAt === item.value}
             />
             <span></span>
             <p>{item.name}</p>

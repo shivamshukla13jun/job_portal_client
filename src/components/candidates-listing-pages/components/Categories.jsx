@@ -1,29 +1,24 @@
 
 
-import { useDispatch, useSelector } from "react-redux";
-import { addCategory } from "../../../features/filter/candidateFilterSlice";
 import { get, getById } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
-import { categories } from "@/data/category";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 
-const Categories = () => {
+const Categories = ({filters={}, updateFilters,clearFilters}) => {
     const userInfo=useUserInfo()
-    const { category: getCategory } = useSelector((state) => state.candidateFilter) || {};
-
-    const dispatch = useDispatch();
+    const {  category } =filters
 
     // category handler
     const categoryHandler = (e) => {
-        dispatch(addCategory(e.target.value));
+        updateFilters("category",e.target.value)
     };
     const { data=[], isLoading } = useQuery({
         queryKey: [`dashboard/options`],
         queryFn: async () => {
-          let res = (await get(`utilities/applicationoptions/${userInfo?.userTypeValue?._id}/categories.label`)).data.data
+          let res = (await get(`utilities/applicationoptions/allcandidates/categories.label`)).data.data
           return res;
         },
-        enabled:!!userInfo?.userTypeValue?._id
+        
       });
       if (isLoading) return <div>Loading...</div>;
 
@@ -31,7 +26,7 @@ const Categories = () => {
         <>
             <select
                 onChange={categoryHandler}
-                value={getCategory}
+                value={category}
                 className="form-select"
             >
                 <option value="">Choose a category</option>

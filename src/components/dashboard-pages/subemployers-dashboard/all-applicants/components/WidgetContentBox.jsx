@@ -51,7 +51,7 @@ const WidgetContentBox = ({ data, title }) => {
                             />
                           </figure>
                           <h4 className="name">
-                            <Link to={`${paths.publiccandidate}/${_id}`}>
+                            <Link to={`${paths.applicationid}/${_id}`}>
                               {candidate?.name}
                             </Link>
                           </h4>
@@ -87,7 +87,7 @@ const WidgetContentBox = ({ data, title }) => {
                         <div className="option-box">
                           <ul className="option-list">
                             <li>
-                              <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${_id}`)}>
+                              <button data-text="View Application" onClick={() => navigate(`${paths.applicationid}/${_id}`)}>
                                 <span className="la la-eye"></span>
                               </button>
                             </li>

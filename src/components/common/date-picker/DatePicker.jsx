@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
 
-const DatePicker = ({ value, onChange, label = 'Select Date', id }) => {
+const DatePicker = ({ value, onChange, label = 'Select Date', id, startDate }) => {
     const [focused, setFocused] = useState(false);
 
     const returnYears = () => {
@@ -37,6 +37,14 @@ const DatePicker = ({ value, onChange, label = 'Select Date', id }) => {
         </div>
     );
 
+    // Disable dates before the start date
+    const isOutsideRange = (day) => {
+        if (startDate) {
+            return day.isBefore(moment(startDate), 'day');
+        }
+        return false;
+    };
+
     return (
         <SingleDatePicker
             id={id}
@@ -45,7 +53,7 @@ const DatePicker = ({ value, onChange, label = 'Select Date', id }) => {
             focused={focused}
             onFocusChange={({ focused }) => setFocused(focused)}
             numberOfMonths={1}
-            isOutsideRange={() => false}
+            isOutsideRange={isOutsideRange}  // Disable dates before the start date
             displayFormat="DD-MM-YYYY"
             renderMonthElement={renderMonthElement}
             readOnly={true}

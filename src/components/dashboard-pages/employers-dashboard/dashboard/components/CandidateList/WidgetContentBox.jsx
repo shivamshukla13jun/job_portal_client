@@ -80,7 +80,7 @@ const WidgetContentBox = () => {
                     />
                   </figure>
                   <h4 className="name">
-                    <Link to={`${paths.publiccandidate}/${_id}`}>
+                    <Link to={`${paths.applicationid}/${_id}`}>
                       {candidate.name}
                     </Link>
                   </h4>

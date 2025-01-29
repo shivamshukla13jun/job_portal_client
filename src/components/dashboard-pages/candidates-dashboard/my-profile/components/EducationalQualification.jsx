@@ -86,7 +86,7 @@ const EducationalQualification = ({ watch, register, setValue, error }) => {
                   <div className="col-lg-9">
                     <h5>{item.name}</h5>
                     <p className="mb-0">{item.qualification}</p>
-                    <p className="mb-0">{moment(item.from).year() + ' - ' + moment(item.to).year()}</p>
+                    <p className="mb-0">{moment(item.to).year()}</p>
                   </div>
                   <div className="col-lg-2 text-end">
                     <span

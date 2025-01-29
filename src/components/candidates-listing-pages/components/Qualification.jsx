@@ -7,8 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import { get, getById } from "@/services/api";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 
-const Qualification = () => {
-    const { qualifications } = useSelector((state) => state.candidateFilter) || {};
+const Qualification = ({filters={}, updateFilters,clearFilters}) => {
+    const { qualifications } = filters || {};
     const dispatch = useDispatch();
     const userInfo=useUserInfo()
     // qualification handler
@@ -19,10 +19,10 @@ const Qualification = () => {
     const { data=[], isLoading } = useQuery({
         queryKey: [`dashboard/options`],
         queryFn: async () => {
-          let res = (await get(`utilities/applicationoptions/${userInfo?.userTypeValue?._id}/personal_info.info.degree`)).data.data
+          let res = (await get(`utilities/applicationoptions/allcandidates/personal_info.info.degree`)).data.data
           return res;
         },
-        enabled:!!userInfo?.userTypeValue?._id
+        
       });
       if (isLoading) return <div>Loading...</div>;
       console.log(data)

@@ -1,29 +1,18 @@
 
 
-import { useDispatch, useSelector } from "react-redux";
-import { addCandidateGender } from "../../../features/filter/candidateFilterSlice";
-
-const CandidatesGender = () => {
-    const { candidateGender } =
-        useSelector((state) => state.candidateFilter) || {};
-
-    const dispath = useDispatch();
-
-    // gender handler
-    const genderHandler = (e) => {
-        dispath(addCandidateGender(e.target.value));
-    };
-
+const CandidatesGender = ({filters={}, updateFilters,clearFilters}) => {
+    const { gender } =filters
     return (
         <>
             <select
                 className="form-select"
-                value={candidateGender}
-                onChange={genderHandler}
+                value={gender}
+                onChange={(e)=>updateFilters("gender",e.target.value)}
             >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Others</option>
+                <option hidden value={""}>Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
             </select>
             <span className="icon flaticon-briefcase"></span>
         </>
