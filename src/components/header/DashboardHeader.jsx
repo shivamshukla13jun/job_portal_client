@@ -5,8 +5,6 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { API_CANDIDATE_PATH, API_EMPLOYER_PATH } from "@/lib/config"
 import { useSelector } from "react-redux";
 import { selectWishlist } from "@/store/reducers/Whishlist";
-import { useQuery } from "@tanstack/react-query";
-import { getById } from "@/services/api";
 import { getDisplayName } from "@/utils/getDisplayName";
 import { authverify, paths } from "@/services/paths";
 import MobileMenu from "./MobileMenu";

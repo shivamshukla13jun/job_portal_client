@@ -1,33 +1,14 @@
 import FooterDefault from "../../footer/common-footer";
-import MapJobFinder from "../components/MapJobFinder";
-import LoginPopup from "../../common/form/login/LoginPopup";
-import DefaulHeader2 from "../../header/DefaulHeader2";
-import MobileMenu from "../../header/MobileMenu";
 import FilterTopBox from "./FilterTopBox";
 import FilterSidebar from "./FilterSidebar";
+import DashboardHeader from "@/components/header/DashboardHeader";
 
 const Index = () => {
   return (
     <>
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
-
-      <LoginPopup />
-      {/* End Login Popup Modal */}
-
       <DashboardHeader />
-      {/* End Header with upload cv btn */}
-
-      <MobileMenu />
-      {/* End MobileMenu */}
-
-      <div className="listing-maps">
-        <div style={{ height: "500px", width: "100%" }}>
-          <MapJobFinder />
-        </div>
-      </div>
-      {/* <!-- Map --> */}
-
       <section className="ls-section">
         <div className="auto-container">
           <div className="row">

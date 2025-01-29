@@ -9,6 +9,8 @@ import {
   shopItems,
 } from "../../data/mainMenuData";
 import {
+  isActiveHeader,
+  isActiveLink,
   isActiveParent,
   isActiveParentChaild,
 } from "../../utils/linkActiveChecker";
@@ -23,28 +25,38 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 const HeaderNavContent = () => {
   const  userInfo  = useUserInfo();
   const { pathname } = useLocation();
+  const userType = userInfo?.userType?.name?.toLowerCase();
+
   const dispatch=useDispatch()
   useEffect(() => {
     if (userInfo?._id) {
       dispatch(fetchWishlist());
     }
   }, [userInfo?._id])
+  const renderFindJobsLink = () => {
+    const isEmployerOrSub = userType === "employer" || userType === "subemployer";
+    const linkpath=isEmployerOrSub?paths.candidatelist:paths.job_list
+    return (
+      <li className={`${isActiveHeader(linkpath,location.pathname) ? "current" : ""}`}>
+        <Link to={linkpath}>
+          {isEmployerOrSub ? "Candidates" : "Find Jobs"}
+        </Link>
+      </li>
+    );
+  };
   return (
     <>
       <nav className="nav main-menu">
         
         {userInfo && (
           <ul className="navigation" id="navbar">
-            <li className={`${isActiveParent(homeItems, pathname) ? "current" : ""}`}>
+            <li className={`${isActiveHeader(paths.home, pathname) ? "current" : ""}`}>
               <Link to={paths.home}>Home</Link>
             </li>
             {/* End homepage menu items */}
+            {renderFindJobsLink()}
 
-            <li className={`${isActiveParent(findJobItems, pathname) ? "current" : ""}`}>
-              <Link to={paths.job_list}>Find Jobs</Link>
-            </li>
-
-            <li className={`${isActiveParentChaild(blogItems, pathname) ? "current" : ""}`} >
+            <li className={`${isActiveHeader(paths.blog, pathname) ? "current" : ""}`} >
               <Link to={paths.blog}>Blog</Link>
             </li>
             {/* End Blog menu items */}

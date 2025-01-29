@@ -31,7 +31,7 @@ const index = () => {
   const { data, isLoading } = useQuery({
     queryKey: [`application/tracking`,status,page, debouncedSearch,createdAt,category,experience_from,experience_to,qualification],
     queryFn: async () => {
-      let res = (await get(`application/tracking?createdAt=${createdAt}&category=${category}&experience_from=${experience_from}&experience_to=${experience_to}&qualification=${qualification}&page=${page}&limit=${limit}&name=${debouncedSearch}&status=${status}`)).data;
+      let res = (await get(`application/tracking?createdAt=${createdAt}&category=${category}&experience_from=${experience_from}&experience_to=${experience_to}&qualification=${qualification}&page=${page}&limit=${limit}&keyword=${debouncedSearch}&status=${status}`)).data;
       return res;
     },
     enabled: !!userInfo._id

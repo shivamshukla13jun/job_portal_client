@@ -33,3 +33,7 @@ export const isActiveChild = (data = [], path) => {
   const exists = data?.filter(item => item.routePath === path);
   return exists.length > 0 ? true : false;
 }
+export const isActiveHeader = (link, path) => {
+  return  path===link
+  
+}
