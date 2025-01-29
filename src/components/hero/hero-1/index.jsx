@@ -15,13 +15,9 @@ const index = () => {
             >
               <div className="title-box">
                 <h3>
-                  There Are <span className="colored">93,178</span> Postings
-                  Here
-                  <br /> For you!
+                  Connecting Chemistry with Talent
                 </h3>
-                <div className="text">
-                Connecting Chemistry with Talent 
-                </div>
+              
               </div>
 
               {/* <!-- Job Search Form --> */}

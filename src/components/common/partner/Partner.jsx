@@ -3,6 +3,11 @@
 
 
 
+import { API_EMPLOYER_PATH } from "@/lib/config";
+import { get } from "@/services/api";
+import { paths } from "@/services/paths";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 
 const Partner = () => {
@@ -63,20 +68,30 @@ const Partner = () => {
     { id: 6, link: "#", imgNumber: "1-6" },
     { id: 7, link: "#", imgNumber: "1-7" },
   ];
+  const { data, isLoading } = useQuery({
+    queryKey: [`utilities/employers`,],
+    queryFn: async () => {
+        try {
+            const res = (await get(`/utilities/employers`)).data;
+            return res.data  || []
+        } catch (error) {
+            return null
+        }
+    },
+});
+if (isLoading) return <div>Loading...</div>;
 
   return (
     <>
       <Slider {...settings} arrows={false}>
-        {sliderGallery.map((item) => (
+        {data?.map((item) => (
           <li className="slide-item" key={item.id}>
             <figure className="image-box">
-              <a href={item.link}>
-                <img
-                 
-                  src={`/images/clients/${item.imgNumber}.png`}
-                  alt="brand"
-                />
-              </a>
+              <Link to={`${paths.publicemployer}/${item._id}`}>
+              <img src={API_EMPLOYER_PATH + item?.logo?.filename} alt="logo"              onError={(e) => e.target.src = "/images/pharma.webp"}
+              />
+
+              </Link>
             </figure>
           </li>
         ))}

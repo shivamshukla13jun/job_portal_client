@@ -97,7 +97,8 @@ const JobSingleDynamicV1 = () => {
               <div className="inner-box">
                 <div className="content">
                   <span className="company-logo">
-                    <img src={API_EMPLOYER_PATH + data?.employerId?.logo?.filename} alt="logo" />
+                    <img src={API_EMPLOYER_PATH + data?.employerId?.logo?.filename} alt="logo"             onError={(e) => e.target.src = "/images/pharma.webp"}
+ />
                   </span>
                   <h4>{data?.title ?capitalizeFirstLetter(data?.title):""}</h4>
 
@@ -212,7 +213,8 @@ const JobSingleDynamicV1 = () => {
                     <div className="widget-content">
                       <div className="company-title">
                         <div className="company-logo">
-                        <img src={API_EMPLOYER_PATH + data?.employerId?.logo?.filename} alt="logo" />
+                        <img src={API_EMPLOYER_PATH + data?.employerId?.logo?.filename} alt="logo"             onError={(e) => e.target.src = "/images/pharma.webp"}
+                        />
                         </div>
                         <h5 className="company-name">{data?.employerId?.business_name}</h5>
                         <Link to={`${paths.publicemployer}/${data?.employerId?._id}`} state={{company:data?.company}} className="profile-link">
