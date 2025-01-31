@@ -1,18 +1,6 @@
 import { Link } from "react-router-dom";
 import {
-  blogItems,
-  candidateItems,
-  employerItems,
-  findJobItems,
-  homeItems,
-  pageItems,
-  shopItems,
-} from "../../data/mainMenuData";
-import {
   isActiveHeader,
-  isActiveLink,
-  isActiveParent,
-  isActiveParentChaild,
 } from "../../utils/linkActiveChecker";
 
 import { useLocation } from "react-router-dom";

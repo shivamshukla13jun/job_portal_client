@@ -19,6 +19,7 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist, selectWishlist } from "@/store/reducers/Whishlist";
 import DashboardHeader from "@/components/header/DashboardHeader";
+import moment from "moment";
 const metadata = {
   title: "Job Single Dyanmic V1 || Chem Pharma - Job Borad ReactJs Template",
   description: "Chem Pharma - Job Borad ReactJs Template",
@@ -113,20 +114,21 @@ const JobSingleDynamicV1 = () => {
                       {data?.location}
                     </li>
                     {/* location info */}
-                    {/* <li>
+                    <li>
                       <span className="icon flaticon-clock-3"></span>{" "}
-                      {data?.timing?.job}
-                    </li> */}
+                      {moment(data?.createdAt).startOf('hour').fromNow()}
+                    </li>
                     {/* time info */}
                     <li>
                       <span className="icon flaticon-money"></span>{" "}
-                      {data?.candidate_requirement?.salary_from && data?.candidate_requirement?.salary_to?<span>₹{data?.candidate_requirement?.salary_from} - ₹{data?.candidate_requirement?.salary_to}</span>:<span>Not Disclosed</span>}
+                      {data?.candidate_requirement?.salary_from && data?.candidate_requirement?.salary_to?<span>₹{data?.candidate_requirement?.salary_from} - ₹{data?.candidate_requirement?.salary_to} LPA</span>:<span>Not Disclosed</span>}
                     
                     </li>
                     {/* salary info */}
                   </ul>
                   {/* End .job-info */}
 
+                  {/* End .job-other-info */}
                   <ul className="job-other-info">
                     {data?.categories?.map((val, i) => (
                       <li key={i} className={`required`}>
@@ -134,7 +136,6 @@ const JobSingleDynamicV1 = () => {
                       </li>
                     ))}
                   </ul>
-                  {/* End .job-other-info */}
                 </div>
                 {/* End .content */}
 

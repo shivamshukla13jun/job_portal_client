@@ -17,16 +17,16 @@ const FooterContact = () => {
       <div className="contact-info">
         {/* Phone Numbers */}
         <div className="d-flex align-items-start mb-3">
-          <i className="fas fa-phone me-2"></i>
+          <i className="icon flaticon-phone me-2"></i>
           <div>
-            <p className="fw-bold ">Call us</p>
+            {/* <p className="fw-bold ">Call us</p> */}
             <p className="mb-0">8928235501 / 9870122286</p>
           </div>
         </div>
 
         {/* Address */}
         <div className="d-flex align-items-start mb-3">
-          <i className="fas fa-map-marker-alt mt-1 me-2"></i>
+          <i className="icon flaticon-map-locator  me-2"></i>
           <div className="address-block">
             <address className="">
               Shubham Avenue<br />
@@ -45,12 +45,12 @@ const FooterContact = () => {
         {/* Email Addresses */}
         <div className="d-flex align-items-start">
           <div className="email-block">
-          {/* <i className="fas fa-envelope me-2"></i>
+          {/* <i className="flaticon-envelope me-2"></i>
           <a href="mailto:recruit@chempharmajobs.com" className="text-decoration-none">
               recruit@chempharmajobs.com
             </a>
             <br/> */}
-            <i className="fas fa-envelope me-2"></i>
+            <i className="icon flaticon-envelope me-2"></i>
             <a href="mailto:info@chempharmajobs.com" className="text-decoration-none">
               info@chempharmajobs.com
             </a>

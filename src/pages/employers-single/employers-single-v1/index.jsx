@@ -67,10 +67,10 @@ const EmployersSingleV1 = () => {
                       {data?.employerDetails?.address?.city + ", "+data?.employerDetails?.address?.state}
                     </li>
                     {/* compnay info */}
-                    {/* <li>
+                    <li>
                       <span className="icon flaticon-briefcase"></span>
-                      {data?.jobType}
-                    </li> */}
+                      {data?.employerDetails?.categories?.slice(0,1)?.map((item)=>item.label)}
+                    </li>
                     {/* location info */}
                     <li>
                       <span className="icon flaticon-telephone-1"></span>
@@ -86,7 +86,7 @@ const EmployersSingleV1 = () => {
                   {/* End .job-info */}
 
                   <ul className="job-other-info">
-                    {/* <li className="time">Open Jobs – {employer.jobNumber}</li> */}
+                    <li className="time">Open Jobs – {data?.totalJobs || 0}</li>
                   </ul>
                   {/* End .job-other-info */}
                 </div>

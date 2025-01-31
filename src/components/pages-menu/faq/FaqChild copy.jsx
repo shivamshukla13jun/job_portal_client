@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-
-const FaqChild = ({faqData}) => {
+import faqData from "./faq.js"
+const FaqChild = () => {
  
 
   return (

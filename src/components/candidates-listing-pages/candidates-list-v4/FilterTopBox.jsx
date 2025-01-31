@@ -14,7 +14,7 @@ const FilterTopBox = ({filters,setFilters,updateFilters,clearFilters}) => {
   const debouncedLocation = useDebounce(filters.location, 500);
   const debouncedExperieneto = useDebounce(filters.experience_to, 500);
   const debouncedexperienceFrom = useDebounce(filters.experience_from, 500);
-
+  const employerid=userInfo?.parentEmployerId|| userInfo.userTypeValue?._id
   // Fetch candidates & stats
   const { data, isLoading } = useQuery({
     queryKey: [
@@ -30,15 +30,16 @@ const FilterTopBox = ({filters,setFilters,updateFilters,clearFilters}) => {
       filters.gender,
       filters.sort,
       filters.createdAt,
+      filters.qualification,
       userInfo,
     ],
     queryFn: async () => {
       const res = await get(
-        `employer/allcandidates?gender=${filters.gender}&page=${filters.page}&limit=${filters.limit}&sort=${filters.sort}&location=${filters.location}&category=${filters.category}&createdAt=${filters.createdAt}&experience_from=${filters.experience_from}&experience_to=${filters.experience_to}&keyword=${filters.keyword}`
+        `employer/allcandidates/${employerid}?gender=${filters.gender}&page=${filters.page}&limit=${filters.limit}&sort=${filters.sort}&location=${filters.location}&category=${filters.category}&createdAt=${filters.createdAt}&experience_from=${filters.experience_from}&experience_to=${filters.experience_to}&keyword=${filters.keyword}&qualification=${filters.qualification}`
       );
       return res.data;
     },
-    enabled: !!userInfo.userTypeValue?._id,
+    enabled: !!employerid,
   });
 
   if (isLoading) return <div>Loading...</div>;

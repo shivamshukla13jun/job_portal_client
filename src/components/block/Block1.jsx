@@ -4,33 +4,43 @@ const Block1 = () => {
   const blockContent = [
     {
       id: 1,
-      icon: "/images/resource/work1.jpeg",
-      title: "Integrity",
-      text: `Transparent and ethical recruitment practices.`,
+      icon: "/images/resource/work-1.png",
+      title: "Mission",
+      text: `To empower recruiters in the chemical and
+pharmaceutical industries by connecting them with
+the right talent, streamlining the hiring process,
+and building long-term partnerships that drive
+mutual success.`,
     },
     {
       id: 2,
-      icon: "/images/resource/work2.jpeg",
-      title: "Innovation",
-      text: `Leveraging technology to deliver smarter hiring solutions.`,
+      icon: "/images/resource/work-2.png",
+      title: "Vision",
+      text: `To be the leading global platform for Chemical and
+Pharma job recruitment, trusted for reliability,
+expertise, and service.`,
     },
     {
       id: 3,
-      icon: "/images/resource/work4.jpeg",
-      title: "Excellence",
-      text: `Commitment to delivering top-notch services.`,
+      icon: "/images/resource/work-3.png",
+      title: "Values",
+      text: `To empower recruiters in the chemical and
+pharmaceutical industries by connecting them with
+the right talent, streamlining the hiring process,
+and building long-term partnerships that drive
+mutual success`,
     },
-    {
-      id: 4,
-      icon: "/images/resource/work3.jpeg",
-      title: "Collaboration",
-      text: `Building long-lasting relationships with clients and candidates.`,
-    },
+    // {
+    //   id: 4,
+    //   icon: "/images/resource/work3.png",
+    //   title: "Collaboration",
+    //   text: `Building long-lasting relationships with clients and candidates.`,
+    // },
   ];
   return (
-    <>
+    <div className="row">
       {blockContent.map((item) => (
-        <div className="work-block col-lg-3 col-md-6 col-sm-12" key={item.id}>
+        <div className="work-block col-lg-4 col-md-6 col-sm-12" style={{display:"flex"}} key={item.id}>
           <div className="inner-box">
             <figure className="image">
               <img
@@ -44,7 +54,7 @@ const Block1 = () => {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

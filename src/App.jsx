@@ -94,15 +94,15 @@ function App() {
               <Route path="job/:id" element={<JobSingleDynamicV1 />} />
               <Route path="employers-list-v1" element={<EmployerListPage1 />} />
               <Route path="employer/:id" element={<EmployersSingleV1 />} />
-              <Route path="candidates-list-v1" element={<ProtectedRoute requiredRole="employer">
-                <CandidateListPage4 /></ProtectedRoute>} />
-              <Route path="candidate/:id" element={<ProtectedRoute requiredRole="employer">
+              <Route path="candidates-list-v1" element={
+                <CandidateListPage4 />} />
+              <Route path="candidate/:id" element={
                 <CandidateSingleDynamicV1 />
-              </ProtectedRoute>}
+            }
               />
-              <Route path="candidatev2/:id" element={<ProtectedRoute requiredRole="employer">
+              <Route path="candidatev2/:id" element={
                 <CandidateSingleDynamicV2 />
-              </ProtectedRoute>}
+             }
               />
               <Route path="blog-list-v1" element={<BlogListpage1 />} />
               <Route path="blog-details/:id" element={<BlogDetailsDynamic />} />

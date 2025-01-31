@@ -7,7 +7,7 @@ const useFetchMenu = () => {
   const dispatch = useDispatch();
   const userInfo=useUserInfo()
   const userId = userInfo?._id;
-
+  console.log("userid",userId)
   const { data, isLoading } = useQuery({
     queryKey: ["user/menu", userInfo],
     queryFn: async () => {

@@ -43,7 +43,7 @@ const FilterSidebar = ({ search, setSearch,data }) => {
         {/* <!-- Filter Block --> */}
 
         <div className="filter-block">
-          <h4>Category</h4>
+          <h4>Job Sector</h4>
           <div className="form-group">
             <Categories search={search} setSearch={setSearch} />
           </div>

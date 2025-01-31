@@ -1,23 +1,12 @@
 
 
-import { useDispatch, useSelector } from "react-redux";
-import { addQualificationCheck } from "../../../features/candidate/candidateSlice";
-import { addQualification } from "../../../features/filter/candidateFilterSlice";
 import { useQuery } from "@tanstack/react-query";
-import { get, getById } from "@/services/api";
-import useUserInfo from "@/utils/hooks/useUserInfo";
-
+import { get } from "@/services/api";
 const Qualification = ({filters={}, updateFilters,clearFilters}) => {
-    const { qualifications } = filters || {};
-    const dispatch = useDispatch();
-    const userInfo=useUserInfo()
-    // qualification handler
-    const qualificationHandler = (e, id) => {
-        dispatch(addQualificationCheck(id));
-        dispatch(addQualification(e.target.value));
-    };
+    const { qualification } = filters || {};
+  
     const { data=[], isLoading } = useQuery({
-        queryKey: [`dashboard/options`],
+        queryKey: [`dashboard/options`,"utilities/applicationoptions/allcandidates/personal_info.info.degree"],
         queryFn: async () => {
           let res = (await get(`utilities/applicationoptions/allcandidates/personal_info.info.degree`)).data.data
           return res;
@@ -25,7 +14,7 @@ const Qualification = ({filters={}, updateFilters,clearFilters}) => {
         
       });
       if (isLoading) return <div>Loading...</div>;
-      console.log(data)
+      console.log("qualification",qualification)
     return (
         <ul className="switchbox">
             {data?.map((item) => (
@@ -33,9 +22,9 @@ const Qualification = ({filters={}, updateFilters,clearFilters}) => {
                     <label className="switch">
                         <input
                             type="checkbox"
-                            checked={Array.isArray(data) && data.map((item=>item.value)).includes(item)}
-                            value={item}
-                            onChange={(e) => qualificationHandler(e, item)}
+                            checked={item.value==qualification}
+                            value={item.value}
+                            onChange={(e) =>updateFilters("qualification",e.target.value)}
                         />
                         <span className="slider round"></span>
                         <span className="title">{item.value}</span>

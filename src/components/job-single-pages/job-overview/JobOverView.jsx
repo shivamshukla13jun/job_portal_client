@@ -29,7 +29,7 @@ const JobOverView = ({ data }) => {
           <span>          {data?.candidate_requirement?.experience} to {data?.candidate_requirement?.experience + 1} years
           </span>
         </li>
-          {/* <li>
+        {/* <li>
             <i className="icon icon-clock"></i>
             <h5>Hours:</h5>
             <span>50h / week</span>
@@ -39,11 +39,16 @@ const JobOverView = ({ data }) => {
           <h5>Rate:</h5>
           <span>$15 - $25 / hour</span>
         </li> */}
+
         <li>
           <i className="icon icon-salary"></i>
           <h5>Salary:</h5>
-          {data?.candidate_requirement?.salary_from && data?.candidate_requirement?.salary_to?<span>₹{data?.candidate_requirement?.salary_from} - ₹{data?.candidate_requirement?.salary_to}</span>:<span>Not Disclosed</span>}
+          {data?.candidate_requirement?.salary_from && data?.candidate_requirement?.salary_to ? <span>₹{data?.candidate_requirement?.salary_from} - ₹{data?.candidate_requirement?.salary_to}</span> : <span>Not Disclosed</span>}
         </li>
+        <li>
+          <i className="icon icon-open"></i>
+          <h5>No of Openings:</h5>
+          {data?.opening || 0}        </li>
       </ul>
     </div>
   );

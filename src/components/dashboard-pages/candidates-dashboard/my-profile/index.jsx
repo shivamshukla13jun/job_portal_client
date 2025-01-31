@@ -122,8 +122,6 @@ const index = () => {
   const mutation = useMutation({
     mutationFn: (data) => put(`/candidate`, userInfo._id, data),
     onSuccess: async (res) => {
-     
-
       if (res.data.success) {
         toast.success(res.data.message);
         // sessionStorage.setItem("session", res.data.token)

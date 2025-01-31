@@ -12,9 +12,13 @@ import { employerSchema } from "@/validations/dashboard/employer";
 import useUserInfo from "@/utils/hooks/useUserInfo";
 import BusinessPreviewModal from "./components/BusinessPreviewModal";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
+import { encrypt } from "@/lib/encrypt";
+import { useDispatch } from "react-redux";
+import { login } from "@/store/reducers/user";
 
 const index = () => {
   const userInfo = useUserInfo();
+  const dispatch=useDispatch()
   const [previewData, setPreviewData] = useState(null);
   const [FormLoading, setFormLoading] = useState(false);
   const { data, isLoading } = useQuery({
@@ -71,9 +75,14 @@ const index = () => {
       let response = put(`/employer`, userInfo._id, data);
       return response;
     },
-    onSuccess: (res) => {
+    onSuccess: async(res) => {
+     // sessionStorage.setItem("session", res.data.token)
+     let user = (await getById(`/user`, res.data.data.userId)).data.data;
+     let enData = encrypt(user);
+     sessionStorage.setItem("userInfo", enData);
+     setFormLoading(false);
+     window.location.reload()
       //console.log(res);
-      setFormLoading(false);
 
       toast.success(res.data.message);
     },

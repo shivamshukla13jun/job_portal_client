@@ -55,6 +55,8 @@ const Index = () => {
   const {
     data: matchJobs,
     isLoading: matchJobLoading,
+    isFetching,
+    isPending,
     isError: matchJobError,
     error: matchJobErrorDetails,
   } = useQuery({
@@ -80,7 +82,7 @@ const Index = () => {
     enabled: !!userInfo?.userTypeValue && Object.keys(userInfo?.userTypeValue).length > 0,
   });
 
-  if (isLoading || matchJobLoading) return <div>Loading...</div>;
+  if (isPending ||isFetching || isLoading || matchJobLoading) return <div>Loading...</div>;
 
   return (
     <div className="page-wrapper dashboard">
@@ -88,7 +90,7 @@ const Index = () => {
 
       <DashboardSidebar />
 
-      {isError || matchJobError ? (
+      {isError || matchJobError || !userInfo?.userTypeValue?._id ? (
         <div className="text-danger text-center m-auto px-5">
           <Link to="/candidates-dashboard/my-profile"> Complete Your Profile</Link>
         </div>
