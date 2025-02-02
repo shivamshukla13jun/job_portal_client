@@ -7,8 +7,6 @@ import JobType from "../components/JobType";
 import LocationBox from "../components/LocationBox";
 import SalaryRangeSlider from "../components/SalaryRangeSlider";
 import SearchBox from "../components/SearchBox";
-import Tag from "../components/Tag";
-import { get } from "@/services/api";
 
 const FilterSidebar = ({ search, setSearch,data }) => {
 

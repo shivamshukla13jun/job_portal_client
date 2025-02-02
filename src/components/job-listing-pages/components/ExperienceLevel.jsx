@@ -1,6 +1,6 @@
 import InputRange from "react-input-range";
 
-const ExperienceLevel = ({ search, setSearch }) => {
+const ExperienceLevel = ({ search, setSearch,data }) => {
 
     const handleOnChange = (value) => {
         setSearch((prev) => ({
@@ -10,13 +10,14 @@ const ExperienceLevel = ({ search, setSearch }) => {
             ,page:1
         }))
     }
-
+    console.log("data",data)
+    if(!data) return null
     return (
         <div className="range-slider-one salary-range">
             <InputRange
                 formatLabel={(value) => ``}
                 minValue={0}
-                maxValue={10}
+                maxValue={data?.maxeperience?.candidate_requirement?.experience || 10}
                 value={{
                     min: search.experience_from,
                     max: search.experience_to,

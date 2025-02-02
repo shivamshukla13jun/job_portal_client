@@ -45,7 +45,7 @@ const DashboardHeader = () => {
               <Link to={"/candidates-dashboard/saved-jobs"} className="count">
                 {SavedJobs?.length}
               </Link>
-              <span className="icon la la-heart-o"></span>
+              <span  onClick={() => navigate("/candidates-dashboard/saved-jobs")} className="icon la la-heart-o"></span>
             </button>
             <DropdownMenu
               menuData={menuItems}

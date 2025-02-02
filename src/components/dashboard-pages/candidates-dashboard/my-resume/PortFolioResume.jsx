@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { API_CANDIDATE_PATH } from '@/lib/config';
 import data from "./resumedata.json"
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
+import { Factory } from 'lucide-react';
 const PersonalPortfolio = () => {
   const userInfo = useUserInfo();
 
@@ -23,7 +24,12 @@ const PersonalPortfolio = () => {
     },
     enabled: !!userInfo._id,
   });
-
+  const jobSector=data?.employment
+  ?.flatMap(item => item.categories)
+  ?.filter((category, index, self) =>
+    index === self.findIndex(c => c.value === category.value)
+  )
+  console.log("jobSector",jobSector)
   return (
     <div className="resume">
       <div className="resume_left">
@@ -56,6 +62,12 @@ const PersonalPortfolio = () => {
                   <i className="fas fa-envelope" />
                 </div>
                 <div className="data">{data?.email}</div>
+              </li>
+              <li>
+                <div className="icon">
+                <i className="fas fa-industry" />
+                </div>
+                <div className="data">{jobSector?.map((item=>item.label))?.join(" ,")}</div>
               </li>
             </ul>
           </div>
