@@ -44,7 +44,7 @@ const index = () => {
           <div className="sec-title text-center">
             <h2>Featured Jobs</h2>
             <div className="text">
-              Know your worth and find the job that qualify your life
+             
             </div>
           </div>
 
@@ -70,7 +70,7 @@ const index = () => {
           <div className="sec-title text-center">
             <h2>Testimonials From Our Customers</h2>
             <div className="text">
-              Lorem ipsum dolor sit amet elit, sed do eiusmod tempor
+              
             </div>
           </div>
         </div>
