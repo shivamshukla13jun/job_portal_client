@@ -26,7 +26,7 @@ const index = () => {
         <div className="auto-container">
           <div className="sec-title text-center">
             <h2>Popular Job Categories</h2>
-            <div className="text">2020 jobs live - 293 added today.</div>
+            <div className="text">2025 jobs live - 293 added today.</div>
           </div>
 
           <div
@@ -46,7 +46,7 @@ const index = () => {
           <div className="sec-title text-center">
             <h2>Featured Jobs</h2>
             <div className="text">
-              Know your worth and find the job that qualify your life
+             
             </div>
           </div>
 
@@ -72,7 +72,7 @@ const index = () => {
           <div className="sec-title text-center">
             <h2>Testimonials From Our Customers</h2>
             <div className="text">
-              Lorem ipsum dolor sit amet elit, sed do eiusmod tempor
+              
             </div>
           </div>
         </div>
