@@ -24,8 +24,10 @@ export const jobSchema = Yup.object().shape({
     // age: Yup.number().required('Age is required'),
     candidate_requirement: Yup.object().shape({
         experience: Yup.string().required('Experience is required'),
-        salary_from: Yup.number().label("Salary From").notRequired(),
-        salary_to: Yup.number().min(Yup.ref('salary_from'), 'Salary to must be greater than or equal to Salary from').label("Salary To").notRequired(),
+        salary_from: Yup.number().label("Salary From").transform((value, originalValue) => (originalValue === "" ? null : value)),
+        
+        salary_to: Yup.number().min(Yup.ref('salary_from'), 'Salary to must be greater than or equal to Salary from').label("Salary To").transform((value, originalValue) => (originalValue === "" ? null : value)),
+
         bonus: Yup.boolean().required('Bonus is required'),
         job_info: Yup.string().required('Job description is required'),
         skills: Yup.array().of(

@@ -4,7 +4,7 @@ import React from 'react'
 const JobType = ({handleChange,search}) => {
   return (
       <select
-           className="chosen-single form-select chosen-container"
+           className="chosen-single chosen-container"
            onChange={(e)=>handleChange("job_type",e.target.value)}
            value={search.job_type}
          >

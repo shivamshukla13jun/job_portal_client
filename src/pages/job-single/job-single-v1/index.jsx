@@ -19,6 +19,7 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist, selectWishlist } from "@/store/reducers/Whishlist";
 import DashboardHeader from "@/components/header/DashboardHeader";
+import moment from "moment";
 const metadata = {
   title: "Job Single Dyanmic V1 || Chem Pharma - Job Borad ReactJs Template",
   description: "Chem Pharma - Job Borad ReactJs Template",
@@ -97,7 +98,8 @@ const JobSingleDynamicV1 = () => {
               <div className="inner-box">
                 <div className="content">
                   <span className="company-logo">
-                    <img src={API_EMPLOYER_PATH + data?.employerId?.logo?.filename} alt="logo" />
+                    <img src={API_EMPLOYER_PATH + data?.employerId?.logo?.filename} alt="logo"             onError={(e) => e.target.src = "/images/pharma.webp"}
+ />
                   </span>
                   <h4>{data?.title ?capitalizeFirstLetter(data?.title):""}</h4>
 
@@ -112,27 +114,28 @@ const JobSingleDynamicV1 = () => {
                       {data?.location}
                     </li>
                     {/* location info */}
-                    {/* <li>
+                    <li>
                       <span className="icon flaticon-clock-3"></span>{" "}
-                      {data?.timing?.job}
-                    </li> */}
+                      {moment(data?.createdAt).startOf('hour').fromNow()}
+                    </li>
                     {/* time info */}
                     <li>
                       <span className="icon flaticon-money"></span>{" "}
-                      {data?.candidate_requirement?.salary_from} - {data?.candidate_requirement?.salary_to}
+                      {data?.candidate_requirement?.salary_from && data?.candidate_requirement?.salary_to?<span>₹{data?.candidate_requirement?.salary_from} - ₹{data?.candidate_requirement?.salary_to} LPA</span>:<span>Not Disclosed</span>}
+                    
                     </li>
                     {/* salary info */}
                   </ul>
                   {/* End .job-info */}
 
+                  {/* End .job-other-info */}
                   <ul className="job-other-info">
-                    {data?.candidate_requirement?.skills?.map((val, i) => (
+                    {data?.categories?.map((val, i) => (
                       <li key={i} className={`required`}>
                         {val.label}
                       </li>
                     ))}
                   </ul>
-                  {/* End .job-other-info */}
                 </div>
                 {/* End .content */}
 
@@ -174,18 +177,6 @@ const JobSingleDynamicV1 = () => {
                 </div>
                 {/* <!-- Other Options --> */}
 
-                <div className="related-jobs">
-                  <div className="title-box">
-                    <h3>Related Jobs</h3>
-                    <div className="text">
-                      {/* 2020 jobs live - 293 added today. */}
-                    </div>
-                  </div>
-                  {/* End title box */}
-
-                  <RelatedJobs  data={jobsData ||[]} handleWishist={handleWishist}/>
-                </div>
-                {/* <!-- Related Jobs --> */}
               </div>
               {/* End .content-column */}
 
@@ -207,9 +198,13 @@ const JobSingleDynamicV1 = () => {
                     </div> */}
                     {/* <!--  Map Widget --> */}
 
+                    <h4 className="widget-title mt-5">Job Sector</h4>
+                    <div className="widget-content">
+                      <JobSkills data={data?.categories || []} />
+                    </div>
                     <h4 className="widget-title mt-5">Job Skills</h4>
                     <div className="widget-content">
-                      <JobSkills data={data} />
+                      <JobSkills data={data?.candidate_requirement?.skills || []} />
                     </div>
                     {/* <!-- Job Skills --> */}
                   </div>
@@ -219,7 +214,8 @@ const JobSingleDynamicV1 = () => {
                     <div className="widget-content">
                       <div className="company-title">
                         <div className="company-logo">
-                        <img src={API_EMPLOYER_PATH + data?.employerId?.logo?.filename} alt="logo" />
+                        <img src={API_EMPLOYER_PATH + data?.employerId?.logo?.filename} alt="logo"             onError={(e) => e.target.src = "/images/pharma.webp"}
+                        />
                         </div>
                         <h5 className="company-name">{data?.employerId?.business_name}</h5>
                         <Link to={`${paths.publicemployer}/${data?.employerId?._id}`} state={{company:data?.company}} className="profile-link">
@@ -248,6 +244,19 @@ const JobSingleDynamicV1 = () => {
                 {/* End .sidebar */}
               </div>
               {/* End .sidebar-column */}
+              
+              <div className="related-jobs">
+                  <div className="title-box">
+                    <h3>Related Jobs</h3>
+                    <div className="text">
+                      {/* 2020 jobs live - 293 added today. */}
+                    </div>
+                  </div>
+                  {/* End title box */}
+
+                  <RelatedJobs  data={jobsData ||[]} handleWishist={handleWishist}/>
+                </div>
+                {/* <!-- Related Jobs --> */}
             </div>
           </div>
         </div>

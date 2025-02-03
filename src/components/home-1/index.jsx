@@ -17,16 +17,14 @@ const index = () => {
     <>
       <DashboardHeader />
       {/* End Header with upload cv btn */}
-
-
       <Hero1 />
       {/* End Hero Section */}
 
       <section className="job-categories ui-job-categories">
         <div className="auto-container">
           <div className="sec-title text-center">
-            <h2>Popular Job Categories</h2>
-            <div className="text">2025 jobs live - 293 added today.</div>
+            <h2>Popular Job Sectors</h2>
+            {/* <div className="text">2020 jobs live - 293 added today.</div> */}
           </div>
 
           <div

@@ -11,7 +11,6 @@ const CandidateListPage4 = () => {
   return (
     <>
       <MetaComponent meta={metadata} />
-
       <CandidatesList />
     </>
   );

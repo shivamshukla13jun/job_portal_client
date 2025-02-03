@@ -5,8 +5,6 @@ import useUserInfo from "@/utils/hooks/useUserInfo";
 import { API_CANDIDATE_PATH, API_EMPLOYER_PATH } from "@/lib/config"
 import { useSelector } from "react-redux";
 import { selectWishlist } from "@/store/reducers/Whishlist";
-import { useQuery } from "@tanstack/react-query";
-import { getById } from "@/services/api";
 import { getDisplayName } from "@/utils/getDisplayName";
 import { authverify, paths } from "@/services/paths";
 import MobileMenu from "./MobileMenu";
@@ -16,7 +14,7 @@ import { DropdownMenu } from "./DropdownMenu";
 
 const DashboardHeader = () => {
   const userInfo = useUserInfo();
-  
+  const {menuItems}=useSelector((state)=>state.menu)
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const SavedJobs = useSelector(selectWishlist);
@@ -36,19 +34,6 @@ const DashboardHeader = () => {
 
     const userType = userInfo?.userType?.name?.toLowerCase();
     const userName =getDisplayName(userInfo)
-    // Fetch menu items from the backend
-    const { data: menuItems = [], isLoading } = useQuery({
-      queryKey: ["user/menu", userId],
-      queryFn: async () => {
-        try {
-          const res = await getById("user/menu", userId);
-          return res.data.data;
-        } catch (error) {
-          console.error("Error fetching menu:", error);
-        }
-      },
-      enabled: Boolean(userId),
-    });
     switch (userType) {
       case "candidate":
         return (
@@ -60,7 +45,7 @@ const DashboardHeader = () => {
               <Link to={"/candidates-dashboard/saved-jobs"} className="count">
                 {SavedJobs?.length}
               </Link>
-              <span className="icon la la-heart-o"></span>
+              <span  onClick={() => navigate("/candidates-dashboard/saved-jobs")} className="icon la la-heart-o"></span>
             </button>
             <DropdownMenu
               menuData={menuItems}

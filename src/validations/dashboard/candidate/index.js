@@ -11,7 +11,7 @@ export const candidateSchema = Yup.object().shape({
         designation:Yup.string().required('Designation is required'),
         gender: Yup.string().required('Gender is required'),
         experience: Yup.number().required('experience is required'),
-        currentsalary: Yup.number().required('Current Salary  is required'),
+        currentsalary: Yup.number().notRequired(),
         expectedsalary: Yup.number().required('Expected Salary is required'),
         dob: Yup.date().required('Date of birth is required').nullable(),
         marital_status: Yup.string().required('Marital status is required'),

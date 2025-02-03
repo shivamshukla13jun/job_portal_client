@@ -1,11 +1,11 @@
 import DatePicker from '@/components/common/date-picker/DatePicker'
 import { categories } from '@/data/category';
 import { departments } from '@/data/department';
+import moment from 'moment';
 import React, { useState } from 'react'
 import Select from "react-select";
 const EmploymentForm = ({ watch, register, setValue, error }) => {
     const index = watch("employment").length - 1;
-
     return (
         <div className='default-form'>
             <h4>Employment Form</h4>
@@ -80,7 +80,9 @@ const EmploymentForm = ({ watch, register, setValue, error }) => {
                         <DatePicker
                             id='employmentFromDate'
                             value={watch(`employment.${index}.from`)}
-                            onChange={(date) => setValue(`employment.${index}.from`, date)}
+                            onChange={(date) =>{
+                                 setValue(`employment.${index}.from`, date)
+                                }}
                         />
                     </div>
                 </div>
@@ -92,6 +94,7 @@ const EmploymentForm = ({ watch, register, setValue, error }) => {
                             id='employmentTillDate'
                             value={watch(`employment.${index}.to`)}
                             onChange={(date) => setValue(`employment.${index}.to`, date)}
+                            startDate={watch(`employment.${index}.from`)}
                         />
                     </div>
                 </div>

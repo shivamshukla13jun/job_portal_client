@@ -8,8 +8,13 @@ const ProtectedRoute = ({
     const userInfo = sessionStorage.getItem("userInfo") ? JSON.parse(decrypt(sessionStorage.getItem("userInfo")))?.userType?.name?.toLowerCase() : null;
     return userInfo === requiredRole ? (
       <>{children}</>
-    ) : (
-      <Navigate to="/unauthorized" replace />
+    ) :
+    !userInfo?
+    (
+      <Navigate to={'/login'} replace />
+    ):
+    (
+      <Navigate to={'/unauthorized'} replace />
     );
   };
 

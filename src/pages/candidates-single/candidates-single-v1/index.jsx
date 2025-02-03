@@ -1,11 +1,10 @@
 
 import FooterDefault from "@/components/footer/common-footer";
 import Social from "@/components/candidates-single-pages/social/Social";
-import JobSkills from "@/components/candidates-single-pages/shared-components/JobSkills";
 import { useParams } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 import { useQuery } from "@tanstack/react-query";
-import {  getById } from "@/services/api";
+import { getById } from "@/services/api";
 import { API_CANDIDATE_PATH } from "@/lib/config";
 import { toast } from "react-toastify";
 import useForwardCV from "@/utils/hooks/useForwardCV";
@@ -14,6 +13,7 @@ import ForwardCVModal from "./ForwardCVModal";
 import { useState } from "react";
 import { useAcceptApplication } from "@/utils/hooks/useApplication";
 import DashboardHeader from "@/components/header/DashboardHeader";
+import JobSkills from "@/components/candidates-single-pages/shared-components/JobSkills";
 
 const metadata = {
   title:
@@ -23,12 +23,12 @@ const metadata = {
 
 const CandidateSingleDynamicV1 = () => {
   let params = useParams();
-  const userInfo=useUserInfo()
+  const userInfo = useUserInfo()
   const [isForwardModalOpen, setIsForwardModalOpen] = useState(false);
-  const handleAccept=useAcceptApplication()
+  const handleAccept = useAcceptApplication()
   const id = params.id;
   const { handleForwardCV, isLoading: isForwarding } = useForwardCV();
-  
+
   const { data, isLoading } = useQuery({
     queryKey: [`resume${id}`],
     queryFn: async () => {
@@ -45,24 +45,24 @@ const CandidateSingleDynamicV1 = () => {
     },
     enabled: Boolean(userInfo?.userTypeValue?._id)
   });
-  function calculateTotalExperience(experience=0) {
-    console.log("experience",experience)
-     return `${experience} - ${experience+1} years` 
-    
-}
+  function calculateTotalExperience(experience = 0) {
+    console.log("experience", experience)
+    return `${experience} - ${experience + 1} years`
+
+  }
   const handleDownload = async () => {
     const fileUrl = API_CANDIDATE_PATH + data?.cv?.filename;
-  
+
     try {
       // Fetch the file data
       const response = await fetch(fileUrl);
       const blob = await response.blob(); // Get the file as a Blob
-  
+
       // Create a temporary link element
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob); // Create an object URL for the Blob
       link.download = data?.cv?.filename; // Set the filename for download
-  
+
       // Append the link to the body, trigger the click, then remove the link
       document.body.appendChild(link);
       link.click();
@@ -71,8 +71,8 @@ const CandidateSingleDynamicV1 = () => {
       toast.info('Download failed');
     }
   };
- const experience=calculateTotalExperience(data?.experience)
- //console.log("SubEmployers",SubEmployers)
+  const experience = calculateTotalExperience(data?.experience)
+  //console.log("SubEmployers",SubEmployers)
   if (isLoading) return <div>Loading...</div>
 
   return (
@@ -91,8 +91,8 @@ const CandidateSingleDynamicV1 = () => {
               <div className="inner-box">
                 <div className="content">
                   <figure className="image">
-                    <img src={API_CANDIDATE_PATH + data?.profile?.filename} alt="avatar"                       onError={(e) => e.target.src = "/images/resource/candidate.png"}
- />
+                    <img src={API_CANDIDATE_PATH + data?.profile?.filename} alt="avatar" onError={(e) => e.target.src = "/images/resource/candidate.png"}
+                    />
                   </figure>
                   <h4 className="name">{data?.name}</h4>
 
@@ -104,11 +104,11 @@ const CandidateSingleDynamicV1 = () => {
                     </li>
                     <li>
                       <span className="icon flaticon-money"></span>
-                      ₹ {data?.expectedsalary} / LPA
+                      ₹ {data?.currentsalary} / LPA
                     </li>
                     <li>
-                      <span className="icon flaticon-clock"></span>
-                      Member {new Date(data?.createdAt).toDateString()}
+                      <span className="icon flaticon-phone"></span>
+                      {data?.contact?.phone}
                     </li>
                   </ul>
 
@@ -129,27 +129,27 @@ const CandidateSingleDynamicV1 = () => {
 
                   <a
                     className="theme-btn btn-style-one me-2"
-                    onClick={()=>{
-                      data?.status!=="shortlisted" && handleAccept(id, "shortlisted")
+                    onClick={() => {
+                      data?.status !== "shortlisted" && handleAccept(id, "shortlisted")
 
                     }}
-                    disabled={data?.status=="shortlisted"}
+                    disabled={data?.status == "shortlisted"}
 
                   >
-                    {`Select${data?.status=="shortlisted" ?"ed":""}`} CV
+                    {`Select${data?.status == "shortlisted" ? "ed" : ""}`} CV
                   </a>
                   {
-                    userInfo && userInfo?.userType?.name?.toLowerCase() === 'employer' && 
+                    userInfo && userInfo?.userType?.name?.toLowerCase() === 'employer' &&
                     <a
-                    className="theme-btn btn-style-one"
-                    disabled={isForwarding}
-                    onClick={() => setIsForwardModalOpen(true)}
-                  >
-                  {isForwarding ? 'Forwarding...' : 'Forward CV'}
+                      className="theme-btn btn-style-one"
+                      disabled={isForwarding}
+                      onClick={() => setIsForwardModalOpen(true)}
+                    >
+                      {isForwarding ? 'Forwarding...' : 'Forward CV'}
 
-                  </a>
+                    </a>
                   }
-                 
+
                 </div>
 
 
@@ -227,9 +227,9 @@ const CandidateSingleDynamicV1 = () => {
                           <div className="text">{workExp?.description}</div>
                         </div>
                       </div>
-                    )):<></>}
+                    )) : <></>}
                   </div>
-                
+
                   {/* <!-- Candidate Resume End --> */}
                 </div>
               </div>
@@ -280,13 +280,25 @@ const CandidateSingleDynamicV1 = () => {
                           <i className="icon icon-degree"></i>
                           <h5>Education Level:</h5>
                           <span>
-                             {data?.education?.map((val, i,arr) => (
-                            
+                            {data?.education?.map((val, i, arr) => (
+                              <>
                                 <a>{val.qualification}</a>
-                            
+                                <br />
+                              </>
+
                             ))}
-                            </span>
+                          </span>
                         </li>
+                        <h4 className="widget-title mt-5">Job Sector</h4>
+                        <div className="widget-content">
+                          <JobSkills
+                            data={data?.employment
+                              ?.flatMap(item => item.categories)
+                              ?.filter((category, index, self) =>
+                                index === self.findIndex(c => c.value === category.value)
+                              )}
+                          />
+                        </div>
                       </ul>
                     </div>
                   </div>
@@ -331,7 +343,7 @@ const CandidateSingleDynamicV1 = () => {
         {/* <!-- job-detail-outer--> */}
       </section>
       {/* <!-- End Job Detail Section --> */}
- {/* Forward CV Modal */}
+      {/* Forward CV Modal */}
       <ForwardCVModal
         isOpen={isForwardModalOpen}
         onClose={() => setIsForwardModalOpen(false)}

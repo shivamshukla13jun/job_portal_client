@@ -20,9 +20,9 @@ console.log("category",category)
 
     };
     const { data=[], isLoading } = useQuery({
-        queryKey: [`dashboard/options/categories`],
+        queryKey: [`dashboard/applicationoptions/categories`],
         queryFn: async () => {
-          let res = (await get(`utilities/options/${userInfo?.userTypeValue?._id}/categories.label`)).data.data
+          let res = (await get(`utilities/applicationoptions/${userInfo?.userTypeValue?._id}/categories.label`)).data.data
           return res;
         },
         enabled:!!userInfo?.userTypeValue?._id
@@ -31,7 +31,7 @@ console.log("category",category)
 
     return (
         <select
-        className="chosen-single form-select chosen-container"
+        className="chosen-single chosen-container"
         onChange={categoryHandler}
         value={category}
       >

@@ -16,12 +16,14 @@ import { get, getById } from "@/services/api";
 import CandidateList from "./components/CandidateList";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const userInfo = useUserInfo();
-  const { limit, page, } = useSelector((state) => state.candidateFilter) || {};
+  const [page,setPage ] =useState(1) 
+  const [limit ] =useState(6) 
   // dashboard data
-  const { data:dashboard, isdashboardLoading } = useQuery({
+  const { data:dashboard, isdashboardLoading,isError } = useQuery({
     queryKey: [`dashboard/employer`, userInfo],
     queryFn: async () => {
       let res = (
@@ -32,7 +34,7 @@ const Index = () => {
     enabled: !!userInfo?.userTypeValue?._id,
   });
   //  recent Application
-    const { data:applications, isapplicationLoading } = useQuery({
+    const { data:applications, isapplicationLoading,isError:IsApplicationError } = useQuery({
       queryKey: [`application/tracking`,page],
       queryFn: async () => {
         let res = (await get(`application/tracking?page=${page}&limit=${limit}`)).data;
@@ -49,6 +51,12 @@ const Index = () => {
       {/* <!-- End User Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
+   
+         {isError || IsApplicationError || !userInfo?.userTypeValue?._id ? (
+           <div className="text-danger text-center m-auto px-5">
+             <Link to="/employers-dashboard/company-profile"> Complete Your Profile</Link>
+           </div>
+         ) :(
       <section className="user-dashboard">
         <div className="dashboard-outer">
           <BreadCrumb title={dashboard?.business_name} />
@@ -105,7 +113,7 @@ const Index = () => {
                 </div>
                 <div className="widget-content">
                   <div className="row">
-                    <Applicants data={applications} isLoading={isdashboardLoading} />
+                    <Applicants data={applications} isLoading={isdashboardLoading} setPage={setPage}page={page} limit={limit} />
                   </div>
                 </div>
               </div>
@@ -116,6 +124,8 @@ const Index = () => {
         </div>
         {/* End dashboard-outer */}
       </section>
+         )
+        }
       {/* <!-- End Dashboard --> */}
 
       <CopyrightFooter />

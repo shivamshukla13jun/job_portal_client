@@ -6,11 +6,13 @@ import { Trash2 } from "lucide-react";
 import MeetingLinkView from "./MeetingLinkView";
 import { del, get, getById } from "@/services/api";
 import useUserInfo from "@/utils/hooks/useUserInfo";
-import { useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
+import MeetingSchedule from "@/components/dashboard-pages/forward-resumes/components/MeetingSchadule";
 
 const MeetingList = () => {
   const [open, setOpen] = useState(false);
+      const [createModalOpen, setCreateModalOpen] = useState(false);
+  
   const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [searchParams] = useSearchParams();
   const createdBy = searchParams.get('createdBy') || "" // e.g., ?query=react
@@ -111,6 +113,14 @@ const MeetingList = () => {
                                     <span className="la la-eye"></span>
                                   </button>
                                 </li>
+                                <li>
+                                  <button
+                                    data-text="Reschdule Meeting"
+                                    onClick={() => setCreateModalOpen({...item.candidate,applicationId:item._id})}
+                                  >
+                                    <span className="la la fa-calendar"></span>
+                                  </button>
+                                </li>
 
                                 <li>
                                   <button
@@ -141,6 +151,12 @@ const MeetingList = () => {
           data={selectedMeeting}
         />
       )}
+       {createModalOpen && (
+                <MeetingSchedule
+                    isOpen={createModalOpen}
+                    onClose={() => setCreateModalOpen(false)}
+                />
+            )}
     </Suspense>
   );
 };

@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addLocation } from "../../../features/filter/candidateFilterSlice";
 
-const LocationBox = () => {
-    const { location } = useSelector((state) => state.candidateFilter) || {};
+const LocationBox = ({filters={}, updateFilters,clearFilters}) => {
+    const { location } =filters 
     const [getLocation, setLocation] = useState(location);
-    const dispath = useDispatch();
-
+  
     // location handler
     const locationHandler = (e) => {
         setLocation(e.target.value);
@@ -17,8 +16,8 @@ const LocationBox = () => {
 
     // location dispatch
     useEffect(() => {
-        dispath(addLocation(getLocation));
-    }, [dispath, addLocation, getLocation]);
+        updateFilters("location",getLocation);
+    }, [ addLocation, getLocation]);
 
     return (
         <>

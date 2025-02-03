@@ -28,9 +28,9 @@ const handleSerch=(name,value)=>{
   const debouncedSearch = useDebounce(search.search, 500);
 
   const { data, isLoading } = useQuery({
-    queryKey: [`sub-employers/shortlistcvs`, debouncedSearch,search.createdAt],
+    queryKey: [`sub-employers/forwarded`, debouncedSearch,search.createdAt],
     queryFn: async () => {
-      let res = (await get(`sub-employers/shortlistcvs?createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}&name=${debouncedSearch}`)).data;
+      let res = (await get(`sub-employers/forwarded?createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}&name=${debouncedSearch}`)).data;
       return res;
     },
     enabled: !!userInfo._id

@@ -52,7 +52,7 @@ const Applicants = ({ data ,search}) => {
                 />
               </figure>
               <h4 className="name">
-                <Link to={`${paths.publiccandidate}/${candidateId?._id}`}>
+                <Link to={`${paths.applicationid}/${candidateId?._id}`}>
                   {candidateId?.name}
                 </Link>
               </h4>
@@ -88,7 +88,7 @@ const Applicants = ({ data ,search}) => {
             <div className="option-box">
               <ul className="option-list">
               <li>
-                  <button data-text="View Application" onClick={() => navigate(`${paths.publiccandidate}/${candidateId._id}`)}>
+                  <button data-text="View Application" onClick={() => navigate(`${paths.applicationid}/${candidateId._id}`)}>
                     <span className="la la-eye"></span>
                   </button>
                 </li>

@@ -7,7 +7,9 @@ import DatePosted from "../components/DatePosted";
 import Experience from "../components/Experience";
 import Qualification from "../components/Qualification";
 
-const FilterSidebar = () => {
+const FilterSidebar = ({filters,setFilters,updateFilters,clearFilters}) => {
+    // Handlers for updating filters
+
     return (
         <div className="inner-column pd-right">
             <div className="filters-outer">
@@ -22,7 +24,7 @@ const FilterSidebar = () => {
                 <div className="filter-block">
                     <h4>Search by Keywords</h4>
                     <div className="form-group">
-                        <SearchBox />
+                        <SearchBox {...{filters, updateFilters,clearFilters}} />
                     </div>
                 </div>
                 {/* <!-- Filter Block --> */}
@@ -30,18 +32,15 @@ const FilterSidebar = () => {
                 <div className="filter-block">
                     <h4>Location</h4>
                     <div className="form-group">
-                        <LocationBox />
+                        <LocationBox {...{filters, updateFilters,clearFilters}} />
                     </div>
-
-                    <p>Radius around selected destination</p>
-                    <DestinationRangeSlider />
                 </div>
                 {/* <!-- Filter Block --> */}
 
                 <div className="filter-block">
-                    <h4>Category</h4>
+                    <h4>Job Sector</h4>
                     <div className="form-group">
-                        <Categories />
+                        <Categories {...{filters, updateFilters,clearFilters}}/>
                     </div>
                 </div>
                 {/* <!-- Filter Block --> */}
@@ -49,26 +48,26 @@ const FilterSidebar = () => {
                 <div className="filter-block">
                     <h4>Candidate Gender</h4>
                     <div className="form-group">
-                        <CandidatesGender />
+                        <CandidatesGender {...{filters, updateFilters,clearFilters}} />
                     </div>
                 </div>
                 {/* <!-- Filter Block --> */}
 
                 <div className="checkbox-outer">
                     <h4>Date Posted</h4>
-                    <DatePosted />
+                    <DatePosted {...{filters, updateFilters,clearFilters}}/>
                 </div>
                 {/* <!-- Filter Block --> */}
 
                 <div className="checkbox-outer">
                     <h4>Experience</h4>
-                    <Experience />
+                    <Experience {...{filters, updateFilters,clearFilters}}/>
                 </div>
                 {/* <!-- Filter Block --> */}
 
                 <div className=" checkbox-outer">
                     <h4>Qualification</h4>
-                    <Qualification />
+                    <Qualification {...{filters, updateFilters,clearFilters}}/>
                 </div>
                 {/* <!-- Filter Block --> */}
             </div>

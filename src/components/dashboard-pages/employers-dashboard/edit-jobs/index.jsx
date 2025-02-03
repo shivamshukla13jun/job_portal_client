@@ -124,26 +124,7 @@ const EditJob = () => {
           skills: data.candidate_requirement.skills || [],
         },
         personal_info: data.personal_info || [{ info: '', assets: [] }],
-        // interview_details:{
-        //   "type": data?.interview_details?.type || "",
-        //   "location": data?.interview_details?.location || "",
-        //   "time":data?.interview_details?.time || "10:00",
-        //   "date": data?.interview_details?.date || new Date()
-        // }
-        // timing: {
-        //   job: data.timing.job || '',
-        //   interview: data.timing.interview || ''
-        // },
-        // company: {
-        //   name: data.company.name || '',
-        //   contact_person: data.company.contact_person || '',
-        //   phone: data.company.phone || '',
-        //   email: data.company.email || '',
-        //   contact_person_profile: data.company.contact_person_profile || '',
-        //   size_of_org: data.company.size_of_org || 20,
-        //   job_address: data.company.job_address || '',
-        //   vacancy: data.company.vacancy || '',
-        // }
+     
       });
     }
 
@@ -159,7 +140,7 @@ console.log("singlejob",data)
       toast.error(errorArray[0][0].toUpperCase() + ' section needs to be filled!')
     }
   }, [errors]);
-
+  console.log(errors)
   if (isLoading) return <div>Loading...</div>
 
   return (

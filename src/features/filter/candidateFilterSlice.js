@@ -89,6 +89,12 @@ export const candidateFilterSlice = createSlice({
             console.log("payload",payload)
             state.page = payload;
         },
+        clearMatchingCandidate:(state,{payload})=>{
+        },
+        clearAllFilters: (state) => {
+            console.log("clear")
+            Object.assign(state, initialState);
+        }
     },
 });
 
@@ -103,7 +109,7 @@ export const {
     clearExperienceF,
     addQualification,
     clearQualificationF,
-    addSort,
+    addSort,clearAllFilters,
     addPerPage,addEdcucation,addLimit,addPage
 } = candidateFilterSlice.actions;
 export default candidateFilterSlice.reducer;

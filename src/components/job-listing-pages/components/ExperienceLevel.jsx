@@ -10,13 +10,14 @@ const ExperienceLevel = ({ search, setSearch,data }) => {
             ,page:1
         }))
     }
-
+    console.log("data",data)
+    if(!data) return null
     return (
         <div className="range-slider-one salary-range">
             <InputRange
                 formatLabel={(value) => ``}
                 minValue={0}
-                maxValue={10}
+                maxValue={data?.maxeperience?.candidate_requirement?.experience || 10}
                 value={{
                     min: search.experience_from,
                     max: search.experience_to,
@@ -26,8 +27,8 @@ const ExperienceLevel = ({ search, setSearch,data }) => {
             <div className="input-outer">
                 <div className="amount-outer">
                     <span className="d-inline-flex align-items-center">
-                        <span className="min">{search.experience_from} year</span>
-                        <span className="max ms-2">{search.experience_to} year</span>
+                        <span className="min">{search.experience_from || 0} year</span>
+                        <span className="max ms-2">{search.experience_to || 10} year</span>
                     </span>
                 </div>
             </div>

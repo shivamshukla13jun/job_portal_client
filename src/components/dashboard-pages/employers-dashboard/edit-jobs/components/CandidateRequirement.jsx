@@ -21,6 +21,7 @@ const CandidateRequirement = ({ watch, register, setValue, error }) => {
                         {/* error error-border */}
                         <select
                 {...register("candidate_requirement.experience")}
+                value={watch("candidate_requirement.experience")}
                 className={`${error?.candidate_requirement?.experience?.message ? "error error-border" : ""}`}
             >
                 {/* Options for Minimum Experience */}

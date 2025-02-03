@@ -18,9 +18,9 @@ const Qualification = () => {
         dispatch(addPage(1))
     };
     const { data=[], isLoading } = useQuery({
-        queryKey: [`dashboard/options`,status],
+        queryKey: [`dashboard/applicationoptions`,status],
         queryFn: async () => {
-          let res = (await get(`utilities/options/${userInfo?.userTypeValue?._id}/personal_info.info.degree?status=${status}`)).data.data
+          let res = (await get(`utilities/applicationoptions/${userInfo?.userTypeValue?._id}/personal_info.info.degree?status=${status}`)).data.data
           return res;
         },
         enabled:!!userInfo?.userTypeValue?._id
@@ -29,7 +29,7 @@ const Qualification = () => {
       console.log(data)
     return (
             <select
-        className="chosen-single form-select chosen-container"
+        className="chosen-single chosen-container"
         onChange={qualificationHandler}
         value={qualification}
       >

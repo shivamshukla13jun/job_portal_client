@@ -8,7 +8,7 @@ import PrivateMessageBox from "@/components/employer-single-pages/shared-compone
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
-import { getById } from "@/services/api";
+import { get, getById } from "@/services/api";
 import { API_EMPLOYER_PATH } from "@/lib/config";
 import { useLocation } from "react-router-dom";
 import DashboardHeader from "@/components/header/DashboardHeader";
@@ -21,8 +21,6 @@ const metadata = {
 
 const EmployersSingleV1 = () => {
   let params = useParams();
-  let {state} = useLocation();
-  //console.log(state)
   const id = params.id;
 
   const { data, isLoading } = useQuery({
@@ -33,12 +31,14 @@ const EmployersSingleV1 = () => {
     }
   });
   const { data: jobsData, isLoading: jobsLoader } = useQuery({
-    queryKey: ['jobs'],
+    queryKey: ['job'], // Remove employer ID dependency
     queryFn: async () => {
       let res = (await get('job?limit=4&sort=new')).data.data;
       return res;
     }
   });
+  if (jobsLoader) return <div>Loading...</div>;
+
   return (
     <>
       <MetaComponent meta={metadata} />
@@ -56,7 +56,8 @@ const EmployersSingleV1 = () => {
               <div className="inner-box">
                 <div className="content">
                   <span className="company-logo">
-                    <img src={API_EMPLOYER_PATH + data?.employerDetails?.logo?.filename} alt="logo" />
+                    <img src={API_EMPLOYER_PATH + data?.employerDetails?.logo?.filename} alt="logo"              onError={(e) => e.target.src = "/images/pharma.webp"}
+                    />
                   </span>
                   <h4>{data?.employerDetails?.business_name}</h4>
 
@@ -66,10 +67,10 @@ const EmployersSingleV1 = () => {
                       {data?.employerDetails?.address?.city + ", "+data?.employerDetails?.address?.state}
                     </li>
                     {/* compnay info */}
-                    {/* <li>
+                    <li>
                       <span className="icon flaticon-briefcase"></span>
-                      {data?.jobType}
-                    </li> */}
+                      {data?.employerDetails?.categories?.slice(0,1)?.map((item)=>item.label)}
+                    </li>
                     {/* location info */}
                     <li>
                       <span className="icon flaticon-telephone-1"></span>
@@ -85,7 +86,7 @@ const EmployersSingleV1 = () => {
                   {/* End .job-info */}
 
                   <ul className="job-other-info">
-                    {/* <li className="time">Open Jobs – {employer.jobNumber}</li> */}
+                    <li className="time">Open Jobs – {data?.totalJobs || 0}</li>
                   </ul>
                   {/* End .job-other-info */}
                 </div>
@@ -151,7 +152,7 @@ const EmployersSingleV1 = () => {
                 {/* End job-detail */}
 
                 {/* <!-- Related Jobs --> */}
-                <div className="related-jobs">
+                <div className="related-jobs mt-5">
                   <div className="title-box">
                     <h3> {jobsData?.length || 0} Others jobs available</h3>
                     <div className="text">
@@ -200,7 +201,8 @@ const EmployersSingleV1 = () => {
 
                       <div className="btn-box">
                         <a
-                          href="#"
+                          href={data?.employerDetails?.url}
+                          target="__blank"
                           className="theme-btn btn-style-three"
                           style={{ textTransform: "lowercase" }}
                         >
@@ -211,18 +213,6 @@ const EmployersSingleV1 = () => {
                     </div>
                   </div>
                   {/* End company-widget */}
-
-                  <div className="sidebar-widget">
-                    {/* <!-- Map Widget --> */}
-                    {/* <h4 className="widget-title">Job Location</h4>
-                    <div className="widget-content">
-                      <div style={{ height: "300px", width: "100%" }}>
-                        <MapJobFinder />
-                      </div>
-                    </div> */}
-                    {/* <!--  Map Widget --> */}
-                  </div>
-                  {/* End sidebar-widget */}
                 </aside>
                 {/* End .sidebar */}
               </div>

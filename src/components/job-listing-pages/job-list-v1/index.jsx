@@ -98,7 +98,7 @@ const index = () => {
                             aria-labelledby="offcanvasLabel"
                         >
                             <div className="filters-column hide-left">
-                                <FilterSidebar search={search} setSearch={setSearch} />
+                                <FilterSidebar search={search} setSearch={setSearch} data={SalaryandExp}/>
                             </div>
                         </div>
                         {/* End filter column for tablet and mobile devices */}

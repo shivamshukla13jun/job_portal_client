@@ -3,36 +3,45 @@ import React from "react";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false, error: null, errorInfo: null };
   }
 
   static getDerivedStateFromError(error) {
-    // Update state to render fallback UI
-    return { hasError: true, error };
+    return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
-    // Log the error to an error reporting service
+    this.setState({ error, errorInfo });
     console.error("ErrorBoundary caught an error:", error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      // Fallback UI
       return (
-        <div className="error-boundary">
-          <h2>Something went wrong!</h2>
-          <p>{this.state.error?.message || "An unexpected error occurred."}</p>
-          <button onClick={() => window.location.reload()}>
-            Reload the Page
-          </button>
+        <div className="container mt-5">
+          <div className="alert alert-danger" role="alert">
+            <h4 className="alert-heading">Oops! Something went wrong.</h4>
+            <p>
+              We encountered an unexpected issue. Please try refreshing the page or contact support if the problem persists.
+            </p>
+            <hr />
+            <p className="mb-0">
+              <strong>Error:</strong> {this.state.error?.toString()}
+            </p>
+            <details className="mt-3">
+              <summary>Click for more details</summary>
+              <pre className="mt-2">
+                {this.state.errorInfo?.componentStack}
+              </pre>
+            </details>
+          </div>
         </div>
       );
     }
 
-    // Render children if no error
     return this.props.children;
   }
+
 }
 
 export default ErrorBoundary;

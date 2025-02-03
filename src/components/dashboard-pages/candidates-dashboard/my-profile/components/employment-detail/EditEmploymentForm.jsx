@@ -1,9 +1,11 @@
 import DatePicker from "@/components/common/date-picker/DatePicker";
 import { categories } from "@/data/category";
 import { departments } from "@/data/department";
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import { Controller } from "react-hook-form";
 import Select from "react-select";
+
 const EditEmploymentForm = ({
   watch,
   register,
@@ -15,6 +17,15 @@ const EditEmploymentForm = ({
   if (index === null) {
     return;
   }
+
+  // Watch the 'from' date to handle the conditional logic for 'till' date
+  const employmentFromDate = watch(`employment.${index}.from`);
+
+  // Disable till date if 'from' date is set
+  const isTillDateDisabled = employmentFromDate
+    ? (date) => date.isBefore(moment(employmentFromDate), "day")
+    : () => false;
+    console.log("isTillDateDisabled",isTillDateDisabled)
 
   return (
     <div className="default-form">
@@ -53,13 +64,17 @@ const EditEmploymentForm = ({
           >
             <option value={""}>Select Department</option>
             {departments.map((item) => (
-              <option value={item.label}>{item.label}</option>
+              <option key={item.label} value={item.label}>
+                {item.label}
+              </option>
             ))}
           </select>
         </div>
+
         <div className="form-group col-lg-12 col-md-12">
           <label>
-            Job Sector <span className="required-form">*</span></label>
+            Job Sector <span className="required-form">*</span>
+          </label>
           <Controller
             name={`employment.${index}.categories`}
             control={control}
@@ -91,13 +106,17 @@ const EditEmploymentForm = ({
             <span className="text-red-500">This field is required</span>
           )}
         </div>
+
         <div className="form-group col-lg-6 col-md-12">
           <label>From Date <span className="required-form">*</span></label>
           <div>
             <DatePicker
               id="employmentFromDate"
-              value={watch?.from}
-              onChange={(date) => setValue(`employment.${index}.from`, date)}
+              value={watch(`employment.${index}.from`)}
+              onChange={(date) =>{
+                // setStartDate(date);
+                 setValue(`employment.${index}.from`, date)
+                }}
             />
           </div>
         </div>
@@ -107,9 +126,13 @@ const EditEmploymentForm = ({
           <div>
             <DatePicker
               id="employmentTillDate"
-              value={watch?.to}
-              onChange={(date) => setValue(`employment.${index}.to`, date)}
-            />
+              value={watch(`employment.${index}.to`)}
+              onChange={(date) =>{
+                // setEndDate(date);
+                 setValue(`employment.${index}.to`, date)
+                }}
+                startDate={watch(`employment.${index}.from`)}  // Pass startDate to restrict the till date
+                />
           </div>
         </div>
 

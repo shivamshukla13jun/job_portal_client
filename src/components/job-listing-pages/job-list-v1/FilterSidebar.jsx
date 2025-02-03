@@ -7,8 +7,6 @@ import JobType from "../components/JobType";
 import LocationBox from "../components/LocationBox";
 import SalaryRangeSlider from "../components/SalaryRangeSlider";
 import SearchBox from "../components/SearchBox";
-import Tag from "../components/Tag";
-import { get } from "@/services/api";
 
 const FilterSidebar = ({ search, setSearch,data }) => {
 
@@ -43,7 +41,7 @@ const FilterSidebar = ({ search, setSearch,data }) => {
         {/* <!-- Filter Block --> */}
 
         <div className="filter-block">
-          <h4>Category</h4>
+          <h4>Job Sector</h4>
           <div className="form-group">
             <Categories search={search} setSearch={setSearch} />
           </div>

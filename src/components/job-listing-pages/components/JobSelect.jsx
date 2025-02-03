@@ -44,7 +44,7 @@ export default function JobSelect() {
                     <div className="form-group">
                         <select
                             onChange={jobTypeHandler}
-                            className="chosen-single form-select"
+                            className="chosen-single"
                             value={jobList?.jobTypeSelect}
                         >
                             <option value="">Job Type</option>
@@ -60,7 +60,7 @@ export default function JobSelect() {
                     <div className="form-group">
                         <select
                             onChange={datePostHandler}
-                            className="chosen-single form-select"
+                            className="chosen-single"
                             value={jobList?.datePosted}
                         >
                             {datePost?.map((item) => (
@@ -75,7 +75,7 @@ export default function JobSelect() {
                     <div className="form-group">
                         <select
                             onChange={experienceHandler}
-                            className="chosen-single form-select"
+                            className="chosen-single"
                             value={jobList?.experienceSelect}
                         >
                             <option>Experience Level</option>
@@ -91,7 +91,7 @@ export default function JobSelect() {
                     <div className="form-group">
                         <select
                             onChange={salaryHandler}
-                            className="chosen-single form-select"
+                            className="chosen-single"
                             value={JSON.stringify(jobList.salary)}
                         >
                             <option

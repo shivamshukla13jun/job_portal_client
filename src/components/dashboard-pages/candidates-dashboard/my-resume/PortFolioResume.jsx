@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { API_CANDIDATE_PATH } from '@/lib/config';
 import data from "./resumedata.json"
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
+import { Factory } from 'lucide-react';
 const PersonalPortfolio = () => {
   const userInfo = useUserInfo();
 
@@ -23,12 +24,17 @@ const PersonalPortfolio = () => {
     },
     enabled: !!userInfo._id,
   });
-
+  const jobSector=data?.employment
+  ?.flatMap(item => item.categories)
+  ?.filter((category, index, self) =>
+    index === self.findIndex(c => c.value === category.value)
+  )
+  console.log("jobSector",jobSector)
   return (
     <div className="resume">
       <div className="resume_left">
         <div className="resume_profile">
-          <img src={data?.profile?.path} alt="Profile" onError={(e) => e.target.src = "/images/profile.png"} />
+          <img src={API_CANDIDATE_PATH+data?.profile?.filename} className='rounded-circle p-1' alt="Profile" onError={(e) => e.target.src = "/images/profile.png"} />
         </div>
         <div className="resume_content">
           <div className="resume_item resume_info">
@@ -56,6 +62,12 @@ const PersonalPortfolio = () => {
                   <i className="fas fa-envelope" />
                 </div>
                 <div className="data">{data?.email}</div>
+              </li>
+              <li>
+                <div className="icon">
+                <i className="fas fa-industry" />
+                </div>
+                <div className="data">{jobSector?.map((item=>item.label))?.join(" ,")}</div>
               </li>
             </ul>
           </div>
@@ -217,7 +229,7 @@ const PersonalPortfolio = () => {
         </div>
 
         {/* Achievements Section */}
-        <div className="resume_item resume_achievements">
+        {Array.isArray(data?.achievement)&& data?.achievement?.length> 0 &&   <div className="resume_item resume_achievements">
           <div className="title">
             <p className="bold">Achievements</p>
           </div>
@@ -231,10 +243,11 @@ const PersonalPortfolio = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> }
+      
 
         {/* References Section */}
-        <div className="resume_item resume_references">
+        {/* <div className="resume_item resume_references">
           <div className="title">
             <p className="bold">References</p>
           </div>
@@ -248,19 +261,18 @@ const PersonalPortfolio = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
 
         {/* Compensation Section */}
-        <div className="resume_item resume_compensation">
+        {/* <div className="resume_item resume_compensation">
           <div className="title">
             <p className="bold">Compensation</p>
           </div>
           <p>
             Current Salary: {data?.currentsalary} LPA <br />
-            Expected Salary: {data?.expectedsalary} LPA <br />
             Experience: {data?.experience} years
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
 

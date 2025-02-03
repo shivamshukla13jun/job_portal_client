@@ -1,5 +1,3 @@
-
-
 const Address = () => {
   const addressContent = [
     {
@@ -8,8 +6,15 @@ const Address = () => {
       title: "Address",
       text: (
         <>
-          329 Queensberry Street, North
-          <br /> Melbourne VIC 3051, Australia.
+         Shubham Avenue<br />
+         Maharashtra - 400077
+          {/* Shubham Avenue<br />
+          C wing, Office Number: 1008<br />
+          Building No. 19, 21<br />
+          Shree Gurudatta Mandir Marg<br />
+          Sai Baba Nagar, Pant Nagar<br />
+          Ghatkopar East, Mumbai<br />
+          Maharashtra - 400077 */}
         </>
       ),
     },
@@ -19,8 +24,11 @@ const Address = () => {
       title: "Call Us",
       text: (
         <>
-          <a href="tel:+4733378901" className="phone">
-            123 456 7890
+          <a href="tel:+8928235501" className="phone">
+            892 823 5501
+          </a><br />
+          <a href="tel:+9870122286" className="phone">
+            987 012 2286
           </a>
         </>
       ),
@@ -31,8 +39,13 @@ const Address = () => {
       title: "Email",
       text: (
         <>
-          {" "}
-          <a href="#">contact.london@example.com</a>
+          <a href="mailto:info@chempharmajobs.com">
+            info@chempharmajobs.com
+          </a>
+          <br />
+          <a href="mailto:recruit@chempharmajobs.com">
+            recruit@chempharmajobs.com
+          </a>
         </>
       ),
     },
@@ -47,7 +60,6 @@ const Address = () => {
           <div className="inner-box">
             <span className="icon">
               <img
-               
                 src={`/images/icons/${item.iconName}.svg`}
                 alt="icon"
               />

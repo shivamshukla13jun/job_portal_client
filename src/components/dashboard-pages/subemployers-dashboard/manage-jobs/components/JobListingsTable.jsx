@@ -16,7 +16,7 @@ const JobListingsTable = ({ data, handleJobDelete }) => {
 
         <div className="chosen-outer">
           {/* <!--Tabs Box--> */}
-          <select className="chosen-single form-select">
+          <select className="chosen-single">
      {
             datePost.map((item)=>(
               <option value={item.value}>{item.name}</option>

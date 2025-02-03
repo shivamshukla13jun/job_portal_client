@@ -13,7 +13,7 @@ import useUserInfo from "@/utils/hooks/useUserInfo.jsx";
 import JobType from "./JobType.jsx";
 import { DateFilter } from "./DateFilter.jsx";
 
-const JobListingsTable = ({ data, handleChange, search }) => {
+const JobListingsTable = ({ data, handleChange, search ,handleClear}) => {
   const queryClient = useQueryClient();
   const userInfo = useUserInfo();
 
@@ -46,6 +46,12 @@ const JobListingsTable = ({ data, handleChange, search }) => {
           <Categories {...{ handleChange, search }} />
           <JobType {...{ handleChange, search }} />
           <DateFilter {...{ handleChange, search }} />
+           <button
+                  className="btn bg-danger chosen-single chosen-container text-white"
+                  onClick={handleClear}
+                >
+                  Clear All
+                </button>
         </div>
       </div>
       {/* End filter top bar */}
@@ -89,9 +95,11 @@ const JobListingsTable = ({ data, handleChange, search }) => {
                             </h4>
                             <ul className="job-info">
                               <li>
-                                <span className="icon flaticon-money"></span>₹
-                                {item?.candidate_requirement?.salary_from} - ₹
-                                {item?.candidate_requirement?.salary_to}
+                                <span className="icon flaticon-money"></span>
+                                {item?.candidate_requirement?.salary_from && item?.candidate_requirement?.salary_to ?   `₹
+                                ${item?.candidate_requirement?.salary_from} - ₹
+                                ${item?.candidate_requirement?.salary_to}`:"Not Disclosed" }
+                             
                               </li>
                               <li>
                                 <span className="icon flaticon-briefcase"></span>

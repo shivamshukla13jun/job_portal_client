@@ -5,18 +5,21 @@ import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter.js";
 import { datePost } from "@/utils/datePost";
 import { addToWishlist } from "@/store/reducers/Whishlist";
 import { useDispatch } from "react-redux";
+import { useMutation } from "@tanstack/react-query";
+import { useAddToWishlist } from "@/utils/hooks/useAddToWishlist";
 
 const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
   const navigate = useNavigate();
   const dispatch=useDispatch()
-  const now = new Date();
+  const { mutate: handleAddToWishlist } = useAddToWishlist();
+
   return (
     <div className="tabs-box">
       <div className="widget-title">
         <h4>My Saved Jobs</h4>
 
         <div className="chosen-outer">
-          {/* <select onChange={(e)=>handleSerch("createdAt",e.target.value)}  className="chosen-single form-select">
+          {/* <select onChange={(e)=>handleSerch("createdAt",e.target.value)}  className="chosen-single">
           {
             datePost.map((item)=>(
               <option value={item.value}>{item.name}</option>
@@ -82,7 +85,7 @@ const JobListingsTable = ({ data ,search, setSearch,handleSerch}) => {
                               </button>
                             </li>
                             <li>
-                            <button  onClick={()=> dispatch(addToWishlist({ id:item?._id, operation:"remove" }))} data-text="Delete Aplication">
+                            <button  onClick={()=> handleAddToWishlist({ id:item?._id, operation:"remove" })} data-text="Delete Aplication">
                               <span className="la la-trash"></span>
                             </button>
                           </li>

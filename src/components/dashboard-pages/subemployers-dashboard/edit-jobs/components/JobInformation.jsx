@@ -15,7 +15,7 @@ const JobInformation = ({ watch, register, setValue, error }) => {
 
         <label style={{ fontSize: "15px", fontWeight: "500", marginBottom: "10px", lineHeight: "20px" }}>Job Location<span className='required-form'>*</span></label>
         <div className="form-group col-lg-6 col-md-12">
-          <select className={`${error?.location?.message ? 'error' : ''} chosen-single form-select`} {...register("location")}>
+          <select className={`${error?.location?.message ? 'error' : ''} chosen-single`} {...register("location")}>
             <option value="" hidden>Select Location</option>
             {cities.map((item, index) => (
               <option value={item} key={item + index}>{item}</option>
@@ -50,7 +50,7 @@ const JobInformation = ({ watch, register, setValue, error }) => {
         <label>
             Job Type <span className="required-form">*</span>
           </label>
-          <select  className={`${error?.jobtype?.message ? 'error' : ''} chosen-single form-select`} {...register("jobtype")}>
+          <select  className={`${error?.jobtype?.message ? 'error' : ''} chosen-single`} {...register("jobtype")}>
             <option value="" hidden>Select Job Type</option>
             {jobTypeList.map((item, index) => (
               <option value={item.value} key={index}>{item.name}</option>

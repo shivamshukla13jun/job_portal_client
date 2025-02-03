@@ -12,7 +12,7 @@ const TopCardBlock = ({data}) => {
       countNumber: data?.jobs?.total,
       metaName: "Posted Jobs",
       uiClass: "ui-blue",
-      to:"/employers-dashboard/post-jobs",
+      to:"/employers-dashboard/manage-jobs",
     },
     {
       id: 2,

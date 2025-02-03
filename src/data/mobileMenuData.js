@@ -7,11 +7,6 @@ const mobileMenudate = [
     routePath: paths.home,
   },
   {
-    id: 1,
-    label: "Home",
-    routePath: paths.home,
-  },
-  {
     id: 2,
     label: "Find Jobs",
     routePath: paths.job_list,

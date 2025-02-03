@@ -12,33 +12,36 @@ import CopyrightFooter from "../CopyrightFooter";
 import MenuToggler from "../MenuToggler";
 import { useParams } from "react-router-dom";
 import Pagination from "@/utils/hooks/usePagination";
-import { useSearchParams } from "react-router-dom";
 
 const index = () => {
   const userInfo = useUserInfo();
   const {EmployerId="",SubEmployerId=""}=useParams()
-  
-  const [search, setSearch] = useState({
+  const initalstate={
     page: 1,
     limit: 10,
     createdAt: '',
     search:""
-});
+  }
+  const [search, setSearch] = useState(initalstate);
+
 const handleSerch=(name,value)=>{
   setSearch((prev)=>({
     ...prev,
     [name]:value
   }))
 }
+const handleClear=()=> setSearch(initalstate)
+
   const debouncedSearch = useDebounce(search.search, 500);
 
   const { data, isLoading } = useQuery({
-    queryKey: [`sub-employers/shortlistcvs`,SubEmployerId,EmployerId,search.page, debouncedSearch,search.createdAt],
+    queryKey: [`sub-employers/forwarded`,SubEmployerId,EmployerId,search.page, debouncedSearch,search.createdAt],
     queryFn: async () => {
-      let res = (await get(`sub-employers/shortlistcvs?EmployerId=${EmployerId}&SubEmployerId=${SubEmployerId}&createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}&name=${debouncedSearch}`)).data;
+
+      let res = (await get(`sub-employers/forwarded?EmployerId=${EmployerId}&SubEmployerId=${SubEmployerId}&createdAt=${search.createdAt}&page=${search.page}&limit=${search.limit}&keyword=${debouncedSearch}`)).data;
       return res;
     },
-    enabled: !!EmployerId || !!SubEmployerId
+    enabled: !!EmployerId || !!SubEmployerId || !!userInfo?.userTypeValue?._id,
   });
 
   if (isLoading) return <div>Loading...</div>
@@ -64,7 +67,7 @@ const handleSerch=(name,value)=>{
               <div className="applicants-widget ls-widget">
                 <div className="widget-title">
                   <h4>Forwrad Applications</h4>
-                  <WidgetToFilterBox search={search} handleSerch={handleSerch} />
+                  <WidgetToFilterBox search={search} handleSerch={handleSerch} handleClear={handleClear} />
                 </div>
                 {/* End widget top filter box */}
                 <WidgetContentBox data={data} search={search}/>

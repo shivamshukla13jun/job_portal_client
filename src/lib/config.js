@@ -6,6 +6,9 @@ const API_EMPLOYER_PATH = MODE=="development"?import.meta.env.VITE_DEV_EMPLOYER_
 const API_CANDIDATE_PATH =  MODE=="development"?import.meta.env.VITE_DEV_CANDIDATE_URL:import.meta.env.VITE_CANDIDATE_URL;
 const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID;
 const RAZORPAY_KEY_SECRET = import.meta.env.VITE_RAZORPAY_KEY_SECRET;
+const EmployerRouteParent = "employers-dashboard"
+const SubemployerRoutePrent = "subemployers-dashboard"
+const candidateRoutePrent = "candidates-dashboard"
 
 export {
     API_PROD, API_DEV, API_EMPLOYER_PATH, API_CANDIDATE_PATH,RAZORPAY_KEY_ID,RAZORPAY_KEY_SECRET
