@@ -4,8 +4,8 @@ import HomeComponent from "@/components/home-1";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Home-1 || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Home",
+  description: "",
 };
 
 export default function Home() {

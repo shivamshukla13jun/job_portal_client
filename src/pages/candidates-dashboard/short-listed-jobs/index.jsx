@@ -3,8 +3,8 @@ import ShortListedJobs from "@/components/dashboard-pages/candidates-dashboard/s
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Short ListedJobs || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Short ListedJobs ",
+  description: "",
 };
 
 const ShortListedJobsPage = () => {

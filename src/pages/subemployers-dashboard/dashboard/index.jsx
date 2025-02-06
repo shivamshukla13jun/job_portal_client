@@ -4,8 +4,8 @@ import MetaComponent from "@/components/common/MetaComponent";
 import ErrorBoundary from "@/utils/ErrorBoundary";
 
 const metadata = {
-  title: "Sub Employeers Dashboard || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Sub-Employer Dashboard | ChemPharmaJobs - Manage Hiring & Recruitment",
+  description: "Use the sub-employer dashboard to assist with job postings, candidate shortlisting, and hiring management on ChemPharmaJobs.",
 };
 
 const DashboardSubemplyerDBPage = () => {

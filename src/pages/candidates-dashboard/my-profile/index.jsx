@@ -3,8 +3,8 @@ import MyProfile from "@/components/dashboard-pages/candidates-dashboard/my-prof
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "My Profile || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "My Profile ",
+  description: "",
 };
 
 const MyProfilePage = () => {
