@@ -4,8 +4,8 @@ import AllApplicants from "../../../components/dashboard-pages/employers-dashboa
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "All Applicants || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "All Applicants ",
+  description: "",
 };
 
 const AllApplicantsCandidatesPage = () => {

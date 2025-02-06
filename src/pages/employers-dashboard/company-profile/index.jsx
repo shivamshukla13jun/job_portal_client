@@ -3,8 +3,8 @@ import CompanyProfile from "@/components/dashboard-pages/employers-dashboard/com
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Company Profile || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Company Profile ",
+  description: "",
 };
 
 const CompanyProfileEmploeeDBPage = () => {

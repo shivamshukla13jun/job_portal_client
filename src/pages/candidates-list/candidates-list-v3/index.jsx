@@ -3,8 +3,8 @@ import CandidatesList from "@/components/candidates-listing-pages/candidates-lis
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Candidates List V3 || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Candidates List V3 ",
+  description: "",
 };
 
 const CandidateListPage3 = () => {

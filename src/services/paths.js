@@ -30,6 +30,7 @@ export const paths = {
 
     // New paths from BrowserRouter
     faq: '/faq',
+    privacy:"/privacy",
     terms: '/terms',
     invoice: '/invoice',
     resetpassword: '/resetpassword',

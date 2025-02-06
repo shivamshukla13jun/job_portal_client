@@ -3,8 +3,8 @@ import Privacy from "@/components/pages-menu/Privacy";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Privacy || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Privacy ",
+  description: "",
 };
 
 const PrivacyPage = () => {

@@ -3,8 +3,8 @@ import DashboadHome from "@/components/dashboard-pages/candidates-dashboard/dash
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Candidates Dashboard || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Candidate Dashboard | ChemPharmaJobs - Manage Your Job Applications",
+  description: "Track job applications, update your profile, and connect with top employers in the Chemical & Pharmaceutical industries using ChemPharmaJobs' candidate dashboard",
 };
 
 const DashboardPage = () => {

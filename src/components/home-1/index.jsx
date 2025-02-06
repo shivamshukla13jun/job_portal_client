@@ -22,7 +22,7 @@ const index = () => {
 
       <section className="job-categories ui-job-categories">
         <div className="auto-container">
-          <div className="sec-title text-center">
+          <div className="sec-title text-center" id="jobsector">
             <h2>Popular Job Sectors</h2>
             {/* <div className="text">2020 jobs live - 293 added today.</div> */}
           </div>

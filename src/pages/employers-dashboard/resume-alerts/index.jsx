@@ -3,8 +3,8 @@ import ResumeAlerts from "@/components/dashboard-pages/employers-dashboard/resum
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Resume Alerts || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Resume Alerts ",
+  description: "",
 };
 
 const ResumeAlertsEmploeeDBPage = () => {

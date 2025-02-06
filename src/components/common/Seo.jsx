@@ -5,7 +5,7 @@ const Seo = ({ pageTitle }) => (
     {/* <Head>
       <title>
         {pageTitle &&
-          `${pageTitle} || Chem Pharma - Job Borad ReactJs Template}`}
+          `${pageTitle} }`}
       </title>
       <meta
         name="viewport"

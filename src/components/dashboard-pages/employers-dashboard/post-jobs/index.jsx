@@ -151,7 +151,7 @@ const Index = () => {
                 <button
                   type="button"
                   onClick={handlePreview}
-                  className="theme-btn btn-style-two"
+                  className="theme-btn btn-style-two me-1"
                 >
                   Preview
                 </button>
