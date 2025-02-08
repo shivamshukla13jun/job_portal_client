@@ -147,7 +147,7 @@ const assetValues = [
 ]
 
 
-const degreeSpecialisationValues =[
+const degreeSpecialisationValues = [
     { "label": "Bachelor of Pharmacy (B.Pharm)", "value": "bachelor_of_pharmacy" },
     { "label": "Doctor of Pharmacy (Pharm.D)", "value": "doctor_of_pharmacy" },
     { "label": "Master of Pharmacy (M.Pharm)", "value": "master_of_pharmacy" },
@@ -203,7 +203,7 @@ const degreeSpecialisationValues =[
 ]
 
 
-const certificationValues =[
+const certificationValues = [
     { "label": "Certified Pharmacy Technician (CPhT)", "value": "certified_pharmacy_technician" },
     { "label": "Good Manufacturing Practices (GMP) Certification", "value": "gmp_certification" },
     { "label": "Certified Clinical Research Associate (CCRA)", "value": "certified_clinical_research_associate" },

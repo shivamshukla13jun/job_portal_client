@@ -7,10 +7,10 @@ const footerContent = [
       { name: "Browse Categories", route: "/job-list-v3" },
       { name: "Candidate Dashboard", route: "/candidates-dashboard/dashboard" },
       // { name: "Job Alerts", route: "/candidates-dashboard/job-alerts" },
-      {
-        name: "My Bookmarks",
-        route: "/candidates-dashboard/short-listed-jobs",
-      },
+      // {
+      //   name: "My Bookmarks",
+      //   route: "/candidates-dashboard/short-listed-jobs",
+      // },
     ],
   },
   {
@@ -33,7 +33,7 @@ const footerContent = [
     menuList: [
       { name: "About Us", route: "/about" },
       // { name: "Job Page Invoice", route: "/invoice" },
-      { name: "Terms and Conditions", route: "/terms" },
+      // { name: "Terms and Conditions", route: "/terms" },
       { name: "Blog", route: "/blog-list-v1" },
       { name: "Contact", route: "/contact" },
     ],
@@ -43,8 +43,8 @@ const footerContent = [
     title: "Helpful Resources",
     menuList: [
       { name: "Site Map", route: window.location.pathname},
-      { name: "Terms of Use", route: "/terms" },
-      { name: "Privacy Center", route: "/privacy" },
+      { name: "Terms and Conditions", route: "/terms" },
+      { name: "Privacy Policy", route: "/privacy" },
       { name: "Faq", route: "/faq" },
       // { name: "Security Center", route: "/" },
       // { name: "Accessibility Center", route: "/" },

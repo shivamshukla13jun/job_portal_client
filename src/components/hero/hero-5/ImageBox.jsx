@@ -44,7 +44,7 @@ const ImageBox = () => {
         <span className="icon flaticon-email-3"></span>
         <p>
           Work Inquiry From <br />
-          Ali Tufan
+          ChemPharma Jobs
         </p>
       </div>
 

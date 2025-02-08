@@ -13,7 +13,7 @@ const Blog4 = () => {
             </div>
 
             <div className="blog-content">
-              <div>November 23, 2021</div>
+              <div>November 23, 2024</div>
               <h4>
                 <Link to={`/blog-details/${item.id}`}>{item.title}</Link>
               </h4>
