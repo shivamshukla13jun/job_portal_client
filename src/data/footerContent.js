@@ -29,7 +29,7 @@ const footerContent = [
   },
   {
     id: 3,
-    title: "About Us",
+    title: "Quick Links",
     menuList: [
       { name: "About Us", route: "/about" },
       // { name: "Job Page Invoice", route: "/invoice" },

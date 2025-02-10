@@ -28,7 +28,7 @@ const FooterContent4 = () => {
     },
     {
       id: 3,
-      title: "About Us",
+      title: "Quick Links",
       colClass: "col-lg-2",
       menuList: [
         { name: "Job Page", route: "/" },
