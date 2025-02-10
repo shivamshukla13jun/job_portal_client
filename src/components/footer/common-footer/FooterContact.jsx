@@ -20,7 +20,7 @@ const FooterContact = () => {
           <i className="icon flaticon-phone me-2"></i>
           <div>
             {/* <p className="fw-bold ">Call us</p> */}
-            <p className="mb-0">+91 892 823 5501 / +91 987 012 2286</p>
+            <p className="mb-0">+91 892 823 5501 <br /> +91 987 012 2286</p>
           </div>
         </div>
 
