@@ -17,7 +17,7 @@ const SidebarFooter = () => {
         <div className="contact-info">
           <span className="phone-num">
             <span>Call us</span>
-            <p className="mb-0">8928235501 / 9870122286</p>
+            <p className="mb-0">+91 892 823 5501 / +91 987 012 2286</p>
           </span>
           <span className="address">
           Shubham Avenue<br />

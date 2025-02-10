@@ -22,7 +22,7 @@ const Blog8 = () => {
             <div className="lower-content">
               <ul className="post-meta">
                 <li>
-                  <a href="#">August 31, 2021</a>
+                  <a href="#">August 31, 2024</a>
                 </li>
                 <li>
                   <a href="#">12 Comment</a>

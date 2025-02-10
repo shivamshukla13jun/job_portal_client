@@ -37,7 +37,7 @@ const BlogDetailsDynamic = () => {
                 </span>
                 Alison Dawn
               </li>
-              <li>August 31, 2021</li>
+              <li>August 31, 2024</li>
               <li>12 Comment</li>
             </ul>
             {/* End post info */}

@@ -6,7 +6,7 @@ const SectionTwo = () => {
     <div className="auto-container">
       <div className="row">
         <div className="content-column col-lg-6 col-md-12 col-sm-12 ">
-          <div className="inner-column aos-init aos-animate" data-aos="fade-left">
+          <div className="aos-init aos-animate" data-aos="fade-left">
             <div className="sec-title">
               <h2>Founder's Message</h2>
               <div className="text">
@@ -42,7 +42,7 @@ const SectionTwo = () => {
               decoding="async"
               data-nimg={1}
               src='/images/resource/about2.jpg'
-              style={{ color: "transparent" }}
+              style={{ color: "transparent", borderRadius: "5px" }}
             />
           </figure>
         </div>

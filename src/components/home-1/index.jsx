@@ -112,8 +112,8 @@ const index = () => {
         <div className="auto-container">
           <div className="sec-title text-center">
             <h2>Recent News Articles</h2>
-            <div className="text">
-              Fresh job related news content posted each day.
+            <div className="text"> 
+           
             </div>
           </div>
           {/* End ."sec-title */}

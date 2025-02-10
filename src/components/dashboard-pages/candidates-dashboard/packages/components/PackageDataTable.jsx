@@ -35,7 +35,7 @@ const PackageDataTable = () => {
           <td className="package">
             <a href="#">Gold Jobs package</a>
           </td>
-          <td className="expiry">Jan 11, 2021</td>
+          <td className="expiry">Jan 11, 2024</td>
           <td className="total-jobs">50</td>
           <td className="used">8</td>
           <td className="remaining">42</td>
@@ -49,7 +49,7 @@ const PackageDataTable = () => {
           <td className="package">
             <a href="#">Silver Jobs package</a>
           </td>
-          <td className="expiry">Jan 11, 2021</td>
+          <td className="expiry">Jan 11, 2024</td>
           <td className="total-jobs">50</td>
           <td className="used">8</td>
           <td className="remaining">42</td>
@@ -63,7 +63,7 @@ const PackageDataTable = () => {
           <td className="package">
             <a href="#">Super CV Pack</a>
           </td>
-          <td className="expiry">Jan 11, 2021</td>
+          <td className="expiry">Jan 11, 2024</td>
           <td className="total-jobs">50</td>
           <td className="used">8</td>
           <td className="remaining">42</td>
@@ -77,7 +77,7 @@ const PackageDataTable = () => {
           <td className="package">
             <a href="#">Gold Jobs package</a>
           </td>
-          <td className="expiry">Jan 11, 2021</td>
+          <td className="expiry">Jan 11, 2024</td>
           <td className="total-jobs">50</td>
           <td className="used">8</td>
           <td className="remaining">42</td>
@@ -91,7 +91,7 @@ const PackageDataTable = () => {
           <td className="package">
             <a href="#">Silver Jobs package</a>
           </td>
-          <td className="expiry">Jan 11, 2021</td>
+          <td className="expiry">Jan 11, 2024</td>
           <td className="total-jobs">50</td>
           <td className="used">8</td>
           <td className="remaining">42</td>
