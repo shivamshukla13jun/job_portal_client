@@ -17,7 +17,7 @@ const PreviewModal = ({ previewData, setPreviewData }) => {
               <p><strong>Title:</strong> {previewData.title}</p>
               <p><strong>Location:</strong> {previewData.location}</p>
               <p><strong>Place:</strong> {previewData.place}</p>
-              <p><strong>Categories:</strong> {previewData.categories?.join(", ") || "N/A"}</p>
+              <p><strong>Job Sector:</strong> {previewData.categories?.join(", ") || "N/A"}</p>
               <p><strong>Opening:</strong> {previewData.opening}</p>
               <p><strong>Job Type:</strong> {previewData.jobtype || "N/A"}</p>
             </section>

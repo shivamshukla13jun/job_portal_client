@@ -98,7 +98,7 @@ const PersonalPortfolio = () => {
                                 <h1>{job.name}</h1>
                                 <p>{job.position}</p>
                                 <p>Department: {job.department}</p>
-                                <p>Categories: {job.categories?.map(cat => cat.label).join(', ')}</p>
+                                <p>Job Sector: {job.categories?.map(cat => cat.label).join(', ')}</p>
                                 <p>Scope: {job.scope}</p>
                             </div>
                         ))}

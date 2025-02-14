@@ -34,7 +34,7 @@ const Index = () => {
       title: '',
       location: '',
       place: '',
-   
+      deadline:new Date(),
       opening: 1,
       jobtype: "",
       candidate_requirement: {
@@ -138,7 +138,7 @@ const Index = () => {
                 <div className="ls-widget">
                   <div className="tabs-box">
                     <div className="widget-title">
-                      <h4>Personal Details, Education, Additional Info</h4>
+                      <h4>Personal Details, Education, Additional Info,Dead Line</h4>
                     </div>
                     <div className="widget-content">
                       <PersonalDetails watch={watch} register={register} setValue={setValue} error={errors} />
