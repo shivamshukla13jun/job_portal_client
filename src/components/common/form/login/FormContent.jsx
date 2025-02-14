@@ -63,7 +63,7 @@ const FormContent = () => {
 
   return (
     <div className="form-inner">
-      <h3>Login to Chem Pharma</h3>
+      <h3>Login to ChemPharma Jobs</h3>
 
       <form onSubmit={handleSubmit(handleLoginSubmit)}>
         <div className="form-group">

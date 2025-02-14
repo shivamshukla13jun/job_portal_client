@@ -48,6 +48,8 @@ export const jobSchema = Yup.object().shape({
             ).min(1, 'At least one skill is required'),
         })
     ).required('Personal info is required').min(1, 'At least one personal info is required'),
+    deadline: Yup.date().required('Dead Line is required'),
+
     // timing: Yup.object().shape({
     //     job: Yup.string().required('Job timing is required'),
     //     interview: Yup.string().required('Interview timing is required'),

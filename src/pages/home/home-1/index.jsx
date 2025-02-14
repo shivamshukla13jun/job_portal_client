@@ -4,7 +4,7 @@ import Home from "@/components/home-1";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Home || Chem Pharma",
+  title: "ChemPharma Jobs | Find Top Careers in Chemical & Pharma Industry",
   description: "Chem Pharma",
 };
 

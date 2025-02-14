@@ -2,6 +2,7 @@ import React from 'react'
 import Select from "react-select";
 
 import { assetValues, certificationValues, degreeSpecialisationValues, preferredIndustryValues, preferredLanguageValues } from '@/data/jobForm'
+import DatePicker from '@/components/common/date-picker/DatePicker';
 
 const PersonalDetails = ({ watch, register, setValue, error }) => {
 
@@ -31,6 +32,16 @@ const PersonalDetails = ({ watch, register, setValue, error }) => {
                         />
                     </div>
                 ))}
+                <div className="form-group col-lg-6 col-md-12" >
+                    <label>{"Dead Line"}<span className='required-form'>*</span> </label>
+                    <div className={error?.deadline?.message ? 'error error-border' : ''}>
+                    <DatePicker
+                        id={'deadline'}
+                        value={watch("deadline")}
+                        onChange={(date) => setValue("deadline", date)}
+                    />
+                    </div>
+                </div>
             </div>
         </div>
     )

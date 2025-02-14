@@ -4,20 +4,22 @@ const footerContent = [
   {
     id: 1,
     title: "For Candidates",
+    colClass: "col-lg-3",
     menuList: [
       { name: "Browse Jobs", route:paths.job_list},
-      { name: "Browse Categories", route: paths.job_list},
+      { name: "Browse Job Sector", route: paths.job_list},
       { name: "Candidate Dashboard", route:paths.candidate },
       // { name: "Job Alerts", route: "/candidates-dashboard/job-alerts" },
-      {
-        name: "My Bookmarks",
-        route: paths.candidate_saved_jobs,
-      },
+      // {
+      //   name: "My Bookmarks",
+      //   route: paths.candidate_saved_jobs,
+      // },
     ],
   },
   {
     id: 2,
     title: "For Employers",
+    colClass: "col-lg-3",
     menuList: [
       {
         name: "Browse Candidates",
@@ -32,6 +34,8 @@ const footerContent = [
   {
     id: 3,
     title: "About Us",
+    colClass: "col-lg-2",
+
     menuList: [
       { name: "About Us", route: paths.about },
       // { name: "Job Page Invoice", route: "/invoice" },
@@ -43,6 +47,8 @@ const footerContent = [
   {
     id: 4,
     title: "Helpful Resources",
+    colClass: "col-lg-2",
+
     menuList: [
       { name: "Site Map", route: window.location.pathname},
       { name: "Terms & Conditions", route:paths.terms },

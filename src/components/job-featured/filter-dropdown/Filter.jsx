@@ -1,7 +1,7 @@
 const Filter = () => {
   return (
     <select>
-      <option value="">All Categories</option>
+      <option value="">All Job Sector</option>
       <option value="44">Accounting / Finance</option>
       <option value="106">Automotive Jobs</option>
       <option value="46">Customer</option>

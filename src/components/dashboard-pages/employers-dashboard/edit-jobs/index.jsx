@@ -5,10 +5,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 
-import MobileMenu from "../../../header/MobileMenu";
-import DashboardHeader from "../../../header/DashboardHeader";
-import LoginPopup from "../../../common/form/login/LoginPopup";
-
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
@@ -23,7 +19,6 @@ import { paths } from "@/services/paths";
 import { get, getById, post, put } from "@/services/api";
 import { jobSchema } from "@/validations/dashboard/employer/job";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
-import InterviewDetails from "./components/InterviewDetails";
 
 const EditJob = () => {
   const params = useParams();
@@ -45,15 +40,9 @@ const EditJob = () => {
       title: '',
       location: '',
       place: '',
+      deadline:new Date(),
+
       categories: [],
-      // interview_details: {
-      //   date:new Date(),
-      //   time:"10:00",
-      //   location: "",
-      //   type: "",
-      //   notes: ""
-      // },
-      // age: 18,
       opening: 1,
       candidate_requirement: {
         experience: '',
@@ -114,9 +103,10 @@ const EditJob = () => {
         categories: data.categories || [],
         jobtype: data.jobtype || [],
         opening: data.opening || 1,
+        deadline:data.deadline || new Date(),
         // age: data.age || 18,
         candidate_requirement: {
-          experience: data.candidate_requirement.experience || '',
+          experience: data.candidate_requirement.experience ,
           salary_from: data.candidate_requirement.salary_from || null,
           salary_to: data.candidate_requirement.salary_to || null,
           bonus: data.candidate_requirement.bonus || false,
@@ -133,7 +123,7 @@ const EditJob = () => {
     }
 
   }, [data, reset]);
-console.log("singlejob",data)
+console.log("singlejob",watch())
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       const errorArray = Object.entries(errors);
@@ -206,7 +196,7 @@ console.log("singlejob",data)
                 <div className="ls-widget">
                   <div className="tabs-box">
                     <div className="widget-title">
-                      <h4>Edit Personal details, Education, additional info</h4>
+                      <h4>Edit Personal details, Education, additional info, Dead Line</h4>
                     </div>
 
                     <div className="widget-content">
