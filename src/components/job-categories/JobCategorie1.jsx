@@ -6,7 +6,7 @@ import { categories } from "@/data/category";
 // Icon mapping for categories
 const categoryIcons = {
   'Basic Chemicals': 'fas fa-flask',
-  'Specialty Chemicals': 'fas fa-flask',
+  'Specialty Chemicals': 'fas fa-vials',
   'Agrochemicals': 'fas fa-leaf',
   'Petrochemicals': 'fas fa-oil-can',
   'Polymers': 'fas fa-atom',

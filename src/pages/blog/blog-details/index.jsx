@@ -33,12 +33,12 @@ const BlogDetailsDynamic = () => {
             <ul className="post-info">
               <li>
                 <span className="thumb">
-                  <img src={"/images/resource/thumb-1.png"} alt="resource" />
+                  <img src={"/images/resource/p1.jpg"} alt="resource" />
                 </span>
-                Alison Dawn
+                Sharad Pawar 
               </li>
-              <li>August 31, 2021</li>
-              <li>12 Comment</li>
+              <li>August 31, 2024</li>
+              <li>6 Comment</li>
             </ul>
             {/* End post info */}
           </div>

@@ -36,7 +36,7 @@ const SectionOne = () => {
             decoding="async"
             data-nimg={1}
             src='/images/resource/about1.jpg'
-            style={{ color: "transparent" }}
+            style={{ color: "transparent", borderRadius: "5px" }}
           />
         </figure>
       </div>

@@ -71,7 +71,7 @@ const JobAlertsTable = () => {
                       </div>
                     </td>
                     <td>Human Resources, Junior</td>
-                    <td>Nov 12, 2021 </td>
+                    <td>Nov 12, 2024 </td>
                     <td>
                       <div className="option-box">
                         <ul className="option-list">

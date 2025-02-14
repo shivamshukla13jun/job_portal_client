@@ -153,6 +153,7 @@ img {
 
 hr {
   -webkit-appearance: none;
+  appearance: none;
   position: relative;
   height: 1px;
   margin: 30px auto;
@@ -196,7 +197,7 @@ Scroll To Top
 .scroll-to-top {
   position: fixed;
   right: 20px;
-  bottom: 28px;
+  bottom: 105px;
   z-index: 9;
   width: 40px;
   height: 40px;

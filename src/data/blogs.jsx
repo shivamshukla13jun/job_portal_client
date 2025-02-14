@@ -4,63 +4,63 @@ const blogs = [
   {
     id: 1,
     img: blog1,
-    title: "Attract Sales And Profits ",
+    title: "The Future of Green Chemistry ",
     blogSingleTitle:
-      "Attract Sales And Profits toward the sunshine - and shadows will fall behind you.",
-    blogText: `A job ravenously while Far much that one rank beheld after outside....`,
+      "The Future of Green Chemistry: Innovations for a Sustainable Tomorrow",
+    blogText: `The Importance of Chemical Engineering in Modern Manufacturing...`,
   },
   {
     id: 2,
     img: blog2,
-    title: "5 Tips For Your Job Interviews",
+    title: "Understanding Chemical Engineering",
     blogSingleTitle:
-      "5 Tips For Your Job Interviews toward the sunshine - and shadows will fall behind you.",
-    blogText: `A job ravenously while Far much that one rank beheld after outside....`,
+      "Understanding Chemical Engineering: A Gateway to the World of Innovation",
+    blogText: `The Importance of Chemical Engineering in Modern Manufacturing...`,
   },
   {
     id: 3,
     img: blog3,
-    title: "Overworked Newspaper Editor",
+    title: "Top Safety Practices in the Chemical ",
     blogSingleTitle:
-      "Overworked Newspaper Editor toward the sunshine - and shadows will fall behind you.",
-    blogText: `A job ravenously while Far much that one rank beheld after outside....`,
+      "Top Safety Practices in the Chemical Industry You Need to Know",
+    blogText: `The Importance of Chemical Engineering in Modern Manufacturing...`,
   },
   {
     id: 4,
     img: blog4,
-    title: "Attract Sales And Profits",
+    title: "Exploring the Role of Chemicals ",
     blogSingleTitle:
-      "Attract Sales And Profits toward the sunshine - and shadows will fall behind you.",
-    blogText: `A job ravenously while Far much that one rank beheld after outside....`,
+      "Exploring the Role of Chemicals in Pharmaceutical Advancements",
+    blogText: `The Importance of Chemical Engineering in Modern Manufacturing...`,
   },
   {
     id: 5,
     img: blog5,
-    title: "An Overworked Newspaper Editor",
+    title: "How the Chemical Industry ",
     blogSingleTitle:
-      "An Overworked Newspaper Editor toward the sunshine - and shadows will fall behind you.",
-    blogText: `A job ravenously while Far much that one rank beheld after outside....`,
+      "How the Chemical Industry is Tackling Environmental Challenges",
+    blogText: `The Importance of Chemical Engineering in Modern Manufacturing...`,
   },
   {
     id: 6,
     img: blog1_1,
-    title: "The Best Account Providers",
+    title: "Breaking Down Chemical Reactions",
     blogSingleTitle:
-      "The Best Account Providers toward the sunshine - and shadows will fall behind you.",
-    blogText: `A job ravenously while Far much that one rank beheld after outside....`,
+      "Breaking Down Chemical Reactions: How Science Shapes Our World",
+    blogText: `The Importance of Chemical Engineering in Modern Manufacturing...`,
   },
   {
     id: 7,
     img: blog1_2,
     title: (
       <>
-        Free advertising for your
-        <br /> online business
+        Advancements in Chemical Safety
+        
       </>
     ),
     blogSingleTitle:
-      "Free advertising for your online business shadows will fall behind you.",
-    blogText: `A job ravenously while Far much that one rank beheld after outside....`,
+      "Advancements in Chemical Safety: Protecting Workers and the Environment",
+    blogText: `The Importance of Chemical Engineering in Modern Manufacturing...`,
   },
  
 ];

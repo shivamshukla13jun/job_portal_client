@@ -9,7 +9,7 @@ const JobOverView2 = () => {
       <li>
         <i className="icon icon-expiry"></i>
         <h5>Expiration date:</h5>
-        <span>April 06, 2021</span>
+        <span>April 06, 2024</span>
       </li>
       <li>
         <i className="icon icon-location"></i>
