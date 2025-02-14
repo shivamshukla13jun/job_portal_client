@@ -209,7 +209,7 @@ const index = () => {
               <button
                 type="button"
                 onClick={() => setPreviewData(watch())}
-                className="theme-btn btn-style-two me-2"
+                className="theme-btn btn-style-two me-1"
               >
                 Preview
               </button>

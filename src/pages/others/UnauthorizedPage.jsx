@@ -3,8 +3,8 @@ import { paths } from '@/services/paths';
 import React from 'react';
 import { Link } from 'react-router-dom';
 const metadata = {
-  title: "Unauthorized || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Unauthorized ",
+  description: "",
 };
 const UnauthorizedPage= () => {
   return (

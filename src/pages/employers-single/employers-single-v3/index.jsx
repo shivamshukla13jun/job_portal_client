@@ -14,8 +14,8 @@ import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
   title:
-    "Employers Single Dyanmic V3 || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+    "Employers Single Dyanmic V3 ",
+  description: "",
 };
 
 const EmployersSingleV3 = () => {

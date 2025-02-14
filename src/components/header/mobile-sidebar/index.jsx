@@ -27,7 +27,6 @@ const MobileSidebar = () => {
   const userName = getDisplayName(userInfo);
 
   const handleMenuClick = async (item) => {
-    dispatch(menuToggle());
     if (item.name === 'Logout') {
       if (confirm("Are You Sure")) {
         dispatch(logout());

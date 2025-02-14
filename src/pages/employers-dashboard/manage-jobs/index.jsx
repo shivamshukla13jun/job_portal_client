@@ -3,8 +3,8 @@ import ManageJobs from "@/components/dashboard-pages/employers-dashboard/manage-
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Manage Jobs || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Manage Jobs ",
+  description: "",
 };
 
 const ManageJobsEmploeeDBPage = () => {

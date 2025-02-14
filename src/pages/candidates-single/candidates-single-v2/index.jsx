@@ -12,8 +12,8 @@ import JobSkills from "@/components/candidates-single-pages/shared-components/Jo
 
 const metadata = {
   title:
-    "Candidate Single Dyanmic V1 || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+    "Candidate Single Dyanmic V1 ",
+  description: "",
 };
 
 const CandidateSingleDynamicV1 = () => {

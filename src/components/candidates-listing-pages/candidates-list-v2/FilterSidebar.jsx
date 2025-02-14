@@ -1,9 +1,5 @@
 import Categories from "../components/Categories";
-import DestinationRangeSlider from "../components/DestinationRangeSlider";
-import CandidatesGender from "../components/CandidatesGender";
-import LocationBox from "../components/LocationBox";
 import SearchBox from "../components/SearchBox";
-import DatePosted from "../components/DatePosted";
 import Experience from "../components/Experience";
 import Qualification from "../components/Qualification";
 
@@ -39,7 +35,7 @@ const FilterSidebar = () => {
                 {/* <!-- Filter Block --> */}
 
                 <div className="filter-block">
-                    <h4>Category</h4>
+                    <h4>Job Sector</h4>
                     <div className="form-group">
                         <Categories />
                     </div>

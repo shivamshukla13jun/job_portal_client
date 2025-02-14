@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Page Not Found || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Page Not Found ",
+  description: "",
 };
 
 const NotFoundPage = () => {

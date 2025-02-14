@@ -3,8 +3,8 @@ import CvManager from "@/components/dashboard-pages/candidates-dashboard/cv-mana
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "CV Manager || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "CV Manager ",
+  description: "",
 };
 
 const CVMannagerPage = () => {

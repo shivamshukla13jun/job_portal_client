@@ -114,6 +114,7 @@ const Profile = ({ watch, register, setValue, error }) => {
               value={watch("myProfile.dob")}
               onChange={(date) => setValue("myProfile.dob", date)}
             />
+           
           </div>
         </div>
 

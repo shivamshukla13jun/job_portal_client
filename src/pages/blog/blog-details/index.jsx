@@ -8,8 +8,8 @@ import MetaComponent from "@/components/common/MetaComponent";
 import DashboardHeader from "@/components/header/DashboardHeader";
 
 const metadata = {
-  title: "Blog Details Dyanmic V1 || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Blog Details Dyanmic V1 ",
+  description: "",
 };
 
 const BlogDetailsDynamic = () => {

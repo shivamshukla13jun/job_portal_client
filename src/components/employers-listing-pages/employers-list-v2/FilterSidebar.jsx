@@ -37,7 +37,7 @@ const FilterSidebar = () => {
                 {/* <!-- Filter Block --> */}
 
                 <div className="filter-block">
-                    <h4>Category</h4>
+                    <h4>Job Sector</h4>
                     <div className="form-group">
                         <Categories />
                     </div>

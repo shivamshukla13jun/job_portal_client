@@ -21,8 +21,8 @@ import { addToWishlist, selectWishlist } from "@/store/reducers/Whishlist";
 import DashboardHeader from "@/components/header/DashboardHeader";
 import moment from "moment";
 const metadata = {
-  title: "Job Single Dyanmic V1 || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+  title: "Job Single Dyanmic V1 ",
+  description: "",
 };
 
 const JobSingleDynamicV1 = () => {

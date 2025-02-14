@@ -15,8 +15,8 @@ import DashboardHeader from "@/components/header/DashboardHeader";
 
 const metadata = {
   title:
-    "Employers Single Dyanmic V1 || Chem Pharma - Job Borad ReactJs Template",
-  description: "Chem Pharma - Job Borad ReactJs Template",
+    "Employers Single Dyanmic V1 ",
+  description: "",
 };
 
 const EmployersSingleV1 = () => {
