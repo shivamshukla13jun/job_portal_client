@@ -9,30 +9,23 @@ import Tag from "./Tag";
 const index = () => {
   return (
     <div className="auto-container">
-      <h4>Course Description</h4>
+      <h4>Description</h4>
 
       <p>
-        Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec.
-        Quisque bibendum orci ac nibh facilisis, at malesuada orci congue.
-        Nullam tempus sollicitudin cursus. Ut et adipiscing erat. Curabitur this
-        is a text link libero tempus congue.
+        The chemical industry plays a vital role in global economies by producing a wide range of products that impact various sectors, including manufacturing, healthcare,
+        agriculture, and consumer goods. It involves complex production processes like distillation, polymerization, and batch processing to convert raw materials into valuable
+        chemicals. Safety and compliance are crucial in this industry, with strict regulations to ensure workplace and environmental safety.
       </p>
 
       <p>
-        Duis mattis laoreet neque, et ornare neque sollicitudin at. Proin
-        sagittis dolor sed mi elementum pretium. Donec et justo ante. Vivamus
-        egestas sodales est, eu rhoncus urna semper eu. Cum sociis natoque
-        penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-        Integer tristique elit lobortis purus bibendum, quis dictum metus
-        mattis. Phasellus posuere felis sed eros porttitor mattis. Curabitur
-        massa magna, tempor in blandit id, porta in ligula. Aliquam laoreet nisl
-        massa, at interdum mauris sollicitudin et.
+        Research and development (R&D) drive innovation, helping companies develop new chemicals, improve existing products, and explore sustainable solutions such as green chemistry.
+        As sustainability becomes increasingly important, the industry is shifting toward energy-efficient production methods and waste reduction strategies. Chemical engineers, production
+        managers, and safety officers are just a few of the professionals working to maintain high standards in this ever-evolving sector.
       </p>
 
       <blockquote className="blockquote-style-one mb-5 mt-5">
         <p>
-          Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec.
-          Quisque bibendum orci ac nibh facilisis, at malesuada orci congue.{" "}
+          Curved leadership sollicitudin, which is in rutrum my accumulation and filling the skills of others.{" "}
         </p>
         <cite>Luis Pickford</cite>
       </blockquote>
@@ -40,16 +33,17 @@ const index = () => {
 
       <h4>What you&apos;ll learn</h4>
       <ul className="list-style-four">
-        <li>Become a UI/UX designer.</li>
-        <li>Build a UI project from beginning to end.</li>
-        <li>You will be able to start earning money Figma skills.</li>
-        <li>Work with colors & fonts.</li>
-        <li>You will create your own UI Kit.</li>
-        <li>Become a UI/UX designer.</li>
-        <li>Build a UI project from beginning to end.</li>
-        <li>You will be able to start earning money Figma skills.</li>
-        <li>Work with colors & fonts.</li>
-        <li>You will create your own UI Kit.</li>
+        <li>Learn about key sectors like petrochemicals, specialty, and consumer chemicals.</li>
+        <li>Study production methods like batch processing and distillation.</li>
+
+        <li>Learn core concepts like thermodynamics, fluid dynamics, and mass transfer.</li>
+        <li>Explore new product development and process improvements.</li>
+        <li>Study green chemistry, recycling, and waste reduction practices.</li>
+        <li>Learn about materials like polymers, catalysts, and advanced chemicals.</li>
+        <li>Understand market dynamics, demand shifts, and pricing in the industry.</li>
+        <li>Focus on handling chemical hazards and emergency response.</li>
+        <li>Explore jobs like chemical engineer, production manager, and safety officer.</li>
+        <li>Understand safety standards like OSHA and EPA guidelines.</li>
       </ul>
       {/* List */}
 
@@ -64,12 +58,10 @@ const index = () => {
       <h4>Requirements</h4>
       <ul className="list-style-three">
         <li>
-          We do not require any previous experience or pre-defined skills to
-          take this course. A great orientation would be enough to master UI/UX
-          design.
+          A degree in Chemical Engineering, Chemistry, or a related field is essential. Advanced degrees (Master’s or PhD) may be required for research roles or specialized positions.
         </li>
-        <li>A computer with a good internet connection.</li>
-        <li>Adobe Photoshop (OPTIONAL)</li>
+        <li>Familiarity with industry safety standards, environmental regulations, and health protocols, including OSHA, EPA guidelines, and hazardous material handling.</li>
+        <li>Ability to identify issues in production processes, troubleshoot, and implement solutions efficiently.</li>
       </ul>
       {/* <!-- list --> */}
 
@@ -80,7 +72,7 @@ const index = () => {
         </div>
         {/* End social-share */}
 
-        <Tag />
+        {/* <Tag /> */}
       </div>
       {/* End other share */}
 

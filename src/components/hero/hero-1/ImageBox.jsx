@@ -18,7 +18,7 @@ const ImageBox = () => {
         <span className="icon flaticon-email-3"></span>
         <p>
           Work Inquiry From <br />
-          Ali Tufan
+          ChemPharma Jobs
         </p>
       </div>
       {/* <!-- Info BLock Two --> */}
@@ -39,7 +39,7 @@ const ImageBox = () => {
         data-aos-delay="1500"
       >
         <span className="icon flaticon-briefcase"></span>
-        <p>Creative Agency</p>
+        <p>Chemical Agency</p>
         <span className="sub-text">Startup</span>
         <span className="right_icon fa fa-check"></span>
       </div>

@@ -28,11 +28,11 @@ const index = () => {
           <ImageBox />
 
           {/* <!-- Fun Fact Section --> */}
-          <div className="fun-fact-section">
+          {/* <div className="fun-fact-section">
             <div className="row">
               <Funfact />
             </div>
-          </div>
+          </div> */}
           {/* <!-- Fun Fact Section --> */}
 
           <IntroDescriptions />

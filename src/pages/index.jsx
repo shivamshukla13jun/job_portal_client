@@ -4,8 +4,8 @@ import HomeComponent from "@/components/home-1";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Home",
-  description: "",
+  title: "ChemPharma Jobs | Find Top Careers in Chemical & Pharma Industry",
+  description: "ChemPharma - Job Borad for Chemical & Pharma Industry. Find Jobs in Chemical Engineering, Pharmaceutical, Biotech, and more.",
 };
 
 export default function Home() {

@@ -2,7 +2,7 @@ import React from 'react'
 
 export const WhyChooseUs = () => {
   return (
-    <section className="steps-section pt-0">
+    <section className="steps-section pt-50">
     <div className="auto-container">
       <div className="row">
         <div className="image-column col-lg-6 col-md-12 col-sm-12">

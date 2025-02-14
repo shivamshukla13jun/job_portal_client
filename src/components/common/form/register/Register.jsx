@@ -110,7 +110,7 @@ const Register = () => {
 
   return (
     <div className="form-inner">
-      <h3>Create a Free Chem Pharma Account</h3>
+      <h3>Create a Free ChemPharma Jobs Account</h3>
 
       <Tabs defaultIndex={type === 'Employer' ? 1 : 0}>
         <div className="form-group register-dual">

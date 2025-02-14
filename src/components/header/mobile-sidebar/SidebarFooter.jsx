@@ -1,9 +1,9 @@
 const SidebarFooter = () => {
   const socialContent = [
-    { id: 1, icon: "fa-facebook-f", link: "https://www.facebook.com/" },
-    { id: 2, icon: "fa-twitter", link: "https://www.twitter.com/" },
-    { id: 3, icon: "fa-instagram", link: "https://www.instagram.com/" },
-    { id: 4, icon: "fa-linkedin-in", link: "https://www.linkedin.com/" },
+    { id: 1, icon: "fa-facebook-f", link: "https://www.facebook.com/share/14xUZgTzBG/" },
+    { id: 2, icon: "fa-instagram", link: "https://www.instagram.com/chempharma_jobs/" },
+    // { id: 3, icon:  "fa-linkedin-in", link: "https://www.linkedin.com/"},
+    // { id: 4, icon:  },
   ];
 
   return (
@@ -17,7 +17,7 @@ const SidebarFooter = () => {
         <div className="contact-info">
           <span className="phone-num">
             <span>Call us</span>
-            <p className="mb-0">+91 8928235501 / 9870122286</p>
+            <p className="mb-0">+91 892 823 5501 <br /> +91 987 012 2286</p>
           </span>
           <span className="address">
           Shubham Avenue<br />
