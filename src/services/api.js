@@ -4,8 +4,8 @@ import { paths } from "./paths";
 const MODE=import.meta.env.MODE
 const request = axios.create({
     withCredentials: true,
-    // baseURL: API_DEV,
-    baseURL: API_PROD,
+    baseURL: API_DEV,
+    // baseURL: API_PROD,
     // headers: {
     //     Authorization: `Bearer ${sessionStorage.getItem("session")}`
     // }

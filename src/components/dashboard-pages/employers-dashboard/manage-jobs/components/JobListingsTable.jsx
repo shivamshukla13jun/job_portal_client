@@ -23,7 +23,7 @@ const JobListingsTable = ({ data, handleChange, search ,handleClear}) => {
     onSuccess: (res) => {
       if (res.data.success) {
         toast.success(res.data.message);
-        queryClient.invalidateQueries(["jobs", userInfo._id]);
+        queryClient.invalidateQueries(["/job/employer", userInfo._id]);
       }
     },
     onError: (err) => {

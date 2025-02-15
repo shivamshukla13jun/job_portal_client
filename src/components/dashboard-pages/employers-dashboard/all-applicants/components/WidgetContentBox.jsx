@@ -1,10 +1,15 @@
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import CandidateCard from "@/components/common/CandidateCard";
+import { useQueryClient } from "@tanstack/react-query";
 
-const WidgetContentBox = ({ data, title,setStatus }) => {
+const WidgetContentBox = ({ data, title,setStatus,setPage }) => {
+  const queryClient = useQueryClient();
+
   const handleChangestatus = (status) => {
     setStatus(status)
+    setPage(1); // Reset to first page
+    queryClient.invalidateQueries({ queryKey: [`application/tracking`] });
   }
   return (
     <div className="widget-content">

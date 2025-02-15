@@ -11,6 +11,8 @@ import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
 import DashboardSidebar from "@/components/header/DashboardSideBar";
 import Pagination from "@/utils/hooks/usePagination";
+import { useLocation } from "react-router-dom";
+import useUserInfo from "@/utils/hooks/useUserInfo";
 
 const index = () => {
   const [status,setStatus]=useState("")
@@ -33,6 +35,8 @@ const [job, setJob] = useState(searchParams.get("id") || "")
       let res = (await get(`application/tracking?status=${status}&jobid=${job}&page=${page}&limit=${limit}`,)).data;
       return res;
     },
+    staleTime: 300000, // Cache data for 5 minutes to avoid unnecessary refetches
+    keepPreviousData: false, // Prevents flickering when changing pages
   });
 
   if (isLoading || jobLoader) return <div>Loading...</div>
@@ -61,11 +65,11 @@ let title=Array.isArray(jobNames) && jobNames.length>0 ?jobNames?.find((item=>it
                 <div className="tabs-box">
                   <div className="widget-title">
                     <h4>Applicant</h4>
-                    <WidgetTopFilterBox data={jobNames} job={job} setJob={setJob} />
+                    <WidgetTopFilterBox data={jobNames} job={job} setJob={setJob} setPage={setPage}/>
                   </div>
                   {/* End top widget filter bar */}
 
-                  <WidgetContentBox  data={currentJob}  title={title}  setStatus={setStatus}/>
+                  <WidgetContentBox  data={currentJob}  title={title}  setStatus={setStatus} setPage={setPage}/>
                   {/* End widget-content */}
                 </div>
                 {currentJob?.totalPages && (

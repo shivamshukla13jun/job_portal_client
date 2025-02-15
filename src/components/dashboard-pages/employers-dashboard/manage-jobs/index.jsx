@@ -42,7 +42,7 @@ const debouncedExperieneto = useDebounce(search.experience_to, 500);
 const debouncedexperienceFrom = useDebounce(search.experience_from, 500);
   const handleChange=(name,value)=>setsearch((prev)=>({...prev,[name]:value}))
   const { data, isLoading } = useQuery({
-    queryKey: [`jobs${userInfo._id}`, debouncedKeyword, debouncedLocation, search.sort, search.page, search.categories,search.job_type,debounceSalarytwo,debouncedsalaryFrom,search.createdAt,debouncedExperieneto,debouncedexperienceFrom],
+    queryKey: [`jobs${userInfo._id}`,'/job/employer', debouncedKeyword, debouncedLocation, search.sort, search.page, search.categories,search.job_type,debounceSalarytwo,debouncedsalaryFrom,search.createdAt,debouncedExperieneto,debouncedexperienceFrom],
     queryFn: async () => {
       const res = await get(`/job/employer?page=${search.page}&limit=${search.limit}&keyword=${search.keyword}&jobtype=${search.job_type}&location=${search.location}&categories=${search.categories}&sort=${search.sort}&candidate_requirement.salary_to=${search.salary_to}&candidate_requirement.salary_from=${search.salary_from}&createdAt=${search.createdAt}&experience_from=${search.experience_from}&experience_to=${search.experience_to}`);
       return res.data;

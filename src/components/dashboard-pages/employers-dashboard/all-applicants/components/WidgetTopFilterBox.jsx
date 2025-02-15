@@ -1,11 +1,19 @@
-const WidgetTopFilterBox = ({ data, job, setJob }) => {
+import { useQueryClient } from "@tanstack/react-query";
 
+const WidgetTopFilterBox = ({ data, job, setJob,setPage }) => {
+  const queryClient = useQueryClient();
+
+  const handleChangeJob = (newJob) => {
+    setJob(newJob);
+    setPage(1); // Reset to first page
+    queryClient.invalidateQueries({ queryKey: [`application/tracking`] });
+  };
   return (
     <div className="chosen-outer">
       <select
         className="chosen-single  chosen-container"
         value={job}
-        onChange={e => setJob(e.target.value)}
+        onChange={e => handleChangeJob(e.target.value)}
       >
         <option hidden value={""}>Select Jobs</option>
         {
